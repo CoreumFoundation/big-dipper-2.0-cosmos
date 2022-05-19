@@ -30,7 +30,7 @@ const TitleBar:React.FC<{
       {
       title
         ? <Typography variant="h1">{title}</Typography>
-        : <img src={logoUrl} className={classes.logo} alt="logo" />
+        : <img src={logoUrl} className={classes.lpogo} alt="logo" />
       }
       <div className={classes.content}>
         {market.map((x) => (

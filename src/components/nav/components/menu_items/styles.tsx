@@ -16,7 +16,7 @@ export const useStyles = () => {
             color: theme.palette.custom.general.icon,
           },
           '&.active': {
-            background: Color(theme.palette.background.paper).lighten(0.5).string(),
+            background: Color(theme.palette.primary.main).alpha(0.2).lighten(0.5).string(),
             '& .MuiListItemIcon-root': {
               '& svg': {
                 fill: theme?.palette?.primary?.main,

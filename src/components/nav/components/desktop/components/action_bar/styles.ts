@@ -10,10 +10,11 @@ export const useStyles = () => {
           display: 'flex',
           justifyContent: 'flex-end',
           alignItems: 'center',
-          padding: theme.spacing(3),
+          padding: theme.spacing(2),
+          height: '100%',
         },
         actions: {
-          width: '70%',
+          width: '50%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-end',

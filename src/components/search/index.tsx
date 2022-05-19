@@ -1,8 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import {
-  InputBase, InputAdornment,
-} from '@material-ui/core';
+import { InputBase } from '@material-ui/core';
 import { Search as SearchIcon } from '@material-ui/icons';
 import { useStyles } from './styles';
 import { useSearch } from './hooks';
@@ -37,10 +35,8 @@ const Search: React.FC<{
         inputProps={{
           'aria-label': placeholder,
         }}
-        startAdornment={(
-          <InputAdornment position="start">
-            <SearchIcon fontSize="small" />
-          </InputAdornment>
+        endAdornment={(
+          <SearchIcon fontSize="small" className="Search-icon" />
         )}
       />
     </form>

@@ -6,19 +6,19 @@
     "default": "/images/logo.svg"
   },
   "prefix": {
-    "consensus": "cosmosvalcons",
-    "validator": "cosmosvaloper",
-    "account": "cosmos"
+    "consensus": "[consensus]",
+    "validator": "[validator]",
+    "account": "[account]"
   },
   "genesis": {
     "time": "2021-07-13T08:00:00",
     "height": 1
   },
-  "primaryTokenUnit": "uatom",
-  "votingPowerTokenUnit": "uatom",
+  "primaryTokenUnit": "core",
+  "votingPowerTokenUnit": "core",
   "tokenUnits": {
-    "uatom": {
-      "display": "atom",
+    "core": {
+      "display": "core",
       "exponent": 6
     }
   },

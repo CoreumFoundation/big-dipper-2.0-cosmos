@@ -16,7 +16,6 @@ const Nav:React.FC<{
       {isDesktop ? (
         <Desktop
           className={classes.desktop}
-          title={title}
         />
       ) : (
         <Mobile

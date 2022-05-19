@@ -12,11 +12,17 @@ export const useStyles = () => {
             border: 'none',
           },
         },
-        logo: {
-          width: '216px',
-          padding: theme.spacing(2, 1.75, 2.5),
-          '&:hover': {
-            cursor: 'pointer',
+        container: {
+          display: 'grid',
+          placeItems: 'center',
+
+          '& .logo': {
+            height: 'fit-content',
+            width: '216px',
+            padding: theme.spacing(2, 1.75, 2.5),
+            '&:hover': {
+              cursor: 'pointer',
+            },
           },
         },
         appBar: {

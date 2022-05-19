@@ -7,26 +7,18 @@ export const useStyles = () => {
         root: {
           display: 'grid',
           gridGap: theme.spacing(1),
-          gridTemplateRows: 'auto',
-          [theme.breakpoints.up('sm')]: {
-            gridTemplateColumns: 'repeat(2, 1fr)',
-          },
-          [theme.breakpoints.up('lg')]: {
-            gridGap: theme.spacing(2),
-            gridTemplateColumns: 'repeat(4, 1fr)',
-          },
         },
         blockHeight: {
-          background: theme.palette.custom.primaryData.one,
+          background: theme.palette.custom.general.single_block,
         },
         blockTime: {
-          background: theme.palette.custom.primaryData.two,
+          background: theme.palette.custom.general.single_block,
         },
         price: {
-          background: theme.palette.custom.primaryData.three,
+          background: theme.palette.custom.general.single_block,
         },
         validators: {
-          background: theme.palette.custom.primaryData.four,
+          background: theme.palette.custom.general.single_block,
         },
       });
     }, { index: 1 },

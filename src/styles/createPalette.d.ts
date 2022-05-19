@@ -8,6 +8,7 @@ declare module '@material-ui/core/styles/createPalette' {
             surfaceOne: string;
             surfaceTwo: string;
             icon: string;
+            single_block: string;
         },
         fonts: {
             fontOne: string;

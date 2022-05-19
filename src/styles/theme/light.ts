@@ -18,7 +18,7 @@ export const lightThemeOverride = {
   palette: {
     type: 'light',
     primary: {
-      main: '#FD3B4C',
+      main: '#25D695',
       contrastText: '#fff',
     },
     background: {

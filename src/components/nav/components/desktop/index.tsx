@@ -7,21 +7,19 @@ import {
 } from '@material-ui/core';
 import { useRecoilValue } from 'recoil';
 import { readTheme } from '@recoil/settings/selectors';
-import BigDipperLogoWhite from '@assets/big-dipper-white.svg';
-import BigDipperLogoRed from '@assets/big-dipper-red.svg';
+import CoreumDark from '@assets/coreum-dark.svg';
 import { useStyles } from './styles';
 import { useDesktop } from './hooks';
 import {
   MenuItems,
-  TitleBar,
+  // TitleBar,
 } from '..';
 import { ActionBar } from './components';
 
 const Desktop: React.FC<{
   className?: string;
-  title: string;
 }> = ({
-  className, title,
+  className,
 }) => {
   const classes = useStyles();
   const theme = useRecoilValue(readTheme);
@@ -47,7 +45,7 @@ const Desktop: React.FC<{
             toggleNetwork={toggleNetwork}
             isNetwork={isNetwork}
           />
-          <TitleBar title={title} />
+          {/* <TitleBar title={title} /> */}
         </AppBar>
         <Drawer
           variant="permanent"
@@ -66,18 +64,28 @@ const Desktop: React.FC<{
             }),
           }}
         >
+          {/* FIXME logo placement or svg split & redesign */}
           {theme === 'light' ? (
-            <BigDipperLogoRed
-              className={classes.logo}
-              onClick={toggleMenu}
-              role="button"
-            />
+            <div className={classes.container}>
+              <CoreumDark
+                className="logo"
+                onClick={toggleMenu}
+                role="button"
+              />
+            </div>
           ) : (
-            <BigDipperLogoWhite
-              className={classes.logo}
-              onClick={toggleMenu}
-              role="button"
-            />
+            // <BigDipperLogoWhite
+            //   className={classes.logo}
+            //   onClick={toggleMenu}
+            //   role="button"
+            // />
+            <div className={classes.container}>
+              <CoreumDark
+                className="logo"
+                onClick={toggleMenu}
+                role="button"
+              />
+            </div>
           )}
           <MenuItems />
         </Drawer>

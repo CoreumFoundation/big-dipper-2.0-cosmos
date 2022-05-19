@@ -5,8 +5,11 @@ config:
 generates:
   ./src/graphql/types/general_types.tsx:
     documents:
-      - 'src/graphql/general/*'
-    schema: https://gql.desmos.forbole.com/v1/graphql
+      - './src/**/*.graphql'
+      - './src/**/*_actions.ts'
+      - './src/**/*_documents.ts'
+      - '!./src/**/desmos_profile.graphql'
+    schema: http://localhost:8080/v1/graphql
     plugins:
       - "typescript"
       - "typescript-operations"
