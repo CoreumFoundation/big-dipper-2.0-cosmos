@@ -38,6 +38,7 @@ jobs:
             --build-arg PORT=3000 \
             --build-arg NEXT_PUBLIC_MATOMO_URL="https://analytics.bigdipper.live" \
             --build-arg NEXT_PUBLIC_MATOMO_SITE_ID=4 \
+            .
       - name: Publish
         run: |-
           docker push "gcr.io/$PROJECT_ID/$IMAGE:${{ env.tag }}" && \
