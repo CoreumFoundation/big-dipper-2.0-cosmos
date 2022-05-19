@@ -36,6 +36,7 @@ export const darkThemeOverride = {
         surfaceOne, // same as background paper
         surfaceTwo, // striped tables
         single_block: 'linear-gradient(110.16deg, rgba(94, 103, 115, 0.35) 0%, rgba(94, 103, 115, 0.15) 100%)',
+        nav_drawer: '#2B3138',
       },
       fonts: {
         fontOne,

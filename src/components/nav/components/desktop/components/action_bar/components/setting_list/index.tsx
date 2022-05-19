@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import classnames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import SettingIcon from '@assets/icon-setting.svg';
 import { generalConfig } from '@configs';
@@ -14,6 +13,9 @@ import {
   Button,
   IconButton,
   Select,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import {
@@ -41,13 +43,21 @@ const Settings: React.FC<{
 
   return (
     <div>
-      <div
+      <ListItem
+        button
+        className={props.className}
         onClick={handleOpen}
-        role="button"
-        className={classnames(props.className, classes.icon)}
       >
-        <SettingIcon />
-      </div>
+        <ListItemIcon>
+          <div
+            role="button"
+            className={classes.icon}
+          >
+            <SettingIcon />
+          </div>
+        </ListItemIcon>
+        <ListItemText primary={t('settings')} />
+      </ListItem>
       <Dialog
         maxWidth="md"
         onClose={handleCancel}

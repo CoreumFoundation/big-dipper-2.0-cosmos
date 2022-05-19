@@ -43,30 +43,6 @@ const Consensus: React.FC<{
       <Typography variant="h2" className={classes.label}>
         {t('consensus')}
       </Typography>
-      <div className={classes.info}>
-        <div>
-          <Typography variant="caption" className="label" component="div">
-            {t('height')}
-          </Typography>
-          <Typography variant="caption" className="label" component="div">
-            {t('proposer')}
-          </Typography>
-        </div>
-        <div>
-          <Typography variant="h4">
-            {numeral(state.height).format('0,0')}
-          </Typography>
-          {state.proposer ? (
-            <AvatarName
-              address={proposerProfile.address}
-              imageUrl={proposerProfile.imageUrl}
-              name={proposerProfile.name}
-            />
-          ) : (
-            '-'
-          )}
-        </div>
-      </div>
       <div className={classes.content}>
         <RadialBarChart
           className={classes.chart}
@@ -118,6 +94,30 @@ const Consensus: React.FC<{
             </tspan>
           </text>
         </RadialBarChart>
+      </div>
+      <div className={classes.info}>
+        <div>
+          <Typography variant="caption" className="label" component="div">
+            {t('height')}
+          </Typography>
+          <Typography variant="caption" className="label" component="div">
+            {t('proposer')}
+          </Typography>
+        </div>
+        <div className="values">
+          <Typography variant="h4" className="height">
+            {numeral(state.height).format('0,0')}
+          </Typography>
+          {state.proposer ? (
+            <AvatarName
+              address={proposerProfile.address}
+              imageUrl={proposerProfile.imageUrl}
+              name={proposerProfile.name}
+            />
+          ) : (
+            '-'
+          )}
+        </div>
       </div>
     </Box>
   );

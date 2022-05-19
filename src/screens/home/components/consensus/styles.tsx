@@ -9,17 +9,18 @@ export const useStyles = () => {
       return ({
         root: {
           height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          overflow: 'auto',
+          display: 'grid',
+          gridTemplateRows: 'auto 1fr auto',
+          // flexDirection: 'column',
+          // overflow: 'auto',
         },
         content: {
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          flexDirection: 'column',
+          // flex: 1,
+          // display: 'flex',
+          // alignItems: 'center',
+          // justifyContent: 'space-around',
+          // flexDirection: 'column',
+          placeSelf: 'start center',
         },
         label: {
           marginBottom: theme.spacing(2),
@@ -50,6 +51,12 @@ export const useStyles = () => {
             alignItems: 'center',
             '& > *': {
               width: '50%',
+            },
+          },
+
+          '& .values': {
+            '& .height': {
+              color: theme.palette.custom.fonts.fontOne,
             },
           },
           '& .label': {

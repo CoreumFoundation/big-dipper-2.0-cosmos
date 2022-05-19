@@ -2,11 +2,11 @@ import React from 'react';
 import classnames from 'classnames';
 import { useGetComponentDimension } from '@hooks';
 import { useStyles } from './styles';
-import {
-  // Network,
-  // NetworkList,
-  SettingsList,
-} from './components';
+// import {
+//   // Network,
+//   // NetworkList,
+//   // SettingsList,
+// } from './components';
 import { SearchBar } from '../../..';
 
 const ActionBar: React.FC<{
@@ -31,7 +31,7 @@ const ActionBar: React.FC<{
           className={classnames(classes.network, { open: isNetwork })}
           toggleNetwork={toggleNetwork}
         /> */}
-        <SettingsList />
+        {/* <SettingsList /> */}
       </div>
       {/* <NetworkList
         actionHeight={height}

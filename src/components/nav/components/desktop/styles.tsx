@@ -58,6 +58,7 @@ export const useStyles = () => {
           boxSizing: 'border-box',
         },
         drawerOpen: {
+          background: theme.palette.custom.general.nav_drawer,
           width: OPEN_DRAWER_WIDTH,
           transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.easeIn,
@@ -65,6 +66,7 @@ export const useStyles = () => {
           }),
         },
         drawerClose: {
+          background: theme.palette.custom.general.nav_drawer,
           transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.easeIn,
             duration: theme.transitions.duration.enteringScreen,

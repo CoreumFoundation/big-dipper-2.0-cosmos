@@ -22,8 +22,10 @@ export const useStyles = () => {
             display: 'flex',
             alignItems: 'flex-end',
             justifyContent: 'space-between',
+            color: theme.palette.primary.main,
           },
           '& .description': {
+            color: theme.palette.custom.fonts.fontFive,
             display: 'none',
             [theme.breakpoints.up('md')]: {
               display: 'block',

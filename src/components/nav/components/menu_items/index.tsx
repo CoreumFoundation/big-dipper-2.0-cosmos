@@ -11,6 +11,7 @@ import {
 import useTranslation from 'next-translate/useTranslation';
 import { useStyles } from './styles';
 import { getMenuItems } from './utils';
+import { SettingsList } from '../desktop/components/action_bar/components';
 
 const MenuItems = () => {
   const classes = useStyles();
@@ -44,6 +45,7 @@ const MenuItems = () => {
           </Link>
         );
       })}
+      <SettingsList className={classes.root} />
     </List>
   );
 };
