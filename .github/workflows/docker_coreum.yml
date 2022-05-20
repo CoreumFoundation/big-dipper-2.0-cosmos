@@ -29,10 +29,10 @@ jobs:
           docker build \
             --tag "gcr.io/$PROJECT_ID/$IMAGE:$TAG" \
             --tag "gcr.io/$PROJECT_ID/$IMAGE:latest" \
-            --build-arg NEXT_PUBLIC_GRAPHQL_URL="http://hasura:8080/v1/graphql" \
-            --build-arg NEXT_PUBLIC_GRAPHQL_WS="ws://hasura:8080/v1/graphql" \
+            --build-arg NEXT_PUBLIC_GRAPHQL_URL="http://localhost:8080/v1/graphql" \
+            --build-arg NEXT_PUBLIC_GRAPHQL_WS="ws://localhost:8080/v1/graphql" \
             --build-arg NEXT_PUBLIC_URL="http://0.0.0.0" \
-            --build-arg NEXT_PUBLIC_RPC_WEBSOCKET="ws://cored:9090/websocket" \
+            --build-arg NEXT_PUBLIC_RPC_WEBSOCKET="ws://localhost:9090/websocket" \
             --build-arg NEXT_PUBLIC_CHAIN_TYPE="testnet" \
             --build-arg NODE_ENV="production" \
             --build-arg PORT=3000 \
