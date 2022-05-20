@@ -28,7 +28,7 @@ function App(props: AppProps) {
   return (
     <>
       <DefaultSeo
-        titleTemplate={`%s | ${chainConfig.title}`}
+        titleTemplate={`${chainConfig.title}`}
         title={t('common:bigDipper')}
         description={t('common:description')}
         openGraph={{

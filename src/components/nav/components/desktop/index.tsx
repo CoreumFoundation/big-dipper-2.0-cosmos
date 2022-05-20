@@ -7,7 +7,8 @@ import {
 } from '@material-ui/core';
 import { useRecoilValue } from 'recoil';
 import { readTheme } from '@recoil/settings/selectors';
-import CoreumDark from '@assets/coreum-dark.svg';
+import Logo from '@assets/logo.svg';
+import LogoTextDark from '@assets/logo-text-dark.svg';
 import { useStyles } from './styles';
 import { useDesktop } from './hooks';
 import {
@@ -64,29 +65,23 @@ const Desktop: React.FC<{
             }),
           }}
         >
-          {/* FIXME logo placement or svg split & redesign */}
-          {theme === 'light' ? (
-            <div className={classes.container}>
-              <CoreumDark
-                className="logo"
-                onClick={toggleMenu}
-                role="button"
+          <div className={classes.logo} role="button" onClick={toggleMenu}>
+            {/* FIXME get light and dark theme assets */}
+            {theme === 'light' ? <Logo /> : <Logo />}
+            {isMenu && theme === 'light' ? (
+              <LogoTextDark
+                style={{
+                  opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                }}
               />
-            </div>
-          ) : (
-            // <BigDipperLogoWhite
-            //   className={classes.logo}
-            //   onClick={toggleMenu}
-            //   role="button"
-            // />
-            <div className={classes.container}>
-              <CoreumDark
-                className="logo"
-                onClick={toggleMenu}
-                role="button"
+            ) : (
+              <LogoTextDark
+                style={{
+                  opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                }}
               />
-            </div>
-          )}
+            )}
+          </div>
           <MenuItems />
         </Drawer>
       </div>

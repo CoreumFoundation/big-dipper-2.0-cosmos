@@ -8,9 +8,10 @@ export const useStyles = () => {
       return ({
         root: {
           height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
+          display: 'grid',
+          gridTemplateRows: 'auto 1fr auto',
+          // justifyContent: 'center',
+          // flexDirection: 'column',
         },
         label: {
           marginBottom: theme.spacing(2),
@@ -61,11 +62,11 @@ export const useStyles = () => {
           },
         },
         content: {
-          flex: 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-around',
           flexDirection: 'column',
+          height: '100%',
         },
       });
     },
