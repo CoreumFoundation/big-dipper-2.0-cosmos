@@ -6,13 +6,24 @@ export const useStyles = () => {
       return ({
         root: {
           height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          overflow: 'auto',
+          display: 'grid',
+          gridTemplateColumns: '2fr auto 1fr',
+          gap: 16,
         },
         label: {
           marginBottom: theme.spacing(2),
+        },
+        chart: {
+          display: 'grid',
+          placeItems: 'stretch',
+        },
+        container: {
+          display: 'grid',
+          gridTemplateRows: 'auto 1fr',
+        },
+        divider: {
+          height: '90%',
+          placeSelf: 'end',
         },
       });
     }, { index: 1 },

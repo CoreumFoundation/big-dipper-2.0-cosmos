@@ -31,6 +31,7 @@ export const useStyles = () => {
           '& .MuiIconButton-root': {
             padding: 0,
           },
+          background: theme.palette.custom.general.modal_header,
         },
         title: {
           display: 'flex',
@@ -42,12 +43,16 @@ export const useStyles = () => {
           },
         },
         formItem: {
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          placeItems: 'center start',
           marginBottom: theme.spacing(2),
           '& .MuiOutlinedInput-root': {
             width: '100%',
+            padding: 0,
           },
           '& .form-item--label': {
-            marginBottom: theme.spacing(1),
+            color: theme.palette.custom.fonts.settings_label,
           },
         },
         version: {

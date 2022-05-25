@@ -82,7 +82,7 @@ const Settings: React.FC<{
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent dividers>
+        <DialogContent>
           <form onSubmit={handleFormSubmit}>
             <div className={classes.formItem}>
               <Typography className="form-item--label">

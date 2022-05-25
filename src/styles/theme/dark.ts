@@ -37,13 +37,15 @@ export const darkThemeOverride = {
         surfaceTwo, // striped tables
         single_block: 'linear-gradient(110.16deg, rgba(37, 214, 149, 0.15) 0%, rgba(37, 214, 149, 0.05) 100%)',
         nav_drawer: '#2B3138',
+        modal_header: '#1D222C',
       },
       fonts: {
         fontOne,
         fontTwo,
         fontThree,
         fontFour: '#999999',
-        highlight: '#6AA6FF',
+        highlight: '#F1C34E',
+        settings_label: '#868991',
       },
       primaryData: {
         one: '#AE73F8',
@@ -52,9 +54,9 @@ export const darkThemeOverride = {
         four: '#E3AB55',
       },
       tokenomics: {
-        one: '#5E94FF',
+        one: '#004DC2',
         two: '#E3AB55',
-        three: '#5ACF78',
+        three: '#25D695',
       },
       results: {
         pass: '#1EC490',

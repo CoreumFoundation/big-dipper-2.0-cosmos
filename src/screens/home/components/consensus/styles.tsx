@@ -12,7 +12,8 @@ export const useStyles = () => {
           display: 'grid',
           gridTemplateRows: 'auto 1fr auto',
           // flexDirection: 'column',
-          // overflow: 'auto',
+          overflow: 'auto',
+          minWidth: 0,
         },
         content: {
           // flex: 1,
@@ -44,6 +45,7 @@ export const useStyles = () => {
         info: {
           display: 'flex',
           flexDirection: 'column',
+          overflow: 'hidden',
           width: '100%',
           color: theme.palette.custom.fonts.fontTwo,
           '& > *': {
@@ -55,6 +57,8 @@ export const useStyles = () => {
           },
 
           '& .values': {
+            textOverflow: 'ellipses',
+
             '& .height': {
               color: theme.palette.custom.fonts.fontOne,
             },

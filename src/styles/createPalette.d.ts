@@ -10,6 +10,7 @@ declare module '@material-ui/core/styles/createPalette' {
             icon: string;
             single_block: string;
             nav_drawer: string;
+            modal_header: string;
         },
         fonts: {
             fontOne: string;
@@ -18,6 +19,7 @@ declare module '@material-ui/core/styles/createPalette' {
             fontFour: string;
             fontFive: string;
             highlight: string;
+            settings_label: string;
         },
         primaryData: {
             one: string;

@@ -25,6 +25,7 @@ export const useStyles = () => {
           },
         },
         mainInfo: {
+          gridColumn: '1',
           [theme.breakpoints.up('md')]: {
             gridColumn: '1 / 3',
           },
@@ -35,6 +36,7 @@ export const useStyles = () => {
           },
         },
         dataBlocks: {
+          gridColumn: '1',
           [theme.breakpoints.up('md')]: {
             gridColumn: '1 / 2',
           },
@@ -43,6 +45,7 @@ export const useStyles = () => {
           },
         },
         hero: {
+          gridColumn: '1',
           [theme.breakpoints.up('md')]: {
             gridColumn: '2 / 3',
           },
@@ -53,6 +56,7 @@ export const useStyles = () => {
           },
         },
         tokenomics: {
+          gridColumn: '1',
           height: '375px',
           [theme.breakpoints.up('md')]: {
             gridColumn: '1/ 2',
@@ -63,6 +67,7 @@ export const useStyles = () => {
           },
         },
         consensus: {
+          gridColumn: '1',
           height: '375px',
           [theme.breakpoints.up('md')]: {
             gridColumn: '2 / 3',
@@ -73,10 +78,13 @@ export const useStyles = () => {
           },
         },
         bottom: {
-          gridColumn: '1 / 4',
+          gridColumn: '1',
           display: 'grid',
           gridTemplateColumns: '1fr',
           gap: theme.spacing(2),
+          [theme.breakpoints.up('md')]: {
+            gridColumn: '1 / 4',
+          },
           [theme.breakpoints.up('lg')]: {
             gridGap: theme.spacing(2),
             gridTemplateColumns: 'repeat(2, 1fr)',
