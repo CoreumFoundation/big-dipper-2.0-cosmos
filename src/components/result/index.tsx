@@ -1,9 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import {
-  CheckCircle, Cancel,
-} from '@material-ui/icons';
+import Check from '@assets/icon-check.svg';
+import Cross from '@assets/icon-cross.svg';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 
@@ -25,14 +24,14 @@ const Result: React.FC<{
     >
       {success ? (
         <>
-          <CheckCircle />
+          <Check />
           <Typography variant="body1">
             {t('success')}
           </Typography>
         </>
       ) : (
         <>
-          <Cancel />
+          <Cross />
           <Typography variant="body1">
             {t('fail')}
           </Typography>
