@@ -1,6 +1,6 @@
 import { readTheme } from '@src/recoil/settings';
 import {
-  createChart, SingleValueData,
+  createChart, IChartApi, SingleValueData,
 } from 'lightweight-charts';
 import React, {
   useEffect, useRef,
@@ -14,16 +14,16 @@ const TitleBar:React.FC = () => {
   // const theme = useRecoilValue(readTheme);
   // const { t } = useTranslation('common');
   const classes = useStyles();
-  const ref = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<IChartApi>(null);
   const theme = useRecoilValue(readTheme);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const chartOptions: any = {
+      const chartOptions = {
         layout: {
           textColor: theme === 'dark' ? 'white' : 'black',
           background: {
-            type: 'solid', color: theme === 'dark' ? '#1B1D23' : 'white',
+            color: theme === 'dark' ? '#1B1D23' : 'white',
           },
         },
         grid: {
@@ -35,8 +35,8 @@ const TitleBar:React.FC = () => {
           },
         },
       };
-      const chart = createChart(document.getElementById('price-chart'), chartOptions);
-      const baselineSeries = chart.addBaselineSeries({
+      chartRef.current = createChart(document.getElementById('price-chart'), chartOptions);
+      const baselineSeries = chartRef.current.addBaselineSeries({
         baseValue: {
           type: 'price', price: 25,
         },
@@ -72,12 +72,35 @@ const TitleBar:React.FC = () => {
 
       baselineSeries.setData(data);
 
-      chart.timeScale().fitContent();
+      chartRef.current.timeScale().fitContent();
     }
   }, []);
 
+  useEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.applyOptions(
+        {
+          layout: {
+            textColor: theme === 'dark' ? 'white' : 'black',
+            background: {
+              color: theme === 'dark' ? '#1B1D23' : 'white',
+            },
+          },
+          grid: {
+            vertLines: {
+              color: theme === 'dark' ? '#1B1D23' : 'white',
+            },
+            horzLines: {
+              color: theme === 'dark' ? '#1B1D23' : 'white',
+            },
+          },
+        },
+      );
+    }
+  }, [theme]);
+
   return (
-    <div className={classes.chart} ref={ref} id="price-chart" />
+    <div className={classes.chart} id="price-chart" />
   );
 };
 
