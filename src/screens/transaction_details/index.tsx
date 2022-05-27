@@ -42,16 +42,18 @@ const TransactionDetails = () => {
           exists={state.exists}
         >
           <span className={classes.root}>
-            <Overview
-              data={overview}
-            />
-            <Messages
-              className={classes.messages}
-              messages={filterMessages(messages.items)}
-              viewRaw={messages.viewRaw}
-              toggleMessageDisplay={toggleMessageDisplay}
-              onMessageFilterCallback={onMessageFilterCallback}
-            />
+            <div className={classes.top}>
+              <Overview
+                data={overview}
+              />
+              <Messages
+                className={classes.messages}
+                messages={filterMessages(messages.items)}
+                viewRaw={messages.viewRaw}
+                toggleMessageDisplay={toggleMessageDisplay}
+                onMessageFilterCallback={onMessageFilterCallback}
+              />
+            </div>
             {!!logs && <Logs logs={logs} />}
           </span>
         </LoadAndExist>

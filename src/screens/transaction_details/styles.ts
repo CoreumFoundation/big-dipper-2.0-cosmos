@@ -17,6 +17,14 @@ export const useStyles = () => {
             gridGap: theme.spacing(2),
           },
         },
+        top: {
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: theme.spacing(2),
+          [theme.breakpoints.up('lg')]: {
+            gridTemplateColumns: '1fr 1fr',
+          },
+        },
         messages: {
           minHeight: '500px',
           height: '50vh',
