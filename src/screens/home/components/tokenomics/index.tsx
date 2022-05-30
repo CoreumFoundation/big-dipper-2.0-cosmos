@@ -14,7 +14,7 @@ import {
 } from 'recharts';
 // import { chainConfig } from '@configs';
 import { useStyles } from './styles';
-// import { useTokenomics } from './hooks';
+import { useTokenomics } from './hooks';
 
 const Tokenomics:React.FC<{
   className?: string;
@@ -23,15 +23,15 @@ const Tokenomics:React.FC<{
   const {
     classes, theme,
   } = useStyles();
-  // const { state } = useTokenomics();
+  const { state } = useTokenomics();
 
-  const state = {
-    bonded: 30,
-    unbonded: 20,
-    unbonding: 50,
-    total: 100,
-    // denom: 'asdf';
-  };
+  // const state = {
+  //   bonded: 30,
+  //   unbonded: 20,
+  //   unbonding: 50,
+  //   total: 100,
+  //   // denom: 'asdf';
+  // };
 
   const data = [
     {
