@@ -6,9 +6,9 @@
     "default": "/images/logo.svg"
   },
   "prefix": {
-    "consensus": "[consensus]",
-    "validator": "[validator]",
-    "account": "[account]"
+    "consensus": "cosmosvalcons",
+    "validator": "cosmosvaloper",
+    "account": "cosmos"
   },
   "genesis": {
     "time": "2021-07-13T08:00:00",
