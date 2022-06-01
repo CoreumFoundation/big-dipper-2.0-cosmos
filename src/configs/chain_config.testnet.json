@@ -15,11 +15,15 @@
     "height": 1
   },
   "primaryTokenUnit": "core",
-  "votingPowerTokenUnit": "core",
+  "votingPowerTokenUnit": "stake",
   "tokenUnits": {
+    "stake": {
+      "display": "stake",
+      "exponent": 0
+    },
     "core": {
       "display": "core",
-      "exponent": 6
+      "exponent": 0
     }
   },
   "extra": {
