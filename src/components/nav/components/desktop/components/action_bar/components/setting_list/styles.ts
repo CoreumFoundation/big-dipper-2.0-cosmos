@@ -44,7 +44,7 @@ export const useStyles = () => {
         },
         formItem: {
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
+          gridTemplateColumns: '1fr 150px',
           placeItems: 'center start',
           marginBottom: theme.spacing(2),
           '& .MuiOutlinedInput-root': {
@@ -53,6 +53,23 @@ export const useStyles = () => {
           },
           '& .form-item--label': {
             color: theme.palette.custom.fonts.settings_label,
+          },
+          '& .theme_container': {
+            display: 'grid',
+            gridAutoFlow: 'column',
+            background: theme.palette.background.default,
+            borderRadius: '10%',
+            '& .theme_item': {
+              padding: 12,
+              borderRadius: '10%',
+              transition: 'background .2s',
+              display: 'grid',
+              placeItems: 'center',
+              color: theme.palette.text.primary,
+              '&.active': {
+                background: theme.palette.primary.main,
+              },
+            },
           },
         },
         version: {

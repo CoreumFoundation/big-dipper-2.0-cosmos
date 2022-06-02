@@ -17,9 +17,11 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
 import {
-  THEME_LIST, DATE_LIST, TX_LIST,
+  Close as CloseIcon, Brightness2 as Dark, Brightness7 as Light,
+} from '@material-ui/icons';
+import {
+  DATE_LIST, TX_LIST,
 } from '@recoil/settings';
 import { useSettingList } from './hooks';
 import { useStyles } from './styles';
@@ -88,7 +90,23 @@ const Settings: React.FC<{
               <Typography className="form-item--label">
                 {t('theme')}
               </Typography>
-              <Select
+              <div className="theme_container">
+                <div
+                  className={`theme_item ${state.theme === 'dark' ? 'active' : ''}`}
+                  role="button"
+                  onClick={() => handleChange('theme', 'dark')}
+                >
+                  <Dark />
+                </div>
+                <div
+                  className={`theme_item ${state.theme === 'light' ? 'active' : ''}`}
+                  role="button"
+                  onClick={() => handleChange('theme', 'light')}
+                >
+                  <Light />
+                </div>
+              </div>
+              {/* <Select
                 variant="outlined"
                 value={state.theme}
                 onChange={(e) => handleChange('theme', e?.target?.value)}
@@ -105,7 +123,7 @@ const Settings: React.FC<{
                       {t(l)}
                     </MenuItem>
                   ))}
-              </Select>
+              </Select> */}
             </div>
 
             <div className={classes.formItem}>
