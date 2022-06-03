@@ -7,17 +7,17 @@ import { TitleBar } from '@src/components/nav/components';
 import {
   Divider, Typography,
 } from '@material-ui/core';
+import { useScreenSize } from '@src/hooks';
 import { useStyles } from './styles';
 
 const PriceChart = dynamic(() => import('./price_chart'), { ssr: false });
 
 const MainInfo: React.FC<{
-  className?: string
-}> = ({
-  className,
-}) => {
+  className?: string;
+}> = ({ className }) => {
   // const { t } = useTranslation('home');
   const classes = useStyles();
+  const { isMobile } = useScreenSize();
 
   return (
     <Box className={classnames(classes.root, className)}>
@@ -27,7 +27,10 @@ const MainInfo: React.FC<{
         </Typography>
         <PriceChart />
       </div>
-      <Divider orientation="vertical" className={classes.divider} />
+      <Divider
+        orientation={isMobile ? 'horizontal' : 'vertical'}
+        className={isMobile ? undefined : classes.divider}
+      />
       <TitleBar />
     </Box>
   );

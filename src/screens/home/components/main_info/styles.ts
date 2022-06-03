@@ -7,8 +7,15 @@ export const useStyles = () => {
         root: {
           height: '100%',
           display: 'grid',
-          gridTemplateColumns: '2fr auto 1fr',
+          gridTemplateRows: '1fr auto 1fr',
           gap: 16,
+          [theme.breakpoints.up('md')]: {
+            gridTemplateColumns: '1fr auto 1fr',
+            gridTemplateRows: 'unset',
+          },
+          [theme.breakpoints.up('lg')]: {
+            gridTemplateColumns: '2fr auto 1fr',
+          },
         },
         label: {
           marginBottom: theme.spacing(2),
