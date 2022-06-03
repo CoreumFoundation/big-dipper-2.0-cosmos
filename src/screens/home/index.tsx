@@ -9,7 +9,7 @@ import {
   Transactions,
   Hero,
 } from './components';
-import MainInfo from './components/main_info/main_info';
+import MainInfo from './components/main_info';
 
 const Home = () => {
   const classes = useStyles();

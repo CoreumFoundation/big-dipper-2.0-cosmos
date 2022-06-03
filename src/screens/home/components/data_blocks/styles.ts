@@ -7,6 +7,9 @@ export const useStyles = () => {
         root: {
           display: 'grid',
           gridGap: theme.spacing(1),
+          [theme.breakpoints.down('sm')]: {
+            gridTemplateColumns: '1fr 1.5fr 1.5fr',
+          },
         },
         blockHeight: {
           background: theme.palette.custom.general.single_block,
