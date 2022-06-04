@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = () => {
   const styles = makeStyles(
     (theme) => {
-      return ({
+      return {
         root: {
           height: '100%',
           display: 'grid',
@@ -32,8 +32,9 @@ export const useStyles = () => {
           height: '90%',
           placeSelf: 'end',
         },
-      });
-    }, { index: 1 },
+      };
+    },
+    { index: 1 },
   )();
 
   return styles;
