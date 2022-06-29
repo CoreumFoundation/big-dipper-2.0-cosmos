@@ -24,6 +24,9 @@ export const useStyles = () => {
             cursor: 'pointer',
           },
         },
+        logo_text: {
+          display: 'grid',
+        },
         appBar: {
           ...theme.mixins.toolbar,
           display: 'flex',

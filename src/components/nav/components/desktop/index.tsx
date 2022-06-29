@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil';
 import { readTheme } from '@recoil/settings/selectors';
 import Logo from '@assets/logo.svg';
 import LogoTextDark from '@assets/logo-text-dark.svg';
+import DevnetBadge from '@assets/devnet-badge.svg';
 import { useStyles } from './styles';
 import { useDesktop } from './hooks';
 import {
@@ -69,17 +70,31 @@ const Desktop: React.FC<{
             {/* FIXME get light and dark theme assets */}
             {theme === 'light' ? <Logo /> : <Logo />}
             {isMenu && theme === 'light' ? (
-              <LogoTextDark
-                style={{
-                  opacity: isMenu ? 1 : 0, transition: '.3s ease',
-                }}
-              />
+              <div className={classes.logo_text}>
+                <LogoTextDark
+                  style={{
+                    opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                  }}
+                />
+                <DevnetBadge
+                  style={{
+                    opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                  }}
+                />
+              </div>
             ) : (
-              <LogoTextDark
-                style={{
-                  opacity: isMenu ? 1 : 0, transition: '.3s ease',
-                }}
-              />
+              <div className={classes.logo_text}>
+                <LogoTextDark
+                  style={{
+                    opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                  }}
+                />
+                <DevnetBadge
+                  style={{
+                    opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                  }}
+                />
+              </div>
             )}
           </div>
           <MenuItems />

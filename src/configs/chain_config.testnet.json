@@ -6,24 +6,20 @@
     "default": "/images/logo.svg"
   },
   "prefix": {
-    "consensus": "cosmosvalcons",
-    "validator": "cosmosvaloper",
-    "account": "cosmos"
+    "consensus": "corevalcons",
+    "validator": "corevaloper",
+    "account": "core"
   },
   "genesis": {
     "time": "2021-07-13T08:00:00",
     "height": 1
   },
-  "primaryTokenUnit": "core",
-  "votingPowerTokenUnit": "stake",
+  "primaryTokenUnit": "acore",
+  "votingPowerTokenUnit": "acore",
   "tokenUnits": {
-    "stake": {
-      "display": "stake",
-      "exponent": 0
-    },
-    "core": {
+    "acore": {
       "display": "core",
-      "exponent": 0
+      "exponent": 18
     }
   },
   "extra": {

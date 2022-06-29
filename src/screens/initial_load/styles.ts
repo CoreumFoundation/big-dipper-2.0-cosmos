@@ -21,6 +21,10 @@ export const useStyles = () => {
         },
         logo: {
           width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 12,
           [theme.breakpoints.up('sm')]: {
             width: '300px',
           },
