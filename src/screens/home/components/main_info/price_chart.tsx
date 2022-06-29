@@ -1,9 +1,10 @@
 import { readTheme } from '@src/recoil/settings';
+import axios from 'axios';
 import {
   createChart, IChartApi, SingleValueData,
 } from 'lightweight-charts';
 import React, {
-  useEffect, useRef,
+  useEffect, useRef, useState,
 } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -14,9 +15,26 @@ const TitleBar: React.FC = () => {
   const classes = useStyles();
   const chartRef = useRef<IChartApi>(null);
   const theme = useRecoilValue(readTheme);
+  const [data, setData] = useState<SingleValueData[]>();
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !chartRef.current) {
+    if (typeof window !== 'undefined') {
+      (async () => {
+        const chartData: any = await axios.get(
+          'https://api.coingecko.com/api/v3/coins/coreum/market_chart?vs_currency=usd&days=7',
+        );
+        console.log(chartData);
+        const formatted = chartData.data.prices.map((entry) => ({
+          time: entry[0] / 1000,
+          value: entry[1],
+        }));
+        setData(formatted);
+      })();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !chartRef.current && data) {
       const chartOptions = {
         layout: {
           textColor: theme === 'dark' ? 'white' : 'black',
@@ -40,7 +58,7 @@ const TitleBar: React.FC = () => {
       const baselineSeries = chartRef.current.addBaselineSeries({
         baseValue: {
           type: 'price',
-          price: 25,
+          price: data[0].value,
         },
         topLineColor: 'rgba( 38, 166, 154, 1)',
         topFillColor1: 'rgba( 38, 166, 154, 0.28)',
@@ -50,54 +68,11 @@ const TitleBar: React.FC = () => {
         bottomFillColor2: 'rgba( 239, 83, 80, 0.28)',
       });
 
-      const data = [
-        {
-          value: 1,
-          time: 1642425322,
-        },
-        {
-          value: 8,
-          time: 1642511722,
-        },
-        {
-          value: 10,
-          time: 1642598122,
-        },
-        {
-          value: 20,
-          time: 1642684522,
-        },
-        {
-          value: 3,
-          time: 1642770922,
-        },
-        {
-          value: 43,
-          time: 1642857322,
-        },
-        {
-          value: 41,
-          time: 1642943722,
-        },
-        {
-          value: 43,
-          time: 1643030122,
-        },
-        {
-          value: 56,
-          time: 1643116522,
-        },
-        {
-          value: 46,
-          time: 1643202922,
-        },
-      ] as SingleValueData[];
-
       baselineSeries.setData(data);
 
       chartRef.current.timeScale().fitContent();
     }
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     if (chartRef.current) {
@@ -125,7 +100,8 @@ const TitleBar: React.FC = () => {
       if (chartRef.current) {
         const container = document.getElementById('price-chart');
         const dimensions = {
-          width: container.clientWidth, height: container.clientHeight,
+          width: container.clientWidth,
+          height: container.clientHeight,
         };
         chartRef.current.applyOptions(dimensions);
         // chartRef.current.timeScale().fitContent();
