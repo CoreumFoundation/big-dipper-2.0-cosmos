@@ -15,7 +15,7 @@
     "height": 1
   },
   "primaryTokenUnit": "acore",
-  "votingPowerTokenUnit": "acore",
+  "votingPowerTokenUnit": "core",
   "tokenUnits": {
     "acore": {
       "display": "core",
