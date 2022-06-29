@@ -24,10 +24,6 @@ export const useStyles = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 12,
-          [theme.breakpoints.up('sm')]: {
-            width: '300px',
-          },
         },
         divider: {
           margin: theme.spacing(2, 0),

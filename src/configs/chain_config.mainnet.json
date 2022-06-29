@@ -1,25 +1,25 @@
 {
   "title": "Coreum Block Explorer",
-  "network": "coreum-mainnet",
+  "network": "coreum-testnet",
   "icon": "https://raw.githubusercontent.com/forbole/big-dipper-assets/master/desmos/icon.svg?sanitize=true",
   "logo": {
-    "default": "/desmos/images/logo.svg"
+    "default": "/images/logo.svg"
   },
   "prefix": {
-    "consensus": "desmosvalcons",
-    "validator": "desmosvaloper",
-    "account": "desmos"
+    "consensus": "corevalcons",
+    "validator": "corevaloper",
+    "account": "core"
   },
   "genesis": {
     "time": "2021-07-13T08:00:00",
     "height": 1
   },
-  "primaryTokenUnit": "udsm",
-  "votingPowerTokenUnit": "udsm",
+  "primaryTokenUnit": "acore",
+  "votingPowerTokenUnit": "acore",
   "tokenUnits": {
-    "udsm": {
-      "display": "dsm",
-      "exponent": 6
+    "acore": {
+      "display": "core",
+      "exponent": 18
     }
   },
   "extra": {

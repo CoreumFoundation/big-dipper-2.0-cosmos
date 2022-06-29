@@ -1,7 +1,6 @@
 import React from 'react';
 import { LinearProgress } from '@material-ui/core';
-import Logo from '@assets/logo.svg';
-import LogoTextDark from '@assets/logo-text-dark.svg';
+import LogoFull from '@assets/logo-full.svg';
 import { useStyles } from './styles';
 
 const InitialLoad = () => {
@@ -10,9 +9,8 @@ const InitialLoad = () => {
   return (
     <div className={classes.root}>
       <div>
-        <div>
-          <Logo />
-          <LogoTextDark />
+        <div className={classes.logo}>
+          <LogoFull />
         </div>
         <LinearProgress className={classes.divider} />
       </div>
