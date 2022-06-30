@@ -12,7 +12,7 @@ export const useStyles = () => {
           '& .MuiInputBase-root': {
             width: '100%',
             height: '100%',
-            background: theme.palette.background.paper,
+            background: theme.palette.custom.general.search,
             padding: theme.spacing(1, 2),
             borderRadius: 48,
           },
