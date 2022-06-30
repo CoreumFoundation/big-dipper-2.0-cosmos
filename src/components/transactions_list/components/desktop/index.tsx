@@ -93,7 +93,7 @@ const Desktop: React.FC<TransactionsListState> = ({
                   return (
                     <div
                       style={style}
-                      className={classes.cell}
+                      className={classes.header}
                     >
                       <Typography
                         variant="h4"
