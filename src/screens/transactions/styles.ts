@@ -13,6 +13,7 @@ export const useStyles = () => {
         box: {
           minHeight: '500px',
           height: '50vh',
+          padding: '0px !important',
           [theme.breakpoints.up('lg')]: {
             height: '100%',
             minHeight: '65vh',
