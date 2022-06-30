@@ -12,6 +12,7 @@ import { useScreenSize } from '@hooks';
 import {
   useProfilesRecoil,
 } from '@recoil/profiles';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { useBlocks } from './hooks';
 
@@ -53,6 +54,9 @@ const Blocks = () => {
           loading={state.loading}
           exists={state.exists}
         >
+          <Typography variant="h1">
+            {t('blocks')}
+          </Typography>
           <Box className={classes.box}>
             {!state.items.length ? (
               <NoData />
