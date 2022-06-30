@@ -10,6 +10,12 @@ export const useStyles = () => {
         cell: {
           ...theme.mixins.tableCell,
         },
+        header: {
+          ...theme.mixins.tableCell,
+          background: theme.palette.custom.general.modal_header,
+          color: theme.palette.custom.fonts.table_headers,
+          textTransform: 'uppercase',
+        },
         body: {
           color: theme.palette.custom.fonts.fontTwo,
         },
