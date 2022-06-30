@@ -11,7 +11,7 @@ export const useStyles = () => {
             color: theme.palette.custom.fonts.highlight,
           },
           '& .button': {
-            color: theme.palette.custom.fonts.fontTwo,
+            color: theme.palette.primary.main,
             '&:hover': {
               cursor: 'pointer',
             },

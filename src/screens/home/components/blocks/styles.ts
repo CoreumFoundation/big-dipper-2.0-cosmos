@@ -8,7 +8,7 @@ export const useStyles = () => {
           display: 'flex',
           flexDirection: 'column',
           '& .button': {
-            color: theme.palette.custom.fonts.fontTwo,
+            color: theme.palette.primary.main,
             '&:hover': {
               cursor: 'pointer',
             },
