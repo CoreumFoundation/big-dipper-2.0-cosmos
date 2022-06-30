@@ -10,6 +10,7 @@ import {
 } from '@components';
 import { useRecoilValue } from 'recoil';
 import { readTx } from '@recoil/settings';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { useTransactions } from './hooks';
 
@@ -40,6 +41,9 @@ const Transactions = () => {
           exists={state.exists}
           loading={state.loading}
         >
+          <Typography variant="h1">
+            {t('transactions')}
+          </Typography>
           <Box className={classes.box}>
             {txListFormat === 'compact' ? (
               <TransactionsList
