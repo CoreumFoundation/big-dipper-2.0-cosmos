@@ -10,9 +10,10 @@ export const darkThemeOverride = {
   mixins: {
     tableCell: {
       background: surfaceOne, // surface one
-      '&.odd': {
-        background: surfaceTwo, // surface two
-      },
+      borderBottom: '1px solid #23272E',
+      // '&.odd': {
+      //   background: surfaceTwo, // surface two
+      // },
     },
   },
   palette: {
@@ -38,6 +39,7 @@ export const darkThemeOverride = {
         single_block: 'linear-gradient(110.16deg, rgba(37, 214, 149, 0.15) 0%, rgba(37, 214, 149, 0.05) 100%)',
         nav_drawer: '#2B3138',
         modal_header: '#1D222C',
+        search: '#2B3138',
       },
       fonts: {
         fontOne,
@@ -46,6 +48,7 @@ export const darkThemeOverride = {
         fontFour: '#999999',
         highlight: '#F1C34E',
         settings_label: '#868991',
+        table_headers: '#6C6F78',
       },
       primaryData: {
         one: '#AE73F8',
@@ -83,11 +86,12 @@ export const darkThemeOverride = {
       root: {
         '& .MuiTableRow-root': {
           '&:nth-child(odd)': {
-            backgroundColor: surfaceTwo, // surface two
+            // backgroundColor: surfaceTwo, // surface two
           },
         },
         '& .MuiTableCell-root': {
           color: fontTwo, // font two
+          borderBottom: '1px solid #23272E',
         },
       },
     },

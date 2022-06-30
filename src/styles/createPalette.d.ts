@@ -11,6 +11,7 @@ declare module '@material-ui/core/styles/createPalette' {
             single_block: string;
             nav_drawer: string;
             modal_header: string;
+            search: string;
         },
         fonts: {
             fontOne: string;
@@ -20,6 +21,7 @@ declare module '@material-ui/core/styles/createPalette' {
             fontFive: string;
             highlight: string;
             settings_label: string;
+            table_headers: string;
         },
         primaryData: {
             one: string;
