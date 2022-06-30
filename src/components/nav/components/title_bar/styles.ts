@@ -35,10 +35,9 @@ export const useStyles = () => {
           padding: theme.spacing(1),
           display: 'grid',
           placeItems: 'center start',
-          gridTemplateColumns: 'repeat(1, 1fr)',
-          // [theme.breakpoints.up('md')]: {
-          //   flexDirection: 'row',
-          // },
+          [theme.breakpoints.up('lg')]: {
+            gridTemplateColumns: 'repeat(2, 1fr)',
+          },
           // [theme.breakpoints.up('lg')]: {
           //   alignItems: 'center',
           //   justifyContent: 'space-between',
@@ -49,12 +48,15 @@ export const useStyles = () => {
           // },
         },
         item: {
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          // display: 'flex',
+          // alignItems: 'center',
+          // justifyContent: 'center',
+          // flexDirectionc:
+          display: 'grid',
           padding: theme.spacing(1),
           width: '100%',
           '& .label': {
+            color: theme.palette.text.secondary,
             marginRight: theme.spacing(1),
           },
           [theme.breakpoints.up('sm')]: {

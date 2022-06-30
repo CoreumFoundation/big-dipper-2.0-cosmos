@@ -14,11 +14,11 @@
     "time": "2021-07-13T08:00:00",
     "height": 1
   },
-  "primaryTokenUnit": "acore",
-  "votingPowerTokenUnit": "core",
+  "primaryTokenUnit": "core",
+  "votingPowerTokenUnit": "exacore",
   "tokenUnits": {
-    "acore": {
-      "display": "core",
+    "core": {
+      "display": "exacore",
       "exponent": 18
     }
   },

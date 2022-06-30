@@ -14,7 +14,7 @@ export const useStyles = () => {
             gridTemplateRows: 'unset',
           },
           [theme.breakpoints.up('lg')]: {
-            gridTemplateColumns: '2fr auto 1fr',
+            gridTemplateColumns: '1.5fr auto 1fr',
           },
         },
         label: {
