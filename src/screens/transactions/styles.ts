@@ -19,6 +19,11 @@ export const useStyles = () => {
             minHeight: '65vh',
           },
         },
+        header: {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        },
       });
     },
   )();
