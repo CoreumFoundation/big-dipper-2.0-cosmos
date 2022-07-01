@@ -23,7 +23,6 @@ const TitleBar: React.FC = () => {
         const chartData: any = await axios.get(
           'https://api.coingecko.com/api/v3/coins/coreum/market_chart?vs_currency=usd&days=7',
         );
-        console.log(chartData);
         const formatted = chartData.data.prices.map((entry) => ({
           time: entry[0] / 1000,
           value: entry[1],
