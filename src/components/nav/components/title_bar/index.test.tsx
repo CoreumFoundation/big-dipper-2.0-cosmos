@@ -7,7 +7,7 @@ import TitleBar from '.';
 // ==================================
 // global setup
 // ==================================
-let component:renderer.ReactTestRenderer;
+let component: renderer.ReactTestRenderer;
 
 // ==================================
 // mocks
@@ -29,9 +29,7 @@ describe('screen: Nav/TitleBar', () => {
     component = renderer.create(
       <RecoilRoot>
         <MockTheme>
-          <TitleBar
-            title="hello world"
-          />
+          <TitleBar />
         </MockTheme>
       </RecoilRoot>,
     );
@@ -47,7 +45,7 @@ describe('screen: Nav/TitleBar', () => {
     component.update(
       <RecoilRoot>
         <MockTheme>
-          <TitleBar title="hello world" />
+          <TitleBar />
         </MockTheme>
       </RecoilRoot>,
     );

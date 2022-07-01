@@ -28,7 +28,7 @@ describe('screen: Nav/Desktop', () => {
     component = renderer.create(
       <RecoilRoot>
         <MockTheme>
-          <Desktop title="hello world" />
+          <Desktop />
         </MockTheme>
       </RecoilRoot>,
     );
