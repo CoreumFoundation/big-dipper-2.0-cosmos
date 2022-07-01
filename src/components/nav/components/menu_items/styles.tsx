@@ -20,6 +20,9 @@ export const useStyles = () => {
             '& .MuiListItemIcon-root': {
               '& svg': {
                 fill: theme?.palette?.primary?.main,
+                '& path': {
+                  fill: theme?.palette?.primary?.main,
+                },
               },
             },
             '& .MuiListItemText-root': {
