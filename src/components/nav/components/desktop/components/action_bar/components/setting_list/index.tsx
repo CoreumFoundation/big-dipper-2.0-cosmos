@@ -21,7 +21,7 @@ import {
   Close as CloseIcon, Brightness2 as Dark, Brightness7 as Light,
 } from '@material-ui/icons';
 import {
-  DATE_LIST, readTx, TX_LIST,
+  readTx, TX_LIST,
 } from '@recoil/settings';
 import { useRecoilValue } from 'recoil';
 import { useSettingList } from './hooks';
@@ -152,7 +152,7 @@ const Settings: React.FC<{
               </Select>
             </div>
 
-            <div className={classes.formItem}>
+            {/* <div className={classes.formItem}>
               <Typography className="form-item--label">
                 {t('dateFormat')}
               </Typography>
@@ -174,7 +174,7 @@ const Settings: React.FC<{
                     </MenuItem>
                   ))}
               </Select>
-            </div>
+            </div> */}
 
             <div className={classes.formItem}>
               <Typography className="form-item--label">

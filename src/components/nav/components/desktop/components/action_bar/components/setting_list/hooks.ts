@@ -65,8 +65,7 @@ export const useSettingList = ({ lang }) => {
     }
   };
 
-  // Custom method that allows for changing state from both
-  // the settings menu and the transactions page
+  // Custom method that allows for changing state from tx page
   const updateTxFormat = () => {
     setTx(tx === 'compact' ? 'detailed' : 'compact');
   };
