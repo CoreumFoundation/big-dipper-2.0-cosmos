@@ -10,21 +10,30 @@ import {
 } from '@components';
 import { useRecoilValue } from 'recoil';
 import { readTx } from '@recoil/settings';
-import { Typography } from '@material-ui/core';
+import {
+  Switch, Typography,
+} from '@material-ui/core';
+import { useSettingList } from '@src/components/nav/components/desktop/components/action_bar/components/setting_list/hooks';
 import { useStyles } from './styles';
 import { useTransactions } from './hooks';
 
 const Transactions = () => {
   const txListFormat = useRecoilValue(readTx);
-  const { t } = useTranslation('transactions');
+  const {
+    t, lang,
+  } = useTranslation('transactions');
   const classes = useStyles();
   const {
-    state,
-    loadNextPage,
+    state, loadNextPage,
   } = useTransactions();
+  const {
+    updateTxFormat,
+  } = useSettingList({ lang });
   const loadMoreItems = state.isNextPageLoading ? () => null : loadNextPage;
   const isItemLoaded = (index) => !state.hasNextPage || index < state.items.length;
-  const itemCount = state.hasNextPage ? state.items.length + 1 : state.items.length;
+  const itemCount = state.hasNextPage
+    ? state.items.length + 1
+    : state.items.length;
   return (
     <>
       <NextSeo
@@ -33,17 +42,19 @@ const Transactions = () => {
           title: t('transactions'),
         }}
       />
-      <Layout
-        navTitle={t('transactions')}
-        className={classes.root}
-      >
-        <LoadAndExist
-          exists={state.exists}
-          loading={state.loading}
-        >
-          <Typography variant="h1">
-            {t('transactions')}
-          </Typography>
+      <Layout navTitle={t('transactions')} className={classes.root}>
+        <LoadAndExist exists={state.exists} loading={state.loading}>
+          <div className={classes.header}>
+            <Typography variant="h1">{t('transactions')}</Typography>
+            <div className={classes.header}>
+              <Typography variant="h4">{t('showDetails')}</Typography>
+              <Switch
+                color="primary"
+                checked={txListFormat === 'detailed'}
+                onChange={updateTxFormat}
+              />
+            </div>
+          </div>
           <Box className={classes.box}>
             {txListFormat === 'compact' ? (
               <TransactionsList

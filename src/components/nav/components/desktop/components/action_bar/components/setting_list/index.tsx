@@ -21,8 +21,9 @@ import {
   Close as CloseIcon, Brightness2 as Dark, Brightness7 as Light,
 } from '@material-ui/icons';
 import {
-  DATE_LIST, TX_LIST,
+  DATE_LIST, readTx, TX_LIST,
 } from '@recoil/settings';
+import { useRecoilValue } from 'recoil';
 import { useSettingList } from './hooks';
 import { useStyles } from './styles';
 
@@ -31,6 +32,7 @@ const Settings: React.FC<{
 }> = (props) => {
   const classes = useStyles();
   const router = useRouter();
+  const txListFormat = useRecoilValue(readTx);
   const {
     t, lang,
   } = useTranslation('common');
@@ -180,7 +182,7 @@ const Settings: React.FC<{
               </Typography>
               <Select
                 variant="outlined"
-                value={state.txListFormat}
+                value={txListFormat}
                 onChange={(e) => handleChange('txListFormat', e?.target?.value)}
                 MenuProps={{ MenuListProps: {
                   disablePadding: true,

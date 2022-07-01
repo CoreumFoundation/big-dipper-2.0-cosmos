@@ -26,7 +26,6 @@ export const useSettingList = ({ lang }) => {
     lang,
     theme,
     dateFormat: date,
-    txListFormat: tx,
   });
 
   const resetSettings = () => {
@@ -66,6 +65,12 @@ export const useSettingList = ({ lang }) => {
     }
   };
 
+  // Custom method that allows for changing state from both
+  // the settings menu and the transactions page
+  const updateTxFormat = () => {
+    setTx(tx === 'compact' ? 'detailed' : 'compact');
+  };
+
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
     if (state.theme !== theme) {
@@ -80,10 +85,6 @@ export const useSettingList = ({ lang }) => {
       setDate(state.dateFormat);
     }
 
-    if (state.txListFormat !== tx) {
-      setTx(state.txListFormat);
-    }
-
     handleClose();
   };
 
@@ -95,5 +96,6 @@ export const useSettingList = ({ lang }) => {
     handleChange,
     handleFormSubmit,
     handleCancel,
+    updateTxFormat,
   };
 };
