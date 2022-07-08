@@ -7,7 +7,12 @@ import { ADDRESS_DETAILS } from '@utils/go_to_page';
 import { useStyles } from './styles';
 
 const AvatarName: React.FC<AvatarName> = ({
-  className, address, name, imageUrl, href = ADDRESS_DETAILS,
+  className,
+  address,
+  name,
+  imageUrl,
+  href = ADDRESS_DETAILS,
+  shorten,
 }) => {
   const classes = useStyles();
 
@@ -16,7 +21,10 @@ const AvatarName: React.FC<AvatarName> = ({
       <a>
         <div className={classnames(className, classes.root)}>
           <Avatar address={address} imageUrl={imageUrl} />
-          <Typography variant="body1">
+          <Typography
+            variant="body1"
+            className={shorten ? classes.short : undefined}
+          >
             {name}
           </Typography>
         </div>

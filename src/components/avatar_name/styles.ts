@@ -19,6 +19,11 @@ export const useStyles = () => {
             cursor: 'pointer',
           },
         },
+        short: {
+          maxWidth: '16ch',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        },
       });
     },
   )();
