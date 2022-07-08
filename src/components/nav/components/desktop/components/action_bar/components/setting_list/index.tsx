@@ -83,7 +83,7 @@ const Settings: React.FC<{
                   role="button"
                   onClick={() => handleChange('theme', 'dark')}
                 >
-                  <Dark />
+                  <Dark htmlColor={state.theme === 'dark' ? 'white' : undefined} />
                 </div>
                 <div
                   className={`theme_item ${
@@ -92,7 +92,7 @@ const Settings: React.FC<{
                   role="button"
                   onClick={() => handleChange('theme', 'light')}
                 >
-                  <Light />
+                  <Light htmlColor={state.theme === 'light' ? 'white' : undefined} />
                 </div>
               </div>
             </div>
