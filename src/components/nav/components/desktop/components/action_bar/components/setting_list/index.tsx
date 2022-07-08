@@ -149,6 +149,7 @@ const Settings: React.FC<{
           }}
         >
           <Typography variant="body2" className={classes.version}>
+            {t('version')}
             {generalConfig.version}
           </Typography>
           <Button onClick={handleFormSubmit} color="primary">
