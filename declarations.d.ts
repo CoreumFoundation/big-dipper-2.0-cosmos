@@ -16,6 +16,7 @@ interface AvatarName {
   address: string;
   name: string;
   href?: (address: string) => string;
+  shorten?: boolean;
 }
 
 type Transactions = {
