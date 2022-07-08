@@ -74,7 +74,10 @@ export const useStyles = () => {
       },
       version: {
         color: theme.palette.custom.fonts.fontFour,
-        marginLeft: theme.spacing(1),
+        // marginLeft: theme.spacing(1),
+        display: 'flex',
+        alignItems: 'start',
+        justifyContent: 'center',
       },
     };
   })();
