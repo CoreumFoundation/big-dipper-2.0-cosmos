@@ -29,7 +29,7 @@ const Desktop: React.FC<{
   const classes = useStyles();
 
   const formattedData = items.map((x) => {
-    return ({
+    return {
       height: (
         <Link href={BLOCK_DETAILS(x.height)} passHref>
           <Typography variant="body1" className="value" component="a">
@@ -44,18 +44,18 @@ const Desktop: React.FC<{
           address={x.proposer.address}
           imageUrl={x.proposer.imageUrl}
           name={x.proposer.name}
+          shorten
         />
       ),
       hash: getMiddleEllipsis(x.hash, {
-        beginning: 6, ending: 5,
+        beginning: 6,
+        ending: 5,
       }),
-    });
+    };
   });
 
   return (
-    <div
-      className={classnames(className, classes.root)}
-    >
+    <div className={classnames(className, classes.root)}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
@@ -63,6 +63,7 @@ const Desktop: React.FC<{
               <TableCell
                 key={column.key}
                 align={column.align}
+                className={classes.header}
               >
                 {t(column.key)}
               </TableCell>
