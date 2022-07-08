@@ -4,6 +4,7 @@ import { NextSeo } from 'next-seo';
 import {
   Layout,
 } from '@components';
+import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { List } from './components';
 import { useProposals } from './hooks';
@@ -30,6 +31,7 @@ const Proposals = () => {
         navTitle={t('proposals')}
         className={classes.root}
       >
+        <Typography variant="h1">{t('proposals')}</Typography>
         <List
           items={state.items}
           rawDataTotal={state.rawDataTotal}
