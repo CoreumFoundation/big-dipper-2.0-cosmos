@@ -1,84 +1,83 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = () => {
-  const styles = makeStyles(
-    (theme) => {
-      return ({
-        icon: {
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          '&:hover': {
-            cursor: 'pointer',
-          },
-          '& svg': {
+  const styles = makeStyles((theme) => {
+    return {
+      icon: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        '&:hover': {
+          cursor: 'pointer',
+        },
+        '& svg': {
+          fill: theme.palette.custom.general.icon,
+          '& path': {
             fill: theme.palette.custom.general.icon,
-            '& path': {
-              fill: theme.palette.custom.general.icon,
-            },
           },
         },
-        closeButton: {
-          position: 'absolute',
-          right: theme.spacing(1),
-          top: theme.spacing(1),
-          color: theme.palette.grey[500],
+      },
+      closeButton: {
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.palette.grey[500],
+      },
+      header: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        '& .MuiIconButton-root': {
+          padding: 0,
         },
-        header: {
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          '& .MuiIconButton-root': {
-            padding: 0,
-          },
-          background: theme.palette.custom.general.modal_header,
+        background: theme.palette.custom.general.modal_header,
+      },
+      title: {
+        display: 'flex',
+        alignItems: 'center',
+      },
+      dialog: {
+        '& .MuiDialog-paper': {
+          width: '500px',
         },
-        title: {
-          display: 'flex',
-          alignItems: 'center',
+      },
+      formItem: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 150px',
+        placeItems: 'center start',
+        marginBottom: theme.spacing(2),
+        '& .MuiOutlinedInput-root': {
+          width: '100%',
+          padding: 0,
         },
-        dialog: {
-          '& .MuiDialog-paper': {
-            width: '500px',
-          },
+        '& .form-item--label': {
+          color: theme.palette.custom.fonts.settings_label,
         },
-        formItem: {
+        '& .theme_container': {
           display: 'grid',
-          gridTemplateColumns: '1fr 150px',
-          placeItems: 'center start',
-          marginBottom: theme.spacing(2),
-          '& .MuiOutlinedInput-root': {
-            width: '100%',
-            padding: 0,
-          },
-          '& .form-item--label': {
-            color: theme.palette.custom.fonts.settings_label,
-          },
-          '& .theme_container': {
-            display: 'grid',
-            gridAutoFlow: 'column',
-            background: theme.palette.background.default,
+          gridAutoFlow: 'column',
+          background: theme.palette.background.default,
+          borderRadius: '10%',
+          placeSelf: 'end',
+          '& .theme_item': {
+            padding: 12,
             borderRadius: '10%',
-            '& .theme_item': {
-              padding: 12,
-              borderRadius: '10%',
-              transition: 'background .2s',
-              display: 'grid',
-              placeItems: 'center',
-              color: theme.palette.text.primary,
-              '&.active': {
-                background: theme.palette.primary.main,
-              },
+            transition: 'background .2s',
+            display: 'grid',
+            placeItems: 'center',
+            color: theme.palette.text.primary,
+            '&.active': {
+              background: theme.palette.primary.main,
             },
           },
         },
-        version: {
-          color: theme.palette.custom.fonts.fontFour,
-          marginLeft: theme.spacing(1),
-        },
-      });
-    },
-  )();
+      },
+      version: {
+        color: theme.palette.custom.fonts.fontFour,
+        marginLeft: theme.spacing(1),
+      },
+    };
+  })();
 
   return styles;
 };

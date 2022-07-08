@@ -108,24 +108,6 @@ const Settings: React.FC<{
                   <Light />
                 </div>
               </div>
-              {/* <Select
-                variant="outlined"
-                value={state.theme}
-                onChange={(e) => handleChange('theme', e?.target?.value)}
-                MenuProps={{ MenuListProps: {
-                  disablePadding: true,
-                } }}
-              >
-                {THEME_LIST
-                  .map((l) => (
-                    <MenuItem
-                      key={l}
-                      value={l}
-                    >
-                      {t(l)}
-                    </MenuItem>
-                  ))}
-              </Select> */}
             </div>
 
             <div className={classes.formItem}>
@@ -151,30 +133,6 @@ const Settings: React.FC<{
                   ))}
               </Select>
             </div>
-
-            {/* <div className={classes.formItem}>
-              <Typography className="form-item--label">
-                {t('dateFormat')}
-              </Typography>
-              <Select
-                variant="outlined"
-                value={state.dateFormat}
-                onChange={(e) => handleChange('dateFormat', e?.target?.value)}
-                MenuProps={{ MenuListProps: {
-                  disablePadding: true,
-                } }}
-              >
-                {DATE_LIST
-                  .map((l) => (
-                    <MenuItem
-                      key={l}
-                      value={l}
-                    >
-                      {t(l)}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </div> */}
 
             <div className={classes.formItem}>
               <Typography className="form-item--label">
