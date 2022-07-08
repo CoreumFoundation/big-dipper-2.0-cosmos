@@ -31,7 +31,7 @@ const Desktop: React.FC<{
   const { t } = useTranslation('transactions');
 
   const formattedData = items.map((x) => {
-    return ({
+    return {
       block: (
         <Link href={BLOCK_DETAILS(x.height)} passHref>
           <Typography variant="body1" component="a">
@@ -43,17 +43,16 @@ const Desktop: React.FC<{
         <Link href={TRANSACTION_DETAILS(x.hash)} passHref>
           <Typography variant="body1" component="a">
             {getMiddleEllipsis(x.hash, {
-              beginning: 15, ending: 5,
+              beginning: 15,
+              ending: 5,
             })}
           </Typography>
         </Link>
       ),
-      result: (
-        <Result success={x.success} />
-      ),
+      result: <Result success={x.success} />,
       time: dayjs.utc(x.timestamp).fromNow(),
       messages: numeral(x.messages).format('0,0'),
-    });
+    };
   });
 
   return (
@@ -66,6 +65,7 @@ const Desktop: React.FC<{
                 key={column.key}
                 align={column.align}
                 style={{ width: `${column.width}%` }}
+                className={classes.header}
               >
                 {t(column.key)}
               </TableCell>
