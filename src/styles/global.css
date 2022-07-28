@@ -109,3 +109,8 @@ svg {
 .scrollbar::-webkit-scrollbar {
   display: none;
 }
+/* 
+::-webkit-scrollbar-thumb {
+  color: "green";
+  width: 8px;
+} */
