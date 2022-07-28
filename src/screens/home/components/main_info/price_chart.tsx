@@ -49,6 +49,9 @@ const TitleBar: React.FC = () => {
             color: theme === 'dark' ? '#1B1D23' : 'white',
           },
         },
+        // disable scaling and panning since we aren't implementing a scrollback-refetch
+        handleScroll: false,
+        handleScale: false,
       };
       chartRef.current = createChart(
         document.getElementById('price-chart'),
