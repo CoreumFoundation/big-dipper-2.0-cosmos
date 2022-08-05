@@ -1,0 +1,15 @@
+FROM node:14.5.0-alpine
+
+ENV PORT 3000
+
+# Install git for ui and internal packages
+RUN apk add --no-cache git
+
+COPY . .
+
+RUN npm i
+# Building app
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
