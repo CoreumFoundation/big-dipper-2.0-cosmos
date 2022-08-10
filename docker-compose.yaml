@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bdjuno
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+      - ./schema:/var/lib/postgresql/schema
+  migration:
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bdjuno
+    command: /var/lib/postgresql/schema/setup.sh
+    volumes:
+      - ./schema:/var/lib/postgresql/schema
+    depends_on:
+      - db
+
+  hasura:
+    image: hasura/graphql-engine:v2.1.1
+    ports:
+    - "8080:8080"
+    restart: always
+    environment:
+      ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@db:5432/bdjuno
+      ## enable the console served by server
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      ## enable debugging mode. It is recommended to disable this in production
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      ## uncomment next line to set an admin secret
+      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+
+  hasura-cli:
+    build: https://gist.githubusercontent.com/alinetskyi/bac04f48c26e21091bd28007627b0109/raw/2299539765c29bf9bd77a1f8cc2f0352940eabbc/Dockerfile-hasura-cli
+    volumes:
+      ## Modify first path to match configuration file.
+      - ./hasura:/hasura
+
+  bdjuno:
+    image: gcr.io/coreum-devnet-1/bdjuno:0.44.0
+    restart: always
+    command: bdjuno start --home /bdjuno/.bdjuno
+    volumes:
+      ## Modify first path to match configuration file.
+      - ./bdjuno:/bdjuno/.bdjuno
+
+  cored:
+    image: gcr.io/coreum-devnet-1/cored:latest
+    command: start --home=/ --rpc.laddr=tcp://0.0.0.0:26657 --p2p.laddr=tcp://0.0.0.0:26656 --grpc.address=0.0.0.0:9090 --grpc-web.address=0.0.0.0:9091 --rpc.pprof_laddr=0.0.0.0:6060
+    ports:
+      - '26657:26657'
+      - '9090:9090'
+
+  big-dipper-ui:
+    build: https://github.com/CoreumFoundation/big-dipper-2.0-cosmos.git#chains/coreum
+    ports:
+      - '3000:3000'
+
+volumes:
+  db:
+    driver: local
