@@ -13,6 +13,9 @@ import {
 import { WebSocketLink } from '@apollo/client/link/ws';
 
 import { useMemo } from 'react';
+import {
+  GRAPHQL_WS, GRAPHQL_URL,
+} from '@src/configs/environment';
 
 const defaultOptions:any = {
   watchQuery: {
@@ -28,11 +31,11 @@ const defaultOptions:any = {
 let apolloClient;
 
 const httpLink = new HttpLink({
-  uri: process.env.NEXT_PUBLIC_GRAPHQL_URL,
+  uri: GRAPHQL_URL,
 });
 
 const wsLink = new WebSocketLink({
-  uri: process.env.NEXT_PUBLIC_GRAPHQL_WS ?? 'wss://localhost:3000',
+  uri: GRAPHQL_WS ?? 'wss://localhost:3000',
   options: {
     reconnect: true,
   },

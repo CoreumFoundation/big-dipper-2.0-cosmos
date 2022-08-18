@@ -13,6 +13,7 @@ import {
 import { formatToken } from '@utils/format_token';
 import { getDenom } from '@utils/get_denom';
 import { chainConfig } from '@configs';
+import { GRAPHQL_URL } from '@src/configs/environment';
 import { StakingState } from './types';
 
 const stakingDefault = {
@@ -63,7 +64,7 @@ export const useStaking = () => {
   // helper function to get rest of the staking items
   // if it is over the default limit
   const getStakeByPage = async (page: number, query: string) => {
-    const { data } = await axios.post(process.env.NEXT_PUBLIC_GRAPHQL_URL, {
+    const { data } = await axios.post(GRAPHQL_URL, {
       variables: {
         validatorAddress: R.pathOr('', ['query', 'address'], router),
         offset: page * LIMIT,
@@ -80,7 +81,7 @@ export const useStaking = () => {
   // =====================================
   const getDelegations = async () => {
     try {
-      const { data } = await axios.post(process.env.NEXT_PUBLIC_GRAPHQL_URL, {
+      const { data } = await axios.post(GRAPHQL_URL, {
         variables: {
           validatorAddress: R.pathOr('', ['query', 'address'], router),
           limit: LIMIT,
@@ -144,7 +145,7 @@ export const useStaking = () => {
   // =====================================
   const getRedelegations = async () => {
     try {
-      const { data } = await axios.post(process.env.NEXT_PUBLIC_GRAPHQL_URL, {
+      const { data } = await axios.post(GRAPHQL_URL, {
         variables: {
           validatorAddress: R.pathOr('', ['query', 'address'], router),
           limit: LIMIT,
@@ -215,7 +216,7 @@ export const useStaking = () => {
   // =====================================
   const getUnbondings = async () => {
     try {
-      const { data } = await axios.post(process.env.NEXT_PUBLIC_GRAPHQL_URL, {
+      const { data } = await axios.post(GRAPHQL_URL, {
         variables: {
           validatorAddress: R.pathOr('', ['query', 'address'], router),
           limit: LIMIT,
