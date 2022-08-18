@@ -6,6 +6,7 @@ import * as R from 'ramda';
 import { hexToBech32 } from '@utils/hex_to_bech32';
 import { chainConfig } from '@configs';
 import WebSocket from 'isomorphic-ws';
+import { RPC_WEBSOCKET } from '@src/configs/environment';
 
 export const useConsensus = () => {
   const [state, setState] = useState<{
@@ -25,7 +26,7 @@ export const useConsensus = () => {
   });
 
   const websocketUrl = (
-    process.env.NEXT_PUBLIC_RPC_WEBSOCKET || process.env.NEXT_PUBLIC_WS_CHAIN_URL);
+    RPC_WEBSOCKET || process.env.NEXT_PUBLIC_WS_CHAIN_URL);
 
   useEffect(() => {
     const client = new WebSocket(websocketUrl);
