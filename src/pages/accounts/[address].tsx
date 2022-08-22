@@ -6,4 +6,8 @@ const AccountDetailsPage = () => {
   );
 };
 
+AccountDetailsPage.getServerSideProps = async () => {
+  return { foo: 'bar' };
+};
+
 export default AccountDetailsPage;

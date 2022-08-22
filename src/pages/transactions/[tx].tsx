@@ -6,4 +6,9 @@ const TransactionDetailsPage = () => {
   );
 };
 
+TransactionDetailsPage.getServerSideProps = async () => {
+  // Dummy function to force SSR
+  return { foo: 'bar' };
+};
+
 export default TransactionDetailsPage;

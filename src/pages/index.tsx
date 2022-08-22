@@ -6,4 +6,8 @@ const HomePage = () => {
   );
 };
 
+HomePage.getServerSideProps = async () => {
+  return { foo: 'bar' };
+};
+
 export default HomePage;

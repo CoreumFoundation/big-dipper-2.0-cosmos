@@ -6,4 +6,9 @@ const BlockDetailsPage = () => {
   );
 };
 
+BlockDetailsPage.getServerSideProps = async () => {
+  // Dummy function to force SSR
+  return { foo: 'bar' };
+};
+
 export default BlockDetailsPage;
