@@ -11,4 +11,9 @@ const ValidatorDetailsPage = () => {
   return null;
 };
 
+ValidatorDetailsPage.getServerSideProps = async () => {
+  // Dummy function to force SSR
+  return { foo: 'bar' };
+};
+
 export default ValidatorDetailsPage;

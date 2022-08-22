@@ -6,4 +6,9 @@ const ValidatorsPage = () => {
   );
 };
 
+ValidatorsPage.getServerSideProps = async () => {
+  // Dummy function to force SSR
+  return { foo: 'bar' };
+};
+
 export default ValidatorsPage;

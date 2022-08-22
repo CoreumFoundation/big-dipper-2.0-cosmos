@@ -17,7 +17,7 @@ import {
   ADDITIONAL_META_TAGS,
 } from './utils';
 
-function App(props: AppProps) {
+function MyApp(props: AppProps) {
   useApp();
   const { pageProps } = props;
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -50,4 +50,4 @@ function App(props: AppProps) {
   );
 }
 
-export default App;
+export default MyApp;

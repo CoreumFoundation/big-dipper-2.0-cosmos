@@ -6,4 +6,9 @@ const TokenDetailsPage = () => {
   );
 };
 
+TokenDetailsPage.getServerSideProps = async () => {
+  // Dummy function to force SSR
+  return { foo: 'bar' };
+};
+
 export default TokenDetailsPage;

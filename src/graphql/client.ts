@@ -1,21 +1,13 @@
 import WebSocket from 'isomorphic-ws';
 import {
-  ApolloClient,
-  InMemoryCache,
-  split,
-  HttpLink,
-  ApolloLink,
-  concat,
+  ApolloClient, ApolloLink, concat, HttpLink, InMemoryCache, split,
 } from '@apollo/client';
-import {
-  getMainDefinition,
-} from '@apollo/client/utilities';
+import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
+import getConfig from 'next/config';
 
 import { useMemo } from 'react';
-import {
-  GRAPHQL_WS, GRAPHQL_URL,
-} from '@src/configs/environment';
+import { GRAPHQL_WS } from '@src/configs/environment';
 
 const defaultOptions:any = {
   watchQuery: {
@@ -30,8 +22,14 @@ const defaultOptions:any = {
 
 let apolloClient;
 
+const getURL = () => {
+  const { publicRuntimeConfig } = getConfig();
+
+  return publicRuntimeConfig.NEXT_PUBLIC_GRAPHQL_URL;
+};
+
 const httpLink = new HttpLink({
-  uri: GRAPHQL_URL,
+  uri: getURL(),
 });
 
 const wsLink = new WebSocketLink({
