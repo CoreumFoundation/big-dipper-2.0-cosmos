@@ -4,10 +4,11 @@ import {
 } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
-import getConfig from 'next/config';
 
 import { useMemo } from 'react';
-import { GRAPHQL_WS } from '@src/configs/environment';
+import {
+  GRAPHQL_URL, GRAPHQL_WS,
+} from '@src/configs/environment';
 
 const defaultOptions:any = {
   watchQuery: {
@@ -22,14 +23,8 @@ const defaultOptions:any = {
 
 let apolloClient;
 
-const getURL = () => {
-  const { publicRuntimeConfig } = getConfig();
-
-  return publicRuntimeConfig.NEXT_PUBLIC_GRAPHQL_URL;
-};
-
 const httpLink = new HttpLink({
-  uri: getURL(),
+  uri: GRAPHQL_URL,
 });
 
 const wsLink = new WebSocketLink({
@@ -97,6 +92,5 @@ export function initializeApollo(initialState = null) {
 }
 
 export function useApollo(initialState) {
-  const store = useMemo(() => initializeApollo(initialState), [initialState]);
-  return store;
+  return useMemo(() => initializeApollo(initialState), [initialState]);
 }
