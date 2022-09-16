@@ -10,7 +10,7 @@ chain:
     - consensus
     - mint
     - distribution
-    - pricefeed
+    #- pricefeed
     - gov
     - slashing
     - actions       # from hasura
