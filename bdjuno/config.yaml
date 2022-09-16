@@ -3,16 +3,16 @@ chain:
   modules:
     # cosmos modules
     - modules
+    - messages    # listed as available but unsure
     - auth
     - bank
     - staking
     - consensus
-    # - mint
-    # - distribution
-    # - pricefeed
-    # - gov
-    # - slashing
-    - messages    # listed as available but unsure
+    - mint
+    - distribution
+    - pricefeed
+    - gov
+    - slashing
     - actions       # from hasura
 
 node:
