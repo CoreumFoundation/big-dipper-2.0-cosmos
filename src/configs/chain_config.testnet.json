@@ -14,10 +14,10 @@
     "time": "2021-07-13T08:00:00",
     "height": 1
   },
-  "primaryTokenUnit": "dmcore",
-  "votingPowerTokenUnit": "dmcore",
+  "primaryTokenUnit": "ducore",
+  "votingPowerTokenUnit": "ducore",
   "tokenUnits": {
-    "dmcore": {
+    "ducore": {
       "display": "core",
       "exponent": 6
     }
