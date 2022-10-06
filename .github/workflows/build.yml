@@ -7,7 +7,6 @@ on:
 
 env:
   REPO: big-dipper-ui
-  HASURA_REPO: hasura
   ORG: coreumfoundation
 
 jobs:
@@ -73,17 +72,6 @@ jobs:
           file: ./Dockerfile.dev
           tags: |
             ${{ env.ORG }}/${{ env.REPO }}:${{ env.DEV_SHA8 }}
-          push: true
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and push hasura image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile.hasura
-          tags: |
-            ${{ env.ORG }}/${{ env.HASURA_REPO }}:${{ env.DEV_SHA8 }}
           push: true
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
