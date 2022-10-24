@@ -18,35 +18,35 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head"
+          className="MuiTableCell-root MuiTableCell-head makeStyles-header"
           scope="col"
         >
           height
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head"
+          className="MuiTableCell-root MuiTableCell-head makeStyles-header"
           scope="col"
         >
           proposer
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head"
+          className="MuiTableCell-root MuiTableCell-head makeStyles-header"
           scope="col"
         >
           hash
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight"
+          className="MuiTableCell-root MuiTableCell-head makeStyles-header MuiTableCell-alignRight"
           scope="col"
         >
           txs
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight"
+          className="MuiTableCell-root MuiTableCell-head makeStyles-header MuiTableCell-alignRight"
           scope="col"
         >
           time
@@ -83,6 +83,7 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
             id="AvatarName"
             imageUrl=""
             name="name"
+            shorten={true}
           />
         </td>
         <td

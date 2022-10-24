@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { MockTheme } from '@tests/utils';
+import { RecoilRoot } from 'recoil';
 import MenuItems from '.';
 // ==================================
 // global setup
@@ -22,9 +23,11 @@ jest.mock('next-translate/useTranslation', () => () => mockI18n);
 describe('screen: Nav/MenuItems', () => {
   beforeEach(() => {
     component = renderer.create(
-      <MockTheme>
-        <MenuItems />
-      </MockTheme>,
+      <RecoilRoot>
+        <MockTheme>
+          <MenuItems />
+        </MockTheme>
+      </RecoilRoot>,
     );
   });
 

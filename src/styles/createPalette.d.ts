@@ -22,6 +22,7 @@ declare module '@material-ui/core/styles/createPalette' {
             highlight: string;
             settings_label: string;
             table_headers: string;
+            data_blocks: string;
         },
         primaryData: {
             one: string;

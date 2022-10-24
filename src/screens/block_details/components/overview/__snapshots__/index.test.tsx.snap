@@ -2,40 +2,78 @@
 
 exports[`screen: BlockDetails/Overview matches snapshot 1`] = `
 <div
-  details={
-    Array [
-      Object {
-        "detail": <WithStyles(ForwardRef(Typography))
-          className="value"
-          variant="body1"
-        >
-          300
-        </WithStyles(ForwardRef(Typography))>,
-        "label": "blocks:height",
-      },
-      Object {
-        "detail": "hash",
-        "label": "blocks:hash",
-      },
-      Object {
-        "detail": <AvatarName
-          address="proposer"
-          imageUrl=""
-          name="proposer"
-        />,
-        "label": "blocks:proposer",
-      },
-      Object {
-        "detail": "2020-08-10 12:00:00",
-        "label": "blocks:time",
-      },
-      Object {
-        "detail": "0",
-        "label": "blocks:txs",
-      },
-    ]
-  }
+  className="makeStyles-root"
   id="BoxDetails"
-  title="blocks:overview"
-/>
+>
+  <h2
+    className="MuiTypography-root MuiTypography-h2"
+  >
+    blocks:overview
+  </h2>
+  <div
+    className="makeStyles-item"
+  >
+    <div
+      className="label"
+    >
+      blocks:hash
+    </div>
+    hash
+  </div>
+  <div
+    className="makeStyles-details"
+  >
+    <div
+      className="makeStyles-item"
+    >
+      <div
+        className="label"
+      >
+        blocks:height
+      </div>
+      <div>
+        300
+      </div>
+    </div>
+    <div
+      className="makeStyles-item"
+    >
+      <div
+        className="label"
+      >
+        blocks:time
+      </div>
+      <div>
+        2020-08-10 12:00:00
+      </div>
+    </div>
+    <div
+      className="makeStyles-item"
+    >
+      <div
+        className="label"
+      >
+        blocks:proposer
+      </div>
+      <div
+        address="proposer"
+        id="BoxDetailAvatarName"
+        imageUrl=""
+        name="proposer"
+      />
+    </div>
+    <div
+      className="makeStyles-item"
+    >
+      <div
+        className="label"
+      >
+        blocks:txs
+      </div>
+      <div>
+        0
+      </div>
+    </div>
+  </div>
+</div>
 `;

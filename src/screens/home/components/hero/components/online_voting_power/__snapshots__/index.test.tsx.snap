@@ -11,29 +11,33 @@ Array [
       onlineVotingPower
     </h2>
     <div
-      className="makeStyles-data"
-    >
-      <h3
-        className="MuiTypography-root primary__data MuiTypography-h3"
-      >
-        100.00%
-      </h3>
-      <p
-        className="MuiTypography-root MuiTypography-body1"
-      >
-        76,341,043
-         
-        /
-         
-        76,341,043
-      </p>
-    </div>
-    <div
-      className="makeStyles-chart"
+      className="makeStyles-chartContainer"
     >
       <div
-        className="makeStyles-active"
-      />
+        className="makeStyles-chart"
+      >
+        <div
+          className="makeStyles-active"
+        />
+      </div>
+      <div
+        className="makeStyles-data"
+      >
+        <h3
+          className="MuiTypography-root primary__data MuiTypography-h3"
+        >
+          100.00%
+        </h3>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+        >
+          76,341,043
+           
+          /
+           
+          76,341,043
+        </p>
+      </div>
     </div>
     <div
       className="makeStyles-itemsContainer"
@@ -111,29 +115,33 @@ Array [
       onlineVotingPower
     </h2>
     <div
-      className="makeStyles-data"
-    >
-      <h3
-        className="MuiTypography-root primary__data MuiTypography-h3"
-      >
-        100.00%
-      </h3>
-      <p
-        className="MuiTypography-root MuiTypography-body1"
-      >
-        76,341,043
-         
-        /
-         
-        76,341,043
-      </p>
-    </div>
-    <div
-      className="makeStyles-chart"
+      className="makeStyles-chartContainer"
     >
       <div
-        className="makeStyles-active"
-      />
+        className="makeStyles-chart"
+      >
+        <div
+          className="makeStyles-active"
+        />
+      </div>
+      <div
+        className="makeStyles-data"
+      >
+        <h3
+          className="MuiTypography-root primary__data MuiTypography-h3"
+        >
+          100.00%
+        </h3>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+        >
+          76,341,043
+           
+          /
+           
+          76,341,043
+        </p>
+      </div>
     </div>
     <div
       className="makeStyles-itemsContainer"

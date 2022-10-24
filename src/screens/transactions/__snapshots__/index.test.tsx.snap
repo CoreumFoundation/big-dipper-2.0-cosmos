@@ -12,6 +12,64 @@ exports[`screen: Transactions matches snapshot 1`] = `
     loading={false}
   >
     <div
+      className="makeStyles-header"
+    >
+      <h1
+        className="MuiTypography-root MuiTypography-h1"
+      >
+        transactions:transactions
+      </h1>
+      <div
+        className="makeStyles-header"
+      >
+        <h4
+          className="MuiTypography-root MuiTypography-h4"
+        >
+          transactions:showDetails
+        </h4>
+        <span
+          className="MuiSwitch-root"
+        >
+          <span
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={null}
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <input
+                checked={false}
+                className="PrivateSwitchBase-input MuiSwitch-input"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <span
+                className="MuiSwitch-thumb"
+              />
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </span>
+          <span
+            className="MuiSwitch-track"
+          />
+        </span>
+      </div>
+    </div>
+    <div
       className="makeStyles-box"
       id="Box"
     >

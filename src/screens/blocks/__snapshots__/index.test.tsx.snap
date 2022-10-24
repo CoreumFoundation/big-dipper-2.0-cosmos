@@ -11,8 +11,13 @@ exports[`screen: Blocks matches snapshot 1`] = `
     id="LoadAndExist"
     loading={false}
   >
+    <h1
+      className="MuiTypography-root MuiTypography-h1"
+    >
+      blocks:blocks
+    </h1>
     <div
-      className="makeStyles-box"
+      className="makeStyles-box scrollbar"
       id="Box"
     />
   </div>

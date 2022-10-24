@@ -12,7 +12,7 @@ import {
   Cell,
   Tooltip,
 } from 'recharts';
-// import { chainConfig } from '@configs';
+import { chainConfig } from '@configs';
 import { useStyles } from './styles';
 import { useTokenomics } from './hooks';
 
@@ -132,12 +132,12 @@ const Tokenomics:React.FC<{
         </div> */}
       </div>
       <div className={classes.data}>
-        {data.slice(0, 2).reverse().map((x) => (
+        {data.slice(0, 2).map((x) => (
           <div className="data__item" key={x.percentKey}>
-            <Typography variant="h4">
+            <Typography variant="h4" style={{ color: x.fill }}>
               {x.value}
               {' '}
-              {/* {chainConfig.tokenUnits[state.denom]?.display?.toUpperCase()} */}
+              {chainConfig.tokenUnits[state.denom]?.display?.toUpperCase()}
             </Typography>
             <Typography variant="caption">
               {t(x.percentKey, {

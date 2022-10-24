@@ -6,6 +6,10 @@ exports[`screen: Home matches snapshot 1`] = `
   id="Layout"
 >
   <div
+    className="makeStyles-mainInfo"
+    id="MainInfo"
+  />
+  <div
     className="makeStyles-dataBlocks"
     id="DataBlocks"
   />
@@ -22,12 +26,16 @@ exports[`screen: Home matches snapshot 1`] = `
     id="Consensus"
   />
   <div
-    className="makeStyles-blocks"
-    id="Blocks"
-  />
-  <div
-    className="makeStyles-transactions"
-    id="Transactions"
-  />
+    className="makeStyles-bottom"
+  >
+    <div
+      className="blocks"
+      id="Blocks"
+    />
+    <div
+      className="transactions"
+      id="Transactions"
+    />
+  </div>
 </div>
 `;

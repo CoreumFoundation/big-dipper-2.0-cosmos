@@ -17,12 +17,6 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
     value="6.54 s"
   />
   <div
-    className="makeStyles-price"
-    id="SingleBlock"
-    label="price"
-    value="N/A"
-  />
-  <div
     className="makeStyles-validators"
     description="outOfValidators"
     id="SingleBlock"

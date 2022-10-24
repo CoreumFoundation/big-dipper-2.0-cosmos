@@ -1,8 +1,8 @@
 import {
   lightTemplate,
   darkTemplate,
-  deuteranopiaTemplate,
-  tritanopiaTemplate,
+  // deuteranopiaTemplate,
+  // tritanopiaTemplate,
   // lightTheme,
   // darkTheme,
   // deuteranopiaTheme,
@@ -11,8 +11,8 @@ import {
 export {
   lightTemplate,
   darkTemplate,
-  deuteranopiaTemplate,
-  tritanopiaTemplate,
+  // deuteranopiaTemplate,
+  // tritanopiaTemplate,
   // lightTheme,
   // darkTheme,
   // deuteranopiaTheme,

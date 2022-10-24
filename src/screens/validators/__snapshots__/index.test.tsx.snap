@@ -6,6 +6,11 @@ exports[`screen: Validators matches snapshot 1`] = `
   id="Layout"
   navTitle="validators:validators"
 >
+  <h1
+    className="MuiTypography-root MuiTypography-h1"
+  >
+    validators:validators
+  </h1>
   <div
     id="List"
   />

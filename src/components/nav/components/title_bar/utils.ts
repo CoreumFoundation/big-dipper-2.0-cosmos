@@ -2,16 +2,18 @@ import Big from 'big.js';
 import { formatNumber } from '@utils/format_token';
 
 export const formatMarket = (data: {
-  marketCap: number;
+  price: number;
   communityPool: TokenUnit;
   supply: TokenUnit;
   inflation: number;
   apr: number;
 }) => {
-  const exludedItems = [null, 0];
-  const marketCap = exludedItems.includes(data.marketCap) ? 'N/A' : `$${formatNumber(data.marketCap.toString(), 2)}`;
+  const marketCap = `$${formatNumber(
+    (Number(data.supply.value) * data.price).toFixed(),
+    2,
+  )}`;
 
-  return ([
+  return [
     {
       key: 'marketCap',
       data: marketCap,
@@ -26,11 +28,17 @@ export const formatMarket = (data: {
     },
     {
       key: 'supply',
-      data: `${formatNumber(data.supply.value, 2)} ${data.supply.displayDenom.toUpperCase()}`,
+      data: `${formatNumber(
+        data.supply.value,
+        2,
+      )} ${data.supply.displayDenom.toUpperCase()}`,
     },
     {
       key: 'communityPool',
-      data: `${formatNumber(data.communityPool.value, 2)} ${data.communityPool.displayDenom.toUpperCase()}`,
+      data: `${formatNumber(
+        data.communityPool.value,
+        2,
+      )} ${data.communityPool.displayDenom.toUpperCase()}`,
     },
-  ]);
+  ];
 };

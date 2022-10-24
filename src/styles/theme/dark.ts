@@ -36,7 +36,8 @@ export const darkThemeOverride = {
         background: backgroundDefault, // same as background default
         surfaceOne, // same as background paper
         surfaceTwo, // striped tables
-        single_block: 'linear-gradient(110.16deg, rgba(37, 214, 149, 0.15) 0%, rgba(37, 214, 149, 0.05) 100%)',
+        single_block:
+          'linear-gradient(110.16deg, rgba(37, 214, 149, 0.15) 0%, rgba(37, 214, 149, 0.05) 100%)',
         nav_drawer: '#2B3138',
         modal_header: '#1D222C',
         search: '#2B3138',
@@ -49,6 +50,7 @@ export const darkThemeOverride = {
         highlight: '#F1C34E',
         settings_label: '#868991',
         table_headers: '#6C6F78',
+        data_blocks: '#25D695',
       },
       primaryData: {
         one: '#AE73F8',

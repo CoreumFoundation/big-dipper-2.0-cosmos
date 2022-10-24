@@ -29,7 +29,6 @@ const Desktop: React.FC<{
     isMenu,
     toggleMenu,
     turnOffAll,
-    toggleNetwork,
     isNetwork,
   } = useDesktop();
   return (
@@ -43,10 +42,7 @@ const Desktop: React.FC<{
             open: isMenu,
           })}
         >
-          <ActionBar
-            toggleNetwork={toggleNetwork}
-            isNetwork={isNetwork}
-          />
+          <ActionBar isNetwork={isNetwork} />
           {/* <TitleBar title={title} /> */}
         </AppBar>
         <Drawer

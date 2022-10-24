@@ -1,6 +1,6 @@
 {
   "name": "big-dipper-2.0-cosmos",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "license": "Apache-2.0",
   "scripts": {
     "dev": "nodemon",

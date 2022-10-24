@@ -1,3 +1,4 @@
+import MainInfo from './main_info';
 import DataBlocks from './data_blocks';
 import Consensus from './consensus';
 import Tokenomics from './tokenomics';
@@ -6,6 +7,7 @@ import Transactions from './transactions';
 import Hero from './hero';
 
 export {
+  MainInfo,
   DataBlocks,
   Consensus,
   Tokenomics,

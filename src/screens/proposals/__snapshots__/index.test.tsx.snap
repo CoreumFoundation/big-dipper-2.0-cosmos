@@ -6,6 +6,11 @@ exports[`screen: Proposals matches snapshot 1`] = `
   id="Layout"
   navTitle="proposals:proposals"
 >
+  <h1
+    className="MuiTypography-root MuiTypography-h1"
+  >
+    proposals:proposals
+  </h1>
   <div
     id="List"
     isItemLoaded={[Function]}
