@@ -6,19 +6,19 @@ jobs:
   Lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: npm install
-    - name: Run lint check
-      run: npm run lint
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm install
+      - name: Run lint check
+        run: npm run lint
   Unit-tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: npm ci
-    - name: Run tests
-      run: npm test -- --coverage
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm ci
+      - name: Run tests
+        run: npm test --
     # - name: Upload coverage 📤
     #   uses: codecov/codecov-action@v1
     #   with:
@@ -27,8 +27,8 @@ jobs:
   Build-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: npm ci
-    - name: Run build check
-      run: npm run build
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm ci
+      - name: Run build check
+        run: npm run build
