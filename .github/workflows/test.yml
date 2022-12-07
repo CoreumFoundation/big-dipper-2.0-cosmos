@@ -1,6 +1,10 @@
 name: Test
 on:
   pull_request:
+  push:
+    branches:
+      - chains/coreum
+
 jobs:
   Lint:
     runs-on: ubuntu-latest
