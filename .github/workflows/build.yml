@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - chains/coreum
-      - dzmitryhil/login-to-dockerhub # FIXME remove
 
 env:
   REPO: big-dipper-ui
