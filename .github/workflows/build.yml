@@ -2,8 +2,8 @@ name: Docker-Production
 
 on:
   push:
-#    branches:
-#      - chains/coreum
+    branches:
+      - chains/coreum
 
 env:
   REPO: big-dipper-ui
