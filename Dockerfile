@@ -13,7 +13,9 @@ ARG PROJECT_NAME=web
 # Stage: starter
 FROM --platform=$BUILDPLATFORM ${BASE_IMAGE} AS starter
 WORKDIR /app
-RUN npm i -g turbo
+# [TODO]: Update turbo version once argument instead of flag is fully supported
+# https://github.com/vercel/turbo/pull/6022
+RUN npm i -g turbo@v1.10.14
 
 # Stage: pruner
 FROM starter AS pruner
