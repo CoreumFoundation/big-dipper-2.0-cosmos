@@ -71,7 +71,12 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
               <TableCell
                 key={column.key}
                 align={column.align}
-                style={{ width: `${column.width}%` }}
+                style={{
+                  width: `${column.width}%`,
+                  color: '#6C6F78',
+                  fontSize: '12px',
+                  textTransform: 'uppercase',
+                }}
               >
                 {t(column.key)}
               </TableCell>

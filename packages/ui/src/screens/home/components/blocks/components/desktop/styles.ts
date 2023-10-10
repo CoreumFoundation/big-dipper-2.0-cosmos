@@ -10,8 +10,9 @@ const useStyles = makeStyles()((theme) => ({
   header: {
     // ...theme.mixins.tableCell,
     background: theme.palette.custom.general.modal_header,
-    color: theme.palette.custom.fonts.table_headers,
+    color: `${theme.palette.custom.fonts.table_headers} !important`,
     textTransform: 'uppercase',
+    fontSize: '12px !important',
   },
   table: {
     '& .MuiTableBody-root': {

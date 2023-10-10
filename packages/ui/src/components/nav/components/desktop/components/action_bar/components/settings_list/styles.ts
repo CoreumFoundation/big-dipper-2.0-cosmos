@@ -76,6 +76,7 @@ const useStyles = makeStyles()((theme) => ({
           background: theme.palette.primary.main,
           svg: {
             color: theme.palette.primary.contrastText,
+            fill: 'white',
           },
         },
       },

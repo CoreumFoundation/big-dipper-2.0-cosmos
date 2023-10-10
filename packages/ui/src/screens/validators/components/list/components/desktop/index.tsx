@@ -55,7 +55,7 @@ const GridColumn: FC<GridColumnProps> = ({
   return (
     <div
       style={style}
-      className={cx(classes.cell, {
+      className={cx(classes.cell, classes.header, {
         [classes.flexCells]: !!component || sort,
         [align ?? '']: sort || !!component,
         sort,

@@ -13,19 +13,19 @@ export const getValidatorStatus = (status: number, jailed: boolean, tombstoned: 
   // jailed and tombstone statuses are prioritised over their unbonding state
   if (tombstoned) {
     results.status = 'tombstoned';
-    results.theme = 'two';
+    results.theme = 'four';
     return results;
   }
 
   if (jailed) {
     results.status = 'jailed';
-    results.theme = 'two';
+    results.theme = 'five';
     return results;
   }
 
   if (status === 3) {
     results.status = 'active';
-    results.theme = 'one';
+    results.theme = 'two';
   } else if (status === 2) {
     results.status = 'unbonding';
     results.theme = 'three';

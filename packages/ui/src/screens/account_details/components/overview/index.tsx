@@ -53,16 +53,29 @@ const Overview: FC<OverviewProps> = ({ className, address, withdrawalAddress }) 
             </div>
           </div>
           <div className="qrWrapper">
-            <Typography variant="body1" align="center">
-              {t('scanForAddress')}
-            </Typography>
-            <QRCodeSVG value={address} size={200} bgColor="#ffffff" fgColor="#000000" />
+            <div className="qrWrapperContent">
+              <Typography variant="body1" align="center">
+                {t('scanForAddress')}
+              </Typography>
+              <QRCodeSVG value={address} size={200} bgColor="#ffffff" fgColor="#000000" />
+            </div>
           </div>
-          <br />
+          <div className="divider">
+            <div className="divider-line" />
+            <div className="divider-text">{t('or')}</div>
+          </div>
           <div className="dialog__share--wrapper">
             <Typography variant="body1">{t('shareTo')}</Typography>
-            <br />
             <div className={classes.icons}>
+              <EmailShareButton
+                url={url}
+                subject="address"
+                body={address}
+                separator=":: "
+                className="share-buttons email"
+              >
+                <EmailIcon round />
+              </EmailShareButton>
               <FacebookShareButton
                 url={url}
                 quote={address}
@@ -79,11 +92,9 @@ const Overview: FC<OverviewProps> = ({ className, address, withdrawalAddress }) 
               >
                 <TwitterIcon round />
               </TwitterShareButton>
-
               <TelegramShareButton url={url} title={address} className="share-buttons">
                 <TelegramIcon round />
               </TelegramShareButton>
-
               <WhatsappShareButton
                 url={url}
                 title={address}
@@ -92,15 +103,6 @@ const Overview: FC<OverviewProps> = ({ className, address, withdrawalAddress }) 
               >
                 <WhatsappIcon round />
               </WhatsappShareButton>
-              <EmailShareButton
-                url={url}
-                subject="address"
-                body={address}
-                separator=":: "
-                className="share-buttons email"
-              >
-                <EmailIcon round />
-              </EmailShareButton>
             </div>
           </div>
         </Box>

@@ -144,7 +144,8 @@
           "netSelector_link": "#999999",
           "data_blocks": "#FFF",
           "fontFive": "#373E48",
-          "highlight": "#F1C34E"
+          "highlight": "#F1C34E",
+          "table_headers": "#A5A8B2"
         },
         "primaryData": {
           "one": "#F87255",

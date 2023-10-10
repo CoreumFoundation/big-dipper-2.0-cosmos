@@ -22,6 +22,7 @@ const notoSans = Noto_Sans({
   style: 'normal',
   display: 'swap',
   preload: true,
+  subsets: ['latin'],
 });
 
 // Client-side cache, shared for the whole session of the user in the browser.

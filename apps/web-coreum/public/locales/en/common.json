@@ -39,7 +39,7 @@
   "deuteranopia": "Deuteranopia",
   "tritanopia": "Tritanopia",
   "achromatopsia": "Achromatopsia",
-  "nothingToShow": "Nothing to show",
+  "nothingToShow": "No Data Found",
   "notFound": "Not Found",
   "useValidatorAddress": "Please use a validator address instead",
   "description": "Access the public record of all blocks, transactions, validators and proposals in the Coreum blockchain. Updated in real-time",

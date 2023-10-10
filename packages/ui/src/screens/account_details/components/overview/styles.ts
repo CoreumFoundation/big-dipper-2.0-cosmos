@@ -12,42 +12,70 @@ const useStyles = makeStyles()((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
+    padding: '0 !important',
+
     '& .modal-header': {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginTop: '-16px',
       width: '100%',
-      height: 64,
+      padding: theme.spacing(2.5),
+      backgroundColor: '#1D222C',
+
       '& .close-btn': {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         cursor: 'pointer',
+        // backgroundColor: '#2D333D',
+        // borderRadius: theme.spacing(1),
       },
     },
     '& .qrWrapper': {
+      padding: theme.spacing(5),
+
+      '& .qrWrapperContent': {
+        display: 'flex',
+        flexDirection: 'column-reverse',
+        padding: theme.spacing(2),
+        backgroundColor: '#fff',
+        borderRadius: theme.spacing(1),
+
+        '& .MuiTypography-body1': {
+          marginTop: theme.spacing(2),
+          color: '#000',
+        },
+      },
+    },
+    '& .divider': {
       display: 'flex',
-      flexDirection: 'column-reverse',
-      backgroundColor: '#fff',
-      padding: theme.spacing(2),
-      borderRadius: theme.spacing(1),
-      '& .MuiTypography-body1': {
-        marginTop: theme.spacing(2),
-        color: '#000',
+      justifyContent: 'center',
+      width: '100%',
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
+      '&-line': {
+        height: '1px',
+        background: '#23272E',
+        width: '100%',
+      },
+      '&-text': {
+        position: 'absolute',
+        marginTop: `-10px`,
+        backgroundColor: '#1B1D23',
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3),
+        color: '#A5A8B2',
+        fontSize: '14px',
       },
     },
     '& .dialog__share--wrapper': {
-      marginTop: theme.spacing(2),
-    },
-    '& .share-buttons': {
-      '&:not(:last-child)': {
-        marginRight: theme.spacing(1),
-      },
-      '&.email': {
-        '& circle': {
-          fill: theme.palette.primary.main,
-        },
+      width: '100%',
+      padding: theme.spacing(3),
+
+      '& .MuiTypography-body1': {
+        fontWeight: 500,
+        fontSize: '16px',
+        marginBottom: theme.spacing(2),
       },
     },
   },
@@ -57,6 +85,12 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   icons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+
     '& svg': {
       width: theme.spacing(4.5),
       height: theme.spacing(4.5),

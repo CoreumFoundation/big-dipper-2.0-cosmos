@@ -4,6 +4,8 @@ const useStyles = makeStyles()((theme) => ({
   root: {
     '& .MuiTypography-h2': {
       marginBottom: theme.spacing(2),
+      fontSize: '20px',
+      lineHeight: '30px',
     },
   },
   list: {

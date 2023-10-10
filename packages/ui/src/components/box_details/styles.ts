@@ -23,6 +23,7 @@ const useStyles = makeStyles()((theme) => ({
     '& .label': {
       marginBottom: theme.spacing(1),
       fontSize: 14,
+      color: '#A5A8B2',
     },
     '& .detail': {
       color: theme.palette.custom.fonts.fontFive,

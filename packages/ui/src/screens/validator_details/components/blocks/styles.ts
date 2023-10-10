@@ -38,15 +38,23 @@ const useStyles = makeStyles()((theme) => ({
   },
   toolTip: {
     boxShadow: theme.shadows[3],
+    background: '#2B3138 !important',
+    padding: theme.spacing(2),
+    paddingBottom: 0,
   },
   item: {
-    marginBottom: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+
     '& .label': {
-      marginBottom: theme.spacing(1),
+      paddingBottom: theme.spacing(0.5),
       color: theme.palette.custom.fonts.fontThree,
+      fontSize: '14px',
+      lineHeight: '21px',
     },
     '& p.value': {
       color: theme.palette.custom.fonts.fontTwo,
+      fontSize: '14px',
+      lineHeight: '21px',
     },
     '& a': {
       color: theme.palette.custom.fonts.highlight,

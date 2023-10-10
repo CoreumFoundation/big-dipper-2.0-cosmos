@@ -90,16 +90,12 @@ const ValidatorOverview: FC<ValidatorOverviewProps> = ({ status, overview, class
                 </>
               }
               display={
-                <Typography variant="body1" className={cx('value', condition)}>
-                  {t(condition)}
-                </Typography>
+                <Tag value={t(condition)} theme={statusTheme.theme} className={classes.statusTag} />
               }
             />
           </div>
         ) : (
-          <Typography variant="body1" className={cx('value', 'condition', condition)}>
-            {t(condition)}
-          </Typography>
+          <Tag value={t(condition)} theme={statusTheme.theme} className={classes.statusTag} />
         ),
     },
     {

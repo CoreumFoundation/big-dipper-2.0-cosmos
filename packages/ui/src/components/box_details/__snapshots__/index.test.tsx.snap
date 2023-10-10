@@ -36,6 +36,7 @@ exports[`components: BoxDetails matches snapshot 1`] = `
 .emotion-1 .label {
   margin-bottom: 8px;
   font-size: 14px;
+  color: #A5A8B2;
 }
 
 .emotion-1 .detail {
@@ -98,6 +99,7 @@ exports[`components: BoxDetails matches snapshot 1`] = `
 .emotion-3 .label {
   margin-bottom: 8px;
   font-size: 14px;
+  color: #A5A8B2;
 }
 
 .emotion-3 .detail {
@@ -220,6 +222,7 @@ exports[`components: BoxDetails matches snapshot with title actions 1`] = `
 .emotion-1 .label {
   margin-bottom: 8px;
   font-size: 14px;
+  color: #A5A8B2;
 }
 
 .emotion-1 .detail {
@@ -282,6 +285,7 @@ exports[`components: BoxDetails matches snapshot with title actions 1`] = `
 .emotion-3 .label {
   margin-bottom: 8px;
   font-size: 14px;
+  color: #A5A8B2;
 }
 
 .emotion-3 .detail {
