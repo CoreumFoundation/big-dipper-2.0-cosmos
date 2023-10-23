@@ -9,6 +9,7 @@ export const VALIDATOR_DETAILS = (address: string): string => `/validators/${add
 export const VALIDATORS = '/validators';
 export const TRANSACTIONS = '/transactions';
 export const TRANSACTION_DETAILS = (tx: string): string => `/transactions/${tx}`;
+export const ASSETS = '/assets';
 export const PROPOSALS = '/proposals';
 export const PROPOSAL_DETAILS = (id: string | number): string => `/proposals/${id}`;
 export const ACCOUNT_DETAILS = (address: string): string => `/accounts/${address}`;

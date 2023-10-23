@@ -1,0 +1,14 @@
+{
+  "assets": "Assets",
+  "asset": "Asset",
+  "fungibleToken": "Fungible Token",
+  "nonFungibleToken": "Non-Fungible Token",
+  "id": "ID",
+  "name": "Name",
+  "token_type": "Token Type",
+  "price": "Price",
+  "supply": "Supply",
+  "market_cap": "Market Cap",
+  "holders": "Holders",
+  "last_7_days": "Last 7 Days"
+}

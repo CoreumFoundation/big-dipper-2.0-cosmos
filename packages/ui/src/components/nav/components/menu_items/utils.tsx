@@ -10,7 +10,17 @@ import ParamIconActive from 'shared-utils/assets/icon_params_active.svg';
 import ProposalsIconActive from 'shared-utils/assets/icon_proposals_active.svg';
 import TransactionIconActive from 'shared-utils/assets/icon_transactions_active.svg';
 import UserIconActive from 'shared-utils/assets/icon_validators_active.svg';
-import { BLOCKS, HOME, PARAMS, PROPOSALS, TRANSACTIONS, VALIDATORS } from '@/utils/go_to_page';
+import AssetsIconActive from 'shared-utils/assets/assets_icon_active.svg';
+import AssetsIconInactive from 'shared-utils/assets/assets_icon_inactive.svg';
+import {
+  ASSETS,
+  BLOCKS,
+  HOME,
+  PARAMS,
+  PROPOSALS,
+  TRANSACTIONS,
+  VALIDATORS,
+} from '@/utils/go_to_page';
 
 export const getMenuItems = () => {
   const iconProps = {
@@ -42,6 +52,12 @@ export const getMenuItems = () => {
       url: TRANSACTIONS,
       iconActive: <TransactionIconActive {...iconProps} />,
       iconInactive: <TransactionIconInactive {...iconProps} />,
+    },
+    {
+      key: 'assets',
+      url: ASSETS,
+      iconActive: <AssetsIconActive {...iconProps} />,
+      iconInactive: <AssetsIconInactive {...iconProps} />,
     },
     {
       key: 'proposals',

@@ -1,0 +1,5 @@
+query Assets {
+  assets: asset(limit: $limit, offset: $offset) {
+
+  }
+}
