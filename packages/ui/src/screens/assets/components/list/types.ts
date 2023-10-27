@@ -7,6 +7,7 @@ export interface AssetFTType {
   price_change: string;
   supply: string;
   holders: string;
+  price_changes_7days: any[];
 }
 
 export interface AssetsState {

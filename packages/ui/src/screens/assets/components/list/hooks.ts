@@ -8,6 +8,69 @@ import type { AssetsState, AssetFTType } from '@/screens/assets/components/list/
 // ==========================
 // const formatAssets = (data: AssetsQuery) => {};
 
+const mockedPriceChanges = [
+  {
+    price: 100,
+  },
+  {
+    price: 500,
+  },
+  {
+    price: 200,
+  },
+  {
+    price: 700,
+  },
+  {
+    price: 300,
+  },
+  {
+    price: 350,
+  },
+  {
+    price: 400,
+  },
+  {
+    price: 100,
+  },
+  {
+    price: 900,
+  },
+  {
+    price: 400,
+  },
+  {
+    price: 300,
+  },
+  {
+    price: 300,
+  },
+  {
+    price: 200,
+  },
+  {
+    price: 700,
+  },
+  {
+    price: 200,
+  },
+  {
+    price: 300,
+  },
+  {
+    price: 500,
+  },
+  {
+    price: 800,
+  },
+  {
+    price: 530,
+  },
+  {
+    price: 600,
+  },
+];
+
 const mockedItems: AssetFTType[] = [
   {
     id: 1,
@@ -18,6 +81,7 @@ const mockedItems: AssetFTType[] = [
     price_change: '0.02',
     supply: '500000000',
     holders: '559305',
+    price_changes_7days: mockedPriceChanges,
   },
   {
     id: 2,
@@ -28,6 +92,7 @@ const mockedItems: AssetFTType[] = [
     price_change: '0.02',
     supply: '500000000',
     holders: '559305',
+    price_changes_7days: mockedPriceChanges,
   },
   {
     id: 3,
@@ -38,6 +103,7 @@ const mockedItems: AssetFTType[] = [
     price_change: '-0.02',
     supply: '500000000',
     holders: '559305',
+    price_changes_7days: mockedPriceChanges,
   },
   {
     id: 4,
@@ -48,6 +114,7 @@ const mockedItems: AssetFTType[] = [
     price_change: '0.02',
     supply: '500000000',
     holders: '559305',
+    price_changes_7days: mockedPriceChanges,
   },
   {
     id: 5,
@@ -58,6 +125,7 @@ const mockedItems: AssetFTType[] = [
     price_change: '-0.02',
     supply: '500000000',
     holders: '559305',
+    price_changes_7days: mockedPriceChanges,
   },
   {
     id: 6,
@@ -68,6 +136,7 @@ const mockedItems: AssetFTType[] = [
     price_change: '0.02',
     supply: '500000000',
     holders: '559305',
+    price_changes_7days: mockedPriceChanges,
   },
 ];
 

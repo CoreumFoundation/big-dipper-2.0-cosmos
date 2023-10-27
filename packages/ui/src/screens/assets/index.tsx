@@ -5,9 +5,10 @@ import Layout from '@/components/layout';
 import List from '@/screens/assets/components/list';
 import useStyles from '@/screens/assets/styles';
 
-const Validators = () => {
+const Assets = () => {
   const { t } = useTranslation('assets');
   const { classes } = useStyles();
+
   return (
     <>
       <NextSeo
@@ -24,4 +25,4 @@ const Validators = () => {
   );
 };
 
-export default Validators;
+export default Assets;
