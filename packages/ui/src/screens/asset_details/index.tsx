@@ -7,6 +7,7 @@ import useStyles from '@/screens/asset_details/styles';
 import AssetOverview from '@/screens/asset_details/components/AssetOverview';
 import AssetDetailsOverview from '@/screens/asset_details/components/AssetDetails';
 import AssetPriceOverview from '@/screens/asset_details/components/AssetPriceOverview';
+import Link from 'next/link';
 
 const AssetDetails = () => {
   const { t } = useTranslation('assets');
@@ -24,11 +25,26 @@ const AssetDetails = () => {
       />
       <Layout navTitle={t('assetDetails') ?? undefined}>
         <LoadAndExist exists={exists} loading={loading}>
-          <span className={classes.root}>
+          <div className={classes.root}>
+            <div className={classes.block}>
+              <Link href="/assets" className={classes.breadcrumb}>
+                <svg
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#25D695" strokeWidth="1.5" />
+                </svg>
+                Back to all Assets
+              </Link>
+              <div className={classes.title}>{t('assetDetails')}</div>
+            </div>
             <AssetOverview className={classes.block} asset={asset} />
             <AssetDetailsOverview className={classes.block} asset={asset} />
             <AssetPriceOverview className={classes.block} asset={asset} />
-          </span>
+          </div>
         </LoadAndExist>
       </Layout>
     </>
