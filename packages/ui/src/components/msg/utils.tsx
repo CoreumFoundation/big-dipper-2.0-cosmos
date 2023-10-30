@@ -544,6 +544,25 @@ export const getMessageModelByType = (type: string): Data['model'] => {
   return MODELS.MsgUnknown as Data['model'];
 };
 
+export const getTagDisplayValue = (type: string) => {
+  const splittedValue = type.split('.');
+
+  const suffix = splittedValue[splittedValue.length - 1].replace('Msg', '');
+  let prefix = '';
+
+  switch (splittedValue.length) {
+    case 4:
+      [, prefix] = splittedValue;
+      break;
+    case 5:
+      prefix = `${splittedValue[1]}${splittedValue[2]}`;
+      break;
+    default:
+  }
+
+  return `${prefix}-${suffix}`;
+};
+
 /**
  * Helper function to correctly display the correct UI
  * @param type Model type
@@ -557,21 +576,21 @@ export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean,
     tagTheme: TagTheme;
   };
 
-  let results: ResultType = {
+  const results: ResultType = {
     content: COMPONENTS.Unknown as unknown as FC<{ message: TMessage }>,
-    tagDisplay: 'txUnknownLabel',
+    tagDisplay: '',
     tagTheme: 'zero',
   };
 
   const data = getDataByType(type);
 
   if (data) {
-    results = {
-      content: data?.content as unknown as FC<{ message: TMessage }>,
-      tagDisplay: data.tagDisplay,
-      tagTheme: data.tagTheme as ResultType['tagTheme'],
-    };
+    results.content = data?.content as unknown as FC<{ message: TMessage }>;
+    results.tagTheme = data.tagTheme as ResultType['tagTheme'];
   }
+
+  const tagDisplayValue = getTagDisplayValue(type);
+  results.tagDisplay = tagDisplayValue;
 
   // If user asks to view the raw data
   if (viewRaw || !results.content) {
