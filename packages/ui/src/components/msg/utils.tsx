@@ -545,7 +545,11 @@ export const getMessageModelByType = (type: string): Data['model'] => {
 };
 
 export const getTagDisplayValue = (type: string) => {
-  const splittedValue = type.split('.');
+  const splittedValue = type?.split('.');
+
+  if (!splittedValue || !splittedValue.length) {
+    return '';
+  }
 
   const suffix = splittedValue[splittedValue.length - 1].replace('Msg', '');
   let prefix = '';

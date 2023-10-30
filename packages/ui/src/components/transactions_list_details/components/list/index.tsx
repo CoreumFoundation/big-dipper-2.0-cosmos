@@ -7,7 +7,7 @@ import { ListChildComponentProps, VariableSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader';
 import { useRecoilValue } from 'recoil';
 import Loading from '@/components/loading';
-import { getMessageByType } from '@/components/msg/utils';
+import { getMessageByType, getTagDisplayValue } from '@/components/msg/utils';
 import Result from '@/components/result';
 import Tag from '@/components/tag';
 import SingleTransaction from '@/components/transactions_list_details/components/list/components/single_transaction';
@@ -32,6 +32,8 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, isItemLoaded,
   const display = useDisplayStyles().classes;
   const { t } = useTranslation('transactions');
   const dateFormat = useRecoilValue(readDate);
+  const typeTagValue = getTagDisplayValue((transaction.messages.items[0] as any).type);
+
   if (!isItemLoaded?.(index)) {
     return (
       <div style={style}>
@@ -62,7 +64,7 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, isItemLoaded,
     ),
     type: (
       <div>
-        <Tag value={transaction.type?.[0] ?? ''} theme="six" />
+        <Tag value={typeTagValue} theme="six" />
         {transaction.messages.count > 1 && ' +'}
       </div>
     ),

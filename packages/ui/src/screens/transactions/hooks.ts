@@ -33,6 +33,7 @@ const formatTransactions = (data: TransactionsListenerSubscription): Transaction
         const eachMsgType = R.pathOr('none type', ['@type'], eachMsg);
         return eachMsgType ?? '';
       }) ?? [];
+
     const convertedMsgType = convertMsgType(msgType);
     return {
       height: x.height,

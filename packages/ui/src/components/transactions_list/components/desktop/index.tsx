@@ -20,6 +20,7 @@ import InfiniteLoader from 'react-window-infinite-loader';
 import CopyIcon from 'shared-utils/assets/icon-copy.svg';
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
+import { getTagDisplayValue } from '@/components/msg/utils';
 
 const Desktop: FC<TransactionsListState> = ({
   className,
@@ -36,15 +37,9 @@ const Desktop: FC<TransactionsListState> = ({
   const { t } = useTranslation('transactions');
 
   const getTypeTag = (x: Transactions) => {
-    if (x.type?.[0] && x.type?.[0] === 'Update Client') {
-      return <Tag value="IBC Received" theme="six" />;
-    }
+    const typeTagValue = getTagDisplayValue((x.messages.items[0] as any).type);
 
-    if (x.type?.[0] === 'Transfer') {
-      return <Tag value="IBC Transfer" theme="six" />;
-    }
-
-    return <Tag value={x.type?.[0] ? x.type[0] : ''} theme="six" />;
+    return <Tag value={typeTagValue} theme="six" />;
   };
 
   const items = transactions.map((x) => ({
