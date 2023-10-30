@@ -91,7 +91,7 @@ const Balance: FC<BalanceProps> = (props) => {
     Big(market.price || price)
       ?.times(props.total.value)
       .toPrecision()
-  ).format('0,0.00')}`;
+  ).format('0,0.0000')}`;
 
   // format
   const totalDisplay = formatNumber(props.total.value, props.total.exponent);
@@ -164,7 +164,7 @@ const Balance: FC<BalanceProps> = (props) => {
                 'Error fetching CORE-USD price'
               ) : (
                 /* Kept the "toUpperCase()" in order to show the token symbol in uppercase */
-                `$${numeral(market.price || price).format('0,0.[00]', Math.floor)} / ${
+                `$${numeral(market.price || price).format('0,0.[0000]', Math.floor)} / ${
                   tokenUnits?.[primaryTokenUnit]?.display?.toUpperCase() ?? ''
                 }`
               )}

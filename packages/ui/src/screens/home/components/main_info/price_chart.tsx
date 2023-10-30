@@ -38,7 +38,7 @@ const PriceChart: React.FC = () => {
           });
           if (gqlResponse.status === 200) {
             const formattedData = gqlResponse.data.data.token_price_history.map((item: any) => {
-              let time = new Date(item.timestamp);
+              const time = new Date(item.timestamp);
               return {
                 value: item.price,
                 time: Math.floor(time.getTime() / 1000),
@@ -83,6 +83,11 @@ const PriceChart: React.FC = () => {
         baseValue: {
           type: 'price',
           price: gqlData[0].value,
+        },
+        priceFormat: {
+          type: 'price',
+          precision: 4,
+          minMove: 0.0001,
         },
         topLineColor: 'rgba( 38, 166, 154, 1)',
         topFillColor1: 'rgba( 38, 166, 154, 0.28)',
