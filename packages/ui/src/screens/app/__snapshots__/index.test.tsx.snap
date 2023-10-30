@@ -226,7 +226,7 @@ exports[`screen: _app matches snapshot 1`] = `
     <h2
       className="MuiTypography-root MuiTypography-h2 emotion-17"
     >
-      coreum-testnet
+      coreum
     </h2>
   </div>,
   <div

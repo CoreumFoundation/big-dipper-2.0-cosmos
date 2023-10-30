@@ -555,14 +555,10 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
       >
         <div
           className="currentNetName"
-        >
-          Testnet1
-        </div>
+        />
         <div
           className="currentNetLink"
-        >
-          explorer.testnet-1.coreum.dev
-        </div>
+        />
       </div>
       <svg
         className="arrowIcon"

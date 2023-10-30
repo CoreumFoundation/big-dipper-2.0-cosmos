@@ -344,8 +344,8 @@ exports[`screen: Transactions matches snapshot 1`] = `
                   {
                     "amounts": [
                       {
-                        "baseDenom": "utestcore",
-                        "displayDenom": "utestcore",
+                        "baseDenom": "ucore",
+                        "displayDenom": "ucore",
                         "exponent": 0,
                         "value": "0",
                       },
@@ -363,8 +363,8 @@ exports[`screen: Transactions matches snapshot 1`] = `
                   {
                     "amounts": [
                       {
-                        "baseDenom": "utestcore",
-                        "displayDenom": "utestcore",
+                        "baseDenom": "ucore",
+                        "displayDenom": "ucore",
                         "exponent": 0,
                         "value": "0",
                       },
