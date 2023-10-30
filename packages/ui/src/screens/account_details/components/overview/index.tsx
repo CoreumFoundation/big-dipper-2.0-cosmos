@@ -40,9 +40,15 @@ const Overview: FC<OverviewProps> = ({ className, address, withdrawalAddress }) 
 
   const url = `${location}/coreum/accounts/${address}`;
   const hashTags = ['coreumexplorer', 'coreum'];
+
   return (
     <>
-      <Dialog maxWidth="xl" onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+      <Dialog
+        classes={{ paper: classes.rootDialog }}
+        onClose={handleClose}
+        aria-labelledby="simple-dialog-title"
+        open={open}
+      >
         <Box className={classes.dialog}>
           <div className="modal-header">
             <Typography variant="h3" align="center">

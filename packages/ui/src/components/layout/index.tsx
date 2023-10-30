@@ -19,7 +19,7 @@ const transition: Transition = {
 
 const Layout = (props: LayoutProps) => {
   const { classes, cx } = useStyles();
-  const { children, navTitle, className } = props;
+  const { children, className } = props;
 
   return (
     <motion.div
@@ -31,7 +31,7 @@ const Layout = (props: LayoutProps) => {
       className={classes.root}
     >
       <div className={classes.contentWrapper}>
-        <Nav title={navTitle} />
+        <Nav />
         <div className={classes.children}>
           <div className={classes.appBarPlaceholder} />
           {!!bannerLinks.length && <Banner />}

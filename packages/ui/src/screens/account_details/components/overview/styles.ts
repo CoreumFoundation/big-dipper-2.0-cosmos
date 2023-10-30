@@ -7,12 +7,17 @@ const useStyles = makeStyles()((theme) => ({
       gridTemplateColumns: 'repeat(2,1fr)',
     },
   },
+  rootDialog: {
+    maxWidth: '100%',
+  },
   dialog: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
     padding: '0 !important',
+    minWidth: '400px',
+    width: '100%',
 
     '& .modal-header': {
       display: 'flex',
@@ -27,8 +32,6 @@ const useStyles = makeStyles()((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         cursor: 'pointer',
-        // backgroundColor: '#2D333D',
-        // borderRadius: theme.spacing(1),
       },
     },
     '& .qrWrapper': {
@@ -53,6 +56,8 @@ const useStyles = makeStyles()((theme) => ({
       width: '100%',
       paddingLeft: theme.spacing(3),
       paddingRight: theme.spacing(3),
+      marginTop: '10px',
+
       '&-line': {
         height: '1px',
         background: '#23272E',
