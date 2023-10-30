@@ -4,10 +4,15 @@ import { Categories } from '../types';
 
 class MsgSetWhitelistedLimit {
   public category: Categories;
+
   public type: string;
+
   public json: any;
+
   public sender: string;
+
   public account: string;
+
   public coin: MsgCoin;
 
   constructor(payload: any) {

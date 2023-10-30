@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import numeral from 'numeral';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 
 const DynamicPieChart = dynamic(() => Promise.resolve(PieChart), { ssr: false });

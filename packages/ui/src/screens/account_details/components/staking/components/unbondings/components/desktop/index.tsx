@@ -27,7 +27,7 @@ const UnbondingsRow: FC<UnbondingsRowProps> = ({ item }) => {
       ? `${formatNumber(
           item.amount.value,
           item.amount.exponent
-          //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+          // Kept the "toUpperCase()" in order to show the token symbol in uppercase
         )} ${item.amount.displayDenom.toUpperCase()}`
       : '',
     completionTime: formatDayJs(dayjs.utc(item.completionTime), dateFormat),

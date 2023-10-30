@@ -15,7 +15,7 @@ const WithdrawReward: FC<{ message: MsgWithdrawDelegatorReward }> = (props) => {
   const validatorMoniker = validator ? validator?.name : message.validatorAddress;
 
   const parsedAmount = message.amounts
-    //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+    // Kept the "toUpperCase()" in order to show the token symbol in uppercase
     .map((x) => `${formatNumber(x.value, x.exponent)} ${x.displayDenom.toUpperCase()}`)
     .join(', ');
 

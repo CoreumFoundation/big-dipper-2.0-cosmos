@@ -48,7 +48,7 @@ const Overview: FC<OverviewProps> = ({ className, data }) => {
       detail: `${formatNumber(
         data.fee.value,
         data.fee.exponent
-        //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+        // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       )} ${data?.fee?.displayDenom.toUpperCase()}`,
     },
     {

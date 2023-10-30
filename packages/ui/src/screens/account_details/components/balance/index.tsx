@@ -11,10 +11,9 @@ import Big from 'big.js';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import numeral from 'numeral';
-import { FC } from 'react';
+import { FC, useState, useEffect, useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { useRecoilValue } from 'recoil';
-import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Spinner from '@/components/loadingSpinner';
 
@@ -96,6 +95,23 @@ const Balance: FC<BalanceProps> = (props) => {
   // format
   const totalDisplay = formatNumber(props.total.value, props.total.exponent);
 
+  const renderTotal = useMemo(() => {
+    if (isLoading) {
+      return <Spinner customStyle={{ marginLeft: '1rem', justifyContent: 'center' }} />;
+    }
+
+    if (isError) {
+      return 'Error fetching CORE-USD price';
+    }
+
+    return (
+      /* Kept the "toUpperCase()" in order to show the token symbol in uppercase */
+      `$${numeral(market.price || price).format('0,0.[0000]', Math.floor)} / ${
+        tokenUnits?.[primaryTokenUnit]?.display?.toUpperCase() ?? ''
+      }`
+    );
+  }, [isError, isLoading, market.price, price]);
+
   return (
     <Box className={cx(classes.root, props.className)}>
       <Typography variant="h2">{t('balance')}</Typography>
@@ -145,7 +161,7 @@ const Balance: FC<BalanceProps> = (props) => {
           <div className="total__single--container">
             <Typography variant="h3" className="label">
               {t('total', {
-                //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+                // Kept the "toUpperCase()" in order to show the token symbol in uppercase
                 unit: props.total.displayDenom.toUpperCase(),
               })}
             </Typography>
@@ -158,16 +174,7 @@ const Balance: FC<BalanceProps> = (props) => {
               className="label"
               style={isError ? { color: '#F34747' } : {}}
             >
-              {isLoading ? (
-                <Spinner customStyle={{ marginLeft: '1rem', justifyContent: 'center' }} />
-              ) : isError ? (
-                'Error fetching CORE-USD price'
-              ) : (
-                /* Kept the "toUpperCase()" in order to show the token symbol in uppercase */
-                `$${numeral(market.price || price).format('0,0.[0000]', Math.floor)} / ${
-                  tokenUnits?.[primaryTokenUnit]?.display?.toUpperCase() ?? ''
-                }`
-              )}
+              {renderTotal}
             </Typography>
             <Typography variant="body1">{price === 0 ? '--' : totalAmount}</Typography>
           </div>

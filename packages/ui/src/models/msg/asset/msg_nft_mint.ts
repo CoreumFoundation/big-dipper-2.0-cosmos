@@ -4,13 +4,21 @@ import { Categories } from '../types';
 
 class MsgNftMint {
   public category: Categories;
+
   public type: string;
+
   public json: any;
+
   public sender: string;
+
   public class_id: string;
+
   public id: string;
+
   public uri: string;
+
   public uri_hash: string;
+
   public data: any;
 
   constructor(payload: any) {

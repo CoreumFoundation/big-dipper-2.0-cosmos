@@ -17,7 +17,7 @@
     "format": "prettier --write \"{**/src/{,**/}*.{js,ts,tsx,mjs,cjs,md},e2e/{,**/}*.{js,ts,tsx,mjs,cjs,md}}\"",
     "ts-check": "yarn dotenv:setup -- turbo run ts-check --filter=$(dotenv -- printenv PROJECT_NAME || echo web)...",
     "ts-check:ci": "yarn turbo:setup -- turbo run ts-check --continue",
-    "lint": "yarn dotenv:setup -- turbo run lint --filter=$(dotenv -- printenv PROJECT_NAME || echo web)...",
+    "lint": "yarn dotenv:setup -- turbo run lint --filter=$(dotenv -- printenv PROJECT_NAME || echo web)... -- --fix",
     "lint:ci": "yarn turbo:setup -- turbo run lint --continue",
     "test": "yarn dotenv:setup -- turbo run test --filter=$(dotenv -- printenv PROJECT_NAME || echo web)... -- -u",
     "test:ci": "yarn turbo:setup -- turbo run test --continue",

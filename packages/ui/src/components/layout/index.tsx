@@ -1,4 +1,4 @@
-import { motion, Transition, Variants } from 'framer-motion';
+import { motion, Transition } from 'framer-motion';
 import Banner, { getBannersLinks } from '@/components/banner';
 import Footer from '@/components/footer';
 import useStyles from '@/components/layout/styles';

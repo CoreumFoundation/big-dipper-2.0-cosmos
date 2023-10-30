@@ -8,9 +8,9 @@ import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import numeral from 'numeral';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { PolarAngleAxis, RadialBar, RadialBarChart, Tooltip } from 'recharts';
-import { readDelegatorAddress, readProfile } from '@/recoil/profiles/selectors';
+import { readDelegatorAddress } from '@/recoil/profiles/selectors';
 import { useRecoilValue } from 'recoil';
 
 const DynamicRadialBarChart = dynamic(() => Promise.resolve(RadialBarChart), { ssr: false });

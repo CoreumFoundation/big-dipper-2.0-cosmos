@@ -1,12 +1,17 @@
 import useStyles from '@/components/loadingSpinner/styles';
 import SpinnerSvg from './spinner.svg';
 
-const Spinner = ({ customStyle = {} }) => {
+interface SpinnerProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  customStyle?: any;
+}
+
+const Spinner = ({ customStyle = {} }: SpinnerProps) => {
   const { classes } = useStyles();
   return (
     <div className={classes.root} style={{ ...customStyle }}>
       <SpinnerSvg
-        className={'spinner'}
+        className="spinner"
         style={{
           animation: 'spin 1s infinite linear',
         }}

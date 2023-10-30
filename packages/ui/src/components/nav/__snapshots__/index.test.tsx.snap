@@ -21,7 +21,6 @@ exports[`component: Nav it renders 1`] = `
 <div
     className="emotion-0"
     id="Mobile"
-    title=""
   />,
 ]
 `;

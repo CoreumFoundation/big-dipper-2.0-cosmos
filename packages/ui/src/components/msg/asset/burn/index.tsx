@@ -14,7 +14,7 @@ const Burn: FC<{ message: MsgBurn }> = (props) => {
   const parsedAmount = `${formatNumber(
     amount.value,
     amount.exponent
-    //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+    // Kept the "toUpperCase()" in order to show the token symbol in uppercase
   )} ${amount.displayDenom.toUpperCase()}`;
 
   const sender = useProfileRecoil(message.sender);

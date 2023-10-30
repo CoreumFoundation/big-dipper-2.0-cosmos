@@ -4,7 +4,6 @@ import numeral from 'numeral';
 import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 import AvatarName from '@/components/avatar_name';
-// import BoxDetails from '@/components/box_details';
 import Box from '@/components/box';
 import { useProfileRecoil } from '@/recoil/profiles/hooks';
 import { readDate } from '@/recoil/settings';
@@ -16,44 +15,9 @@ const Overview: FC<OverviewType & ComponentDefault> = (props) => {
   const { address, imageUrl, name } = useProfileRecoil(props.proposer);
   const { t } = useTranslation('blocks');
   const dateFormat = useRecoilValue(readDate);
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
 
   return (
-    // <BoxDetails
-    //   className={classes.root}
-    //   title={t('overview') ?? undefined}
-    //   details={[
-    //     {
-    //       key: 'height',
-    //       label: t('height'),
-    //       detail: (
-    //         <Typography variant="body1" className="value">
-    //           {numeral(props.height).format('0,0')}
-    //         </Typography>
-    //       ),
-    //     },
-    //     {
-    //       key: 'hash',
-    //       label: t('hash'),
-    //       detail: props.hash,
-    //     },
-    //     {
-    //       key: 'proposer',
-    //       label: t('proposer'),
-    //       detail: <AvatarName address={address} imageUrl={imageUrl} name={name} />,
-    //     },
-    //     {
-    //       key: 'time',
-    //       label: t('time'),
-    //       detail: formatDayJs(dayjs.utc(props.timestamp), dateFormat),
-    //     },
-    //     {
-    //       key: 'txs',
-    //       label: t('txs'),
-    //       detail: numeral(props.txs).format('0,0'),
-    //     },
-    //   ]}
-    // />
     <Box className={classes.root}>
       <Typography variant="h2">{t('overview')}</Typography>
       <div className={classes.item}>

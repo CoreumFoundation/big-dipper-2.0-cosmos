@@ -19,7 +19,7 @@ const Exec: FC<{ message: MsgExec }> = (props) => {
         i18nKey="message_contents:MsgExec"
         components={[<Name address={message.grantee} name={granteeMoniker} />, <b />]}
         values={{
-          messages: messages,
+          messages,
         }}
       />
     </Typography>

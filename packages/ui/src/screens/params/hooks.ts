@@ -190,14 +190,13 @@ const formatFTParams = (data: ParamsQuery) => {
         tokenUpgradeGracePeriod: ftParamsRaw.tokenUpgradeGracePeriod,
         tokenUpgradeDecisionTimeout: ftParamsRaw.tokenUpgradeDecisionTimeout,
       };
-    } else {
-      return {
-        ftIssueFee: formatToken(
-          ftParamsRaw.ftIssueFee.amount ?? '',
-          ftParamsRaw.ftIssueFee.denom ?? ''
-        ),
-      };
     }
+    return {
+      ftIssueFee: formatToken(
+        ftParamsRaw.ftIssueFee.amount ?? '',
+        ftParamsRaw.ftIssueFee.denom ?? ''
+      ),
+    };
   }
   return null;
 };
@@ -245,7 +244,7 @@ export const useParams = () => {
         ...formatParam(data),
       }));
     },
-    onError: (e) => {
+    onError: () => {
       handleSetState((prevState) => ({ ...prevState, loading: false }));
     },
   });

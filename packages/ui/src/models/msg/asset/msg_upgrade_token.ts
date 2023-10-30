@@ -4,10 +4,15 @@ import { Categories } from '../types';
 
 class MsgUpgradeToken {
   public category: Categories;
+
   public type: string;
+
   public json: any;
+
   public sender: string;
+
   public denom: string;
+
   public ibc_enabled: boolean;
 
   constructor(payload: any) {

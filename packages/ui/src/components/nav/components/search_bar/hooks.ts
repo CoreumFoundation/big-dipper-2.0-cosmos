@@ -10,7 +10,6 @@ import {
 import { isValidAddress } from '@/utils/prefix_convert';
 import { TFunction } from 'next-i18next';
 import { useRouter } from 'next/router';
-import numeral from 'numeral';
 import { toast } from 'react-toastify';
 import { useRecoilCallback } from 'recoil';
 
@@ -55,8 +54,8 @@ export const useSearchBar = (t: TFunction) => {
           } else {
             router.push(PROFILE_DETAILS(parsedValue));
           }
-        } else if (/^-?\d+$/.test(String(parsedValue))) {
-          router.push(BLOCK_DETAILS(String(parsedValue)));
+        } else if (/^-?\d+$/.test(String(parsedValue.replace(/[.,]/g, '')))) {
+          router.push(BLOCK_DETAILS(String(parsedValue.replace(/[.,]/g, ''))));
         } else {
           router.push(TRANSACTION_DETAILS(parsedValue));
         }

@@ -3,11 +3,17 @@ import type { Categories } from '@/models/msg/types';
 
 class MsgNftSend {
   public category: Categories;
+
   public type: string;
+
   public json: object;
+
   public class_id: string;
+
   public id: string;
+
   public sender: string;
+
   public receiver: string;
 
   constructor(payload: object) {

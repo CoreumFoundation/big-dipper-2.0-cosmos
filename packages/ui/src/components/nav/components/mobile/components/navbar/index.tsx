@@ -10,7 +10,7 @@ import { useRecoilValue } from 'recoil';
 const Navbar = (props: NavbarProps) => {
   const { classes, cx } = useStyles();
   const theme = useRecoilValue(readTheme);
-  const { isOpen, toggleNavMenus } = props; //Deleted openNetwork since its not being used
+  const { isOpen, toggleNavMenus } = props; // Deleted openNetwork since its not being used
 
   return (
     <div className={classes.root}>

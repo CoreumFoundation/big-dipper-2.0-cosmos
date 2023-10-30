@@ -838,6 +838,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
     className="emotion-37"
     onClick={[Function]}
     onTouchEnd={[Function]}
+    role="button"
   >
     <svg
       className="netIcon"

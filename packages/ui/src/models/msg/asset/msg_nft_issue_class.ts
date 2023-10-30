@@ -4,16 +4,27 @@ import { Categories } from '../types';
 
 class MsgNftIssueClass {
   public category: Categories;
+
   public type: string;
+
   public json: any;
+
   public issuer: string;
+
   public symbol: string;
+
   public name: string;
+
   public description: string;
+
   public uri: string;
+
   public uri_hash: string;
+
   public data: any;
+
   public features: any[];
+
   public royalty_rate: string;
 
   constructor(payload: any) {

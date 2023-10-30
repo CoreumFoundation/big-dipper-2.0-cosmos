@@ -545,6 +545,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
       className="emotion-6"
       onClick={[Function]}
       onTouchEnd={[Function]}
+      role="button"
     >
       <svg
         className="netIcon"

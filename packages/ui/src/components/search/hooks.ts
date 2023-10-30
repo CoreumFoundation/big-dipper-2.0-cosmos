@@ -36,5 +36,6 @@ export const useSearch = (callback: (value: string, clear?: () => void) => void)
     value,
     handleKeyDown,
     handleSubmitOnChange,
+    clear,
   };
 };

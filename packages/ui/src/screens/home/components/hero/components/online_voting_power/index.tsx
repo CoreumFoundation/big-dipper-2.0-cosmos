@@ -25,6 +25,7 @@ const OnlineVotingPower: FC<ComponentDefault> = () => {
         </div>
         <div className={classes.data}>
           <Typography variant="h3" className="primary__data">
+            {/* eslint-disable-next-line no-bitwise */}
             {`${votingPowerPercent.format('0,0.00', (n) => ~~n)}%`}
           </Typography>
           <Typography variant="body1" className="secondary__data">

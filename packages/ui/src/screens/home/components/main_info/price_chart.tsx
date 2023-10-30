@@ -4,17 +4,15 @@ import { createChart, IChartApi, SingleValueData } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import Spinner from '@/components/loadingSpinner';
-import daysjs from 'dayjs';
 
-// import useTranslation from 'next-translate/useTranslation';
 import useStyles from './styles';
 
 const PriceChart: React.FC = () => {
   const { classes } = useStyles();
   const chartRef = useRef<IChartApi>();
   const theme = useRecoilValue(readTheme);
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
-  const [isError, setIsError] = useState<Boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [gqlData, setGqlData] = useState<SingleValueData[]>();
 
   useEffect(() => {
@@ -125,7 +123,7 @@ const PriceChart: React.FC = () => {
   }, [theme]);
 
   useEffect(() => {
-    const handle = (e: any) => {
+    const handle = () => {
       const container: any = document.getElementById('price-chart');
       const dimensions = {
         width: container.clientWidth * (container.clientWidth > 767 ? 0.5 : 0.9),

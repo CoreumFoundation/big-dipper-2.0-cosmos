@@ -8,7 +8,6 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { ListChildComponentProps, VariableSizeList as List } from 'react-window';
 import useStyles from '@/screens/transaction_details/components/messages/styles';
 import { useList, useListRow } from '@/hooks/use_react_window';
-import TransactionMessagesFilter from '@/components/transaction_messages_filter';
 import { getMessageByType } from '@/components/msg/utils';
 import Box from '@/components/box';
 

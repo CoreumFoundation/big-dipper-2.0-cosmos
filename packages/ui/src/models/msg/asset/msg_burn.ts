@@ -4,9 +4,13 @@ import { Categories } from '../types';
 
 class MsgBurn {
   public category: Categories;
+
   public type: string;
+
   public json: any;
+
   public sender: string;
+
   public coin: MsgCoin;
 
   constructor(payload: any) {

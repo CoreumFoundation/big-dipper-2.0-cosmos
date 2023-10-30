@@ -1,9 +1,9 @@
 import { useSettingList } from '@/components/nav/components/desktop/components/action_bar/components/settings_list/hooks';
 import useStyles from '@/components/nav/components/desktop/components/action_bar/components/settings_list/styles';
-import { readTx, TX_LIST } from '@/recoil/settings';
+import { TX_LIST } from '@/recoil/settings';
 import CloseIcon from '@mui/icons-material/Close';
-import { default as Dark } from '@mui/icons-material/Brightness2';
-import { default as Light } from '@mui/icons-material/Brightness7';
+import Dark from '@mui/icons-material/Brightness2';
+import Light from '@mui/icons-material/Brightness7';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -17,20 +17,16 @@ import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
-import { useRecoilValue } from 'recoil';
 import SettingIcon from 'shared-utils/assets/icon_settings.svg';
 import generalConfig from '@/generalConfig';
 
-const release = `${process.env.NEXT_PUBLIC_RELEASE ?? ''}`;
-
 const Settings: FC<ComponentDefault> = (props) => {
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
   const router = useRouter();
   const { t, i18n } = useTranslation('common');
   const { open, handleOpen, state, handleChange, handleFormSubmit, handleCancel } = useSettingList({
     lang: i18n.language,
   });
-  const txListFormat = useRecoilValue(readTx);
 
   return (
     <div>
@@ -56,6 +52,7 @@ const Settings: FC<ComponentDefault> = (props) => {
             <div className={classes.formItem}>
               <Typography className="form-item--label">{t('theme')}</Typography>
               <div className="theme_container">
+                {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
                 <div
                   className={`theme_item ${state.theme === 'dark' ? 'active' : ''}`}
                   role="button"
@@ -63,6 +60,7 @@ const Settings: FC<ComponentDefault> = (props) => {
                 >
                   <Dark htmlColor={state.theme === 'dark' ? 'white' : undefined} />
                 </div>
+                {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
                 <div
                   className={`theme_item ${state.theme === 'light' ? 'active' : ''}`}
                   role="button"

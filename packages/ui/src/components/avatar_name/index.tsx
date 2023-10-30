@@ -1,6 +1,5 @@
 import Avatar from '@/components/avatar';
 import useStyles from '@/components/avatar_name/styles';
-import MiddleEllipsis from '@/components/MiddleEllipsis';
 import { Typography } from '@mui/material';
 import { ADDRESS_DETAILS } from '@/utils/go_to_page';
 import Tooltip from '@mui/material/Tooltip';

@@ -21,7 +21,7 @@ const getThemeDictionary = (list: string[]): ThemeDictionaryType => {
       case 'dark':
         themeDict.dark = darkTemplate;
         break;
-      //Commented out since they are ommited in Coreum BD Repo
+      // Commented out since they are ommited in Coreum BD Repo
       // case 'deuteranopia':
       //   themeDict.deuteranopia = deuteranopiaTemplate;
       //   break;

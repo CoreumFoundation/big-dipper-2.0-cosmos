@@ -230,7 +230,7 @@ export const useAccountDetails = () => {
   // ==========================
   // Desmos Profile
   // ==========================
-  const { data: dataDesmosProfile, loading: loadingDesmosProfile } = useDesmosProfile({
+  const { data: dataDesmosProfile } = useDesmosProfile({
     addresses: [address],
     skip: !extra.profile || !address,
   });
@@ -276,10 +276,5 @@ export const useAccountDetails = () => {
     }));
   }, [handleSetState, address, withdrawalAddress.withdrawalAddress?.address]);
 
-  // if (loadingDesmosProfile) state.loading = true;
-
   return { state };
 };
-// function useBoundingBalance(_address?: string) {
-//   throw new Error('Function not implemented.');
-// }

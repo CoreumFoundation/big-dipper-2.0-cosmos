@@ -127,7 +127,7 @@ export interface ChainConfig extends ChainSettings {
   previewImage?: string;
   themes: {
     default: string;
-    //Removed deuteranopia and trianopia from themeList
+    // Removed deuteranopia and trianopia from themeList
     themeList: Array<'dark' | 'light'>;
     dark: PaletteSettings;
     light: PaletteSettings;

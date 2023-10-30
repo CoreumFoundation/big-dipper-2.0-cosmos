@@ -1,12 +1,7 @@
 import AppBar from '@mui/material/AppBar';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Drawer from '@mui/material/Drawer';
-import { FC } from 'react';
-import { useRecoilValue } from 'recoil';
-// import BigDipperLogoRed from 'shared-utils/assets/big-dipper-red.svg';
-// import BigDipperLogoWhite from 'shared-utils/assets/big-dipper-white.svg';
-import { readTheme } from '@/recoil/settings';
-// import TitleBar from '@/components/nav/components/title_bar';
+import { FC, useMemo } from 'react';
 import MenuItems from '@/components/nav/components/menu_items';
 import useStyles from '@/components/nav/components/desktop/styles';
 import { useDesktop } from '@/components/nav/components/desktop/hooks';
@@ -20,14 +15,23 @@ import ArrowIcon from '@/assets/icon_nav.svg';
 
 type DesktopProps = {
   className?: string;
-  // title: string;
 };
 
 const Desktop: FC<DesktopProps> = ({ className }) => {
   const { classes, cx } = useStyles();
-  const theme = useRecoilValue(readTheme);
   const netName = process.env.NEXT_PUBLIC_CHAIN_TYPE;
-  const { isMenu, toggleMenu, turnOffAll, toggleNetwork, isNetwork } = useDesktop();
+  const { isMenu, toggleMenu, turnOffAll, isNetwork } = useDesktop();
+
+  const renderBadge = useMemo(() => {
+    switch (netName) {
+      case 'devnet':
+        return <DevnetBadge style={{ opacity: isMenu ? 1 : 0, transition: '.3s ease' }} />;
+      case 'testnet':
+        return <TestnetBadge style={{ opacity: isMenu ? 1 : 0, transition: '.3s ease' }} />;
+      default:
+        return <MainnetBadge style={{ opacity: isMenu ? 1 : 0, transition: '.3s ease' }} />;
+    }
+  }, [isMenu, netName]);
 
   return (
     <ClickAwayListener onClickAway={turnOffAll}>
@@ -39,7 +43,6 @@ const Desktop: FC<DesktopProps> = ({ className }) => {
           })}
         >
           <ActionBar isNetwork={isNetwork} />
-          {/* <TitleBar title={title} /> */}
         </AppBar>
         <ArrowIcon
           className={cx(classes.arrowIcon, isMenu ? 'collapse' : '')}
@@ -62,43 +65,20 @@ const Desktop: FC<DesktopProps> = ({ className }) => {
             }),
           }}
         >
+          {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
           <div className={classes.logo} role="button" onClick={toggleMenu}>
             {/* FIXME get light and dark theme assets */}
-            {<Logo />}
-            {
-              <div className={classes.logo_text}>
-                <LogoText
-                  style={{
-                    opacity: isMenu ? 1 : 0,
-                    transition: '.3s ease',
-                  }}
-                />
-                {netName === 'devnet' ? (
-                  <DevnetBadge style={{ opacity: isMenu ? 1 : 0, transition: '.3s ease' }} />
-                ) : netName === 'testnet' ? (
-                  <TestnetBadge style={{ opacity: isMenu ? 1 : 0, transition: '.3s ease' }} />
-                ) : (
-                  <MainnetBadge style={{ opacity: isMenu ? 1 : 0, transition: '.3s ease' }} />
-                )}
-              </div>
-            }
+            <Logo />
+            <div className={classes.logo_text}>
+              <LogoText
+                style={{
+                  opacity: isMenu ? 1 : 0,
+                  transition: '.3s ease',
+                }}
+              />
+              {renderBadge}
+            </div>
           </div>
-          {/* {theme === 'light' ? (
-            // <BigDipperLogoRed
-            //   className={classes.logo}
-            //   onClick={toggleMenu}
-            //   role="button"
-            //   aria-label="toggle menu"
-            // />
-         
-          ) : (
-            // <BigDipperLogoWhite
-            //   className={classes.logo}
-            //   onClick={toggleMenu}
-            //   role="button"
-            //   aria-label="toggle menu"
-            // />
-          )} */}
           <MenuItems />
         </Drawer>
       </div>

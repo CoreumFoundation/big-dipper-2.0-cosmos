@@ -1,5 +1,4 @@
 import Color from 'color';
-import { none } from 'ramda';
 import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({

@@ -8,9 +8,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getMenuItems } from '@/components/nav/components/menu_items/utils';
 import useStyles from '@/components/nav/components/menu_items/styles';
-import { SettingsList } from '../desktop/components/action_bar/components';
 import { useState, useEffect } from 'react';
 import NetworkSelector from '@/components/network_selector';
+import { SettingsList } from '../desktop/components/action_bar/components';
 
 const isClient = typeof window === 'object';
 

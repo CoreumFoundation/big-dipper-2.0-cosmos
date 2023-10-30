@@ -1,6 +1,5 @@
 import useStyles from '@/components/footer/styles';
 import generalConfig from '@/generalConfig';
-import { readTheme } from '@/recoil/settings';
 import Typography from '@mui/material/Typography';
 import { Trans } from 'next-i18next';
 import { FC } from 'react';

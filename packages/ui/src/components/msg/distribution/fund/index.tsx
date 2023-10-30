@@ -13,7 +13,7 @@ const Fund: FC<{ message: MsgFundCommunityPool }> = (props) => {
   const parsedAmount = message?.amount
     ?.map((x) => {
       const amount = formatToken(x.amount, x.denom);
-      //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+      // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom.toUpperCase()}`;
     })
     .reduce(

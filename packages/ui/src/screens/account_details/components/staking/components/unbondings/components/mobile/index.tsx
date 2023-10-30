@@ -44,7 +44,7 @@ const UnbondingsItem: FC<UnbondingsItemProps> = ({ item, isLast }) => {
             ? `${formatNumber(
                 item.amount.value,
                 item.amount.exponent
-                //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+                // Kept the "toUpperCase()" in order to show the token symbol in uppercase
               )} ${item.amount.displayDenom.toUpperCase()}`
             : ''}
         </div>

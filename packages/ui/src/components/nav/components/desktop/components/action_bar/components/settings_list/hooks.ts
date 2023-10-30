@@ -14,7 +14,7 @@ type SettingListState = {
 
 export const useSettingList = ({ lang }: { lang: string }) => {
   const [theme, setTheme] = useRecoilState(writeTheme) as [Theme, SetterOrUpdater<Theme>];
-  const [date, setDate] = useRecoilState(writeDate) as [Date, SetterOrUpdater<Date>];
+  const [date, _] = useRecoilState(writeDate) as [Date, SetterOrUpdater<Date>];
   const [tx, setTx] = useRecoilState(writeTx) as [Tx, SetterOrUpdater<Tx>];
 
   const [open, setOpen] = useState(false);

@@ -4,9 +4,13 @@ import { Categories } from '../types';
 
 class MsgGloballyFreeze {
   public category: Categories;
+
   public type: string;
+
   public json: any;
+
   public sender: string;
+
   public denom: string;
 
   constructor(payload: any) {

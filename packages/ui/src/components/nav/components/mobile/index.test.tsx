@@ -35,7 +35,7 @@ describe('screen: Nav/Mobile', () => {
       <ApolloProvider client={mockClient}>
         <MockedProvider mocks={[mockQuery, mockChainId]}>
           <MockTheme>
-            <Mobile title="hello world" />
+            <Mobile />
           </MockTheme>
         </MockedProvider>
       </ApolloProvider>

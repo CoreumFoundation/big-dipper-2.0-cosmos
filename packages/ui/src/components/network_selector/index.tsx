@@ -61,8 +61,10 @@ const NetworkSelector: FC<NetSelectorProps> = () => {
   if (windowWidth < 1025) {
     return (
       <ClickAwayListener onClickAway={() => setIsModalOpen(false)}>
+        {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
         <div
           className={cx(classes.root, isModalOpen ? 'open-menu-margin' : '')}
+          role="button"
           onClick={() => setIsModalOpen((prev) => !prev)}
         >
           <IconConnected className="netIcon" />
@@ -80,13 +82,15 @@ const NetworkSelector: FC<NetSelectorProps> = () => {
                 if (selectedNetwork.name === network.name) isSelected = true;
 
                 return (
+                  // eslint-disable-next-line jsx-a11y/anchor-is-valid
                   <a
                     href={isSelected ? '#' : `https://${network.link}`}
                     className={cx(
                       'linkItem',
                       selectedNetwork.name === network.name ? 'selectedItem' : ''
                     )}
-                    key={`${network.name} ${idx}`}
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={`${network.name}-${idx}`}
                   >
                     <div className="netName">{`${network.name} ${
                       network.version ? network.version : ''
@@ -104,7 +108,12 @@ const NetworkSelector: FC<NetSelectorProps> = () => {
 
   return (
     <ClickAwayListener onClickAway={() => setIsModalOpen(false)}>
-      <div className={cx(classes.root)} onClick={() => setIsModalOpen((prev) => !prev)}>
+      {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
+      <div
+        className={cx(classes.root)}
+        role="button"
+        onClick={() => setIsModalOpen((prev) => !prev)}
+      >
         <IconConnected className="netIcon" />
         <div className={cx('netContent')}>
           <div className="currentNetName">{`${selectedNetwork.name} ${
@@ -116,13 +125,16 @@ const NetworkSelector: FC<NetSelectorProps> = () => {
           {networks.map((network, idx) => {
             let isSelected = false;
             if (selectedNetwork.name === network.name) isSelected = true;
+
             return (
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
                 href={isSelected ? '#' : `https://${network.link}`}
                 className={cx(
                   'linkItem',
                   selectedNetwork.name === network.name ? 'selectedItem' : ''
                 )}
+                // eslint-disable-next-line react/no-array-index-key
                 key={`${network.name} ${idx}`}
               >
                 <div className="netName">{`${network.name} ${

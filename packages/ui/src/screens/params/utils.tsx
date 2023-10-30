@@ -53,7 +53,7 @@ export const formatStaking = (data: Staking, t: TFunction) => [
   {
     key: 'minSelfDelegation',
     label: t('minSelfDelegation'),
-    //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+    // Kept the "toUpperCase()" in order to show the token symbol in uppercase
     detail: `${numeral(data.minSelfDelegation.value).format(
       '0,0'
     )} ${data.minSelfDelegation.displayDenom.toUpperCase()}`,
@@ -150,7 +150,7 @@ export const formatGov = (data: Gov, t: TFunction) => [
   {
     key: 'minDeposit',
     label: t('minDeposit'),
-    //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+    // Kept the "toUpperCase()" in order to show the token symbol in uppercase
     detail: `${data.minDeposit.value} ${data.minDeposit.displayDenom.toUpperCase()}`,
   },
   {
@@ -250,15 +250,14 @@ export const formatFT = (data: FT, t: TFunction) => {
         detail: `${tokenDecisionTimeout.toLocaleDateString()} at ${tokenDecisionTimeout.toLocaleTimeString()}`,
       },
     ];
-  } else {
-    return [
-      {
-        key: 'ftIssueFee',
-        label: t('ftIssueFee'),
-        detail: `${numeral(data.ftIssueFee.value).format(
-          '0.[0000]'
-        )} ${data.ftIssueFee.displayDenom.toUpperCase()}`,
-      },
-    ];
   }
+  return [
+    {
+      key: 'ftIssueFee',
+      label: t('ftIssueFee'),
+      detail: `${numeral(data.ftIssueFee.value).format(
+        '0.[0000]'
+      )} ${data.ftIssueFee.displayDenom.toUpperCase()}`,
+    },
+  ];
 };

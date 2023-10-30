@@ -15,7 +15,7 @@ const RecieverName: FC<{ address: string; coins: MsgCoin[] }> = (props) => {
   const parsedAmount = coins
     ?.map((x) => {
       const amount = formatToken(x.amount, x.denom);
-      //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+      // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom.toUpperCase()}`;
     })
     .reduce(
@@ -44,7 +44,7 @@ const Multisend: FC<{ message: MsgMultiSend }> = (props) => {
   const senderAmount = sender?.coins
     ?.map((x) => {
       const amount = formatToken(x.amount, x.denom);
-      //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+      // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom.toUpperCase()}`;
     })
     .reduce(
@@ -68,9 +68,7 @@ const Multisend: FC<{ message: MsgMultiSend }> = (props) => {
       <div className={classes.multisend}>
         {message?.outputs
           ?.filter((x) => x)
-          ?.map((x) => (
-            <RecieverName key={x.address} address={x.address} coins={x.coins} />
-          ))}
+          ?.map((x) => <RecieverName key={x.address} address={x.address} coins={x.coins} />)}
       </div>
     </div>
   );

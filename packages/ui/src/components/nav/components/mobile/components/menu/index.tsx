@@ -6,15 +6,11 @@ import {
 import useStyles from '@/components/nav/components/mobile/components/menu/styles';
 import type { MenuProps } from '@/components/nav/components/mobile/components/menu/types';
 import { THEME_LIST } from '@/recoil/settings';
-import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Language from 'shared-utils/assets/icon-language.svg';
-import ThemeIcon from 'shared-utils/assets/icon-theme.svg';
 import SearchBar from '@/components/nav/components/search_bar';
 
 const Menu = (props: MenuProps) => {
@@ -86,36 +82,6 @@ const Menu = (props: MenuProps) => {
         <div className={classes.menu}>
           <MenuItems />
         </div>
-        {/* ========================= */}
-        {/* Footer Actions */}
-        {/* ========================= */}
-        {/* <div className={classes.footerActions}>
-          <div
-            className={classes.language}
-            role="button"
-            onClick={languageOptions.toggleDrawer}
-            tabIndex={0}
-            aria-label={(router.locale ? t(router.locale) : null) ?? 'toggle language'}
-          >
-            <Language />
-            <Typography variant="caption">
-              {(router.locale ? t(router.locale) : null) ?? ''}
-            </Typography>
-            <ExpandMoreOutlinedIcon fontSize="small" />
-          </div>
-          <div
-            className={classes.theme}
-            role="button"
-            onClick={themeOptions.toggleDrawer}
-            tabIndex={0}
-            aria-label={t(themeOptions.theme) ?? undefined}
-          >
-            <span role="button">
-              <ThemeIcon />
-            </span>
-            <Typography variant="caption">{t(themeOptions.theme)}</Typography>
-          </div>
-        </div> */}
       </div>
     </>
   );

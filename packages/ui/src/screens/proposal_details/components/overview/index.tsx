@@ -38,7 +38,7 @@ const Overview: FC<{ className?: string; overview: OverviewType }> = ({ classNam
     ? `${formatNumber(
         amountRequested.value,
         amountRequested.exponent
-        //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+        // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       )} ${amountRequested.displayDenom.toUpperCase()}`
     : '';
 

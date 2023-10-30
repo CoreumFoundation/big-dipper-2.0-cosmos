@@ -4,10 +4,15 @@ import { Categories } from '../types';
 
 class MsgUnfreeze {
   public category: Categories;
+
   public type: string;
+
   public json: any;
+
   public account: string;
+
   public sender: string;
+
   public coin: MsgCoin;
 
   constructor(payload: any) {

@@ -35,6 +35,18 @@ const Desktop: FC<TransactionsListState> = ({
   const { classes, cx } = useStyles();
   const { t } = useTranslation('transactions');
 
+  const getTypeTag = (x: Transactions) => {
+    if (x.type?.[0] && x.type?.[0] === 'Update Client') {
+      return <Tag value="IBC Received" theme="six" />;
+    }
+
+    if (x.type?.[0] === 'Transfer') {
+      return <Tag value="IBC Transfer" theme="six" />;
+    }
+
+    return <Tag value={x.type?.[0] ? x.type[0] : ''} theme="six" />;
+  };
+
   const items = transactions.map((x) => ({
     block: (
       <Link shallow prefetch={false} href={BLOCK_DETAILS(x.height)}>
@@ -60,13 +72,7 @@ const Desktop: FC<TransactionsListState> = ({
     ),
     type: (
       <div>
-        {x.type?.[0] && x.type?.[0] === 'Update Client' ? (
-          <Tag value="IBC Received" theme="six" />
-        ) : x.type?.[0] === 'Transfer' ? (
-          <Tag value="IBC Transfer" theme="six" />
-        ) : (
-          <Tag value={x.type?.[0] ? x.type[0] : ''} theme="six" />
-        )}
+        {getTypeTag(x)}
         {x.messages.count > 1 ? ` + ${x.messages.count - 1}` : ''}
       </div>
     ),

@@ -4,16 +4,27 @@ import { Categories } from '../types';
 
 class MsgIssue {
   public category: Categories;
+
   public type: string;
+
   public issuer: string;
+
   public symbol: string;
+
   public subunit: string;
+
   public features: any[];
+
   public burn_rate: string;
+
   public precision: number;
+
   public description: string;
+
   public initial_amount: string;
+
   public send_commission_rate: string;
+
   public json: any;
 
   constructor(payload: any) {

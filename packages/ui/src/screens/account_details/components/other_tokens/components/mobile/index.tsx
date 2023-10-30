@@ -19,7 +19,6 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
       {items?.map((x, i) => {
         const available = formatNumber(x.available.value, x.available.exponent);
         const reward = x.reward ? formatNumber(x.reward.value, x.reward.exponent) : '';
-        const commission = formatNumber(x.commission.value, x.commission.exponent);
         const isLast = !items || i === items.length - 1;
         return (
           // eslint-disable-next-line react/no-array-index-key
@@ -30,7 +29,6 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
                   {t('token')}
                 </Typography>
                 <Typography variant="body1" className="value">
-                  {/* //Removed ".toUpperCase()" from the end of the line below per Reza's request */}
                   {x.denom}
                 </Typography>
               </div>
@@ -50,14 +48,6 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
                   {reward}
                 </Typography>
               </div>
-              {/* <div className={classes.item}>
-                <Typography variant="h4" className="label">
-                  {t('commission')}
-                </Typography>
-                <Typography variant="body1" className="value">
-                  {commission}
-                </Typography>
-              </div> */}
             </div>
             {!isLast && <Divider />}
           </Fragment>

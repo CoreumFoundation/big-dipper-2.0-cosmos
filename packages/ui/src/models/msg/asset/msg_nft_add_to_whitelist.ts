@@ -4,11 +4,17 @@ import { Categories } from '../types';
 
 class MsgNftAddToWhitelist {
   public category: Categories;
+
   public type: string;
+
   public json: any;
+
   public sender: string;
+
   public account: string;
+
   public class_id: string;
+
   public id: string;
 
   constructor(payload: any) {

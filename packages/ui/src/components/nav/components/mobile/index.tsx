@@ -3,14 +3,10 @@ import Menu from '@/components/nav/components/mobile/components/menu';
 import Navbar from '@/components/nav/components/mobile/components/navbar';
 import { useMobile } from '@/components/nav/components/mobile/hooks';
 import useStyles from '@/components/nav/components/mobile/styles';
-// import Networks from '@/components/nav/components/networks';
-import SearchBar from '@/components/nav/components/search_bar';
-// import TitleBar from '@/components/nav/components/title_bar';
 import { useGetComponentDimension } from '@/hooks/use_get_component_dimension';
 
 type MobileProps = {
   className?: string;
-  title: string;
 };
 
 const Mobile: FC<MobileProps> = ({ className }) => {
@@ -29,13 +25,11 @@ const Mobile: FC<MobileProps> = ({ className }) => {
           })}
         />
         <Navbar isOpen={isOpen} openNetwork={openNetwork} toggleNavMenus={toggleNavMenus} />
-        {/* <SearchBar className={classes.searchBar} /> */}
       </div>
       {/* ============================== */}
       {/* Height placeholder */}
       {/* ============================== */}
       <div style={{ height }} />
-      {/* <TitleBar  /> */}
     </div>
   );
 };

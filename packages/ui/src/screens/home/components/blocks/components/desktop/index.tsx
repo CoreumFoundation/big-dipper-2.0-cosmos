@@ -11,7 +11,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import numeral from 'numeral';
@@ -29,23 +29,6 @@ const variants: Variants = {
     overflow: 'hidden',
     clipPath: 'inset(0 50 0 50)',
   },
-  // animate: {
-  //   height: 50,
-  //   display: 'inline-flex',
-  //   alignItems: 'center',
-  //   overflow: 'hidden',
-  //   clipPath: 'inset(0 50 0 50)',
-  // },
-  // exit: {
-  //   height: 50,
-  //   display: 'none',
-  //   alignItems: 'center',
-  //   overflow: 'hidden',
-  //   // position: 'absolute',
-  //   // marginTop: [50, 60],
-  //   opacity: 0,
-  //   // transition: { duration: 0.015 },
-  // },
 };
 
 const BlockRow: FC<BlockRowProps> = ({ item }) => {
@@ -71,14 +54,7 @@ const BlockRow: FC<BlockRowProps> = ({ item }) => {
         const { key, align } = column;
         return (
           <TableCell key={`${item.hash}-${key}`} align={align}>
-            <motion.div
-              key={`${item.hash}-${key}`}
-              initial="initial"
-              // animate="animate"
-              // exit="exit"
-              variants={variants}
-              // transition={{ duration: 1.5 }}
-            >
+            <motion.div key={`${item.hash}-${key}`} initial="initial" variants={variants}>
               {formattedData[key as keyof typeof formattedData]}
             </motion.div>
           </TableCell>
@@ -110,11 +86,9 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* <AnimatePresence initial={false}> */}
           {items.map((row) => (
             <BlockRow key={row.hash} item={row} />
           ))}
-          {/* </AnimatePresence> */}
         </TableBody>
       </Table>
     </div>
