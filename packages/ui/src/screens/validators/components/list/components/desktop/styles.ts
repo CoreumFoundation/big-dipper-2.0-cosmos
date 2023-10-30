@@ -48,6 +48,11 @@ const useStyles = makeStyles()((theme) => ({
   body: {
     color: theme.palette.custom.fonts.fontTwo,
   },
+  statusTag: {
+    '& .MuiTypography-body1': {
+      lineHeight: 1,
+    },
+  },
 }));
 
 export default useStyles;

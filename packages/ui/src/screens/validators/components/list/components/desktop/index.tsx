@@ -8,14 +8,15 @@ import AvatarName from '@/components/avatar_name';
 import InfoPopover from '@/components/info_popover';
 import SortArrows from '@/components/sort_arrows';
 import { useGrid } from '@/hooks/use_react_window';
-import Condition from '@/screens/validators/components/list/components/condition';
 import useStyles from '@/screens/validators/components/list/components/desktop/styles';
 import { fetchColumns } from '@/screens/validators/components/list/components/desktop/utils';
 import VotingPower from '@/screens/validators/components/list/components/voting_power';
 import VotingPowerExplanation from '@/screens/validators/components/list/components/voting_power_explanation';
 import type { ItemType } from '@/screens/validators/components/list/types';
-import { getValidatorConditionClass } from '@/utils/get_validator_condition';
+// import { getValidatorConditionClass } from '@/utils/get_validator_condition';
 import { getValidatorStatus } from '@/utils/get_validator_status';
+import Tag from '@/components/tag';
+import { getCondition } from '@/screens/validator_details/components/validator_overview/utils';
 
 type GridColumnProps = {
   column: ReturnType<typeof fetchColumns>[number];
@@ -103,7 +104,8 @@ const GridRow: FC<GridRowProps> = ({ column, style, rowIndex, align, item, searc
   }
 
   const status = getValidatorStatus(item.status, item.jailed, item.tombstoned);
-  const condition = item.status === 3 ? getValidatorConditionClass(item.condition) : undefined;
+  const condition = getCondition(item.condition, item.status);
+
   const percentDisplay =
     item.status === 3 ? `${numeral(item.votingPowerPercent.toFixed(6)).format('0.[00]')}%` : '0%';
   const votingPower = numeral(item.votingPower).format('0,0');
@@ -120,7 +122,7 @@ const GridRow: FC<GridRowProps> = ({ column, style, rowIndex, align, item, searc
       formatItem = `${numeral(item.commission).format('0.[00]')}%`;
       break;
     case 'condition':
-      formatItem = <Condition className={condition} />;
+      formatItem = <Tag value={t(condition)} theme={status.theme} className={classes.statusTag} />;
       break;
     case 'votingPower':
       formatItem = (

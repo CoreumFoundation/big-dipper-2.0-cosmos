@@ -9,6 +9,7 @@ const useStyles = makeStyles()((theme) => ({
     background: theme.palette.custom.general.modal_header,
     color: theme.palette.custom.fonts.table_headers,
     textTransform: 'uppercase',
+    fontSize: '12px !important',
   },
   table: {
     '& .MuiTableBody-root': {
