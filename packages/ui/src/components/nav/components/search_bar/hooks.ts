@@ -55,8 +55,8 @@ export const useSearchBar = (t: TFunction) => {
           } else {
             router.push(PROFILE_DETAILS(parsedValue));
           }
-        } else if (/^-?\d+$/.test(String(numeral(parsedValue).value()))) {
-          router.push(BLOCK_DETAILS(String(numeral(parsedValue).value())));
+        } else if (/^-?\d+$/.test(String(parsedValue))) {
+          router.push(BLOCK_DETAILS(String(parsedValue)));
         } else {
           router.push(TRANSACTION_DETAILS(parsedValue));
         }

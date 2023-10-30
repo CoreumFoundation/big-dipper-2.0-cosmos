@@ -1,22 +1,14 @@
 import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
-import chainConfig from '@/chainConfig';
 import { useSearchBar } from '@/components/nav/components/search_bar/hooks';
 import Search from '@/components/search';
-const { extra } = chainConfig();
 
 const SearchBar: FC<{ className?: string }> = ({ className }) => {
   const { t } = useTranslation('common');
   const { handleOnSubmit } = useSearchBar(t);
 
-  //Modified search placeholder to hide DTag search
-  let placeholderText = t('searchBarPlaceholder');
-
-  // if (extra.profile) {
-  //   placeholderText = t('searchBarPlaceholderDtag');
-  // } else {
-  //   placeholderText = t('searchBarPlaceholder');
-  // }
+  // Modified search placeholder to hide DTag search
+  const placeholderText = t('searchBarPlaceholder');
 
   return <Search className={className} placeholder={placeholderText} callback={handleOnSubmit} />;
 };
