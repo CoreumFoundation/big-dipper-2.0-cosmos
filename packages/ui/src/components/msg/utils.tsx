@@ -544,28 +544,28 @@ export const getMessageModelByType = (type: string): Data['model'] => {
   return MODELS.MsgUnknown as Data['model'];
 };
 
-export const getTagDisplayValue = (type: string) => {
-  const splittedValue = type?.split('.');
+// export const getTagDisplayValue = (type: string) => {
+//   const splittedValue = type?.split('.');
 
-  if (!splittedValue || !splittedValue.length) {
-    return '';
-  }
+//   if (!splittedValue || !splittedValue.length) {
+//     return '';
+//   }
 
-  const suffix = splittedValue[splittedValue.length - 1].replace('Msg', '');
-  let prefix = '';
+//   const suffix = splittedValue[splittedValue.length - 1].replace('Msg', '');
+//   let prefix = '';
 
-  switch (splittedValue.length) {
-    case 4:
-      [, prefix] = splittedValue;
-      break;
-    case 5:
-      prefix = `${splittedValue[1]}${splittedValue[2]}`;
-      break;
-    default:
-  }
+//   switch (splittedValue.length) {
+//     case 4:
+//       [, prefix] = splittedValue;
+//       break;
+//     case 5:
+//       prefix = `${splittedValue[1]}${splittedValue[2]}`;
+//       break;
+//     default:
+//   }
 
-  return `${prefix}-${suffix}`;
-};
+//   return `${prefix}-${suffix}`;
+// };
 
 /**
  * Helper function to correctly display the correct UI
@@ -582,7 +582,7 @@ export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean,
 
   const results: ResultType = {
     content: COMPONENTS.Unknown as unknown as FC<{ message: TMessage }>,
-    tagDisplay: '',
+    tagDisplay: 'txUnknownLabel',
     tagTheme: 'zero',
   };
 
@@ -590,11 +590,12 @@ export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean,
 
   if (data) {
     results.content = data?.content as unknown as FC<{ message: TMessage }>;
+    results.tagDisplay = data.tagDisplay;
     results.tagTheme = data.tagTheme as ResultType['tagTheme'];
   }
 
-  const tagDisplayValue = getTagDisplayValue(type);
-  results.tagDisplay = tagDisplayValue;
+  // const tagDisplayValue = getTagDisplayValue(type);
+  // results.tagDisplay = tagDisplayValue;
 
   // If user asks to view the raw data
   if (viewRaw || !results.content) {
