@@ -59,11 +59,13 @@ const useStyles = makeStyles()((theme) => ({
       padding: theme.spacing(0, 2),
       '& .msg': {
         marginTop: theme.spacing(0.5),
+        wordBreak: 'break-word',
       },
     },
   },
   tags: {
     marginBottom: theme.spacing(2),
+
     [theme.breakpoints.up('lg')]: {
       minWidth: '200px',
       marginBottom: 0,

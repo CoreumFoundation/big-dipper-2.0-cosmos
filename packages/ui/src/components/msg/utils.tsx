@@ -6,6 +6,7 @@ import isKeyOf from '@/utils/isKeyOf';
 import { TFunction } from 'next-i18next';
 import * as R from 'ramda';
 import { ComponentProps, FC } from 'react';
+import { convertMsgType } from '@/utils/convert_msg_type';
 
 // =====================================
 // DO NOT UPDATE IF THIS IS A FORK.
@@ -544,35 +545,14 @@ export const getMessageModelByType = (type: string): Data['model'] => {
   return MODELS.MsgUnknown as Data['model'];
 };
 
-// export const getTagDisplayValue = (type: string) => {
-//   const splittedValue = type?.split('.');
-
-//   if (!splittedValue || !splittedValue.length) {
-//     return '';
-//   }
-
-//   const suffix = splittedValue[splittedValue.length - 1].replace('Msg', '');
-//   let prefix = '';
-
-//   switch (splittedValue.length) {
-//     case 4:
-//       [, prefix] = splittedValue;
-//       break;
-//     case 5:
-//       prefix = `${splittedValue[1]}${splittedValue[2]}`;
-//       break;
-//     default:
-//   }
-
-//   return `${prefix}-${suffix}`;
-// };
-
 /**
  * Helper function to correctly display the correct UI
  * @param type Model type
  */
 export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean, t: TFunction) => {
   const { type } = (message as { type: string }) ?? {};
+
+  const convertedMsgType = convertMsgType([type]);
 
   type ResultType = {
     content: FC<{ message: TMessage }>;
@@ -582,7 +562,7 @@ export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean,
 
   const results: ResultType = {
     content: COMPONENTS.Unknown as unknown as FC<{ message: TMessage }>,
-    tagDisplay: 'txUnknownLabel',
+    tagDisplay: convertedMsgType[0],
     tagTheme: 'zero',
   };
 
@@ -590,12 +570,8 @@ export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean,
 
   if (data) {
     results.content = data?.content as unknown as FC<{ message: TMessage }>;
-    results.tagDisplay = data.tagDisplay;
     results.tagTheme = data.tagTheme as ResultType['tagTheme'];
   }
-
-  // const tagDisplayValue = getTagDisplayValue(type);
-  // results.tagDisplay = tagDisplayValue;
 
   // If user asks to view the raw data
   if (viewRaw || !results.content) {
@@ -605,7 +581,7 @@ export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean,
   const Content = results.content;
 
   return {
-    type: <Tag value={t(`message_labels:${results.tagDisplay}`)} theme={results.tagTheme} />,
+    type: <Tag value={t(results.tagDisplay)} theme={results.tagTheme} />,
     message: <Content message={message as unknown as ComponentProps<typeof Content>['message']} />,
   };
 };

@@ -31,6 +31,7 @@ const ListItem: FC<ListItemProps> = ({
   const { t } = useTranslation('transactions');
   const { rowRef } = useListRow(index, setRowHeight);
   const formattedItem = getMessageByType(message, viewRaw, t);
+
   return (
     <div style={style}>
       <div ref={rowRef}>

@@ -13,9 +13,6 @@ const useStyles = makeStyles()((theme) => ({
     '&:not(:last-child)': {
       marginRight: theme.spacing(1),
     },
-    '& .MuiTypography-body1': {
-      whiteSpace: 'nowrap',
-    },
   },
   zero: {
     color: theme.palette.custom.tags.zero,
