@@ -20,7 +20,7 @@ import InfiniteLoader from 'react-window-infinite-loader';
 import CopyIcon from 'shared-utils/assets/icon-copy.svg';
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
-// import { getTagDisplayValue } from '@/components/msg/utils';
+import { formatNumber } from '@/utils/format_token';
 
 const Desktop: FC<TransactionsListState> = ({
   className,
@@ -73,6 +73,11 @@ const Desktop: FC<TransactionsListState> = ({
           className="copy-icon"
         />
       </>
+    ),
+    fee: (
+      <Typography variant="body1">
+        {`${formatNumber(x.fee.value, x.fee.exponent)} ${x?.fee?.displayDenom.toUpperCase()}`}
+      </Typography>
     ),
     type: (
       <div>

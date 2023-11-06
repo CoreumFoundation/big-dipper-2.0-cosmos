@@ -6,6 +6,7 @@ subscription TransactionsListener($limit: Int = 7, $offset: Int = 0) {
     block {
       timestamp
     }
+    fee
     messages
     logs
   }
@@ -19,6 +20,7 @@ query Transactions($limit: Int = 7, $offset: Int = 0) {
     block {
       timestamp
     }
+    fee
     messages
     logs
   }

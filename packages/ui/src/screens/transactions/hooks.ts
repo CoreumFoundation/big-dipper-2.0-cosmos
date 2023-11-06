@@ -8,6 +8,7 @@ import {
 } from '@/graphql/types/general_types';
 import type { TransactionsState } from '@/screens/transactions/types';
 import { convertMsgType } from '@/utils/convert_msg_type';
+import { formatToken } from '@/utils/format_token';
 
 // This is a bandaid as it can get extremely
 // expensive if there is too much data
@@ -27,6 +28,11 @@ const formatTransactions = (data: TransactionsListenerSubscription): Transaction
   }
 
   return formattedData.map((x) => {
+    const { fee } = x;
+    const feeAmount = fee?.amount?.[0] ?? {
+      denom: '',
+      amount: 0,
+    };
     const messages = convertMsgsToModels(x);
     const msgType =
       x.messages?.map((eachMsg: unknown) => {
@@ -39,6 +45,7 @@ const formatTransactions = (data: TransactionsListenerSubscription): Transaction
       height: x.height,
       hash: x.hash,
       type: convertedMsgType,
+      fee: formatToken(feeAmount.amount, feeAmount.denom),
       messages: {
         count: x.messages.length,
         items: messages,

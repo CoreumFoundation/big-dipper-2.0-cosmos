@@ -11833,7 +11833,7 @@ export type TransactionsListenerSubscriptionVariables = Exact<{
 }>;
 
 
-export type TransactionsListenerSubscription = { transactions: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, messages: any, logs?: any | null, block: { __typename?: 'block', timestamp: any } }> };
+export type TransactionsListenerSubscription = { transactions: Array<{ __typename?: 'transaction', height: any, hash: string, fee: any, success: boolean, messages: any, logs?: any | null, block: { __typename?: 'block', timestamp: any } }> };
 
 export type TransactionsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -11841,7 +11841,7 @@ export type TransactionsQueryVariables = Exact<{
 }>;
 
 
-export type TransactionsQuery = { transactions: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, messages: any, logs?: any | null, block: { __typename?: 'block', timestamp: any } }> };
+export type TransactionsQuery = { transactions: Array<{ __typename?: 'transaction', height: any, hash: string, fee: any, success: boolean, messages: any, logs?: any | null, block: { __typename?: 'block', timestamp: any } }> };
 
 export type LastHundredBlocksSubscriptionVariables = Exact<{
   address?: InputMaybe<Scalars['String']>;
@@ -13207,6 +13207,7 @@ export const TransactionsListenerDocument = gql`
     height
     hash
     success
+    fee
     block {
       timestamp
     }
@@ -13249,6 +13250,7 @@ export const TransactionsDocument = gql`
     height
     hash
     success
+    fee
     block {
       timestamp
     }

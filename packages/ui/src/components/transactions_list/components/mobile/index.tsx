@@ -19,6 +19,8 @@ import InfiniteLoader from 'react-window-infinite-loader';
 import CopyIcon from 'shared-utils/assets/icon-copy.svg';
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
+import Typography from '@mui/material/Typography';
+import { formatNumber } from '@/utils/format_token';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -80,10 +82,15 @@ const ListItem: FC<ListItemProps> = ({
         {transaction.messages.count > 1 && ` + ${transaction.messages.count - 1}`}
       </div>
     ),
+    fee: `${formatNumber(
+      transaction.fee.value,
+      transaction.fee.exponent
+    )} ${transaction?.fee?.displayDenom.toUpperCase()}`,
     result: <Result success={transaction.success} />,
     time: <Timestamp timestamp={transaction.timestamp} />,
     messages: numeral(transaction.messages.count).format('0,0'),
   };
+
   return (
     <div style={style}>
       <div ref={rowRef}>

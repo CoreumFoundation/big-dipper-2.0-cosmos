@@ -28,6 +28,7 @@ type Transactions = {
   type: string[];
   success: boolean;
   timestamp: string;
+  fee: any;
   messages: {
     count: number;
     items: unknown[];

@@ -16,18 +16,23 @@ export const columns: {
     width: 25,
   },
   {
-    key: 'messages',
-    align: 'right',
-    width: 10,
-  },
-  {
-    key: 'result',
+    key: 'fee',
     align: 'right',
     width: 15,
   },
   {
+    key: 'messages',
+    align: 'right',
+    width: 5,
+  },
+  {
+    key: 'result',
+    align: 'right',
+    width: 13,
+  },
+  {
     key: 'time',
     align: 'right',
-    width: 20,
+    width: 12,
   },
 ];
