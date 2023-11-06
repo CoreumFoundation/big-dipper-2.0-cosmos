@@ -75,7 +75,7 @@ const Desktop: FC<TransactionsListState> = ({
         />
       </>
     ),
-    spender: x.spender.length ? (
+    spender: x.spender?.length ? (
       <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.spender)}>
         {getMiddleEllipsis(x.spender, {
           beginning: 4,
@@ -85,7 +85,7 @@ const Desktop: FC<TransactionsListState> = ({
     ) : (
       '-'
     ),
-    receiver: x.receiver.length ? (
+    receiver: x.receiver?.length ? (
       <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.receiver)}>
         {getMiddleEllipsis(x.receiver, {
           beginning: 4,
@@ -107,14 +107,14 @@ const Desktop: FC<TransactionsListState> = ({
       ) : (
         <Typography variant="body1">
           {`${formatNumber(
-            x.amount.value,
-            x.amount.exponent
-          )} ${x?.amount?.displayDenom.toUpperCase()}`}
+            x.amount?.value,
+            x.amount?.exponent
+          )} ${x?.amount?.displayDenom?.toUpperCase()}`}
         </Typography>
       ),
     fee: (
       <Typography variant="body1">
-        {`${formatNumber(x.fee.value, x.fee.exponent)} ${x?.fee?.displayDenom.toUpperCase()}`}
+        {`${formatNumber(x.fee?.value, x.fee?.exponent)} ${x?.fee?.displayDenom?.toUpperCase()}`}
       </Typography>
     ),
     type: (

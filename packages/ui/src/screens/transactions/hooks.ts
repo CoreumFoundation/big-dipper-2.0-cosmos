@@ -21,7 +21,7 @@ const uniqueAndSort = R.pipe(
   R.sort(R.descend((r) => r?.height))
 );
 
-const formatSpenderAndReceiver = (transactionLogs: any[]) => {
+const formatSpenderAndReceiver = (transactionLogs: any[], denom: string) => {
   const spentAttributes = transactionLogs?.[0].events.filter(
     (event: any) => event.type === 'coin_spent'
   );
@@ -46,9 +46,11 @@ const formatSpenderAndReceiver = (transactionLogs: any[]) => {
   const receiverAccountValue = receiverDataArr?.[0]?.attributes?.find(
     (item: any) => item.key === 'receiver'
   );
-  const spentAmount = spenderDataArr?.[0]?.attributes?.find((item: any) => item.key === 'amount');
+  const spentAmount = spenderDataArr?.[0]?.attributes?.find(
+    (item: any) => item.key === 'amount' && item.value.includes(denom)
+  );
   const receivedAmount = receiverDataArr?.[0]?.attributes?.find(
-    (item: any) => item.key === 'amount'
+    (item: any) => item.key === 'amount' && item.value.includes(denom)
   );
 
   return {
@@ -65,13 +67,13 @@ const formatTransactions = (data: TransactionsListenerSubscription): Transaction
   }
 
   return formattedData.map((x) => {
-    const { spender, receiver, amount } = formatSpenderAndReceiver(x.logs);
-
     const { fee } = x;
     const feeAmount = fee?.amount?.[0] ?? {
       denom: '',
       amount: 0,
     };
+
+    const { spender, receiver, amount } = formatSpenderAndReceiver(x.logs, feeAmount.denom);
     const formatedAmount =
       amount !== '' && amount !== '-'
         ? formatToken(amount.replace(feeAmount.denom, ''), feeAmount.denom)

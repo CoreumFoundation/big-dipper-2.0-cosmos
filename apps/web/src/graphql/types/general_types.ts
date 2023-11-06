@@ -12002,7 +12002,7 @@ export type GetMessagesByAddressQueryVariables = Exact<{
 }>;
 
 
-export type GetMessagesByAddressQuery = { messagesByAddress: Array<{ __typename?: 'message', transaction?: { __typename?: 'transaction', height: any, hash: string, success: boolean, messages: any, logs?: any | null, block: { __typename?: 'block', height: any, timestamp: any } } | null }> };
+export type GetMessagesByAddressQuery = { messagesByAddress: Array<{ __typename?: 'message', transaction?: { __typename?: 'transaction', height: any, fee: any, hash: string, success: boolean, messages: any, logs?: any | null, block: { __typename?: 'block', height: any, timestamp: any } } | null }> };
 
 export type OnlineVotingPowerQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12906,6 +12906,7 @@ export const GetMessagesByAddressDocument = gql`
       success
       messages
       logs
+      fee
       block {
         height
         timestamp
