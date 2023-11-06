@@ -8,6 +8,9 @@ export interface OverviewType {
   success: boolean;
   memo: string;
   error: string;
+  spender: string;
+  receiver: string;
+  amount: any;
 }
 
 export interface TransactionState {

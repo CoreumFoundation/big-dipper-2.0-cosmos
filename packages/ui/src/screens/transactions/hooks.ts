@@ -21,6 +21,43 @@ const uniqueAndSort = R.pipe(
   R.sort(R.descend((r) => r?.height))
 );
 
+const formatSpenderAndReceiver = (transactionLogs: any[]) => {
+  const spentAttributes = transactionLogs?.[0].events.filter(
+    (event: any) => event.type === 'coin_spent'
+  );
+  const receivedAttributes = transactionLogs?.[0].events.filter(
+    (event: any) => event.type === 'coin_received'
+  );
+
+  if (!spentAttributes?.length && !receivedAttributes?.length) {
+    return {
+      spender: '',
+      receiver: '',
+      amount: '-',
+    };
+  }
+
+  const spenderDataArr = spentAttributes.filter((event: any) => event.attributes.length === 2);
+  const receiverDataArr = receivedAttributes.filter((event: any) => event.attributes.length === 2);
+
+  const spenderAccountValue = spenderDataArr?.[0]?.attributes?.find(
+    (item: any) => item.key === 'spender'
+  );
+  const receiverAccountValue = receiverDataArr?.[0]?.attributes?.find(
+    (item: any) => item.key === 'receiver'
+  );
+  const spentAmount = spenderDataArr?.[0]?.attributes?.find((item: any) => item.key === 'amount');
+  const receivedAmount = receiverDataArr?.[0]?.attributes?.find(
+    (item: any) => item.key === 'amount'
+  );
+
+  return {
+    spender: spenderAccountValue?.value || '',
+    receiver: receiverAccountValue?.value || '',
+    amount: spentAmount?.value || receivedAmount?.value || '',
+  };
+};
+
 const formatTransactions = (data: TransactionsListenerSubscription): TransactionsState['items'] => {
   let formattedData = data.transactions;
   if (data.transactions.length === 51) {
@@ -28,11 +65,18 @@ const formatTransactions = (data: TransactionsListenerSubscription): Transaction
   }
 
   return formattedData.map((x) => {
+    const { spender, receiver, amount } = formatSpenderAndReceiver(x.logs);
+
     const { fee } = x;
     const feeAmount = fee?.amount?.[0] ?? {
       denom: '',
       amount: 0,
     };
+    const formatedAmount =
+      amount !== '' && amount !== '-'
+        ? formatToken(amount.replace(feeAmount.denom, ''), feeAmount.denom)
+        : amount;
+
     const messages = convertMsgsToModels(x);
     const msgType =
       x.messages?.map((eachMsg: unknown) => {
@@ -41,11 +85,15 @@ const formatTransactions = (data: TransactionsListenerSubscription): Transaction
       }) ?? [];
 
     const convertedMsgType = convertMsgType(msgType);
+
     return {
       height: x.height,
       hash: x.hash,
       type: convertedMsgType,
       fee: formatToken(feeAmount.amount, feeAmount.denom),
+      amount: formatedAmount,
+      spender,
+      receiver,
       messages: {
         count: x.messages.length,
         items: messages,

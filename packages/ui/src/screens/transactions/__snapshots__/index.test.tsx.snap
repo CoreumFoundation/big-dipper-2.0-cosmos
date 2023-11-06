@@ -336,6 +336,18 @@ exports[`screen: Transactions matches snapshot 1`] = `
         transactions={
           [
             {
+              "amount": {
+                "baseDenom": "",
+                "displayDenom": "",
+                "exponent": 0,
+                "value": "10000",
+              },
+              "fee": {
+                "baseDenom": "",
+                "displayDenom": "",
+                "exponent": 0,
+                "value": "7531",
+              },
               "hash": "D223E2E4E4FD29868D1034EFE5FB162EAB78B4CCE1D53EFD4F34A40608FB6C4B",
               "height": 432022,
               "messages": {
@@ -379,6 +391,8 @@ exports[`screen: Transactions matches snapshot 1`] = `
                   },
                 ],
               },
+              "receiver": "addr",
+              "spender": "addr",
               "success": true,
               "timestamp": "2021-05-28T00:08:33.700487",
               "type": [

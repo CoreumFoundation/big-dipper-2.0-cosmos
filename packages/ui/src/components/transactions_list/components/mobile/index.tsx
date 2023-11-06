@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import Loading from '@/components/loading';
 import Result from '@/components/result';
 import SingleTransactionMobile from '@/components/single_transaction_mobile';
@@ -7,7 +8,7 @@ import useStyles from '@/components/transactions_list/components/mobile/styles';
 import type { TransactionsListState } from '@/components/transactions_list/types';
 import { useList, useListRow } from '@/hooks/use_react_window';
 import { getMiddleEllipsis } from '@/utils/get_middle_ellipsis';
-import { BLOCK_DETAILS, TRANSACTION_DETAILS } from '@/utils/go_to_page';
+import { ACCOUNT_DETAILS, BLOCK_DETAILS, TRANSACTION_DETAILS } from '@/utils/go_to_page';
 import { mergeRefs } from '@/utils/merge_refs';
 import Divider from '@mui/material/Divider';
 import Link from 'next/link';
@@ -19,8 +20,9 @@ import InfiniteLoader from 'react-window-infinite-loader';
 import CopyIcon from 'shared-utils/assets/icon-copy.svg';
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
-import Typography from '@mui/material/Typography';
 import { formatNumber } from '@/utils/format_token';
+import { Typography } from '@mui/material';
+import { t } from 'i18next';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -76,6 +78,42 @@ const ListItem: FC<ListItemProps> = ({
         />
       </>
     ),
+    spender: transaction.spender.length ? (
+      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.spender)}>
+        {getMiddleEllipsis(transaction.spender, {
+          beginning: 15,
+          ending: 5,
+        })}
+      </Link>
+    ) : (
+      '-'
+    ),
+    receiver: transaction.receiver.length ? (
+      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.receiver)}>
+        {getMiddleEllipsis(transaction.receiver, {
+          beginning: 15,
+          ending: 5,
+        })}
+      </Link>
+    ) : (
+      '-'
+    ),
+    amount:
+      typeof transaction.amount === 'string' &&
+      (transaction.amount === '' || transaction.amount === '-') ? (
+        transaction.amount === '' ? (
+          <Link shallow prefetch={false} href={TRANSACTION_DETAILS(transaction.hash)}>
+            {t('transactions:more')}
+          </Link>
+        ) : (
+          <Typography variant="body1">{transaction.amount}</Typography>
+        )
+      ) : (
+        `${formatNumber(
+          transaction.amount.value,
+          transaction.amount.exponent
+        )} ${transaction?.amount?.displayDenom.toUpperCase()}`
+      ),
     type: (
       <div>
         <Tag value={transaction.type?.[0] ?? ''} theme="six" />

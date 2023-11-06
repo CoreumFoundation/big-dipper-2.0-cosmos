@@ -75,7 +75,7 @@ exports[`components: SingleTransaction matches snapshot 1`] = `
   line-height: 1.235;
 }
 
-.emotion-17 {
+.emotion-25 {
   margin: 0;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -86,15 +86,15 @@ exports[`components: SingleTransaction matches snapshot 1`] = `
   border-bottom-width: thin;
 }
 
-.emotion-19 {
+.emotion-27 {
   margin-top: 24px;
 }
 
-.emotion-20:not(:last-child) {
+.emotion-28:not(:last-child) {
   margin-bottom: 32px;
 }
 
-.emotion-21 {
+.emotion-29 {
   margin-bottom: 16px;
 }
 
@@ -143,6 +143,42 @@ exports[`components: SingleTransaction matches snapshot 1`] = `
         </div>
       </div>
       <div
+        className="emotion-5 block"
+      >
+        <h4
+          className="MuiTypography-root MuiTypography-h4 label emotion-6"
+        >
+          spender
+        </h4>
+      </div>
+      <div
+        className="emotion-5 block"
+      >
+        <h4
+          className="MuiTypography-root MuiTypography-h4 label emotion-6"
+        >
+          receiver
+        </h4>
+      </div>
+      <div
+        className="emotion-5 block"
+      >
+        <h4
+          className="MuiTypography-root MuiTypography-h4 label emotion-6"
+        >
+          amount
+        </h4>
+      </div>
+      <div
+        className="emotion-5 block"
+      >
+        <h4
+          className="MuiTypography-root MuiTypography-h4 label emotion-6"
+        >
+          fee
+        </h4>
+      </div>
+      <div
         className="emotion-5 time"
       >
         <h4
@@ -184,19 +220,19 @@ exports[`components: SingleTransaction matches snapshot 1`] = `
       </div>
     </div>
     <hr
-      className="MuiDivider-root MuiDivider-fullWidth emotion-17"
+      className="MuiDivider-root MuiDivider-fullWidth emotion-25"
     />
     <div
       className="emotion-5"
     >
       <div
-        className="emotion-19"
+        className="emotion-27"
       >
         <div
-          className="emotion-20"
+          className="emotion-28"
         >
           <div
-            className="emotion-21"
+            className="emotion-29"
           >
             <div>
               type

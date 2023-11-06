@@ -29,6 +29,9 @@ type Transactions = {
   success: boolean;
   timestamp: string;
   fee: any;
+  amount: any;
+  spender: string;
+  receiver: string;
   messages: {
     count: number;
     items: unknown[];

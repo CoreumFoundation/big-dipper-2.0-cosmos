@@ -36,7 +36,38 @@ const mockTransactionsListenerDocument = jest.fn().mockReturnValue({
         block: {
           timestamp: '2021-05-28T00:08:33.700487',
         },
-        logs: [],
+        logs: [
+          {
+            events: [
+              {
+                type: 'coin_received',
+                attributes: [
+                  {
+                    key: 'receiver',
+                    value: 'addr',
+                  },
+                  {
+                    key: 'amount',
+                    value: '10000',
+                  },
+                ],
+              },
+              {
+                type: 'coin_spent',
+                attributes: [
+                  {
+                    key: 'spender',
+                    value: 'addr',
+                  },
+                  {
+                    key: 'amount',
+                    value: '10000',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
         messages: [
           {
             '@type': '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward',
@@ -48,6 +79,12 @@ const mockTransactionsListenerDocument = jest.fn().mockReturnValue({
             validator_address: 'desmosvaloper18kvwy5hzcu3ss08lcfcnx0eajuecg69uvk76c3',
           },
         ],
+        fee: {
+          amount: [{ denom: '', amount: '7531' }],
+          gasLimit: '154700',
+          granter: '',
+          payer: '',
+        },
       },
     ],
   },
@@ -63,7 +100,38 @@ const mockTransactionsDocument = jest.fn().mockReturnValue({
         block: {
           timestamp: '2021-05-28T00:08:33.700487',
         },
-        logs: [],
+        logs: [
+          {
+            events: [
+              {
+                type: 'coin_received',
+                attributes: [
+                  {
+                    key: 'receiver',
+                    value: 'addr',
+                  },
+                  {
+                    key: 'amount',
+                    value: '10000',
+                  },
+                ],
+              },
+              {
+                type: 'coin_spent',
+                attributes: [
+                  {
+                    key: 'spender',
+                    value: 'addr',
+                  },
+                  {
+                    key: 'amount',
+                    value: '10000',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
         messages: [
           {
             '@type': '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward',
@@ -75,6 +143,12 @@ const mockTransactionsDocument = jest.fn().mockReturnValue({
             validator_address: 'desmosvaloper18kvwy5hzcu3ss08lcfcnx0eajuecg69uvk76c3',
           },
         ],
+        fee: {
+          amount: [{ denom: '', amount: '0.7531' }],
+          gasLimit: '154700',
+          granter: '',
+          payer: '',
+        },
       },
     ],
     total: {

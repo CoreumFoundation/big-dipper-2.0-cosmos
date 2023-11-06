@@ -339,6 +339,7 @@ exports[`screen: TransactionDetails/ Messages matches snapshot 1`] = `
 
   .emotion-21 .msg {
     margin-top: 4px;
+    word-break: break-word;
   }
 }
 
@@ -525,7 +526,7 @@ exports[`screen: TransactionDetails/ Messages matches snapshot 1`] = `
                 <div
                   id="Tag"
                   theme="six"
-                  value="message_labels:bank-Send"
+                  value="Send"
                 />
               </div>
               <span

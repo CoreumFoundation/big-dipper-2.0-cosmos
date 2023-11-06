@@ -11,6 +11,9 @@ type SingleTransactionMobileProps = {
   messages: ReactNode;
   result?: ReactNode;
   fee: ReactNode;
+  amount: ReactNode;
+  spender: ReactNode;
+  receiver: ReactNode;
 };
 
 const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
@@ -21,25 +24,30 @@ const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
   messages,
   result,
   fee,
+  amount,
+  spender,
+  receiver,
 }) => {
   const { t } = useTranslation('transactions');
   const { classes, cx } = useStyles();
 
   return (
     <div className={cx(classes.root, className)}>
-      <div className={classes.item}>
-        <Typography variant="h4" className="label">
-          {t('block')}
-        </Typography>
-        {block}
-      </div>
-      <div className={classes.item}>
-        <Typography variant="h4" className="label">
-          {t('hash')}
-        </Typography>
-        <Typography variant="body1" className="value">
-          {hash}
-        </Typography>
+      <div className={classes.flex}>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
+            {t('block')}
+          </Typography>
+          {block}
+        </div>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
+            {t('hash')}
+          </Typography>
+          <Typography variant="body1" className="value">
+            {hash}
+          </Typography>
+        </div>
       </div>
       <div className={classes.flex}>
         {!!messages && (
@@ -62,20 +70,46 @@ const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
       <div className={classes.flex}>
         <div className={classes.item}>
           <Typography variant="h4" className="label">
+            {t('amount')}
+          </Typography>
+          <Typography variant="body1" className="value">
+            {amount}
+          </Typography>
+        </div>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
             {t('fee')}
           </Typography>
           <Typography variant="body1" className="value">
             {fee}
           </Typography>
         </div>
+      </div>
+      <div className={classes.flex}>
         <div className={classes.item}>
           <Typography variant="h4" className="label">
-            {t('time')}
+            {t('spender')}
           </Typography>
           <Typography variant="body1" className="value">
-            {time}
+            {spender}
           </Typography>
         </div>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
+            {t('receiver')}
+          </Typography>
+          <Typography variant="body1" className="value">
+            {receiver}
+          </Typography>
+        </div>
+      </div>
+      <div className={classes.item}>
+        <Typography variant="h4" className="label">
+          {t('time')}
+        </Typography>
+        <Typography variant="body1" className="value">
+          {time}
+        </Typography>
       </div>
     </div>
   );

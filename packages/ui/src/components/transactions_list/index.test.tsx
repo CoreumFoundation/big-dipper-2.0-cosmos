@@ -36,6 +36,15 @@ const txs: ComponentProps<typeof TransactionsList>['transactions'] = [
         },
       ],
     },
+    fee: {
+      baseDenom: '',
+      displayDenom: '',
+      exponent: 6,
+      value: '0.7531',
+    },
+    spender: 'spenderAddress',
+    receiver: 'receiverAddress',
+    amount: '',
   },
 ];
 

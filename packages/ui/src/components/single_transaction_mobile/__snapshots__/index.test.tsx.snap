@@ -7,42 +7,6 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
 }
 
 .emotion-1 {
-  margin-bottom: 16px;
-}
-
-.emotion-1 .label {
-  margin-bottom: 8px;
-  color: #777777;
-}
-
-.emotion-1 p.value {
-  color: #414141;
-}
-
-.emotion-1 a {
-  color: #4092CD;
-}
-
-.emotion-2 {
-  margin: 0;
-  font-size: 1rem;
-  letter-spacing: 0.15px;
-  font-family: "Noto Sans",sans-serif;
-  font-weight: 400;
-  line-height: 1.235;
-}
-
-.emotion-5 {
-  margin: 0;
-  font-size: 1rem;
-  white-space: pre-wrap;
-  letter-spacing: 0.5px;
-  font-family: "Noto Sans",sans-serif;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -57,11 +21,47 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
   justify-content: flex-start;
 }
 
-.emotion-6>div {
+.emotion-1>div {
   width: 50%;
 }
 
-.emotion-12 {
+.emotion-2 {
+  margin-bottom: 16px;
+}
+
+.emotion-2 .label {
+  margin-bottom: 8px;
+  color: #777777;
+}
+
+.emotion-2 p.value {
+  color: #414141;
+}
+
+.emotion-2 a {
+  color: #4092CD;
+}
+
+.emotion-3 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.15px;
+  font-family: "Noto Sans",sans-serif;
+  font-weight: 400;
+  line-height: 1.235;
+}
+
+.emotion-6 {
+  margin: 0;
+  font-size: 1rem;
+  white-space: pre-wrap;
+  letter-spacing: 0.5px;
+  font-family: "Noto Sans",sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.emotion-13 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -78,7 +78,7 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
   gap: 4px;
 }
 
-.emotion-12 .MuiSvgIcon-root {
+.emotion-13 .MuiSvgIcon-root {
   fill: #1EC490;
 }
 
@@ -88,62 +88,66 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
   <div
     className="emotion-1"
   >
-    <h4
-      className="MuiTypography-root MuiTypography-h4 label emotion-2"
+    <div
+      className="emotion-2"
     >
-      block
-    </h4>
-    <div>
-      10
+      <h4
+        className="MuiTypography-root MuiTypography-h4 label emotion-3"
+      >
+        block
+      </h4>
+      <div>
+        10
+      </div>
+    </div>
+    <div
+      className="emotion-2"
+    >
+      <h4
+        className="MuiTypography-root MuiTypography-h4 label emotion-3"
+      >
+        hash
+      </h4>
+      <p
+        className="MuiTypography-root MuiTypography-body1 value emotion-6"
+      >
+        <div>
+          1572D5F78D0192BC59E6BD99875D7796A39B1CE0CEF2E106D586CCCEF5C75317
+        </div>
+      </p>
     </div>
   </div>
   <div
     className="emotion-1"
   >
-    <h4
-      className="MuiTypography-root MuiTypography-h4 label emotion-2"
-    >
-      hash
-    </h4>
-    <p
-      className="MuiTypography-root MuiTypography-body1 value emotion-5"
-    >
-      <div>
-        1572D5F78D0192BC59E6BD99875D7796A39B1CE0CEF2E106D586CCCEF5C75317
-      </div>
-    </p>
-  </div>
-  <div
-    className="emotion-6"
-  >
     <div
-      className="emotion-1"
+      className="emotion-2"
     >
       <h4
-        className="MuiTypography-root MuiTypography-h4 label emotion-2"
+        className="MuiTypography-root MuiTypography-h4 label emotion-3"
       >
         messages
       </h4>
       <p
-        className="MuiTypography-root MuiTypography-body1 value emotion-5"
+        className="MuiTypography-root MuiTypography-body1 value emotion-6"
       >
         2
       </p>
     </div>
     <div
-      className="emotion-1"
+      className="emotion-2"
     >
       <h4
-        className="MuiTypography-root MuiTypography-h4 label emotion-2"
+        className="MuiTypography-root MuiTypography-h4 label emotion-3"
       >
         result
       </h4>
       <span
-        className="emotion-12"
+        className="emotion-13"
       >
         <svg />
         <span
-          className="MuiTypography-root MuiTypography-body1 emotion-5"
+          className="MuiTypography-root MuiTypography-body1 emotion-6"
         >
           success
         </span>
@@ -153,13 +157,69 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
   <div
     className="emotion-1"
   >
+    <div
+      className="emotion-2"
+    >
+      <h4
+        className="MuiTypography-root MuiTypography-h4 label emotion-3"
+      >
+        amount
+      </h4>
+      <p
+        className="MuiTypography-root MuiTypography-body1 value emotion-6"
+      />
+    </div>
+    <div
+      className="emotion-2"
+    >
+      <h4
+        className="MuiTypography-root MuiTypography-h4 label emotion-3"
+      >
+        fee
+      </h4>
+      <p
+        className="MuiTypography-root MuiTypography-body1 value emotion-6"
+      />
+    </div>
+  </div>
+  <div
+    className="emotion-1"
+  >
+    <div
+      className="emotion-2"
+    >
+      <h4
+        className="MuiTypography-root MuiTypography-h4 label emotion-3"
+      >
+        spender
+      </h4>
+      <p
+        className="MuiTypography-root MuiTypography-body1 value emotion-6"
+      />
+    </div>
+    <div
+      className="emotion-2"
+    >
+      <h4
+        className="MuiTypography-root MuiTypography-h4 label emotion-3"
+      >
+        receiver
+      </h4>
+      <p
+        className="MuiTypography-root MuiTypography-body1 value emotion-6"
+      />
+    </div>
+  </div>
+  <div
+    className="emotion-2"
+  >
     <h4
-      className="MuiTypography-root MuiTypography-h4 label emotion-2"
+      className="MuiTypography-root MuiTypography-h4 label emotion-3"
     >
       time
     </h4>
     <p
-      className="MuiTypography-root MuiTypography-body1 value emotion-5"
+      className="MuiTypography-root MuiTypography-body1 value emotion-6"
     >
       2022-02-19T19:03:14.969688
     </p>

@@ -34,5 +34,9 @@
   "feegrant": "Feegrant",
   "vesting": "Vesting",
   "logs": "Logs",
-  "showDetails": "Show Details"
+  "showDetails": "Show Details",
+  "amount": "Amount",
+  "spender": "Spender",
+  "receiver": "Receiver",
+  "more": "More"
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import Loading from '@/components/loading';
 import Result from '@/components/result';
 import Tag from '@/components/tag';
@@ -7,7 +8,7 @@ import { columns } from '@/components/transactions_list/components/desktop/utils
 import type { TransactionsListState } from '@/components/transactions_list/types';
 import { useGrid } from '@/hooks/use_react_window';
 import { getMiddleEllipsis } from '@/utils/get_middle_ellipsis';
-import { BLOCK_DETAILS, TRANSACTION_DETAILS } from '@/utils/go_to_page';
+import { ACCOUNT_DETAILS, BLOCK_DETAILS, TRANSACTION_DETAILS } from '@/utils/go_to_page';
 import { mergeRefs } from '@/utils/merge_refs';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
@@ -74,6 +75,43 @@ const Desktop: FC<TransactionsListState> = ({
         />
       </>
     ),
+    spender: x.spender.length ? (
+      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.spender)}>
+        {getMiddleEllipsis(x.spender, {
+          beginning: 4,
+          ending: 4,
+        })}
+      </Link>
+    ) : (
+      '-'
+    ),
+    receiver: x.receiver.length ? (
+      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.receiver)}>
+        {getMiddleEllipsis(x.receiver, {
+          beginning: 4,
+          ending: 4,
+        })}
+      </Link>
+    ) : (
+      '-'
+    ),
+    amount:
+      typeof x.amount === 'string' && (x.amount === '' || x.amount === '-') ? (
+        x.amount === '' ? (
+          <Link shallow prefetch={false} href={TRANSACTION_DETAILS(x.hash)}>
+            {t('transactions:more')}
+          </Link>
+        ) : (
+          <Typography variant="body1">{x.amount}</Typography>
+        )
+      ) : (
+        <Typography variant="body1">
+          {`${formatNumber(
+            x.amount.value,
+            x.amount.exponent
+          )} ${x?.amount?.displayDenom.toUpperCase()}`}
+        </Typography>
+      ),
     fee: (
       <Typography variant="body1">
         {`${formatNumber(x.fee.value, x.fee.exponent)} ${x?.fee?.displayDenom.toUpperCase()}`}

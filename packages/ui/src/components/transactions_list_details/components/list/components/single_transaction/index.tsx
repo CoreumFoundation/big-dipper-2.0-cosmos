@@ -18,6 +18,10 @@ export type SingleTransactionProps = {
     } & JSX.IntrinsicAttributes
   >;
   result?: ReactNode;
+  spender: ReactNode;
+  receiver: ReactNode;
+  fee: ReactNode;
+  amount: ReactNode;
 };
 
 const SingleTransaction: FC<SingleTransactionProps> = ({
@@ -29,6 +33,10 @@ const SingleTransaction: FC<SingleTransactionProps> = ({
   messages,
   result,
   messageCount,
+  spender,
+  receiver,
+  fee,
+  amount,
 }) => {
   const { t } = useTranslation('transactions');
   const { classes, cx } = useStyles();
@@ -53,6 +61,30 @@ const SingleTransaction: FC<SingleTransactionProps> = ({
               {t('type')}
             </Typography>
             {type}
+          </div>
+          <div className={cx(classes.item, 'block')}>
+            <Typography variant="h4" className="label">
+              {t('spender')}
+            </Typography>
+            {spender}
+          </div>
+          <div className={cx(classes.item, 'block')}>
+            <Typography variant="h4" className="label">
+              {t('receiver')}
+            </Typography>
+            {receiver}
+          </div>
+          <div className={cx(classes.item, 'block')}>
+            <Typography variant="h4" className="label">
+              {t('amount')}
+            </Typography>
+            {amount}
+          </div>
+          <div className={cx(classes.item, 'block')}>
+            <Typography variant="h4" className="label">
+              {t('fee')}
+            </Typography>
+            {fee}
           </div>
           <div className={cx(classes.item, 'time')}>
             <Typography variant="h4" className="label">

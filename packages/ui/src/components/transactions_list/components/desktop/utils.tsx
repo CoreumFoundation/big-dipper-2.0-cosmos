@@ -5,20 +5,33 @@ export const columns: {
 }[] = [
   {
     key: 'block',
-    width: 15,
+    width: 10,
   },
   {
     key: 'hash',
-    width: 15,
+    width: 10,
   },
   {
     key: 'type',
-    width: 25,
+    width: 15,
+  },
+  {
+    key: 'spender',
+    width: 10,
+  },
+  {
+    key: 'receiver',
+    width: 10,
+  },
+  {
+    key: 'amount',
+    align: 'right',
+    width: 10,
   },
   {
     key: 'fee',
     align: 'right',
-    width: 15,
+    width: 10,
   },
   {
     key: 'messages',
@@ -28,11 +41,11 @@ export const columns: {
   {
     key: 'result',
     align: 'right',
-    width: 13,
+    width: 10,
   },
   {
     key: 'time',
     align: 'right',
-    width: 12,
+    width: 10,
   },
 ];
