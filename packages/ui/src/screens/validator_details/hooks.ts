@@ -93,7 +93,7 @@ const formatVotingPower = (data: ValidatorDetailsQuery) => {
   const selfVotingPower = data.validator[0]?.validatorVotingPowers?.[0]?.votingPower ?? 0;
 
   const votingPower = {
-    self: selfVotingPower,
+    self: +formatToken(selfVotingPower, votingPowerTokenUnit).value,
     overall: formatToken(data?.stakingPool?.[0]?.bonded ?? 0, votingPowerTokenUnit),
     height: data.validator[0]?.validatorVotingPowers?.[0]?.height ?? 0,
   };

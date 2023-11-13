@@ -26,7 +26,7 @@ const formatOnlineVotingPower = (data: OnlineVotingPowerQuery) => {
 
   return {
     activeValidators,
-    votingPower,
+    votingPower: numeral(formatToken(votingPower, votingPowerTokenUnit).value).value() ?? 0,
     totalVotingPower: numeral(formatToken(bonded, votingPowerTokenUnit).value).value() ?? 0,
   };
 };

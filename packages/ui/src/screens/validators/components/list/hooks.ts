@@ -32,8 +32,10 @@ const formatValidators = (data: ValidatorsQuery): Partial<ValidatorsState> => {
     .map((x) => {
       const votingPower =
         (x?.validatorVotingPowers?.[0]?.votingPower ?? 0) / 10 ** (extra.votingPowerExponent ?? 0);
+      const formattedVotingPower =
+        numeral(formatToken(votingPower, votingPowerTokenUnit).value).value() ?? 0;
       const votingPowerPercent = votingPowerOverall
-        ? numeral((votingPower / votingPowerOverall) * 100).value()
+        ? numeral((formattedVotingPower / votingPowerOverall) * 100).value()
         : 0;
 
       const missedBlockCounter = x?.validatorSigningInfos?.[0]?.missedBlocksCounter ?? 0;
@@ -41,7 +43,7 @@ const formatValidators = (data: ValidatorsQuery): Partial<ValidatorsState> => {
 
       return {
         validator: x.validatorInfo?.operatorAddress ?? '',
-        votingPower: votingPower ?? 0,
+        votingPower: formattedVotingPower ?? 0,
         votingPowerPercent: votingPowerPercent ?? 0,
         commission: (x?.validatorCommissions?.[0]?.commission ?? 0) * 100,
         condition,
