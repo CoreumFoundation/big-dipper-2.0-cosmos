@@ -39,10 +39,10 @@ const formatSpenderAndReceiver = (transactionLogs: any[], denom: string) => {
     (item: any) => item.key === 'receiver'
   );
   const spentAmount = spenderDataArr?.[0]?.attributes?.find(
-    (item: any) => item.key === 'amount' && item.value.includes(denom)
+    (item: any) => item.key === 'amount' && item.value?.includes(denom)
   );
   const receivedAmount = receiverDataArr?.[0]?.attributes?.find(
-    (item: any) => item.key === 'amount' && item.value.includes(denom)
+    (item: any) => item.key === 'amount' && item.value?.includes(denom)
   );
 
   return {
