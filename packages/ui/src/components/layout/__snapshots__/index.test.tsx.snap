@@ -53,10 +53,8 @@ exports[`component: Layout it renders 1`] = `
   }
 }
 
-@media (min-width:1025px) {
-  .emotion-4 {
-    position: relative;
-  }
+.emotion-4 {
+  position: relative;
 }
 
 <div

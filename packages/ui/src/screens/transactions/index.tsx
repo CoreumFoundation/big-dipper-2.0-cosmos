@@ -30,7 +30,12 @@ const Transactions = () => {
           title: t('transactions') ?? undefined,
         }}
       />
-      <Layout navTitle={t('transactions') ?? undefined} className={classes.root}>
+      <Layout
+        navTitle={t('transactions') ?? undefined}
+        className={classes.root}
+        rootClassName={classes.layoutRoot}
+        contentWrapperClassName={classes.layoutContentWrapper}
+      >
         <LoadAndExist exists={state.exists} loading={state.loading}>
           <div className={classes.header}>
             <Typography variant="h1">{t('transactions')}</Typography>

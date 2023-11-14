@@ -10,7 +10,7 @@ exports[`component: TransactionsList it renders 1`] = `
   display: block;
 }
 
-@media (max-width:1024.95px) {
+@media (max-width:1919.95px) {
   .emotion-0 {
     display: none;
   }
@@ -33,7 +33,7 @@ exports[`component: TransactionsList it renders 1`] = `
   height: 100%;
 }
 
-@media (min-width:1025px) {
+@media (min-width:1920px) {
   .emotion-0 {
     display: none;
   }

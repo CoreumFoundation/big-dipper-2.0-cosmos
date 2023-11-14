@@ -244,22 +244,16 @@ exports[`screen: Transactions matches snapshot 1`] = `
 }
 
 .emotion-11 {
-  min-height: 500px;
-  height: 50vh;
-  padding: 0px 0px 32pxpx 0px!important;
-}
-
-@media (min-width:1025px) {
-  .emotion-11 {
-    height: 100%;
-    min-height: 65vh;
-  }
+  height: 100%;
+  min-height: 65vh;
 }
 
 <div
   className="emotion-0"
+  contentWrapperClassName="css-s4fdp5-layoutContentWrapper"
   id="Layout"
   navTitle="transactions"
+  rootClassName="css-1ibkw6x-layoutRoot"
 >
   <div
     exists={true}

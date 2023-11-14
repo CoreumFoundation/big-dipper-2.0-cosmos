@@ -9,13 +9,9 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   box: {
-    minHeight: '500px',
-    height: '50vh',
-    padding: `0px 0px ${theme.spacing(4)}px 0px !important`,
-    [theme.breakpoints.up('lg')]: {
-      height: '100%',
-      minHeight: '65vh',
-    },
+    // marginTop: theme.spacing(10),
+    height: '100%',
+    minHeight: '65vh',
   },
   header: {
     display: 'flex',
@@ -28,6 +24,26 @@ const useStyles = makeStyles()((theme) => ({
       '& > h4': {
         fontSize: '0.75rem',
       },
+    },
+  },
+  layoutRoot: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: `calc(100vh - ${theme.spacing(8)})`,
+    marginTop: theme.spacing(8),
+
+    [theme.breakpoints.up('lg')]: {
+      marginTop: 'unset',
+    },
+  },
+  layoutContentWrapper: {
+    marginBottom: theme.spacing(6),
+    display: 'flex',
+    flex: 1,
+    maxHeight: `calc(100vh - ${theme.spacing(10)})`,
+
+    [theme.breakpoints.up('lg')]: {
+      maxHeight: 'unset',
     },
   },
 }));

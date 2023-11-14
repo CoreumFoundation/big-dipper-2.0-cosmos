@@ -16,9 +16,7 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   footer: {
-    [theme.breakpoints.up('lg')]: {
-      position: 'relative',
-    },
+    position: 'relative',
   },
   appBarPlaceholder: {
     ...(theme.mixins.toolbar as CSSObject),

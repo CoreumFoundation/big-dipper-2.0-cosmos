@@ -35,8 +35,8 @@ const TransactionsList: FC<TransactionsListState> = (props) => {
 
   return (
     <>
-      <Desktop className={display.hiddenUntilLg} {...formatProps} />
-      <Mobile className={display.hiddenWhenLg} {...formatProps} />
+      <Desktop className={display.hiddenUntilXl} {...formatProps} />
+      <Mobile className={display.hiddenWhenXl} {...formatProps} />
     </>
   );
 };

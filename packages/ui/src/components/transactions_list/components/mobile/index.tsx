@@ -60,7 +60,7 @@ const ListItem: FC<ListItemProps> = ({
       <>
         <Link shallow prefetch={false} href={TRANSACTION_DETAILS(transaction.hash)}>
           {getMiddleEllipsis(transaction.hash, {
-            beginning: 15,
+            beginning: 8,
             ending: 5,
           })}
         </Link>
@@ -81,7 +81,7 @@ const ListItem: FC<ListItemProps> = ({
     spender: transaction.spender.length ? (
       <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.spender)}>
         {getMiddleEllipsis(transaction.spender, {
-          beginning: 15,
+          beginning: 8,
           ending: 5,
         })}
       </Link>
@@ -91,7 +91,7 @@ const ListItem: FC<ListItemProps> = ({
     receiver: transaction.receiver.length ? (
       <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.receiver)}>
         {getMiddleEllipsis(transaction.receiver, {
-          beginning: 15,
+          beginning: 8,
           ending: 5,
         })}
       </Link>

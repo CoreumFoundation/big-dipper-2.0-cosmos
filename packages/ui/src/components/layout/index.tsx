@@ -7,30 +7,23 @@ import Nav from '@/components/nav';
 
 const bannerLinks = getBannersLinks();
 
-// const variants: Variants = {
-//   initial: { filter: 'blur(4px)' },
-//   animate: { filter: 'blur(0px)' },
-//   exit: { filter: 'blur(4px)' },
-// };
-
 const transition: Transition = {
   duration: 1,
 };
 
 const Layout = (props: LayoutProps) => {
   const { classes, cx } = useStyles();
-  const { children, className } = props;
+  const { children, className, contentWrapperClassName, rootClassName } = props;
 
   return (
     <motion.div
       initial="initial"
       animate="animate"
       exit="exit"
-      // variants={variants}
       transition={transition}
-      className={classes.root}
+      className={cx(classes.root, rootClassName)}
     >
-      <div className={classes.contentWrapper}>
+      <div className={cx(classes.contentWrapper, contentWrapperClassName)}>
         <Nav />
         <div className={classes.children}>
           <div className={classes.appBarPlaceholder} />
