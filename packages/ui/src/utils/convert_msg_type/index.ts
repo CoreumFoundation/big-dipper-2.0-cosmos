@@ -4,10 +4,18 @@
  */
 export const convertMsgType = (type: string[]) => {
   const typeTitle = type?.map((eachType) => {
+    const splittedType = eachType.split('.');
+    const isNFTPresent = splittedType.includes('nft');
+
     const wordIndex = eachType.indexOf('Msg');
     const msgStringLength = 'Msg'.length;
     const msgTitle = eachType.substring(wordIndex + msgStringLength);
-    const msgTitleSeperatedByUpperCase = msgTitle.match(/[A-Z][a-z]+|[0-9]+/g)?.join(' ');
+    let msgTitleSeperatedByUpperCase = msgTitle.match(/[A-Z][a-z]+|[0-9]+/g)?.join(' ');
+
+    if (isNFTPresent) {
+      msgTitleSeperatedByUpperCase = `NFT ${msgTitleSeperatedByUpperCase}`;
+    }
+
     return msgTitleSeperatedByUpperCase ?? '';
   });
 
