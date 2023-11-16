@@ -34,6 +34,7 @@ const useStyles = makeStyles()((theme) => ({
 
     [theme.breakpoints.up('lg')]: {
       marginTop: 'unset',
+      minHeight: '100vh',
     },
   },
   layoutContentWrapper: {

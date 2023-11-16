@@ -253,7 +253,7 @@ exports[`screen: Transactions matches snapshot 1`] = `
   contentWrapperClassName="css-s4fdp5-layoutContentWrapper"
   id="Layout"
   navTitle="transactions"
-  rootClassName="css-1ibkw6x-layoutRoot"
+  rootClassName="css-1ydocy-layoutRoot"
 >
   <div
     exists={true}
