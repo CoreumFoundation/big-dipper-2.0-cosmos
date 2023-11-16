@@ -37,8 +37,8 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ env.ORG }}/${{ env.REPO }}:${{ env.TAG }}
-            ${{ env.ORG }}/${{ env.REPO }}:latest
+            ${{ env.ORG }}/${{ env.REPO }}:devnet-${{ env.TAG }}
+            ${{ env.ORG }}/${{ env.REPO }}:devnet-latest
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           push: true
