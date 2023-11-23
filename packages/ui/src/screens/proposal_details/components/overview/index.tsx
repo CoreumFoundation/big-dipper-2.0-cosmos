@@ -95,12 +95,12 @@ const Overview: FC<{ className?: string; overview: OverviewType }> = ({ classNam
       />
       <Divider />
       <div className={classes.content}>
-        <Typography variant="body1" className="label">
+        {/* <Typography variant="body1" className="label">
           {t('type')}
         </Typography>
         <Typography variant="body1" className="value">
           {t(type)}
-        </Typography>
+        </Typography> */}
         <Typography variant="body1" className="label">
           {t('proposer')}
         </Typography>

@@ -102,14 +102,6 @@ exports[`screen: BlockDetails/Overview matches snapshot 1`] = `
     <p
       className="MuiTypography-root MuiTypography-body1 label emotion-3"
     >
-      type
-    </p>
-    <p
-      className="MuiTypography-root MuiTypography-body1 value emotion-3"
-    />
-    <p
-      className="MuiTypography-root MuiTypography-body1 label emotion-3"
-    >
       proposer
     </p>
     <div
