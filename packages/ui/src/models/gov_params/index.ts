@@ -49,23 +49,19 @@ class GovParams {
   static fromJson(data: object): GovParams {
     return {
       depositParams: {
-        minDeposit: R.pathOr<GovParams['depositParams']['minDeposit']>(
-          [],
-          ['depositParams', 'min_deposit'],
-          data
-        ).map((x) => ({
-          denom: x.denom,
-          amount: String(x.amount),
+        minDeposit: R.pathOr([], ['min_deposit'], data).map((x) => ({
+          denom: (x as any).denom,
+          amount: String((x as any).amount),
         })),
-        maxDepositPeriod: R.pathOr(0, ['depositParams', 'max_deposit_period'], data),
+        maxDepositPeriod: R.pathOr(0, ['max_deposit_period'], data),
       },
       tallyParams: {
-        quorum: R.pathOr('0', ['tallyParams', 'quorum'], data),
-        threshold: R.pathOr('0', ['tallyParams', 'threshold'], data),
-        vetoThreshold: R.pathOr('0', ['tallyParams', 'veto_threshold'], data),
+        quorum: R.pathOr('0', ['quorum'], data),
+        threshold: R.pathOr('0', ['threshold'], data),
+        vetoThreshold: R.pathOr('0', ['veto_threshold'], data),
       },
       votingParams: {
-        votingPeriod: R.pathOr(0, ['votingParams', 'voting_period'], data),
+        votingPeriod: R.pathOr(0, ['voting_period'], data),
       },
     };
   }
