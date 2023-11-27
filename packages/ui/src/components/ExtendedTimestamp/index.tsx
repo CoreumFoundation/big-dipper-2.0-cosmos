@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 
 /* styles */
@@ -38,23 +38,34 @@ const ExtendedTimestamp: FC<ExtendedTimestampProps> = ({ timestamp, flexEnd = tr
   const interval = useRef<NodeJS.Timer>();
 
   const { classes, cx } = useStyles();
-  const inputDate = new Date(timestamp);
+  const inputDate = useMemo(() => new Date(timestamp), [timestamp]);
+  const currentDate = useMemo(() => new Date(), []);
 
-  const currentDate = new Date();
-  const timePassedMs = currentDate.getTime() - inputDate.getTime();
+  const timePassedMs = useMemo(
+    () => currentDate.getTime() - inputDate.getTime(),
+    [currentDate, inputDate]
+  );
 
-  const dayValue = inputDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
-  });
+  const dayValue = useMemo(
+    () =>
+      inputDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+      }),
+    [inputDate]
+  );
 
-  const formatTimestamp = inputDate.toLocaleTimeString('en-US', {
-    hour12: false,
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  });
+  const formatTimestamp = useMemo(
+    () =>
+      inputDate.toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }),
+    [inputDate]
+  );
 
   useEffect(() => {
     if (timestamp)
@@ -75,10 +86,13 @@ const ExtendedTimestamp: FC<ExtendedTimestampProps> = ({ timestamp, flexEnd = tr
 
         setTimePassedValue(timePassed);
       }, 1000);
+
     return () => {
       if (interval.current) clearInterval(interval.current);
     };
   });
+
+  if (!timestamp) return null;
 
   // eslint-disable-next-line consistent-return
   return (

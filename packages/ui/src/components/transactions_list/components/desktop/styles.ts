@@ -41,6 +41,7 @@ const useStyles = makeStyles()((theme) => ({
   sender: {
     display: 'flex',
     fontSize: theme.spacing(1.75),
+    minWidth: '80px',
   },
   arrow: {
     display: 'flex',

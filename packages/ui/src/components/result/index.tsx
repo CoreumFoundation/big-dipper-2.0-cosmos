@@ -1,11 +1,11 @@
 import useStyles from '@/components/result/styles';
-// import CancelIcon from '@mui/icons-material/Cancel';
-// import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
 import Check from '@/assets/icon-check.svg';
 import Cross from '@/assets/icon-cross.svg';
+import Tooltip from '@mui/material/Tooltip';
+import Zoom from '@mui/material/Zoom';
 
 type ResultProps = {
   className?: string;
@@ -26,7 +26,16 @@ const Result: FC<ResultProps> = ({ className, success, displayLabel = true }) =>
     >
       {success ? (
         <>
-          <Check />
+          <Tooltip
+            TransitionComponent={Zoom}
+            title={<pre>{t('success')}</pre>}
+            placement="bottom"
+            arrow
+          >
+            <span>
+              <Check />
+            </span>
+          </Tooltip>
           {displayLabel && (
             <Typography component="span" variant="body1">
               {t('success')}
@@ -35,7 +44,16 @@ const Result: FC<ResultProps> = ({ className, success, displayLabel = true }) =>
         </>
       ) : (
         <>
-          <Cross />
+          <Tooltip
+            TransitionComponent={Zoom}
+            title={<pre>{t('fail')}</pre>}
+            placement="bottom"
+            arrow
+          >
+            <span>
+              <Cross />
+            </span>
+          </Tooltip>
           {displayLabel && (
             <Typography component="span" variant="body1">
               {t('fail')}

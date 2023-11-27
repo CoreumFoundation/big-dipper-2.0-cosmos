@@ -21,6 +21,8 @@ import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
 import { formatNumber } from '@/utils/format_token';
 import ExtendedTimestamp from '@/components/ExtendedTimestamp';
+import Tooltip from '@mui/material/Tooltip';
+import Zoom from '@mui/material/Zoom';
 
 const Desktop: FC<TransactionsListState> = ({
   className,
@@ -69,15 +71,22 @@ const Desktop: FC<TransactionsListState> = ({
     'sender.receiver': (
       <div className={classes.combined}>
         <div className={classes.sender}>
-          {x.sender === '-' || x.sender === 'Multiple' ? (
-            <span>{x.sender}</span>
+          {!x.sender || x.sender === '-' || x.sender === 'Multiple' ? (
+            <span>{x.sender || '-'}</span>
           ) : (
-            <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.sender)}>
-              {getMiddleEllipsis(x.sender, {
-                beginning: 4,
-                ending: 4,
-              })}
-            </Link>
+            <Tooltip
+              TransitionComponent={Zoom}
+              title={<pre>{x.sender}</pre>}
+              placement="bottom"
+              arrow
+            >
+              <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.sender)}>
+                {getMiddleEllipsis(x?.sender || '', {
+                  beginning: 4,
+                  ending: 4,
+                })}
+              </Link>
+            </Tooltip>
           )}
         </div>
         <div className={classes.arrow}>
@@ -99,15 +108,22 @@ const Desktop: FC<TransactionsListState> = ({
           </svg>
         </div>
         <div className={classes.receiver}>
-          {x.receiver === '-' || x.receiver === 'Multiple' ? (
-            <span>{x.receiver}</span>
+          {!x.receiver || x.receiver === '-' || x.receiver === 'Multiple' ? (
+            <span>{x.receiver || '-'}</span>
           ) : (
-            <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.receiver)}>
-              {getMiddleEllipsis(x.receiver, {
-                beginning: 4,
-                ending: 4,
-              })}
-            </Link>
+            <Tooltip
+              TransitionComponent={Zoom}
+              title={<pre>{x.receiver}</pre>}
+              placement="bottom"
+              arrow
+            >
+              <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.receiver)}>
+                {getMiddleEllipsis(x.receiver, {
+                  beginning: 4,
+                  ending: 4,
+                })}
+              </Link>
+            </Tooltip>
           )}
         </div>
       </div>
