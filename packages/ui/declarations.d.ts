@@ -30,7 +30,7 @@ type Transactions = {
   timestamp: string;
   fee: any;
   amount: any;
-  spender: string;
+  sender: string;
   receiver: string;
   messages: {
     count: number;

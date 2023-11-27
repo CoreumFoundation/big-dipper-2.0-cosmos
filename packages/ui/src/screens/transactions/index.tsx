@@ -1,13 +1,13 @@
 import { NextSeo } from 'next-seo';
 import { useTranslation } from 'next-i18next';
 import { useRecoilValue } from 'recoil';
+import { Switch, Typography } from '@mui/material';
 import Box from '@/components/box';
 import Layout from '@/components/layout';
 import LoadAndExist from '@/components/load_and_exist';
 import TransactionsList from '@/components/transactions_list';
 import TransactionsListDetails from '@/components/transactions_list_details';
 import { readTx } from '@/recoil/settings';
-import { Switch, Typography } from '@mui/material';
 import { useSettingList } from '@/components/nav/components/desktop/components/action_bar/components/settings_list/hooks';
 import { useTransactions } from '@/screens/transactions/hooks';
 import useStyles from '@/screens/transactions/styles';

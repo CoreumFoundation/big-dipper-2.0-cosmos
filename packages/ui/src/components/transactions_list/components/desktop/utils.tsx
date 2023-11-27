@@ -4,48 +4,35 @@ export const columns: {
   width: number;
 }[] = [
   {
-    key: 'block',
-    width: 10,
-  },
-  {
     key: 'hash',
-    width: 10,
-  },
-  {
-    key: 'type',
     width: 15,
   },
   {
-    key: 'spender',
-    width: 10,
+    key: 'type',
+    width: 17,
   },
   {
-    key: 'receiver',
-    width: 10,
+    key: 'sender.receiver',
+    width: 18,
   },
   {
     key: 'amount',
     align: 'right',
-    width: 10,
+    width: 15,
   },
   {
     key: 'fee',
     align: 'right',
-    width: 10,
-  },
-  {
-    key: 'messages',
-    align: 'right',
-    width: 5,
+    width: 15,
   },
   {
     key: 'result',
-    align: 'right',
-    width: 10,
+    align: 'center',
+    width: 9,
   },
   {
     key: 'time',
     align: 'right',
-    width: 10,
+    width: 11,
   },
 ];

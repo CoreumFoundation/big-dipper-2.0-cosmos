@@ -18,7 +18,7 @@ export type SingleTransactionProps = {
     } & JSX.IntrinsicAttributes
   >;
   result?: ReactNode;
-  spender: ReactNode;
+  sender: ReactNode;
   receiver: ReactNode;
   fee: ReactNode;
   amount: ReactNode;
@@ -33,7 +33,7 @@ const SingleTransaction: FC<SingleTransactionProps> = ({
   messages,
   result,
   messageCount,
-  spender,
+  sender,
   receiver,
   fee,
   amount,
@@ -64,9 +64,9 @@ const SingleTransaction: FC<SingleTransactionProps> = ({
           </div>
           <div className={cx(classes.item, 'block')}>
             <Typography variant="h4" className="label">
-              {t('spender')}
+              {t('sender')}
             </Typography>
-            {spender}
+            {sender}
           </div>
           <div className={cx(classes.item, 'block')}>
             <Typography variant="h4" className="label">

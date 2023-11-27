@@ -12,7 +12,7 @@ type SingleTransactionMobileProps = {
   result?: ReactNode;
   fee: ReactNode;
   amount: ReactNode;
-  spender: ReactNode;
+  sender: ReactNode;
   receiver: ReactNode;
 };
 
@@ -25,7 +25,7 @@ const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
   result,
   fee,
   amount,
-  spender,
+  sender,
   receiver,
 }) => {
   const { t } = useTranslation('transactions');
@@ -88,10 +88,10 @@ const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
       <div className={classes.flex}>
         <div className={classes.item}>
           <Typography variant="h4" className="label">
-            {t('spender')}
+            {t('sender')}
           </Typography>
           <Typography variant="body1" className="value">
-            {spender}
+            {sender}
           </Typography>
         </div>
         <div className={classes.item}>

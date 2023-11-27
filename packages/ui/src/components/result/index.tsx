@@ -10,9 +10,10 @@ import Cross from '@/assets/icon-cross.svg';
 type ResultProps = {
   className?: string;
   success?: boolean;
+  displayLabel?: boolean;
 };
 
-const Result: FC<ResultProps> = ({ className, success }) => {
+const Result: FC<ResultProps> = ({ className, success, displayLabel = true }) => {
   const { t } = useTranslation('common');
   const { classes, cx } = useStyles();
 
@@ -26,16 +27,20 @@ const Result: FC<ResultProps> = ({ className, success }) => {
       {success ? (
         <>
           <Check />
-          <Typography component="span" variant="body1">
-            {t('success')}
-          </Typography>
+          {displayLabel && (
+            <Typography component="span" variant="body1">
+              {t('success')}
+            </Typography>
+          )}
         </>
       ) : (
         <>
           <Cross />
-          <Typography component="span" variant="body1">
-            {t('fail')}
-          </Typography>
+          {displayLabel && (
+            <Typography component="span" variant="body1">
+              {t('fail')}
+            </Typography>
+          )}
         </>
       )}
     </span>

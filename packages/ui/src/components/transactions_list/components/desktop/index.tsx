@@ -2,18 +2,16 @@
 import Loading from '@/components/loading';
 import Result from '@/components/result';
 import Tag from '@/components/tag';
-import Timestamp from '@/components/Timestamp';
 import useStyles from '@/components/transactions_list/components/desktop/styles';
 import { columns } from '@/components/transactions_list/components/desktop/utils';
 import type { TransactionsListState } from '@/components/transactions_list/types';
 import { useGrid } from '@/hooks/use_react_window';
 import { getMiddleEllipsis } from '@/utils/get_middle_ellipsis';
-import { ACCOUNT_DETAILS, BLOCK_DETAILS, TRANSACTION_DETAILS } from '@/utils/go_to_page';
+import { ACCOUNT_DETAILS, TRANSACTION_DETAILS } from '@/utils/go_to_page';
 import { mergeRefs } from '@/utils/merge_refs';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import numeral from 'numeral';
 import { FC, LegacyRef } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { VariableSizeGrid as Grid } from 'react-window';
@@ -22,6 +20,7 @@ import CopyIcon from 'shared-utils/assets/icon-copy.svg';
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
 import { formatNumber } from '@/utils/format_token';
+import ExtendedTimestamp from '@/components/ExtendedTimestamp';
 
 const Desktop: FC<TransactionsListState> = ({
   className,
@@ -38,26 +37,18 @@ const Desktop: FC<TransactionsListState> = ({
   const { t } = useTranslation('transactions');
 
   const getTypeTag = (x: Transactions) => {
-    // const typeTagValue = getTagDisplayValue((x.messages.items[0] as any).type);
-
-    // return <Tag value={typeTagValue} theme="six" />;
     if (x.type?.[0] && x.type?.[0] === 'Update Client') {
-      return <Tag value="IBC Received" theme="six" />;
+      return <Tag value="IBC Received" theme="six" className={classes.tagType} />;
     }
 
     if (x.type?.[0] === 'Transfer') {
-      return <Tag value="IBC Transfer" theme="six" />;
+      return <Tag value="IBC Transfer" theme="six" className={classes.tagType} />;
     }
 
-    return <Tag value={x.type?.[0] ? x.type[0] : ''} theme="six" />;
+    return <Tag value={x.type?.[0] ? x.type[0] : ''} theme="six" className={classes.tagType} />;
   };
 
   const items = transactions.map((x) => ({
-    block: (
-      <Link shallow prefetch={false} href={BLOCK_DETAILS(x.height)}>
-        {numeral(x.height).format('0,0')}
-      </Link>
-    ),
     hash: (
       <>
         <Link shallow prefetch={false} href={TRANSACTION_DETAILS(x.hash)}>
@@ -75,46 +66,88 @@ const Desktop: FC<TransactionsListState> = ({
         />
       </>
     ),
-    spender: x.spender?.length ? (
-      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.spender)}>
-        {getMiddleEllipsis(x.spender, {
-          beginning: 4,
-          ending: 4,
-        })}
-      </Link>
-    ) : (
-      '-'
-    ),
-    receiver: x.receiver?.length ? (
-      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.receiver)}>
-        {getMiddleEllipsis(x.receiver, {
-          beginning: 4,
-          ending: 4,
-        })}
-      </Link>
-    ) : (
-      '-'
+    'sender.receiver': (
+      <div className={classes.combined}>
+        <div className={classes.sender}>
+          {x.sender === '-' || x.sender === 'Multiple' ? (
+            <span>{x.sender}</span>
+          ) : (
+            <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.sender)}>
+              {getMiddleEllipsis(x.sender, {
+                beginning: 4,
+                ending: 4,
+              })}
+            </Link>
+          )}
+        </div>
+        <div className={classes.arrow}>
+          <svg
+            className="w-2 h-2"
+            width={24}
+            height={24}
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            strokeWidth={1.5}
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+            />
+          </svg>
+        </div>
+        <div className={classes.receiver}>
+          {x.receiver === '-' || x.receiver === 'Multiple' ? (
+            <span>{x.receiver}</span>
+          ) : (
+            <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.receiver)}>
+              {getMiddleEllipsis(x.receiver, {
+                beginning: 4,
+                ending: 4,
+              })}
+            </Link>
+          )}
+        </div>
+      </div>
     ),
     amount:
       typeof x.amount === 'string' && (x.amount === '' || x.amount === '-') ? (
         x.amount === '' ? (
-          <Link shallow prefetch={false} href={TRANSACTION_DETAILS(x.hash)}>
+          <Link
+            shallow
+            prefetch={false}
+            href={TRANSACTION_DETAILS(x.hash)}
+            className={classes.amount}
+          >
             {t('transactions:more')}
           </Link>
         ) : (
-          <Typography variant="body1">{x.amount}</Typography>
+          <Typography variant="body1" className={classes.amount}>
+            {x.amount}
+          </Typography>
         )
       ) : (
-        <Typography variant="body1">
-          {`${formatNumber(
+        <Typography variant="body1" className={classes.amount}>
+          {`${formatNumber(x.amount?.value, x.amount?.exponent, 'whole')}`}
+          <span className={classes.decimal}>{`${formatNumber(
             x.amount?.value,
-            x.amount?.exponent
-          )} ${x?.amount?.displayDenom?.toUpperCase()}`}
+            x.amount?.exponent,
+            'decimal'
+          )}`}</span>
+          <span className={classes.denom}>{`${x?.amount?.displayDenom?.toUpperCase()}`}</span>
         </Typography>
       ),
     fee: (
-      <Typography variant="body1">
-        {`${formatNumber(x.fee?.value, x.fee?.exponent)} ${x?.fee?.displayDenom?.toUpperCase()}`}
+      <Typography variant="body1" className={classes.amount}>
+        {`${formatNumber(x.fee?.value, x.fee?.exponent, 'whole')}`}
+        <span className={classes.decimal}>{`${formatNumber(
+          x.fee?.value,
+          x.fee?.exponent,
+          'decimal'
+        )}`}</span>
+        <span className={classes.denom}>{`${x?.fee?.displayDenom?.toUpperCase()}`}</span>
       </Typography>
     ),
     type: (
@@ -123,9 +156,8 @@ const Desktop: FC<TransactionsListState> = ({
         {x.messages.count > 1 ? ` + ${x.messages.count - 1}` : ''}
       </div>
     ),
-    result: <Result success={x.success} />,
-    time: <Timestamp timestamp={x.timestamp} />,
-    messages: numeral(x.messages.count).format('0,0'),
+    result: <Result success={x.success} displayLabel={false} />,
+    time: <ExtendedTimestamp timestamp={x.timestamp} />,
   }));
 
   if (itemCount < 10 && hasNextPage && !isNextPageLoading && loadMoreItems) {

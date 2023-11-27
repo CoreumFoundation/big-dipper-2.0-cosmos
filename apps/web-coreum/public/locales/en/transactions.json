@@ -36,7 +36,8 @@
   "logs": "Logs",
   "showDetails": "Show Details",
   "amount": "Amount",
-  "spender": "Spender",
+  "sender": "Sender",
   "receiver": "Receiver",
+  "sender.receiver": "Sender / Receiver",
   "more": "More"
 }

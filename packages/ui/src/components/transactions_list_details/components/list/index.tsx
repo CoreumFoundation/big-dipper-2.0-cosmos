@@ -68,9 +68,9 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, isItemLoaded,
         </span>
       </Link>
     ),
-    spender: transaction.spender.length ? (
-      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.spender)}>
-        {getMiddleEllipsis(transaction.spender, {
+    sender: transaction.sender.length ? (
+      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.sender)}>
+        {getMiddleEllipsis(transaction.sender, {
           beginning: 4,
           ending: 4,
         })}

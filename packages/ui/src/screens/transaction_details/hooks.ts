@@ -26,6 +26,9 @@ const formatOverview = (data: TransactionDetailsQuery) => {
     success,
     memo: data.transaction[0].memo ?? '',
     error: success ? '' : data.transaction[0].rawLog ?? '',
+    sender: '',
+    receiver: '',
+    amount: '',
   };
   return overview;
 };
@@ -89,6 +92,9 @@ export const useTransactionDetails = () => {
       success: false,
       memo: '',
       error: '',
+      sender: '',
+      receiver: '',
+      amount: '',
     },
     logs: null,
     messages: {

@@ -3,7 +3,6 @@ import Loading from '@/components/loading';
 import Result from '@/components/result';
 import SingleTransactionMobile from '@/components/single_transaction_mobile';
 import Tag from '@/components/tag';
-import Timestamp from '@/components/Timestamp';
 import useStyles from '@/components/transactions_list/components/mobile/styles';
 import type { TransactionsListState } from '@/components/transactions_list/types';
 import { useList, useListRow } from '@/hooks/use_react_window';
@@ -22,7 +21,8 @@ import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
 import { formatNumber } from '@/utils/format_token';
 import { Typography } from '@mui/material';
-import { t } from 'i18next';
+import ExtendedTimestamp from '@/components/ExtendedTimestamp';
+import { useTranslation } from 'next-i18next';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -39,7 +39,10 @@ const ListItem: FC<ListItemProps> = ({
   transaction,
   isLast,
 }) => {
+  const { classes } = useStyles();
+  const { t } = useTranslation('transactions');
   const { rowRef } = useListRow(index, setRowHeight);
+
   if (!isItemLoaded?.(index)) {
     return (
       <div style={style}>
@@ -60,8 +63,8 @@ const ListItem: FC<ListItemProps> = ({
       <>
         <Link shallow prefetch={false} href={TRANSACTION_DETAILS(transaction.hash)}>
           {getMiddleEllipsis(transaction.hash, {
-            beginning: 8,
-            ending: 5,
+            beginning: 6,
+            ending: 4,
           })}
         </Link>
         <CopyIcon
@@ -78,11 +81,11 @@ const ListItem: FC<ListItemProps> = ({
         />
       </>
     ),
-    spender: transaction.spender.length ? (
-      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.spender)}>
-        {getMiddleEllipsis(transaction.spender, {
-          beginning: 8,
-          ending: 5,
+    sender: transaction.sender.length ? (
+      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.sender)}>
+        {getMiddleEllipsis(transaction.sender, {
+          beginning: 6,
+          ending: 4,
         })}
       </Link>
     ) : (
@@ -91,8 +94,8 @@ const ListItem: FC<ListItemProps> = ({
     receiver: transaction.receiver.length ? (
       <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.receiver)}>
         {getMiddleEllipsis(transaction.receiver, {
-          beginning: 8,
-          ending: 5,
+          beginning: 6,
+          ending: 4,
         })}
       </Link>
     ) : (
@@ -109,10 +112,17 @@ const ListItem: FC<ListItemProps> = ({
           <Typography variant="body1">{transaction.amount}</Typography>
         )
       ) : (
-        `${formatNumber(
-          transaction.amount.value,
-          transaction.amount.exponent
-        )} ${transaction?.amount?.displayDenom.toUpperCase()}`
+        <div className={classes.amount}>
+          {`${formatNumber(transaction.amount?.value, transaction.amount?.exponent, 'whole')}`}
+          <span className={classes.decimal}>{`${formatNumber(
+            transaction.amount?.value,
+            transaction.amount?.exponent,
+            'decimal'
+          )}`}</span>
+          <span
+            className={classes.denom}
+          >{`${transaction?.amount?.displayDenom?.toUpperCase()}`}</span>
+        </div>
       ),
     type: (
       <div>
@@ -120,12 +130,19 @@ const ListItem: FC<ListItemProps> = ({
         {transaction.messages.count > 1 && ` + ${transaction.messages.count - 1}`}
       </div>
     ),
-    fee: `${formatNumber(
-      transaction.fee.value,
-      transaction.fee.exponent
-    )} ${transaction?.fee?.displayDenom.toUpperCase()}`,
+    fee: (
+      <div className={classes.amount}>
+        {`${formatNumber(transaction.fee?.value, transaction.fee?.exponent, 'whole')}`}
+        <span className={classes.decimal}>{`${formatNumber(
+          transaction.fee?.value,
+          transaction.fee?.exponent,
+          'decimal'
+        )}`}</span>
+        <span className={classes.denom}>{`${transaction?.fee?.displayDenom?.toUpperCase()}`}</span>
+      </div>
+    ),
     result: <Result success={transaction.success} />,
-    time: <Timestamp timestamp={transaction.timestamp} />,
+    time: <ExtendedTimestamp timestamp={transaction.timestamp} flexEnd={false} />,
     messages: numeral(transaction.messages.count).format('0,0'),
   };
 
@@ -147,7 +164,6 @@ const Mobile: FC<TransactionsListState> = ({
   transactions,
 }) => {
   const { classes, cx } = useStyles();
-
   const { listRef, getRowHeight, setRowHeight } = useList();
 
   return (

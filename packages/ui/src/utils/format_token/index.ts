@@ -67,7 +67,11 @@ export const formatTokenByExponent = (value: number | string | undefined, expone
  * @param toFixed defaults null
  * @returns formatted number with all the decimal places one can wish for
  */
-export const formatNumber = (tokenUnit: string, toFixed: number | null = null): string => {
+export const formatNumber = (
+  tokenUnit: string,
+  toFixed: number | null = null,
+  resultPart: 'whole' | 'decimal' | undefined = undefined
+): string => {
   // split whole number and decimal if any
   const split = `${tokenUnit}`.split('.');
   // whole number
@@ -85,12 +89,30 @@ export const formatNumber = (tokenUnit: string, toFixed: number | null = null): 
     if (toFixed === null) {
       toFixed = decimal.length;
     }
+
     // we remove any ending 0s ex - 100 -> 1
     const formatDecimal = removeEndingZeros(decimal.substring(0, toFixed));
+
+    switch (resultPart) {
+      case 'whole':
+        return formatWholeNumber;
+      case 'decimal':
+        return formatDecimal.length ? `.${formatDecimal}` : '';
+      default:
+    }
+
     // merge the full number together and return it.
     // If for some insane reason after removing all the 0s we ended up with
     // '' in the decimal place we just return the full number
     return `${formatWholeNumber}${formatDecimal.length ? '.' : ''}${formatDecimal}`;
+  }
+
+  switch (resultPart) {
+    case 'whole':
+      return formatWholeNumber;
+    case 'decimal':
+      return '';
+    default:
   }
 
   // else we return whole number

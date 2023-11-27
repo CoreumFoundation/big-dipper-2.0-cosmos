@@ -21,42 +21,63 @@ const uniqueAndSort = R.pipe(
   R.sort(R.descend((r) => r?.height))
 );
 
-const formatSpenderAndReceiver = (transactionLogs: any[], denom: string) => {
-  const spentAttributes = transactionLogs?.[0].events.filter(
-    (event: any) => event.type === 'coin_spent'
+const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom: string) => {
+  const attributes = transactionLogs?.[0]?.events.filter(
+    (event: any) => event.attributes.length > 1
   );
-  const receivedAttributes = transactionLogs?.[0].events.filter(
-    (event: any) => event.type === 'coin_received'
-  );
+  let sender = '-';
 
-  if (!spentAttributes?.length && !receivedAttributes?.length) {
-    return {
-      spender: '',
-      receiver: '',
-      amount: '-',
-    };
+  if (messages?.length) {
+    sender =
+      messages.length === 1
+        ? messages[0].sender ||
+          messages[0].from_address ||
+          messages[0].issuer ||
+          messages[0].grantee ||
+          messages[0].granter ||
+          messages[0].depositor ||
+          messages[0].submitter ||
+          messages[0].proposer ||
+          messages[0].voter ||
+          messages[0].delegator_address ||
+          messages[0].admin ||
+          messages[0].address ||
+          messages[0].executor ||
+          '-'
+        : 'Multiple';
   }
 
-  const spenderDataArr = spentAttributes.filter((event: any) => event.attributes.length === 2);
-  const receiverDataArr = receivedAttributes.filter((event: any) => event.attributes.length === 2);
+  const receivers = attributes
+    ?.map((e: any) => {
+      const receiverItems = e.attributes.filter((attr: any) => attr.key === 'receiver');
 
-  const spenderAccountValue = spenderDataArr?.[0]?.attributes?.find(
-    (item: any) => item.key === 'spender'
-  );
-  const receiverAccountValue = receiverDataArr?.[0]?.attributes?.find(
-    (item: any) => item.key === 'receiver'
-  );
-  const spentAmount = spenderDataArr?.[0]?.attributes?.find(
-    (item: any) => item.key === 'amount' && item.value?.includes(denom)
-  );
-  const receivedAmount = receiverDataArr?.[0]?.attributes?.find(
-    (item: any) => item.key === 'amount' && item.value?.includes(denom)
-  );
+      return receiverItems;
+    })
+    .filter((item: any) => item.length);
+
+  let receiver = '-';
+
+  if (receivers?.length) {
+    receiver = receivers.length === 1 ? receivers[0][0].value : 'Multiple';
+  }
+
+  let amount = '';
+  const coinReceivedEvents = attributes?.filter((item: any) => item.type === 'coin_received');
+
+  if (coinReceivedEvents?.length === 1) {
+    const amountAttribute = coinReceivedEvents[0].attributes.find(
+      (item: any) => item.key === 'amount' && item.value?.includes(denom)
+    );
+
+    if (amountAttribute) {
+      amount = amountAttribute.value;
+    }
+  }
 
   return {
-    spender: spenderAccountValue?.value || '',
-    receiver: receiverAccountValue?.value || '',
-    amount: spentAmount?.value || receivedAmount?.value || '',
+    sender,
+    receiver,
+    amount,
   };
 };
 
@@ -73,7 +94,11 @@ const formatTransactions = (data: TransactionsListenerSubscription): Transaction
       amount: 0,
     };
 
-    const { spender, receiver, amount } = formatSpenderAndReceiver(x.logs, feeAmount.denom);
+    const { sender, receiver, amount } = formatSpenderAndReceiver(
+      x.messages,
+      x.logs,
+      feeAmount.denom
+    );
     const formatedAmount =
       amount !== '' && amount !== '-'
         ? formatToken(amount.replace(feeAmount.denom, ''), feeAmount.denom)
@@ -94,7 +119,7 @@ const formatTransactions = (data: TransactionsListenerSubscription): Transaction
       type: convertedMsgType,
       fee: formatToken(feeAmount.amount, feeAmount.denom),
       amount: formatedAmount,
-      spender,
+      sender,
       receiver,
       messages: {
         count: x.messages.length,
