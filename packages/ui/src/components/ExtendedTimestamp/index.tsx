@@ -86,7 +86,7 @@ const ExtendedTimestamp: FC<ExtendedTimestampProps> = ({ timestamp, flexEnd = tr
       {dayValue}
       <div className={cx(classes.formatDate, flexEnd ? classes.flexEnd : '')}>
         {formatTimestamp}
-        <span>({timePassedValue} ago)</span>
+        {timePassedValue ? <span>({timePassedValue} ago)</span> : ''}
       </div>
     </Typography>
   );
