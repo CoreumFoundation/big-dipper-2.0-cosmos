@@ -42,7 +42,7 @@ const txs: ComponentProps<typeof TransactionsList>['transactions'] = [
       exponent: 6,
       value: '0.7531',
     },
-    spender: 'spenderAddress',
+    sender: 'spenderAddress',
     receiver: 'receiverAddress',
     amount: '',
   },

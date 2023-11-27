@@ -361,6 +361,7 @@ exports[`screen: Transactions matches snapshot 1`] = `
                     "json": {
                       "@type": "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
                       "delegator_address": "desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr",
+                      "sender": "desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr",
                       "validator_address": "desmosvaloper18kvwy5hzcu3ss08lcfcnx0eajuecg69uvk76c3",
                     },
                     "type": "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
@@ -378,6 +379,7 @@ exports[`screen: Transactions matches snapshot 1`] = `
                     "category": "distribution",
                     "json": {
                       "@type": "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
+                      "sender": "desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr",
                       "validator_address": "desmosvaloper18kvwy5hzcu3ss08lcfcnx0eajuecg69uvk76c3",
                     },
                     "type": "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
@@ -386,7 +388,7 @@ exports[`screen: Transactions matches snapshot 1`] = `
                 ],
               },
               "receiver": "addr",
-              "spender": "addr",
+              "sender": "Multiple",
               "success": true,
               "timestamp": "2021-05-28T00:08:33.700487",
               "type": [

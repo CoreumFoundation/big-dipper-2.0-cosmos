@@ -73,10 +73,12 @@ const mockTransactionsListenerDocument = jest.fn().mockReturnValue({
             '@type': '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward',
             delegator_address: 'desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr',
             validator_address: 'desmosvaloper18kvwy5hzcu3ss08lcfcnx0eajuecg69uvk76c3',
+            sender: 'desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr',
           },
           {
             '@type': '/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission',
             validator_address: 'desmosvaloper18kvwy5hzcu3ss08lcfcnx0eajuecg69uvk76c3',
+            sender: 'desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr',
           },
         ],
         fee: {
@@ -137,10 +139,12 @@ const mockTransactionsDocument = jest.fn().mockReturnValue({
             '@type': '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward',
             delegator_address: 'desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr',
             validator_address: 'desmosvaloper18kvwy5hzcu3ss08lcfcnx0eajuecg69uvk76c3',
+            sender: 'desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr',
           },
           {
             '@type': '/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission',
             validator_address: 'desmosvaloper18kvwy5hzcu3ss08lcfcnx0eajuecg69uvk76c3',
+            sender: 'desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr',
           },
         ],
         fee: {

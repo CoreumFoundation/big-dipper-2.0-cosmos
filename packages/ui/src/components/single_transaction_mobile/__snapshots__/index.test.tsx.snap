@@ -191,7 +191,7 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
       <h4
         className="MuiTypography-root MuiTypography-h4 label emotion-3"
       >
-        spender
+        sender
       </h4>
       <p
         className="MuiTypography-root MuiTypography-body1 value emotion-6"
