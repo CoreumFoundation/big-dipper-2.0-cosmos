@@ -35,7 +35,19 @@ exports[`components: Result matches snapshot 1`] = `
 <span
   className="emotion-0"
 >
-  <svg />
+  <span
+    aria-label={null}
+    aria-labelledby={null}
+    data-mui-internal-clone-element={true}
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    onTouchEnd={[Function]}
+    onTouchStart={[Function]}
+  >
+    <svg />
+  </span>
   <span
     className="MuiTypography-root MuiTypography-body1 emotion-1"
   >
@@ -79,7 +91,19 @@ exports[`components: Result matches snapshot success 1`] = `
 <span
   className="emotion-0"
 >
-  <svg />
+  <span
+    aria-label={null}
+    aria-labelledby={null}
+    data-mui-internal-clone-element={true}
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    onTouchEnd={[Function]}
+    onTouchStart={[Function]}
+  >
+    <svg />
+  </span>
   <span
     className="MuiTypography-root MuiTypography-body1 emotion-1"
   >

@@ -145,7 +145,19 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
       <span
         className="emotion-13"
       >
-        <svg />
+        <span
+          aria-label={null}
+          aria-labelledby={null}
+          data-mui-internal-clone-element={true}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOver={[Function]}
+          onTouchEnd={[Function]}
+          onTouchStart={[Function]}
+        >
+          <svg />
+        </span>
         <span
           className="MuiTypography-root MuiTypography-body1 emotion-6"
         >

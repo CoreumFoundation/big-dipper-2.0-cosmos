@@ -6,6 +6,7 @@ import { convertMsgsToModels } from '@/components/msg/utils';
 import { BlockDetailsQuery, useBlockDetailsQuery } from '@/graphql/types/general_types';
 import type { BlockDetailState } from '@/screens/block_details/types';
 import { convertMsgType } from '@/utils/convert_msg_type';
+import { formatToken } from '@/utils/format_token';
 
 export const useBlockDetails = () => {
   const router = useRouter();
@@ -88,8 +89,84 @@ const formatSignatures = (data: BlockDetailsQuery) => {
 // ==========================
 // Transactions
 // ==========================
+const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom: string) => {
+  const attributes = transactionLogs?.[0]?.events.filter(
+    (event: any) => event.attributes.length > 1
+  );
+  let sender = '-';
+
+  if (messages?.length) {
+    sender =
+      messages.length === 1
+        ? messages[0].sender ||
+          messages[0].from_address ||
+          messages[0].issuer ||
+          messages[0].grantee ||
+          messages[0].granter ||
+          messages[0].depositor ||
+          messages[0].submitter ||
+          messages[0].proposer ||
+          messages[0].voter ||
+          messages[0].delegator_address ||
+          messages[0].admin ||
+          messages[0].address ||
+          messages[0].executor ||
+          '-'
+        : 'Multiple';
+  }
+
+  const receivers = attributes
+    ?.map((e: any) => {
+      const receiverItems = e.attributes.filter((attr: any) => attr.key === 'receiver');
+
+      return receiverItems;
+    })
+    .filter((item: any) => item.length);
+
+  let receiver = '-';
+
+  if (receivers?.length) {
+    receiver = receivers.length === 1 ? receivers[0][0].value : 'Multiple';
+  }
+
+  let amount = '';
+  const coinReceivedEvents = attributes?.filter((item: any) => item.type === 'coin_received');
+
+  if (coinReceivedEvents?.length === 1) {
+    const amountAttribute = coinReceivedEvents[0].attributes.find(
+      (item: any) => item.key === 'amount' && item.value?.includes(denom)
+    );
+
+    if (amountAttribute) {
+      amount = amountAttribute.value;
+    }
+  }
+
+  return {
+    sender,
+    receiver,
+    amount,
+  };
+};
+
 const formatTransactions = (data: BlockDetailsQuery, stateChange: Partial<BlockDetailState>) => {
   const transactions = data.transaction.map((x) => {
+    const { fee, logs, messages: txMessages } = x;
+
+    const feeAmount = fee?.amount?.[0] ?? {
+      denom: '',
+      amount: 0,
+    };
+    const { sender, receiver, amount } = formatSpenderAndReceiver(
+      txMessages,
+      logs,
+      feeAmount.denom
+    );
+    const formatedAmount =
+      amount !== '' && amount !== '-'
+        ? formatToken(amount.replace(feeAmount.denom, ''), feeAmount.denom)
+        : amount;
+
     const messages = convertMsgsToModels(x);
     const msgType = messages.map((eachMsg) => {
       const eachMsgType = eachMsg?.type ?? 'none type';
@@ -106,6 +183,10 @@ const formatTransactions = (data: BlockDetailsQuery, stateChange: Partial<BlockD
         count: x.messages.length,
         items: messages,
       },
+      fee: formatToken(feeAmount.amount, feeAmount.denom),
+      amount: formatedAmount,
+      sender,
+      receiver,
     };
   });
 

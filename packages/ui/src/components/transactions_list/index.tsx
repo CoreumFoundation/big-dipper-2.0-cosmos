@@ -33,8 +33,6 @@ const TransactionsList: FC<TransactionsListState> = (props) => {
     return isNextPageLoading ? <Loading /> : <NoData />;
   }
 
-  console.log(transactions);
-
   return (
     <>
       <Desktop className={display.hiddenUntilLg} {...formatProps} />

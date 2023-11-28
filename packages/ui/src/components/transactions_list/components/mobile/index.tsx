@@ -81,26 +81,30 @@ const ListItem: FC<ListItemProps> = ({
         />
       </>
     ),
-    sender: transaction.sender.length ? (
-      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.sender)}>
-        {getMiddleEllipsis(transaction.sender, {
-          beginning: 6,
-          ending: 4,
-        })}
-      </Link>
-    ) : (
-      '-'
-    ),
-    receiver: transaction.receiver.length ? (
-      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.receiver)}>
-        {getMiddleEllipsis(transaction.receiver, {
-          beginning: 6,
-          ending: 4,
-        })}
-      </Link>
-    ) : (
-      '-'
-    ),
+    sender:
+      !transaction.sender || transaction.sender === '-' || transaction.sender === 'Multiple' ? (
+        <span>{transaction.sender || '-'}</span>
+      ) : (
+        <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.sender)}>
+          {getMiddleEllipsis(transaction?.sender || '', {
+            beginning: 4,
+            ending: 4,
+          })}
+        </Link>
+      ),
+    receiver:
+      !transaction.receiver ||
+      transaction.receiver === '-' ||
+      transaction.receiver === 'Multiple' ? (
+        <span>{transaction.receiver || '-'}</span>
+      ) : (
+        <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.receiver)}>
+          {getMiddleEllipsis(transaction?.receiver || '', {
+            beginning: 4,
+            ending: 4,
+          })}
+        </Link>
+      ),
     amount:
       typeof transaction.amount === 'string' &&
       (transaction.amount === '' || transaction.amount === '-') ? (

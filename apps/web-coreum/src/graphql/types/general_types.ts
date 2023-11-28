@@ -12307,6 +12307,7 @@ export const BlockDetailsDocument = gql`
     messages
     success
     logs
+    fee
   }
   block(limit: 1, where: {height: {_eq: $height}}) {
     height

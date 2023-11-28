@@ -8,10 +8,7 @@ import { ListChildComponentProps, VariableSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader';
 import { useRecoilValue } from 'recoil';
 import Loading from '@/components/loading';
-import {
-  getMessageByType,
-  // getTagDisplayValue,
-} from '@/components/msg/utils';
+import { getMessageByType } from '@/components/msg/utils';
 import Result from '@/components/result';
 import Tag from '@/components/tag';
 import SingleTransaction from '@/components/transactions_list_details/components/list/components/single_transaction';
@@ -26,6 +23,8 @@ import { ACCOUNT_DETAILS, BLOCK_DETAILS, TRANSACTION_DETAILS } from '@/utils/go_
 import { mergeRefs } from '@/utils/merge_refs';
 import { formatNumber } from '@/utils/format_token';
 import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import Zoom from '@mui/material/Zoom';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -68,26 +67,44 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, isItemLoaded,
         </span>
       </Link>
     ),
-    sender: transaction.sender.length ? (
-      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.sender)}>
-        {getMiddleEllipsis(transaction.sender, {
-          beginning: 4,
-          ending: 4,
-        })}
-      </Link>
-    ) : (
-      '-'
-    ),
-    receiver: transaction.receiver.length ? (
-      <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.receiver)}>
-        {getMiddleEllipsis(transaction.receiver, {
-          beginning: 4,
-          ending: 4,
-        })}
-      </Link>
-    ) : (
-      '-'
-    ),
+    sender:
+      !transaction.sender || transaction.sender === '-' || transaction.sender === 'Multiple' ? (
+        <span>{transaction.sender || '-'}</span>
+      ) : (
+        <Tooltip
+          TransitionComponent={Zoom}
+          title={<pre>{transaction.sender}</pre>}
+          placement="bottom"
+          arrow
+        >
+          <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.sender)}>
+            {getMiddleEllipsis(transaction?.sender || '', {
+              beginning: 4,
+              ending: 4,
+            })}
+          </Link>
+        </Tooltip>
+      ),
+    receiver:
+      !transaction.receiver ||
+      transaction.receiver === '-' ||
+      transaction.receiver === 'Multiple' ? (
+        <span>{transaction.receiver || '-'}</span>
+      ) : (
+        <Tooltip
+          TransitionComponent={Zoom}
+          title={<pre>{transaction.receiver}</pre>}
+          placement="bottom"
+          arrow
+        >
+          <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.receiver)}>
+            {getMiddleEllipsis(transaction?.receiver || '', {
+              beginning: 4,
+              ending: 4,
+            })}
+          </Link>
+        </Tooltip>
+      ),
     amount:
       typeof transaction.amount === 'string' &&
       (transaction.amount === '' || transaction.amount === '-') ? (

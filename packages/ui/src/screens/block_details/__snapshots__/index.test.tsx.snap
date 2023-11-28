@@ -69,6 +69,13 @@ exports[`screen: BlockDetails matches snapshot 1`] = `
         transactions={
           [
             {
+              "amount": "",
+              "fee": {
+                "baseDenom": "",
+                "displayDenom": "",
+                "exponent": 0,
+                "value": "0",
+              },
               "hash": "393310C681CB39E09CD3AC16C600DBFDACB2DF5085277DA81E52698620C06136",
               "height": 999,
               "messages": {
@@ -95,6 +102,8 @@ exports[`screen: BlockDetails matches snapshot 1`] = `
                   },
                 ],
               },
+              "receiver": "-",
+              "sender": "desmos18kvwy5hzcu3ss08lcfcnx0eajuecg69ujmkwjr",
               "success": true,
               "timestamp": "2021-04-27T16:27:34.331769",
               "type": [
