@@ -45,9 +45,9 @@ jobs:
           build-args: |
             "PROJECT_NAME=web-coreum"
 
-      # - name: Update Devnet Deployment
-      #   run: |-
-      #     curl -v -u "${{ secrets.KEEL_DEVNET_USERNAME }}:${{ secrets.KEEL_DEVNET_PASSWORD }}" -X POST ${{ env.DEVNET_WEBHOOK_ENDPOINT }}  -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ env.TAG }}\"}"
+      - name: Update Devnet Deployment
+        run: |-
+          curl -v -u "${{ secrets.KEEL_DEVNET_USERNAME }}:${{ secrets.KEEL_DEVNET_PASSWORD }}" -X POST ${{ env.DEVNET_WEBHOOK_ENDPOINT }}  -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"devnet-${{ env.TAG }}\"}"
 
       # - name: Update Testnet Deployment
       #   run: |-
