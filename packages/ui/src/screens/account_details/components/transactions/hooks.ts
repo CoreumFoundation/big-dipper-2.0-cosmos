@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import * as R from 'ramda';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { convertMsgsToModels } from '@/components/msg/utils';
 import {
   GetMessagesByAddressQuery,
@@ -160,6 +160,14 @@ export function useTransactions() {
       handleSetState((prevState) => ({ ...prevState, ...stateChange }));
     },
   });
+
+  useEffect(() => {
+    const { loading } = transactionQuery;
+
+    if (loading !== state.isNextPageLoading) {
+      handleSetState((prevState) => ({ ...prevState, isNextPageLoading: true }));
+    }
+  }, [transactionQuery, state.isNextPageLoading]);
 
   const loadNextPage = async () => {
     handleSetState((prevState) => ({ ...prevState, isNextPageLoading: true }));
