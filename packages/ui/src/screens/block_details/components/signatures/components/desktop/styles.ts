@@ -11,6 +11,9 @@ const useStyles = makeStyles()((theme) => ({
   body: {
     color: theme.palette.custom.fonts.fontTwo,
   },
+  cellItem: {
+    width: 'auto',
+  },
 }));
 
 export default useStyles;

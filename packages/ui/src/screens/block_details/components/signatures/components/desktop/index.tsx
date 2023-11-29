@@ -66,7 +66,8 @@ const Desktop: FC<DesktopProps> = ({ className, signatures }) => {
             >
               {({ columnIndex, rowIndex, style }) => {
                 const { key, align } = columns[columnIndex];
-                const selectedItem = rows[rowIndex][key as keyof typeof rows[number]];
+                const selectedItem = rows[rowIndex][key as keyof (typeof rows)[number]];
+
                 return (
                   <div
                     style={style}
@@ -74,7 +75,12 @@ const Desktop: FC<DesktopProps> = ({ className, signatures }) => {
                       odd: !(rowIndex % 2),
                     })}
                   >
-                    <Typography variant="body1" align={align} component="div">
+                    <Typography
+                      variant="body1"
+                      align={align}
+                      component="div"
+                      className={classes.cellItem}
+                    >
                       {selectedItem}
                     </Typography>
                   </div>
