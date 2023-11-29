@@ -162,12 +162,13 @@ export function useTransactions() {
   });
 
   useEffect(() => {
-    const { loading } = transactionQuery;
-
-    if (loading !== state.isNextPageLoading) {
-      handleSetState((prevState) => ({ ...prevState, isNextPageLoading: true }));
-    }
-  }, [transactionQuery, state.isNextPageLoading]);
+    setState({
+      data: [],
+      hasNextPage: false,
+      isNextPageLoading: true,
+      offsetCount: 0,
+    });
+  }, [router?.query?.address]);
 
   const loadNextPage = async () => {
     handleSetState((prevState) => ({ ...prevState, isNextPageLoading: true }));
