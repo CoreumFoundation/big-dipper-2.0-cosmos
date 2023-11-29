@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 
 /* styles */
@@ -38,13 +38,14 @@ const ExtendedTimestamp: FC<ExtendedTimestampProps> = ({ timestamp, flexEnd = tr
   const interval = useRef<NodeJS.Timer>();
 
   const { classes, cx } = useStyles();
-  const inputDate = useMemo(() => new Date(timestamp), [timestamp]);
+  const inputDate = useMemo(() => new Date(`${timestamp}Z`), [timestamp]);
   const currentDate = useMemo(() => new Date(), []);
-
   const timePassedMs = useMemo(
     () => currentDate.getTime() - inputDate.getTime(),
     [currentDate, inputDate]
   );
+
+  inputDate.setTime(inputDate.getTime() + inputDate.getTimezoneOffset() * 60000);
 
   const dayValue = useMemo(
     () =>
@@ -67,22 +68,34 @@ const ExtendedTimestamp: FC<ExtendedTimestampProps> = ({ timestamp, flexEnd = tr
     [inputDate]
   );
 
+  const getTimePassedValue = useCallback((timeMs: number) => {
+    let timePassed = '';
+    if (timeMs < 60000) {
+      timePassed = `${Math.floor(timeMs / 1000)}s`;
+    } else if (timeMs < 3600000) {
+      timePassed = `${Math.floor(timeMs / 60000)}m`;
+    } else if (timeMs < 86400000) {
+      timePassed = `${Math.floor(timeMs / 3600000)}h`;
+    } else if (timeMs < 2592000000) {
+      // Approximate duration for a month
+      timePassed = `${Math.floor(timeMs / 86400000)}d`;
+    } else {
+      timePassed = `${Math.floor(timeMs / 2592000000)}mo`;
+    }
+
+    return timePassed;
+  }, []);
+
+  useEffect(() => {
+    const timePassed = getTimePassedValue(timePassedMs);
+
+    setTimePassedValue(timePassed);
+  }, []);
+
   useEffect(() => {
     if (timestamp)
       interval.current = setInterval(() => {
-        let timePassed = '';
-        if (timePassedMs < 60000) {
-          timePassed = `${Math.floor(timePassedMs / 1000)}s`;
-        } else if (timePassedMs < 3600000) {
-          timePassed = `${Math.floor(timePassedMs / 60000)}m`;
-        } else if (timePassedMs < 86400000) {
-          timePassed = `${Math.floor(timePassedMs / 3600000)}h`;
-        } else if (timePassedMs < 2592000000) {
-          // Approximate duration for a month
-          timePassed = `${Math.floor(timePassedMs / 86400000)}d`;
-        } else {
-          timePassed = `${Math.floor(timePassedMs / 2592000000)}mo`;
-        }
+        const timePassed = getTimePassedValue(timePassedMs);
 
         setTimePassedValue(timePassed);
       }, 1000);
