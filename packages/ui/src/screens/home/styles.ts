@@ -90,14 +90,18 @@ const useStyles = makeStyles()((theme) => ({
     '& .blocks': {
       [theme.breakpoints.up('md')]: {
         gridColumn: '1',
+        height: 'fit-content',
       },
       [theme.breakpoints.up('lg')]: {
         gridColumn: '1',
       },
     },
     '& .transactions': {
+      height: 'fit-content',
+
       [theme.breakpoints.up('md')]: {
         gridColumn: '1',
+        height: 'fit-content',
       },
       [theme.breakpoints.up('lg')]: {
         gridColumn: '2',

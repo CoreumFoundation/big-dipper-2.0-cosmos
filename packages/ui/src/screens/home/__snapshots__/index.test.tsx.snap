@@ -145,6 +145,9 @@ exports[`screen: Home matches snapshot 1`] = `
 @media (min-width:768px) {
   .emotion-6 .blocks {
     grid-column: 1;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
   }
 }
 
@@ -154,9 +157,18 @@ exports[`screen: Home matches snapshot 1`] = `
   }
 }
 
+.emotion-6 .transactions {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 @media (min-width:768px) {
   .emotion-6 .transactions {
     grid-column: 1;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
   }
 }
 
