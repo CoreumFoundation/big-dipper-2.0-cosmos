@@ -21,7 +21,8 @@ const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom
   if (messages?.length) {
     sender =
       messages.length === 1
-        ? messages[0].sender ||
+        ? messages[0].executor ||
+          messages[0].sender ||
           messages[0].from_address ||
           messages[0].issuer ||
           messages[0].grantee ||
@@ -33,7 +34,6 @@ const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom
           messages[0].delegator_address ||
           messages[0].admin ||
           messages[0].address ||
-          messages[0].executor ||
           '-'
         : 'Multiple';
   }
@@ -67,7 +67,7 @@ const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom
 
   return {
     sender,
-    receiver,
+    receiver: receiver.replaceAll('"', ''),
     amount,
   };
 };
