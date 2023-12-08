@@ -2560,11 +2560,9 @@ export type Genesis_Variance_Fields = {
 /** columns and relationships of "gov_params" */
 export type Gov_Params = {
   __typename?: 'gov_params';
-  deposit_params: Scalars['jsonb'];
   height: Scalars['bigint'];
   one_row_id: Scalars['Boolean'];
-  tally_params: Scalars['jsonb'];
-  voting_params: Scalars['jsonb'];
+  params: any;
 };
 
 
@@ -2626,11 +2624,9 @@ export type Gov_Params_Bool_Exp = {
   _and?: InputMaybe<Array<Gov_Params_Bool_Exp>>;
   _not?: InputMaybe<Gov_Params_Bool_Exp>;
   _or?: InputMaybe<Array<Gov_Params_Bool_Exp>>;
-  deposit_params?: InputMaybe<Jsonb_Comparison_Exp>;
   height?: InputMaybe<Bigint_Comparison_Exp>;
   one_row_id?: InputMaybe<Boolean_Comparison_Exp>;
-  tally_params?: InputMaybe<Jsonb_Comparison_Exp>;
-  voting_params?: InputMaybe<Jsonb_Comparison_Exp>;
+  params?: any;
 };
 
 /** aggregate max on columns */
@@ -12856,8 +12852,8 @@ export const ProposalDetailsTallyDocument = gql`
   ) {
     bondedTokens: bonded_tokens
   }
-  quorum: gov_params(limit: 1, order_by: {height: desc}) {
-    tallyParams: tally_params
+  quorum: gov_params(limit: 1, order_by: {height: desc, params: asc}) {
+    params
   }
 }
     `;
