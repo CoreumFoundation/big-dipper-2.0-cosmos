@@ -3,7 +3,7 @@ name: Docker-Production
 on:
   push:
     branches:
-      - devnet
+      - master
 
 env:
   REPO: big-dipper-ui
@@ -37,8 +37,8 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ env.ORG }}/${{ env.REPO }}:devnet-${{ env.TAG }}
-            ${{ env.ORG }}/${{ env.REPO }}:devnet-latest
+            ${{ env.ORG }}/${{ env.REPO }}:${{ env.TAG }}
+            ${{ env.ORG }}/${{ env.REPO }}:latest
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           push: true
@@ -49,10 +49,10 @@ jobs:
         run: |-
           curl -v -u "${{ secrets.KEEL_DEVNET_USERNAME }}:${{ secrets.KEEL_DEVNET_PASSWORD }}" -X POST ${{ env.DEVNET_WEBHOOK_ENDPOINT }}  -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"devnet-${{ env.TAG }}\"}"
 
-      # - name: Update Testnet Deployment
-      #   run: |-
-      #     curl -v -u "${{ secrets.KEEL_TESTNET_USERNAME }}:${{ secrets.KEEL_TESTNET_PASSWORD }}" -X POST ${{ env.TESTNET_WEBHOOK_ENDPOINT }} -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ env.TAG }}\"}"
+      - name: Update Testnet Deployment
+        run: |-
+          curl -v -u "${{ secrets.KEEL_TESTNET_USERNAME }}:${{ secrets.KEEL_TESTNET_PASSWORD }}" -X POST ${{ env.TESTNET_WEBHOOK_ENDPOINT }} -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ env.TAG }}\"}"
 
-      # - name: Update Mainnet Deployment
-      #   run: |-
-      #     curl -v -u "${{ secrets.KEEL_MAINNET_USERNAME }}:${{ secrets.KEEL_MAINNET_PASSWORD }}" -X POST ${{ env.MAINNET_WEBHOOK_ENDPOINT }} -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ env.TAG }}\"}"
+      - name: Update Mainnet Deployment
+        run: |-
+          curl -v -u "${{ secrets.KEEL_MAINNET_USERNAME }}:${{ secrets.KEEL_MAINNET_PASSWORD }}" -X POST ${{ env.MAINNET_WEBHOOK_ENDPOINT }} -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ env.TAG }}\"}"
