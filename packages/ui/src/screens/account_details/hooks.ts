@@ -31,6 +31,7 @@ const defaultTokenUnit: TokenUnit = {
 
 const initialState: AccountDetailState = {
   loading: true,
+  balanceLoading: true,
   exists: true,
   desmosProfile: null,
   overview: {
@@ -196,7 +197,7 @@ const formatOtherTokens = (data: Data) => {
 // ==========================
 const formatAllBalance = (data: Data) => {
   const stateChange: Partial<AccountDetailState> = {
-    loading: false,
+    balanceLoading: false,
   };
 
   stateChange.rewards = formatRewards(data);
@@ -230,12 +231,17 @@ export const useAccountDetails = () => {
   // ==========================
   // Desmos Profile
   // ==========================
-  const { data: dataDesmosProfile } = useDesmosProfile({
+  const { data: dataDesmosProfile, loading: loadingDesmosProfile } = useDesmosProfile({
     addresses: [address],
     skip: !extra.profile || !address,
   });
   useEffect(
-    () => setState((prevState) => ({ ...prevState, desmosProfile: dataDesmosProfile?.[0] })),
+    () =>
+      setState((prevState) => ({
+        ...prevState,
+        desmosProfile: dataDesmosProfile?.[0],
+        loading: loadingDesmosProfile,
+      })),
     [dataDesmosProfile]
   );
 
@@ -269,6 +275,7 @@ export const useAccountDetails = () => {
   useEffect(() => {
     handleSetState((prevState) => ({
       ...prevState,
+      loading: false,
       overview: {
         address: address ?? '',
         withdrawalAddress: withdrawalAddress.withdrawalAddress?.address ?? '',

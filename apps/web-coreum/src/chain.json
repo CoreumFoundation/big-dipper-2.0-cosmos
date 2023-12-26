@@ -222,7 +222,7 @@
       "votingPowerTokenUnit": "ucore",
       "tokenUnits": {
         "ucore": {
-          "display": "core",
+          "display": "coreum",
           "exponent": 6
         }
       },
@@ -252,7 +252,7 @@
       "votingPowerTokenUnit": "utestcore",
       "tokenUnits": {
         "utestcore": {
-          "display": "testcore",
+          "display": "coreum",
           "exponent": 6
         }
       },
@@ -282,7 +282,7 @@
       "votingPowerTokenUnit": "udevcore",
       "tokenUnits": {
         "udevcore": {
-          "display": "devcore",
+          "display": "coreum",
           "exponent": 6
         }
       },

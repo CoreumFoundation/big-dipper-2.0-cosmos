@@ -11,11 +11,9 @@ import Big from 'big.js';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import numeral from 'numeral';
-import { FC, useState, useEffect, useMemo } from 'react';
+import { FC } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { useRecoilValue } from 'recoil';
-import axios from 'axios';
-import Spinner from '@/components/loadingSpinner';
 
 const DynamicPieChart = dynamic(() => Promise.resolve(PieChart), { ssr: false });
 const { primaryTokenUnit, tokenUnits } = chainConfig();
@@ -51,66 +49,15 @@ const Balance: FC<BalanceProps> = (props) => {
   const notEmpty = formatData.some((x) => x.value && Big(x.value).gt(0));
   const dataMemo = useShallowMemo(notEmpty ? formatData : [...formatData, empty]);
 
-  const [price, setPrice] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      (async () => {
-        try {
-          setIsLoading(true);
-          const symbols = [
-            'XRP/USD+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq',
-            '434F524500000000000000000000000000000000+rcoreNywaoz2ZCQ8Lg2EbSLnGuRBmun6D/XRP',
-          ];
-          const response = await axios.post('https://api.sologenic.org/api/v1/tickers/24h', {
-            symbols,
-          });
-
-          if (response.status === 200) {
-            const coreXrp: any = Object.values(response.data)[0];
-            const xrpUsd: any = Object.values(response.data)[1];
-
-            const coreumPrice = Big(coreXrp.last_price).times(xrpUsd.last_price);
-            setPrice(coreumPrice.toNumber());
-            setIsLoading(false);
-          }
-        } catch (e) {
-          setIsError(true);
-          console.error(e);
-          setIsLoading(false);
-        }
-      })();
-    }
-  }, []);
-
   const dataCount = formatData.filter((x) => x.value && Big(x.value).gt(0)).length;
   const totalAmount = `$${numeral(
-    Big(market.price || price)
+    Big(market.price || 0)
       ?.times(props.total.value)
       .toPrecision()
   ).format('0,0.0000')}`;
 
   // format
   const totalDisplay = formatNumber(props.total.value, props.total.exponent);
-
-  const renderTotal = useMemo(() => {
-    if (isLoading) {
-      return <Spinner customStyle={{ marginLeft: '1rem', justifyContent: 'center' }} />;
-    }
-
-    if (isError) {
-      return 'Error fetching CORE-USD price';
-    }
-
-    return (
-      /* Kept the "toUpperCase()" in order to show the token symbol in uppercase */
-      `$${numeral(market.price || price).format('0,0.[0000]', Math.floor)} / ${
-        tokenUnits?.[primaryTokenUnit]?.display?.toUpperCase() ?? ''
-      }`
-    );
-  }, [isError, isLoading, market.price, price]);
 
   return (
     <Box className={cx(classes.root, props.className)}>
@@ -169,14 +116,11 @@ const Balance: FC<BalanceProps> = (props) => {
           </div>
           <Divider />
           <div className="total__secondary--container total__single--container">
-            <Typography
-              variant="body1"
-              className="label"
-              style={isError ? { color: '#F34747' } : {}}
-            >
-              {renderTotal}
+            <Typography variant="body1" className="label">
+              ${numeral(market.price).format('0,0.[00]', Math.floor)} /{' '}
+              {(tokenUnits?.[primaryTokenUnit]?.display ?? '').toUpperCase()}
             </Typography>
-            <Typography variant="body1">{price === 0 ? '--' : totalAmount}</Typography>
+            <Typography variant="body1">{totalAmount}</Typography>
           </div>
         </div>
       </div>
