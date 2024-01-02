@@ -11907,6 +11907,8 @@ export type ValidatorAddressesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ValidatorAddressesQuery = { validator: Array<{ __typename?: 'validator', validatorInfo?: { __typename?: 'validator_info', operatorAddress: string, selfDelegateAddress?: string | null, consensusAddress: string } | null, validatorDescriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatarUrl?: string | null }> }> };
 
+export type AssetsQuery = { token_holder_count: Array<{ denom: string, holders: number, __typename?: 'token_holder_count', }>, supply: { __typename?: 'supply', coins: Array<{ __typename?: 'coins', denom: string, amount: number }>, height: number }, account_aggregate: { __typename?: 'account_aggregate', aggregate: { count: number } }};
+export type AssetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export const AccountCommissionDocument = gql`
     query AccountCommission($validatorAddress: String!) {
@@ -13723,3 +13725,48 @@ export function useValidatorAddressesLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type ValidatorAddressesQueryHookResult = ReturnType<typeof useValidatorAddressesQuery>;
 export type ValidatorAddressesLazyQueryHookResult = ReturnType<typeof useValidatorAddressesLazyQuery>;
 export type ValidatorAddressesQueryResult = Apollo.QueryResult<ValidatorAddressesQuery, ValidatorAddressesQueryVariables>;
+
+
+export const AssetsDocument = gql`
+  query Assets {
+    token_holder_count {
+      denom
+      holders
+    }
+    supply {
+      coins
+      height
+    }
+    account_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+/**
+ * __useAssetsQuery__
+ *
+ * To run a query within a React component, call `useAssetsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAssetsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAssetsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAssetsQuery(baseOptions?: Apollo.QueryHookOptions<AssetsQuery, AssetsQueryVariables>) {
+  const options = {...defaultOptions, ...baseOptions}
+  return Apollo.useQuery<AssetsQuery, AssetsQueryVariables>(AssetsDocument, options);
+}
+export function useAssetsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AssetsQuery, AssetsQueryVariables>) {
+    const options = {...defaultOptions, ...baseOptions}
+    return Apollo.useLazyQuery<AssetsQuery, AssetsQueryVariables>(AssetsDocument, options);
+  }
+export type AssetsQueryHookResult = ReturnType<typeof useValidatorAddressesQuery>;
+export type AssetsLazyQueryHookResult = ReturnType<typeof useValidatorAddressesLazyQuery>;
+export type AssetsQueryResult = Apollo.QueryResult<AssetsQuery, AssetsQueryVariables>;

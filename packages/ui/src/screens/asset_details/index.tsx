@@ -8,12 +8,13 @@ import AssetOverview from '@/screens/asset_details/components/AssetOverview';
 import AssetDetailsOverview from '@/screens/asset_details/components/AssetDetails';
 import AssetPriceOverview from '@/screens/asset_details/components/AssetPriceOverview';
 import Link from 'next/link';
+import { Fragment } from 'react';
 
 const AssetDetails = () => {
   const { t } = useTranslation('assets');
   const { classes } = useStyles();
-  const { state, loading } = useAssetDetails();
-  const { exists, asset } = state;
+  const { state } = useAssetDetails();
+  const { exists, asset, loading, metadataLoading, assetsLoading } = state;
 
   return (
     <>
@@ -24,7 +25,7 @@ const AssetDetails = () => {
         }}
       />
       <Layout navTitle={t('assetDetails') ?? undefined}>
-        <LoadAndExist exists={exists} loading={loading}>
+        <LoadAndExist exists={exists} loading={loading || metadataLoading || assetsLoading}>
           <div className={classes.root}>
             <div className={classes.block}>
               <Link href="/assets" className={classes.breadcrumb}>
@@ -41,9 +42,13 @@ const AssetDetails = () => {
               </Link>
               <div className={classes.title}>{t('assetDetails')}</div>
             </div>
-            <AssetOverview className={classes.block} asset={asset} />
-            <AssetDetailsOverview className={classes.block} asset={asset} />
-            <AssetPriceOverview className={classes.block} asset={asset} />
+            {asset && (
+              <>
+                <AssetOverview className={classes.block} asset={asset} />
+                <AssetDetailsOverview className={classes.block} asset={asset} />
+                <AssetPriceOverview className={classes.block} asset={asset} />
+              </>
+            )}
           </div>
         </LoadAndExist>
       </Layout>

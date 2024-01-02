@@ -113,9 +113,9 @@ const useStyles = makeStyles()((theme) => ({
   },
   pricesContainer: {
     display: 'grid',
-    [theme.breakpoints.up('md')]: {
-      borderRight: '1px solid #23272E',
-    },
+    // [theme.breakpoints.up('md')]: {
+    //   borderRight: '1px solid #23272E',
+    // },
   },
   pricesColumn: {
     display: 'flex',
@@ -130,6 +130,7 @@ const useStyles = makeStyles()((theme) => ({
     color: '#3379e2',
     background: alpha('#3379e2', 0.25),
     borderRadius: 2,
+    textTransform: 'uppercase',
   },
   chain: {
     display: 'flex',

@@ -11905,7 +11905,6 @@ export type ValidatorAddressesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ValidatorAddressesQuery = { validator: Array<{ __typename?: 'validator', validatorInfo?: { __typename?: 'validator_info', operatorAddress: string, selfDelegateAddress?: string | null, consensusAddress: string } | null, validatorDescriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatarUrl?: string | null }> }> };
 
-
 export const AccountCommissionDocument = gql`
     query AccountCommission($validatorAddress: String!) {
   commission: action_validator_commission_amount(address: $validatorAddress) {
@@ -13734,3 +13733,90 @@ export function useValidatorAddressesLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type ValidatorAddressesQueryHookResult = ReturnType<typeof useValidatorAddressesQuery>;
 export type ValidatorAddressesLazyQueryHookResult = ReturnType<typeof useValidatorAddressesLazyQuery>;
 export type ValidatorAddressesQueryResult = Apollo.QueryResult<ValidatorAddressesQuery, ValidatorAddressesQueryVariables>;
+
+
+export type AssetsQuery = { token_holder_count: Array<{ denom: string, holders: number, __typename?: 'token_holder_count', }>, supply: { __typename?: 'supply', coins: Array<{ __typename?: 'coins', denom: string, amount: number }>, height: number }, account_aggregate: { __typename?: 'account_aggregate', aggregate: { count: number } }};
+export type AssetsQueryVariables = Exact<{ [key: string]: never; }>;
+
+export const AssetsDocument = gql`
+  query AssetsDocument {
+    token_holder_count {
+      denom
+      holders
+    }
+    supply {
+      coins
+      height
+    }
+    account_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+/**
+ * __useAssetsQuery__
+ *
+ * To run a query within a React component, call `useAssetsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAssetsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAssetsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAssetsQuery(baseOptions?: Apollo.QueryHookOptions<AssetsQuery, AssetsQueryVariables>) {
+  const options = {...defaultOptions, ...baseOptions}
+  return Apollo.useQuery<AssetsQuery, AssetsQueryVariables>(AssetsDocument, options);
+}
+export function useAssetsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AssetsQuery, AssetsQueryVariables>) {
+    const options = {...defaultOptions, ...baseOptions}
+    return Apollo.useLazyQuery<AssetsQuery, AssetsQueryVariables>(AssetsDocument, options);
+  }
+export type AssetsQueryHookResult = ReturnType<typeof useValidatorAddressesQuery>;
+export type AssetsLazyQueryHookResult = ReturnType<typeof useValidatorAddressesLazyQuery>;
+export type AssetsQueryResult = Apollo.QueryResult<AssetsQuery, AssetsQueryVariables>;
+
+// curl 'https://hasura.devnet-1.coreum.dev/v1/graphql' \
+// --header 'Referer: https://hasura.devnet-1.coreum.dev/console' \
+// --header 'x-hasura-admin-secret: coreumsupersecret' \
+// --header 'Origin: https://hasura.devnet-1.coreum.dev' \
+// --header 'Connection: keep-alive' \
+// --header 'Sec-Fetch-Dest: empty' \
+// --header 'Sec-Fetch-Mode: cors' \
+// --header 'Sec-Fetch-Site: same-origin' \
+// --header 'TE: trailers' \
+//   -H 'authority: hasura.devnet-1.coreum.dev' \
+//   -H 'accept: */*' \
+//   -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
+//   -H 'content-type: application/json' \
+//   -H 'sec-ch-ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"' \
+//   -H 'sec-ch-ua-mobile: ?0' \
+//   -H 'sec-ch-ua-platform: "macOS"' \
+//   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' \
+//   --data-raw '[{"operationName":"AssetsDocument","variables":{},"query":"query AssetsDocument {\n  token_holder_count {\n    denom\n    holders\n    __typename\n  }\n  supply {\n    coins\n    height\n    __typename\n  }\n  account_aggregate {\n    aggregate {\n      count\n      __typename\n    }\n    __typename\n  }\n}"}]' \
+//   --compressed
+
+// curl 'https://hasura.devnet-1.coreum.dev/v1/graphql' \
+//   -H 'referer: http://localhost:3000/' \
+//   -H 'origin: http://localhost:3000' \
+//   --header 'Connection: keep-alive' \
+//   --header 'Sec-Fetch-Dest: empty' \
+//   --header 'Sec-Fetch-Mode: cors' \
+//   -H 'sec-fetch-site: cross-site' \
+//   --header 'TE: trailers' \
+//     -H 'authority: hasura.devnet-1.coreum.dev' \
+//     -H 'accept: */*' \
+//     -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
+//     -H 'content-type: application/json' \
+//     -H 'sec-ch-ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"' \
+//     -H 'sec-ch-ua-mobile: ?0' \
+//     -H 'sec-ch-ua-platform: "macOS"' \
+//     -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' \
+//     --data-raw '[{"operationName":"AssetsDocument","variables":{},"query":"query AssetsDocument {\n  token_holder_count {\n    denom\n    holders\n    __typename\n  }\n  supply {\n    coins\n    height\n    __typename\n  }\n  account_aggregate {\n    aggregate {\n      count\n      __typename\n    }\n    __typename\n  }\n}"}]' \
+//     --compressed

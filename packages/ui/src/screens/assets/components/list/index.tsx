@@ -5,7 +5,7 @@ import NoData from '@/components/no_data';
 import Desktop from '@/screens/assets/components/list/components/desktop';
 import Mobile from '@/screens/assets/components/list/components/mobile';
 import Tabs from '@/screens/assets/components/list/components/tabs';
-import { useAssets } from '@/screens/assets/components/list/hooks';
+import { useAssets } from '@/screens/assets/hooks';
 import useStyles from '@/screens/assets/components/list/styles';
 import { useDisplayStyles } from '@/styles/useSharedStyles';
 

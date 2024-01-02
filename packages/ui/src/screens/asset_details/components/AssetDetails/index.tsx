@@ -1,33 +1,21 @@
 import Box from '@/components/box';
-import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
-import { ExtendedAssetFTType } from '../../types';
+import numeral from 'numeral';
 import useStyles from './styles';
 
 type AssetDetailsOverviewProps = {
   className?: string;
-  asset: ExtendedAssetFTType;
+  asset: any;
 };
 
 const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className }) => {
   const { classes } = useStyles();
   const { t } = useTranslation('assets');
+  const { denom, exponent } = asset;
 
-  const {
-    subunit,
-    precision,
-    globally_frozen,
-    holders,
-    issuer,
-    minting_enabled,
-    burning_enabled,
-    freezing_enabled,
-    whitelisting_enabled,
-    burn_rate,
-    send_commission_rate,
-  } = asset;
+  const holders = numeral(asset.holders).format('0,0');
 
   const preDividerDataItems = [
     {
@@ -39,7 +27,7 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
       ),
       value: (
         <Typography variant="body1" className="value">
-          {subunit}
+          {denom}
         </Typography>
       ),
     },
@@ -52,23 +40,23 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
       ),
       value: (
         <Typography variant="body1" className="value">
-          {precision}
+          {exponent}
         </Typography>
       ),
     },
-    {
-      key: 'globally_frozen',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('globally_frozen')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          {globally_frozen}
-        </Typography>
-      ),
-    },
+    // {
+    //   key: 'globally_frozen',
+    //   name: (
+    //     <Typography variant="h4" className="label">
+    //       {t('globally_frozen')}
+    //     </Typography>
+    //   ),
+    //   value: (
+    //     <Typography variant="body1" className="value">
+    //       {globally_frozen}
+    //     </Typography>
+    //   ),
+    // },
     {
       key: 'holders',
       name: (
@@ -84,86 +72,86 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
     },
   ];
 
-  const postDividerDataItems = [
-    {
-      key: 'minting_enabled',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('minting')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          {minting_enabled ? t('enabled') : t('disabled')}
-        </Typography>
-      ),
-    },
-    {
-      key: 'burning_enabled',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('burning')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          {burning_enabled ? t('enabled') : t('disabled')}
-        </Typography>
-      ),
-    },
-    {
-      key: 'freezing_enabled',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('freezing')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          {freezing_enabled ? t('enabled') : t('disabled')}
-        </Typography>
-      ),
-    },
-    {
-      key: 'whitelisting_enabled',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('whitelisting')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          {whitelisting_enabled ? t('enabled') : t('disabled')}
-        </Typography>
-      ),
-    },
-    {
-      key: 'burn_rate',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('burn_rate')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          {burn_rate}
-        </Typography>
-      ),
-    },
-    {
-      key: 'send_commission_rate',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('send_commission_rate')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          {send_commission_rate}
-        </Typography>
-      ),
-    },
-  ];
+  // const postDividerDataItems = [
+  //   {
+  //     key: 'minting_enabled',
+  //     name: (
+  //       <Typography variant="h4" className="label">
+  //         {t('minting')}
+  //       </Typography>
+  //     ),
+  //     value: (
+  //       <Typography variant="body1" className="value">
+  //         {minting_enabled ? t('enabled') : t('disabled')}
+  //       </Typography>
+  //     ),
+  //   },
+  //   {
+  //     key: 'burning_enabled',
+  //     name: (
+  //       <Typography variant="h4" className="label">
+  //         {t('burning')}
+  //       </Typography>
+  //     ),
+  //     value: (
+  //       <Typography variant="body1" className="value">
+  //         {burning_enabled ? t('enabled') : t('disabled')}
+  //       </Typography>
+  //     ),
+  //   },
+  //   {
+  //     key: 'freezing_enabled',
+  //     name: (
+  //       <Typography variant="h4" className="label">
+  //         {t('freezing')}
+  //       </Typography>
+  //     ),
+  //     value: (
+  //       <Typography variant="body1" className="value">
+  //         {freezing_enabled ? t('enabled') : t('disabled')}
+  //       </Typography>
+  //     ),
+  //   },
+  //   {
+  //     key: 'whitelisting_enabled',
+  //     name: (
+  //       <Typography variant="h4" className="label">
+  //         {t('whitelisting')}
+  //       </Typography>
+  //     ),
+  //     value: (
+  //       <Typography variant="body1" className="value">
+  //         {whitelisting_enabled ? t('enabled') : t('disabled')}
+  //       </Typography>
+  //     ),
+  //   },
+  //   {
+  //     key: 'burn_rate',
+  //     name: (
+  //       <Typography variant="h4" className="label">
+  //         {t('burn_rate')}
+  //       </Typography>
+  //     ),
+  //     value: (
+  //       <Typography variant="body1" className="value">
+  //         {burn_rate}
+  //       </Typography>
+  //     ),
+  //   },
+  //   {
+  //     key: 'send_commission_rate',
+  //     name: (
+  //       <Typography variant="h4" className="label">
+  //         {t('send_commission_rate')}
+  //       </Typography>
+  //     ),
+  //     value: (
+  //       <Typography variant="body1" className="value">
+  //         {send_commission_rate}
+  //       </Typography>
+  //     ),
+  //   },
+  // ];
 
   return (
     <Box className={className}>
@@ -176,7 +164,7 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
             </div>
           ))}
         </div>
-        <div className={classes.statusRoot}>
+        {/* <div className={classes.statusRoot}>
           <div className={classes.statusItem}>
             <Typography variant="h4" className="label">
               {t('issuer')}
@@ -185,8 +173,8 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
               {issuer}
             </Typography>
           </div>
-        </div>
-        <Divider className={classes.divider} />
+        </div> */}
+        {/* <Divider className={classes.divider} />
         <div className={classes.statusRoot}>
           {postDividerDataItems.map((x) => (
             <div key={x.key} className={classes.statusItem}>
@@ -194,7 +182,7 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
               {x.value}
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </Box>
   );

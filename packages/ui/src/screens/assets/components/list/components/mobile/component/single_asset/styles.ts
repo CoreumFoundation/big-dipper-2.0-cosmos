@@ -94,6 +94,16 @@ const useStyles = makeStyles()((theme) => ({
       color: '#FF9595',
     },
   },
+  tokenTypeBlock: {
+    display: 'flex',
+  },
+  tokenType: {
+    fontSize: theme.spacing(1.75),
+    padding: `${theme.spacing(0.5)} ${theme.spacing(1.5)}`,
+    color: '#3379e2',
+    background: alpha('#3379e2', 0.25),
+    borderRadius: 2,
+  },
 }));
 
 export default useStyles;

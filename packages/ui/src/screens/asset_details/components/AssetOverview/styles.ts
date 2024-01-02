@@ -26,6 +26,7 @@ const useStyles = makeStyles()((theme) => ({
     fontWeight: 600,
     lineHeight: theme.spacing(6),
     color: theme.palette.text.primary,
+    textTransform: 'capitalize',
   },
   assetChain: {
     fontSize: theme.spacing(1.75),

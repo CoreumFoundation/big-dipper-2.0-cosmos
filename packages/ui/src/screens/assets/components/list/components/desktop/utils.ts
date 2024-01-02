@@ -15,43 +15,27 @@ export const fetchColumns = (): {
   {
     key: 'name',
     sortKey: 'name',
-    width: 15,
+    width: 20,
     sort: true,
   },
   {
     key: 'token_type',
     sortKey: 'token_type',
-    width: 13,
-    sort: true,
-  },
-  {
-    key: 'price',
-    sortKey: 'price',
-    width: 12,
+    width: 15,
     sort: true,
   },
   {
     key: 'supply',
     sortKey: 'supply',
-    width: 15,
+    width: 30,
     sort: true,
-  },
-  {
-    key: 'market_cap',
-    sortKey: 'market_cap',
-    width: 15,
-    sort: true,
+    align: 'right',
   },
   {
     key: 'holders',
     sortKey: 'holders',
-    width: 10,
+    width: 30,
     sort: true,
-  },
-  {
-    key: 'last7Days',
-    width: 14,
-    sort: false,
     align: 'right',
   },
 ];

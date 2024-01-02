@@ -7,23 +7,11 @@ type SingleAssetProps = {
   className?: string;
   name: string;
   tokenType: string;
-  price: string;
-  priceChange: string;
   supply: string;
-  marketCap: string;
   holders: string;
 };
 
-const SingleAsset: FC<SingleAssetProps> = ({
-  className,
-  name,
-  tokenType,
-  price,
-  priceChange,
-  supply,
-  marketCap,
-  holders,
-}) => {
+const SingleAsset: FC<SingleAssetProps> = ({ className, name, tokenType, supply, holders }) => {
   const { t } = useTranslation('assets');
   const { classes, cx } = useStyles();
 
@@ -76,37 +64,17 @@ const SingleAsset: FC<SingleAssetProps> = ({
           <Typography variant="h4" className="label">
             {t('token_type')}
           </Typography>
-          <Typography variant="body1">{t(tokenType)}</Typography>
-        </div>
-        <div className={classes.item}>
-          <Typography variant="h4" className="label">
-            {t('price')}
-          </Typography>
-          <Typography variant="body1" className={classes.priceBlock}>
-            $ {price}
-            <span
-              className={cx(classes.priceChange, {
-                up: +priceChange > 0,
-                down: +priceChange < 0,
-              })}
-            >
-              {priceChange}%
-            </span>
+          <Typography variant="body1" component="div">
+            <div className={classes.tokenTypeBlock}>
+              <div className={classes.tokenType}>{tokenType.toUpperCase()}</div>
+            </div>
           </Typography>
         </div>
-      </div>
-      <div className={classes.flex}>
         <div className={classes.item}>
           <Typography variant="h4" className="label">
             {t('supply')}
           </Typography>
           <Typography variant="body1">{supply}</Typography>
-        </div>
-        <div className={classes.item}>
-          <Typography variant="h4" className="label">
-            {t('market_cap')}
-          </Typography>
-          <Typography variant="body1">{marketCap}</Typography>
         </div>
       </div>
       <div className={classes.flex}>
@@ -115,12 +83,6 @@ const SingleAsset: FC<SingleAssetProps> = ({
             {t('holders')}
           </Typography>
           <Typography variant="body1">{holders}</Typography>
-        </div>
-        <div className={classes.item}>
-          <Typography variant="h4" className="label">
-            {t('last_7_days')}
-          </Typography>
-          <Typography variant="body1">{t('last7Days')}</Typography>
         </div>
       </div>
     </div>

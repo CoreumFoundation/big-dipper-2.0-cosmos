@@ -9,25 +9,21 @@ import numeral from 'numeral';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
-  item: AssetFTType;
+  item: any;
   isLast: boolean;
   i: number;
 };
 
 const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, item, isLast, i }) => {
   const { rowRef } = useListRow(index, setRowHeight);
-  const { name, token_type, price, price_change, supply, holders } = item;
+  const { name, tokenType, supply, holders } = item;
 
   const selectedItem = {
     id: i,
     name,
-    tokenType: token_type,
-    price,
-    priceChange: price_change,
+    tokenType,
     supply: numeral(supply).format('0,0'),
-    marketCap: numeral(+supply * +price).format('0,0.00'),
     holders: numeral(holders).format('0,0'),
-    last7Days: <div>chart</div>,
   };
 
   return (

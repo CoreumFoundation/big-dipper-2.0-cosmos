@@ -54,6 +54,7 @@ const useStyles = makeStyles()((theme) => ({
     fontWeight: 400,
     fontSize: theme.spacing(1.75),
     marginBottom: theme.spacing(0.25),
+    textTransform: 'capitalize',
   },
   chainRow: {
     display: 'flex',

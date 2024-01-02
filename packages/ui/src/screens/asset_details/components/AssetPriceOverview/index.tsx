@@ -3,44 +3,33 @@ import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import numeral from 'numeral';
 import { FC } from 'react';
-import { ExtendedAssetFTType } from '../../types';
-import { AssetTradingChart } from './components/TradingChart';
 import useStyles from './styles';
 
 interface AssetPriceOverviewProps {
   className?: string;
-  asset: ExtendedAssetFTType;
+  asset: any;
 }
 
 const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) => {
   const { classes } = useStyles();
   const { t } = useTranslation('assets');
 
-  const {
-    name,
-    price_usd,
-    price_change,
-    market_cap,
-    token_type,
-    total_supply,
-    chain,
-    price_changes_7days,
-  } = asset;
+  const { tokenType, supply } = asset;
 
   const dataItems = [
-    {
-      key: 'market_cap',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('market_cap')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          $ {numeral(market_cap).format('0,0')}
-        </Typography>
-      ),
-    },
+    // {
+    //   key: 'market_cap',
+    //   name: (
+    //     <Typography variant="h4" className="label">
+    //       {t('market_cap')}
+    //     </Typography>
+    //   ),
+    //   value: (
+    //     <Typography variant="body1" className="value">
+    //       $ {numeral(market_cap).format('0,0')}
+    //     </Typography>
+    //   ),
+    // },
     {
       key: 'total_supply',
       name: (
@@ -50,7 +39,7 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
       ),
       value: (
         <Typography variant="body1" className="value">
-          {numeral(total_supply).format('0,0.00')} CORE
+          {numeral(supply).format('0,0.00')} CORE
         </Typography>
       ),
     },
@@ -64,7 +53,7 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
       value: (
         <Typography variant="body1" className="value">
           <span className={classes.tokenTypeBlock}>
-            <span className={classes.tokenType}>{token_type}</span>
+            <span className={classes.tokenType}>{tokenType}</span>
           </span>
         </Typography>
       ),
@@ -79,7 +68,7 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
       value: (
         <Typography variant="body1" className="value">
           <span className={classes.chain}>
-            <span className={classes.nameChain}>{chain}</span>
+            <span className={classes.nameChain}>CORE</span>
           </span>
         </Typography>
       ),
@@ -92,7 +81,7 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
         <div className={classes.pricesRoot}>
           <div className={classes.pricesContainer}>
             <div className={classes.pricesColumn}>
-              <div className={classes.priceDataRoot}>
+              {/* <div className={classes.priceDataRoot}>
                 <div className={classes.priceItem}>
                   <Typography variant="h4" className="label">
                     {name} {t('price')} (CORE)
@@ -105,7 +94,7 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
                     <span className="priceChange down">{price_change}%</span>
                   </Typography>
                 </div>
-              </div>
+              </div> */}
               <div className={classes.statusRoot}>
                 {dataItems.map((x) => (
                   <div key={x.key} className={classes.statusItem}>
@@ -116,9 +105,9 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
               </div>
             </div>
           </div>
-          <div className={classes.chart}>
+          {/* <div className={classes.chart}>
             <AssetTradingChart data={price_changes_7days} />
-          </div>
+          </div> */}
         </div>
       </div>
     </Box>

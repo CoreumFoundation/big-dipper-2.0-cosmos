@@ -1,162 +1,236 @@
-import { useState } from 'react';
-import {
-  AssetDetailsState,
-  ExtendedAssetFTType,
-  AssetLink,
-  SocialMediaAssetLink,
-} from '@/screens/asset_details/types';
+import * as R from 'ramda';
+import { useCallback, useEffect, useState } from 'react';
+import { AssetsQuery, useAssetsQuery } from '@/graphql/types/general_types';
+import axios from 'axios';
 
-const mockedPriceChanges = [
-  { time: '2018-12-22', value: 32.51 },
-  { time: '2018-12-23', value: 31.11 },
-  { time: '2018-12-24', value: 27.02 },
-  { time: '2018-12-25', value: 27.32 },
-  { time: '2018-12-26', value: 25.17 },
-  { time: '2018-12-27', value: 28.89 },
-  { time: '2018-12-28', value: 25.46 },
-  { time: '2018-12-29', value: 23.92 },
-  { time: '2018-12-30', value: 22.68 },
-];
+import chainConfig from '@/chainConfig';
+import { useRouter } from 'next/router';
 
-const mockedLinks: AssetLink[] = [
-  {
-    type: 'website',
-    link: '#',
-  },
-  {
-    type: 'github',
-    link: '#',
-  },
-  {
-    type: 'whitepaper',
-    link: '#',
-  },
-  {
-    type: 'audit_report',
-    link: '#',
-  },
-  {
-    type: 'explorer',
-    link: '#',
-  },
-];
+const { chainType, primaryTokenUnit, tokenUnits } = chainConfig();
 
-const mockedSocialLinks: SocialMediaAssetLink[] = [
-  {
-    type: 'twitter',
-    link: '#',
-  },
-  {
-    type: 'instagram',
-    link: '#',
-  },
-  {
-    type: 'facebook',
-    link: '#',
-  },
-  {
-    type: 'reddit',
-    link: '#',
-  },
-  {
-    type: 'youtube',
-    link: '#',
-  },
-  {
-    type: 'telegram',
-    link: '#',
-  },
-];
+interface Asset {
+  denom: string;
+  description: string;
+  ibc_info: {
+    display_name: string;
+    precision: number;
+  };
+  logo_URIs: {
+    png: string;
+    svg: string;
+  };
+  urls: {
+    website: string;
+    github: string;
+    whitepaper: string;
+  };
+  social_media: {
+    linkedin: string;
+    twitter: string;
+    instagram: string;
+    facebook: string;
+    discord: string;
+    youtube: string;
+    telegram: string;
+    tiktok: string;
+  };
+}
 
-const mockedAsset: ExtendedAssetFTType = {
-  id: 1,
-  name: 'Coreum',
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam convallis id sapien hendrerit porttitor. Integer nec aliquam quam. Sed diam nisl, efficitur vitae condimentum ut, maximus a sapien. ',
-  logo: '',
-  subunit: 'ucore',
-  precision: '6',
-  globally_frozen: 'XXXX',
-  holders: '559305',
-  issuer: 'core1q39n0uqay2pk0cc6wrsamw4y5zjqek047w67wn',
-  minting_enabled: true,
-  burning_enabled: true,
-  freezing_enabled: true,
-  whitelisting_enabled: false,
-  burn_rate: 'XXXX',
-  send_commission_rate: 'XXXX',
-  price: '1',
-  price_usd: '0.32214',
-  price_change: '0.02',
-  market_cap: '63484950',
-  total_supply: '100000000',
-  token_type: 'GOV',
-  chain: 'Chain',
-  address: 'xxxx',
-  links: mockedLinks,
-  social_media: mockedSocialLinks,
-  price_changes_7days: mockedPriceChanges,
+interface AssetDetailsState {
+  assetsLoading: boolean;
+  metadataLoading: boolean;
+  loading: boolean;
+  exists: boolean;
+  data: {
+    tokenHolderCount: any[];
+    accountAggregate: any;
+    supply: any;
+  };
+  assetsListItem: Asset | null;
+  metadata: any;
+  asset: any;
+}
+
+const formatAsset = ({
+  metadata,
+  asset,
+  additionalData,
+}: {
+  metadata: any;
+  asset: Asset;
+  additionalData: any;
+}) => {
+  let holders = '0';
+  let tokenType = '';
+
+  const assetInTotalSupply = additionalData.supply.coins.find(
+    (coin: any) => coin.denom === asset.denom
+  );
+
+  const exponent = metadata.denom_units[1]?.exponent ?? 0;
+  const descriptionValue = asset.description.length ? asset.description : metadata.description;
+  let display = metadata.display ?? '';
+  const symbol = metadata.symbol ?? '';
+  const supply = assetInTotalSupply?.amount ?? '0';
+
+  if (asset.denom === primaryTokenUnit) {
+    const { count } = additionalData.accountAggregate.aggregate;
+    holders = count;
+    tokenType = 'gov';
+    display = tokenUnits[primaryTokenUnit]?.display;
+  } else {
+    const assetInHolders = additionalData.tokenHolderCount.find(
+      (tokenHolderCount: any) => tokenHolderCount.denom === asset.denom
+    );
+    holders = String(assetInHolders?.holders) ?? '0';
+
+    tokenType = asset.denom.includes('ibc') ? 'ibc' : 'asset';
+  }
+
+  return {
+    ...asset,
+    description: descriptionValue,
+    exponent,
+    display,
+    symbol,
+    holders,
+    supply,
+    tokenType,
+  };
 };
 
-const defaultAsset: ExtendedAssetFTType = {
-  id: -1,
-  name: '',
-  description: '',
-  logo: '',
-  subunit: '',
-  precision: 'XXXX',
-  globally_frozen: 'XXXX',
-  holders: 'XXXX',
-  issuer: '',
-  minting_enabled: false,
-  burning_enabled: false,
-  freezing_enabled: false,
-  whitelisting_enabled: false,
-  burn_rate: 'XXXX',
-  send_commission_rate: 'XXXX',
-  price: '',
-  price_usd: '',
-  price_change: '',
-  market_cap: '',
-  total_supply: '',
-  token_type: '',
-  chain: '',
-  address: 'addr',
-  links: [],
-  social_media: [],
-  price_changes_7days: [],
-};
+const formatAssetsQueryResponse = (data: any) => {
+  const tokenHolderCount = data?.token_holder_count ?? [];
+  const accountAggregate = data?.account_aggregate ?? { aggregate: { count: 0 } };
+  const supply = data?.supply[0] ?? { coins: [], height: 0 };
 
-const initialState: AssetDetailsState = {
-  exists: true,
-  asset: mockedAsset || defaultAsset,
+  return {
+    tokenHolderCount,
+    accountAggregate,
+    supply,
+  };
 };
 
 export const useAssetDetails = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [state, setState] = useState<AssetDetailsState>(initialState);
+  const router = useRouter();
+  const [state, setState] = useState<AssetDetailsState>({
+    assetsLoading: true,
+    metadataLoading: true,
+    loading: true,
+    exists: true,
+    data: {
+      supply: {
+        coins: [],
+        height: 0,
+      },
+      tokenHolderCount: [],
+      accountAggregate: {
+        aggregate: {
+          count: 0,
+        },
+      },
+    },
+    metadata: null,
+    assetsListItem: null,
+    asset: null,
+  });
 
-  // const handleSetState = useCallback(
-  //   (stateChange: (prevState: AssetDetailsState) => AssetDetailsState) => {
-  //     setState((prevState) => {
-  //       const newState = stateChange(prevState);
-  //       return R.equals(prevState, newState) ? prevState : newState;
-  //     });
-  //   },
-  //   []
-  // );
+  const handleSetState = useCallback(
+    (stateChange: (prevState: AssetDetailsState) => AssetDetailsState) => {
+      setState((prevState) => {
+        const newState = stateChange(prevState);
+        return R.equals(prevState, newState) ? prevState : newState;
+      });
+    },
+    []
+  );
 
-  // ==========================
-  // Fetch Data
-  // ==========================
-  // const { loading } = useAssetDetailsQuery({
-  //   variables: {
-  //     address: router.query.address as string,
-  //   },
-  //   onCompleted: (data) => {
-  //     handleSetState((prevState) => ({ ...prevState, data }));
-  //   },
-  // });
+  const getAssetsList = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/master/${chainType.toLowerCase()}/assets.json`
+      );
+      const selectedAssets = response.data.assets.filter(
+        (item: any) => item.denom === router.query.address
+      );
 
-  return { state, loading: false };
+      handleSetState((prevState) => ({
+        ...prevState,
+        assetsLoading: false,
+        assetsListItem: selectedAssets[0],
+      }));
+    } catch (error) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        assetsLoading: false,
+        exists: false,
+      }));
+    }
+  }, [router.query.address]);
+
+  const getDenomMetadatas = useCallback(async () => {
+    try {
+      const { data } = await axios.get(
+        `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/cosmos/bank/v1beta1/denoms_metadata/${
+          router.query.address
+        }`
+      );
+
+      handleSetState((prevState) => ({
+        ...prevState,
+        metadataLoading: false,
+        metadata: data.metadata,
+      }));
+    } catch (error) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        metadataLoading: false,
+      }));
+    }
+  }, [router.query.address, chainType]);
+
+  useEffect(() => {
+    getAssetsList();
+    getDenomMetadatas();
+  }, [router]);
+
+  useAssetsQuery({
+    onCompleted: (data: AssetsQuery) => {
+      handleSetState((prevState) => ({
+        ...prevState,
+        loading: false,
+        data: formatAssetsQueryResponse(data),
+      }));
+    },
+    onError: () => {
+      handleSetState((prevState) => ({
+        ...prevState,
+        loading: false,
+      }));
+    },
+  });
+
+  useEffect(() => {
+    if (!state.assetsLoading && !state.metadataLoading && !state.loading) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        asset: formatAsset({
+          metadata: state.metadata,
+          asset: state.assetsListItem!,
+          additionalData: state.data,
+        }),
+      }));
+    }
+  }, [
+    state.assetsLoading,
+    state.metadataLoading,
+    state.loading,
+    state.data,
+    state.assetsListItem,
+    state.metadata,
+  ]);
+
+  return {
+    state,
+  };
 };

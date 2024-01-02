@@ -15,6 +15,7 @@ export const PROPOSAL_DETAILS = (id: string | number): string => `/proposals/${i
 export const ACCOUNT_DETAILS = (address: string): string => `/accounts/${address}`;
 export const PARAMS = '/params';
 export const PROFILE_DETAILS = (dtag: string): string => `/${dtag}`;
+export const ASSETS_DETAILS = (asset: string): string => `/assets/${asset}`;
 
 /**
  * Helper to determine if we are routing to validator details or account details

@@ -210,7 +210,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   border-radius: inherit;
 }
 
-.emotion-32 {
+.emotion-37 {
   min-width: 56px;
   color: rgba(0, 0, 0, 0.54);
   -webkit-flex-shrink: 0;
@@ -223,7 +223,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   min-width: 0;
 }
 
-.emotion-33 {
+.emotion-38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -238,11 +238,11 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   justify-content: center;
 }
 
-.emotion-33:hover {
+.emotion-38:hover {
   cursor: pointer;
 }
 
-.emotion-37 {
+.emotion-42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -257,7 +257,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
 }
 
 @media (max-width:1024.95px) {
-  .emotion-37 {
+  .emotion-42 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -276,18 +276,18 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   }
 }
 
-.emotion-37.open-menu-margin {
+.emotion-42.open-menu-margin {
   margin-bottom: 220px;
 }
 
 @media (max-width:1024.95px) {
-  .emotion-37 .netIcon {
+  .emotion-42 .netIcon {
     position: relative;
     left: auto;
   }
 }
 
-.emotion-37 .netContent {
+.emotion-42 .netContent {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -302,7 +302,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
 }
 
 @media (max-width:1024.95px) {
-  .emotion-37 .netContent {
+  .emotion-42 .netContent {
     visibility: visible;
     opacity: 1;
     -webkit-box-pack: start;
@@ -320,7 +320,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   }
 }
 
-.emotion-37 .netContent .currentNetName {
+.emotion-42 .netContent .currentNetName {
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
@@ -329,7 +329,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
 }
 
 @media (max-width:1024.95px) {
-  .emotion-37 .netContent .currentNetName {
+  .emotion-42 .netContent .currentNetName {
     margin: 0;
     font-weight: 600;
     font-size: 10px;
@@ -337,7 +337,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   }
 }
 
-.emotion-37 .netContent .currentNetLink {
+.emotion-42 .netContent .currentNetLink {
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
@@ -347,7 +347,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   white-space: nowrap;
 }
 
-.emotion-37 .arrowIcon {
+.emotion-42 .arrowIcon {
   position: relative;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -357,7 +357,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   transition: all 0.3s ease;
 }
 
-.emotion-37 .arrowIcon.modalShow {
+.emotion-42 .arrowIcon.modalShow {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -365,13 +365,13 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
 }
 
 @media (max-width:1024.95px) {
-  .emotion-37 .arrowIcon {
+  .emotion-42 .arrowIcon {
     position: absolute;
     right: 12px;
   }
 }
 
-.emotion-37 .modal {
+.emotion-42 .modal {
   position: fixed;
   visibility: hidden;
   opacity: 0;
@@ -400,13 +400,13 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   box-shadow: -6px 5px rgba(0, 0, 0, 0.25);
 }
 
-.emotion-37 .modal.modalShow {
+.emotion-42 .modal.modalShow {
   visibility: visible;
   opacity: 1;
 }
 
 @media (max-width:1024.95px) {
-  .emotion-37 .modal {
+  .emotion-42 .modal {
     position: absolute;
     width: 100%;
     height: -webkit-fit-content;
@@ -419,7 +419,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
   }
 }
 
-.emotion-37 .modal .linkItem {
+.emotion-42 .modal .linkItem {
   width: 240px;
   height: 55px;
   display: -webkit-box;
@@ -436,25 +436,25 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
 }
 
 @media (max-width:1024.95px) {
-  .emotion-37 .modal .linkItem {
+  .emotion-42 .modal .linkItem {
     width: 100%;
   }
 }
 
-.emotion-37 .modal .linkItem .netName {
+.emotion-42 .modal .linkItem .netName {
   font-weight: 600;
   font-size: 10px;
   line-height: 15px;
 }
 
-.emotion-37 .modal .linkItem .netLink {
+.emotion-42 .modal .linkItem .netLink {
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
   color: #000000;
 }
 
-.emotion-37 .modal .linkItem.selectedItem .netName {
+.emotion-42 .modal .linkItem.selectedItem .netName {
   color: #25D695;
 }
 
@@ -670,6 +670,58 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
     </a>
   </div>
   <div
+    aria-label="assets"
+    aria-labelledby={null}
+    data-mui-internal-clone-element={true}
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    onTouchEnd={[Function]}
+    onTouchStart={[Function]}
+  >
+    <a
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters emotion-1"
+      href="/assets"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className="MuiListItemIcon-root emotion-2"
+      >
+        <svg
+          height={21}
+          width={21}
+        />
+      </div>
+      <div
+        className="MuiListItemText-root emotion-3"
+      >
+        <span
+          className="MuiTypography-root MuiTypography-body1 MuiListItemText-primary emotion-4"
+        >
+          assets
+        </span>
+      </div>
+      <span
+        className="MuiTouchRipple-root emotion-5"
+      />
+    </a>
+  </div>
+  <div
     aria-label="proposals"
     aria-labelledby={null}
     data-mui-internal-clone-element={true}
@@ -804,10 +856,10 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
         tabIndex={0}
       >
         <div
-          className="MuiListItemIcon-root emotion-32"
+          className="MuiListItemIcon-root emotion-37"
         >
           <div
-            className="emotion-33"
+            className="emotion-38"
             role="button"
           >
             <svg
@@ -835,7 +887,7 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
     </div>
   </div>
   <div
-    className="emotion-37"
+    className="emotion-42"
     onClick={[Function]}
     onTouchEnd={[Function]}
     role="button"

@@ -55,6 +55,14 @@ function getBaseConfig(basePath, chainName) {
       reactRemoveProperties: process.env.NODE_ENV === 'production',
       removeConsole: process.env.NODE_ENV === 'production',
     },
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'github.com',
+        },
+      ],
+    },
   };
   return config;
 }
