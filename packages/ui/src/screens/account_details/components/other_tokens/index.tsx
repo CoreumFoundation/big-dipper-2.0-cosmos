@@ -21,7 +21,7 @@ type OtherTokensProps = {
 
 const OtherTokens: FC<OtherTokensProps> = ({ className, otherTokens }) => {
   const { t } = useTranslation('accounts');
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
   const display = useDisplayStyles().classes;
   const { page, rowsPerPage, handlePageChange, handleRowsPerPageChange, sliceItems } =
     usePagination({});
@@ -34,7 +34,7 @@ const OtherTokens: FC<OtherTokensProps> = ({ className, otherTokens }) => {
   }
 
   return (
-    <Box className={className}>
+    <Box className={cx(classes.root, className)}>
       <Typography variant="h2">{t('otherTokens')}</Typography>
       <Desktop className={display.hiddenUntilLg} items={items} />
       <Mobile className={display.hiddenWhenLg} items={items} />
