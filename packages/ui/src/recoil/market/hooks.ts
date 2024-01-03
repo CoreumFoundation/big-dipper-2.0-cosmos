@@ -8,7 +8,7 @@ import type { AtomState } from '@/recoil/market/types';
 import { formatToken } from '@/utils/format_token';
 import { getDenom } from '@/utils/get_denom';
 
-const { primaryTokenUnit, tokenUnits } = chainConfig();
+const { primaryTokenUnit } = chainConfig();
 
 /**
  * It takes a query hook and returns a Recoil state hook
@@ -16,12 +16,12 @@ const { primaryTokenUnit, tokenUnits } = chainConfig();
 export function useMarketRecoil() {
   const [market, setMarket] = useRecoilState(writeMarket) as [
     AtomState,
-    SetterOrUpdater<AtomState>
+    SetterOrUpdater<AtomState>,
   ];
 
   useMarketDataQuery({
     variables: {
-      denom: tokenUnits?.[primaryTokenUnit]?.display,
+      denom: primaryTokenUnit,
     },
     onCompleted: (data) => {
       if (data) {
