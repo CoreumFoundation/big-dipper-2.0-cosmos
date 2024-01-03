@@ -35,7 +35,8 @@
           "modal_header": "#1D222C",
           "search": "#2B3138",
           "net_selector": "#373E48",
-          "modal_background": "#2B4A46"
+          "modal_background": "#2B4A46",
+          "theme_selector_background": "#2B3138"
         },
         "fonts": {
           "fontOne": "#E6E6E6",
@@ -132,7 +133,8 @@
           "modal_net_selector": "#ffff",
           "single_block": "linear-gradient(110.16deg, rgba(37, 214, 149, 0.15) 0%, rgba(37, 214, 149, 0.05) 100%)",
           "net_selector": "#f8f8f8",
-          "modal_background": "#D9F0E6"
+          "modal_background": "#D9F0E6",
+          "theme_selector_background": "#F3F3F3"
         },
         "fonts": {
           "fontOne": "#000000",

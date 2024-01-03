@@ -39,6 +39,10 @@ const useStyles = makeStyles()((theme) => ({
   title: {
     display: 'flex',
     alignItems: 'center',
+
+    '& .MuiTypography-h2': {
+      fontSize: theme.spacing(2.25),
+    },
   },
   dialog: {
     '& .MuiDialog-paper': {
@@ -60,18 +64,26 @@ const useStyles = makeStyles()((theme) => ({
     '& .theme_container': {
       display: 'grid',
       gridAutoFlow: 'column',
-      background: theme.palette.background.default,
+      background: theme.palette.custom.general.theme_selector_background,
       borderRadius: '10%',
       placeSelf: 'end',
       margin: theme.spacing(1.5, 0),
+      padding: 2,
+
       '& .theme_item': {
         cursor: 'pointer',
-        padding: 12,
+        padding: 8,
         borderRadius: '10%',
         transition: 'background .2s',
         display: 'grid',
         placeItems: 'center',
         color: theme.palette.text.primary,
+
+        svg: {
+          width: 16,
+          height: 16,
+        },
+
         '&.active': {
           background: theme.palette.primary.main,
           svg: {

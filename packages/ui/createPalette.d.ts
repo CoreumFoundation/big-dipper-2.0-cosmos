@@ -29,6 +29,7 @@ declare module '@mui/material/styles/createPalette' {
       search: string;
       net_selector: string;
       modal_background: string;
+      theme_selector_background: string;
     };
     fonts: {
       fontOne: string;
