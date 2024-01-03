@@ -17,7 +17,7 @@ const useStyles = makeStyles()((theme) => ({
       fill: 'none',
     },
     '&.active': {
-      background: Color(theme.palette.primary.main).alpha(0.2).lighten(0.5).string(),
+      background: Color(theme.palette.primary.main).alpha(0.15).string(),
       '& .MuiListItemText-root': {
         color: theme.palette.primary.main,
       },
