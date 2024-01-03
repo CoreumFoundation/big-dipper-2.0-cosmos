@@ -33,27 +33,27 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
 
 .emotion-2 {
   margin: 0;
-  font-size: 1rem;
-  letter-spacing: 0.15px;
+  font-size: 0.875rem;
+  letter-spacing: 0.1px;
+  font-weight: 500;
   font-family: "Noto Sans",sans-serif;
-  font-weight: 400;
-  line-height: 1.235;
+  line-height: 1.334;
 }
 
 .emotion-8 {
   margin: 0;
-  font-size: 1rem;
-  letter-spacing: 0.15px;
+  font-size: 0.875rem;
+  letter-spacing: 0.1px;
+  font-weight: 500;
   font-family: "Noto Sans",sans-serif;
-  font-weight: 400;
-  line-height: 1.235;
+  line-height: 1.334;
   text-align: right;
 }
 
 .emotion-11 {
   background: #FFFFFF;
   height: 50px;
-  padding: 16px;
+  padding: 20px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -85,9 +85,16 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
   font-family: "Noto Sans",sans-serif;
   font-weight: 400;
   line-height: 1.5;
+  font-size: 14px!important;
 }
 
-.emotion-18 {
+.emotion-15 svg {
+  width: 22px!important;
+  height: 22px!important;
+  border-radius: 50%;
+}
+
+.emotion-19 {
   margin: 0;
   font-size: 1rem;
   white-space: pre-wrap;
@@ -96,6 +103,7 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
   font-weight: 400;
   line-height: 1.5;
   text-align: right;
+  font-size: 14px!important;
 }
 
 <div
@@ -137,11 +145,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           }
         }
       >
-        <h4
-          className="MuiTypography-root MuiTypography-h4 emotion-2"
+        <h5
+          className="MuiTypography-root MuiTypography-h5 emotion-2"
         >
           height
-        </h4>
+        </h5>
       </div>
       <div
         className="emotion-1"
@@ -156,11 +164,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           }
         }
       >
-        <h4
-          className="MuiTypography-root MuiTypography-h4 emotion-2"
+        <h5
+          className="MuiTypography-root MuiTypography-h5 emotion-2"
         >
           proposer
-        </h4>
+        </h5>
       </div>
       <div
         className="emotion-1"
@@ -175,11 +183,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           }
         }
       >
-        <h4
-          className="MuiTypography-root MuiTypography-h4 emotion-2"
+        <h5
+          className="MuiTypography-root MuiTypography-h5 emotion-2"
         >
           hash
-        </h4>
+        </h5>
       </div>
       <div
         className="emotion-1"
@@ -194,11 +202,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           }
         }
       >
-        <h4
-          className="MuiTypography-root MuiTypography-h4 MuiTypography-alignRight emotion-8"
+        <h5
+          className="MuiTypography-root MuiTypography-h5 MuiTypography-alignRight emotion-8"
         >
           txs
-        </h4>
+        </h5>
       </div>
       <div
         className="emotion-1"
@@ -213,11 +221,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           }
         }
       >
-        <h4
-          className="MuiTypography-root MuiTypography-h4 MuiTypography-alignRight emotion-8"
+        <h5
+          className="MuiTypography-root MuiTypography-h5 MuiTypography-alignRight emotion-8"
         >
           time
-        </h4>
+        </h5>
       </div>
     </div>
   </div>
@@ -290,6 +298,7 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         >
           <div
             address="address"
+            className="emotion-15"
             id="AvatarName"
             imageUrl=""
             name="address"
@@ -329,7 +338,7 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         }
       >
         <div
-          className="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight emotion-18"
+          className="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight emotion-19"
         >
           2
         </div>
@@ -348,7 +357,7 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         }
       >
         <div
-          className="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight emotion-18"
+          className="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight emotion-19"
         />
       </div>
       <div
@@ -396,6 +405,7 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         >
           <div
             address="address"
+            className="emotion-15"
             id="AvatarName"
             imageUrl=""
             name="address"
@@ -435,7 +445,7 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         }
       >
         <div
-          className="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight emotion-18"
+          className="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight emotion-19"
         >
           2
         </div>
@@ -454,7 +464,7 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         }
       >
         <div
-          className="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight emotion-18"
+          className="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight emotion-19"
         />
       </div>
     </div>
