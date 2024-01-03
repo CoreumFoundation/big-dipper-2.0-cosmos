@@ -15,6 +15,7 @@ const useStyles = makeStyles()((theme) => ({
     [theme.breakpoints.up('lg')]: {
       height: '100%',
       minHeight: '65vh',
+      padding: '0 !important',
     },
   },
 }));

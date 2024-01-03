@@ -45,7 +45,9 @@ const BlockItem: FC<BlockItemProps> = ({ item, rowIndex, column, style, align })
       formattedItem = <Timestamp timestamp={item.timestamp} />;
       break;
     case 'proposer':
-      formattedItem = <AvatarName address={address} imageUrl={imageUrl} name={name} />;
+      formattedItem = (
+        <AvatarName address={address} imageUrl={imageUrl} name={name} className={classes.avatar} />
+      );
       break;
     case 'hash':
       formattedItem = getMiddleEllipsis(item.hash, {
@@ -63,7 +65,7 @@ const BlockItem: FC<BlockItemProps> = ({ item, rowIndex, column, style, align })
         odd: !(rowIndex % 2),
       })}
     >
-      <Typography variant="body1" align={align} component="div">
+      <Typography variant="body1" align={align} component="div" className={classes.cellText}>
         {formattedItem}
       </Typography>
     </div>
@@ -111,7 +113,7 @@ const Desktop: FC<DesktopProps> = ({
 
                 return (
                   <div style={style} className={classes.header}>
-                    <Typography variant="h4" align={align}>
+                    <Typography variant="h5" align={align}>
                       {t(key)}
                     </Typography>
                   </div>

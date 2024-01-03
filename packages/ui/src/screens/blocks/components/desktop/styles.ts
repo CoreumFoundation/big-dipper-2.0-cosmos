@@ -7,6 +7,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   cell: {
     ...(theme.mixins.tableCell as CSSObject),
+    padding: theme.spacing(2.5),
   },
   header: {
     ...(theme.mixins.tableCell as CSSObject),
@@ -16,6 +17,16 @@ const useStyles = makeStyles()((theme) => ({
   },
   body: {
     color: theme.palette.custom.fonts.fontTwo,
+  },
+  cellText: {
+    fontSize: '14px !important',
+  },
+  avatar: {
+    svg: {
+      width: '22px !important',
+      height: '22px !important',
+      borderRadius: '50%',
+    },
   },
 }));
 
