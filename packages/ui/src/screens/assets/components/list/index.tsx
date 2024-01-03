@@ -35,7 +35,10 @@ const List: FC<ComponentDefault> = ({ className }) => {
   }
 
   return (
-    <LoadAndExist loading={state.loading} exists={state.exists}>
+    <LoadAndExist
+      loading={state.loading || state.assetsLoading || state.metadataLoading}
+      exists={state.exists}
+    >
       <Box className={className}>
         <Tabs tab={state.tab} handleTabChange={handleTabChange} />
         <div className={classes.list}>{list}</div>
