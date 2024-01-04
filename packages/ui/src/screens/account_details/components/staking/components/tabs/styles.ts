@@ -1,4 +1,3 @@
-import Color from 'color';
 import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
@@ -12,26 +11,26 @@ const useStyles = makeStyles()((theme) => ({
     },
 
     '.MuiTab-root': {
-      background: Color('#1B1D23').alpha(0.5).toString(),
-      color: '#6C6F78',
+      color: theme.palette.custom.fonts.staking_tab,
       fontWeight: 400,
-      fontSize: theme.spacing(1.75),
-      padding: `${theme.spacing(1.5)} ${theme.spacing(3.5)}`,
-
-      '&:first-child': {
-        borderTopLeftRadius: theme.spacing(0.5),
-        borderBottomLeftRadius: theme.spacing(0.5),
-      },
+      fontSize: theme.spacing(2),
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
+      borderRight: `1px solid ${theme.palette.custom.general.border_color}`,
 
       '&:last-child': {
-        borderTopRightRadius: theme.spacing(0.5),
-        borderBottomRightRadius: theme.spacing(0.5),
+        borderRight: 'none',
       },
 
       '&.Mui-selected': {
-        background: Color('#25D695').alpha(0.15).toString(),
-        color: '#25D695',
+        color: theme.palette.custom.fonts.active_tab,
+        borderColor: theme.palette.custom.general.border_color,
         fontWeight: 600,
+        fontSize: theme.spacing(2.5),
+
+        '& span': {
+          color: theme.palette.primary.main,
+        },
       },
     },
   },
@@ -53,6 +52,10 @@ const useStyles = makeStyles()((theme) => ({
         },
       },
     },
+  },
+  label: {
+    display: 'flex',
+    gap: 8,
   },
 }));
 

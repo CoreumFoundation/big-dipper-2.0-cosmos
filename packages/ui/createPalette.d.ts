@@ -30,6 +30,7 @@ declare module '@mui/material/styles/createPalette' {
       net_selector: string;
       modal_background: string;
       theme_selector_background: string;
+      border_color: string;
     };
     fonts: {
       fontOne: string;
@@ -43,6 +44,8 @@ declare module '@mui/material/styles/createPalette' {
       netSelector_link: string;
       table_headers: string;
       data_blocks: string;
+      staking_tab: string;
+      active_tab: string;
     };
     primaryData: {
       one: string;

@@ -1,12 +1,8 @@
 import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()(() => ({
   root: {
     overflow: 'hidden',
-    [theme.breakpoints.up('md')]: {
-      // display: 'flex',
-      // flexDirection: 'column',
-    },
   },
 }));
 

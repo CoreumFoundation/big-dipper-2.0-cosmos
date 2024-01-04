@@ -36,7 +36,8 @@
           "search": "#2B3138",
           "net_selector": "#373E48",
           "modal_background": "#2B4A46",
-          "theme_selector_background": "#2B3138"
+          "theme_selector_background": "#2B3138",
+          "border_color": "#23272E"
         },
         "fonts": {
           "fontOne": "#E6E6E6",
@@ -49,7 +50,9 @@
           "netSelector_link": "#eeeeee",
           "settings_label": "#868991",
           "table_headers": "#6C6F78",
-          "data_blocks": "#25D695"
+          "data_blocks": "#25D695",
+          "staking_tab": "#5E6773",
+          "active_tab": "#FFFFFF"
         },
         "primaryData": {
           "one": "#F87255",
@@ -134,7 +137,8 @@
           "single_block": "linear-gradient(110.16deg, rgba(37, 214, 149, 0.15) 0%, rgba(37, 214, 149, 0.05) 100%)",
           "net_selector": "#f8f8f8",
           "modal_background": "#D9F0E6",
-          "theme_selector_background": "#F3F3F3"
+          "theme_selector_background": "#F3F3F3",
+          "border_color": "#F3F3F3"
         },
         "fonts": {
           "fontOne": "#000000",
@@ -147,7 +151,9 @@
           "data_blocks": "#FFF",
           "fontFive": "#373E48",
           "highlight": "#F1C34E",
-          "table_headers": "#A5A8B2"
+          "table_headers": "#A5A8B2",
+          "staking_tab": "#A5A8B2",
+          "active_tab": "#1B1D23"
         },
         "primaryData": {
           "one": "#F87255",

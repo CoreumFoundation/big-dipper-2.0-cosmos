@@ -37,14 +37,19 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   toolTip: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, 1fr)',
     boxShadow: theme.shadows[3],
     background: '#2B3138 !important',
     padding: theme.spacing(2),
-    paddingBottom: 0,
+    gap: 16,
+
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      alignItems: 'center',
+    },
   },
   item: {
-    paddingBottom: theme.spacing(2),
-
     '& .label': {
       paddingBottom: theme.spacing(0.5),
       color: theme.palette.custom.fonts.fontThree,
@@ -58,6 +63,10 @@ const useStyles = makeStyles()((theme) => ({
     },
     '& a': {
       color: theme.palette.custom.fonts.highlight,
+    },
+    '& .MuiTypography-body1': {
+      textWrap: 'nowrap',
+      fontSize: '14px',
     },
   },
   flex: {

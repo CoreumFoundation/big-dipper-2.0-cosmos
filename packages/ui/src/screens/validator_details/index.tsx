@@ -11,6 +11,7 @@ import ValidatorOverview from '@/screens/validator_details/components/validator_
 import VotingPower from '@/screens/validator_details/components/voting_power';
 import { useValidatorDetails } from '@/screens/validator_details/hooks';
 import useStyles from '@/screens/validator_details/styles';
+import Link from 'next/link';
 
 const ValidatorDetails = () => {
   const { t } = useTranslation('validators');
@@ -29,6 +30,21 @@ const ValidatorDetails = () => {
       <Layout navTitle={t('validatorDetails') ?? undefined}>
         <LoadAndExist exists={exists} loading={loading}>
           <span className={classes.root}>
+            <div className={classes.block}>
+              <Link href="/validators" className={classes.breadcrumb}>
+                <svg
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#25D695" strokeWidth="1.5" />
+                </svg>
+                Back to all validators
+              </Link>
+              <div className={classes.title}>{t('validatorDetails')}</div>
+            </div>
             {desmosProfile ? (
               <DesmosProfile className={classes.profile} {...desmosProfile} />
             ) : (

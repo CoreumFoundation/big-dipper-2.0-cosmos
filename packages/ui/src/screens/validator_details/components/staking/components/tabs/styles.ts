@@ -5,6 +5,34 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+
+    '.MuiTabs-indicator': {
+      display: 'none',
+    },
+
+    '.MuiTab-root': {
+      color: theme.palette.custom.fonts.staking_tab,
+      fontWeight: 400,
+      fontSize: theme.spacing(2),
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
+      borderRight: `1px solid ${theme.palette.custom.general.border_color}`,
+
+      '&:last-child': {
+        borderRight: 'none',
+      },
+
+      '&.Mui-selected': {
+        color: theme.palette.custom.fonts.active_tab,
+        borderColor: theme.palette.custom.general.border_color,
+        fontWeight: 600,
+        fontSize: theme.spacing(2.5),
+
+        '& span': {
+          color: theme.palette.primary.main,
+        },
+      },
+    },
   },
   searchBar: {
     display: 'none',
@@ -24,6 +52,10 @@ const useStyles = makeStyles()((theme) => ({
         },
       },
     },
+  },
+  label: {
+    display: 'flex',
+    gap: 8,
   },
 }));
 

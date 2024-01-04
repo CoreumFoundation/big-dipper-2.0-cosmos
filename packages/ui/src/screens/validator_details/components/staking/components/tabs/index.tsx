@@ -27,9 +27,11 @@ const TabsHeader: FC<TabsHeaderProps> = ({ className, tab, handleTabChange, tabs
         {tabs.map((x) => (
           <Tab
             key={x.key}
-            label={t(x.key, {
-              num: x.count,
-            })}
+            label={
+              <div className={classes.label}>
+                {t(x.key)} <span>({x.count})</span>
+              </div>
+            }
             {...a11yProps(x.id)}
           />
         ))}
