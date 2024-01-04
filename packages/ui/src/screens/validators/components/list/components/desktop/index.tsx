@@ -43,7 +43,7 @@ const GridColumn: FC<GridColumnProps> = ({
 
   if (key === 'votingPower') {
     formattedComponent = (
-      <Typography variant="h4" className="label popover">
+      <Typography variant="h5" className="label popover">
         {t('votingPower')}
         <InfoPopover content={<VotingPowerExplanation />} />
         {!!sort && items && items.length > 1 && (
@@ -67,7 +67,7 @@ const GridColumn: FC<GridColumnProps> = ({
       aria-label={t(key) ?? undefined}
     >
       {formattedComponent || (
-        <Typography variant="h4" align={align}>
+        <Typography variant="h5" align={align}>
           {t(key)}
           {!!sort && items && items.length > 1 && (
             <SortArrows sort={sortKey === sortingKey ? sortDirection : undefined} />

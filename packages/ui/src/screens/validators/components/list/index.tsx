@@ -14,7 +14,7 @@ import { useDisplayStyles } from '@/styles/useSharedStyles';
 const List: FC<ComponentDefault> = ({ className }) => {
   const { classes, cx } = useStyles();
   const display = useDisplayStyles().classes;
-  const { state, handleTabChange, handleSearch, handleSort, sortItems, search } = useValidators();
+  const { state, handleTabChange, handleSort, sortItems, search } = useValidators();
   const validatorsMemo = useShallowMemo(state.items.map((x) => x.validator));
   const { profiles: dataProfiles, loading } = useProfilesRecoil(validatorsMemo);
   const items = useMemo(
@@ -48,8 +48,8 @@ const List: FC<ComponentDefault> = ({ className }) => {
 
   return (
     <LoadAndExist loading={state.loading || !!loading} exists={state.exists}>
-      <Box className={className}>
-        <Tabs tab={state.tab} handleTabChange={handleTabChange} handleSearch={handleSearch} />
+      <Tabs tab={state.tab} handleTabChange={handleTabChange} />
+      <Box className={cx(classes.box, className)}>
         <div className={classes.list}>{list}</div>
       </Box>
     </LoadAndExist>

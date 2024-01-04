@@ -16,17 +16,17 @@ const useStyles = makeStyles()((theme) => ({
     width: '14px',
     height: '14px',
     right: 0,
-    fill: theme.palette.custom.fonts.fontTwo,
+    fill: Color(theme.palette.custom.fonts.fontThree).alpha(0.2).string(),
   },
   up: {
     transform: 'rotate(180deg)',
     '&.desc': {
-      fill: Color(theme.palette.custom.fonts.fontThree).alpha(0.2).string(),
+      fill: theme.palette.custom.fonts.fontTwo,
     },
   },
   down: {
     '&.asc': {
-      fill: Color(theme.palette.custom.fonts.fontThree).alpha(0.2).string(),
+      fill: theme.palette.custom.fonts.fontTwo,
     },
   },
 }));

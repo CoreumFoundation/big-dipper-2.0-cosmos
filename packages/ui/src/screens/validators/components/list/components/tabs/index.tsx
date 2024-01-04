@@ -2,7 +2,6 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { useTranslation } from 'next-i18next';
 import { ComponentProps, FC } from 'react';
-import Search from '@/components/search';
 import useStyles from '@/screens/validators/components/list/components/tabs/styles';
 import { tabLabels } from '@/screens/validators/components/list/components/tabs/utils';
 import { a11yProps } from '@/utils/a11yProps';
@@ -11,10 +10,9 @@ type TabsHeaderProps = {
   className?: string;
   tab: number;
   handleTabChange: ComponentProps<typeof Tabs>['onChange'];
-  handleSearch: (value: string) => void;
 };
 
-const TabsHeader: FC<TabsHeaderProps> = ({ className, tab, handleTabChange, handleSearch }) => {
+const TabsHeader: FC<TabsHeaderProps> = ({ className, tab, handleTabChange }) => {
   const { classes, cx } = useStyles();
   const { t } = useTranslation('validators');
 
@@ -25,12 +23,6 @@ const TabsHeader: FC<TabsHeaderProps> = ({ className, tab, handleTabChange, hand
           <Tab key={x} label={t(x)} {...a11yProps(i)} />
         ))}
       </Tabs>
-      <Search
-        className={classes.searchBar}
-        callback={handleSearch}
-        submitOnChange
-        placeholder={t('searchValidator') ?? undefined}
-      />
     </div>
   );
 };

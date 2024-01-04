@@ -44,6 +44,7 @@ const useStyles = makeStyles()((theme) => ({
   header: {
     color: `${theme.palette.custom.fonts.table_headers} !important`,
     fontSize: '12px !important',
+    textTransform: 'uppercase',
   },
   body: {
     color: theme.palette.custom.fonts.fontTwo,
