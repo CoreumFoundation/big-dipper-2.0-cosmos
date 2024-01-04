@@ -14,7 +14,9 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
   const { classes } = useStyles();
   const { t } = useTranslation('assets');
 
-  const { tokenType, supply } = asset;
+  const { tokenType, supply, denom } = asset;
+
+  console.log({ asset });
 
   const dataItems = [
     // {
@@ -39,7 +41,7 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
       ),
       value: (
         <Typography variant="body1" className="value">
-          {numeral(supply).format('0,0.00')} CORE
+          {numeral(supply).format('0,0.00')} {denom}
         </Typography>
       ),
     },
@@ -68,7 +70,7 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
       value: (
         <Typography variant="body1" className="value">
           <span className={classes.chain}>
-            <span className={classes.nameChain}>CORE</span>
+            <span className={classes.nameChain}>Coreum</span>
           </span>
         </Typography>
       ),

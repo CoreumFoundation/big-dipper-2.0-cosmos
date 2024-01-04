@@ -93,7 +93,13 @@ const AssetOverview: FC<AssetOverviewProps> = ({ asset, className }) => {
           </div>
           <div className={classes.assetProfileData}>
             <div className={classes.assetName}>
-              {display} <span className={classes.assetChain}>Core</span>
+              {display}
+              <div className={classes.chainRow}>
+                <div className={classes.nameChain}>Chain: Coreum</div>
+              </div>
+              {/* <span className={classes.assetChain}>
+                Chain: Coreum
+              </span> */}
             </div>
             <div className={classes.assetDescription}>{description}</div>
           </div>

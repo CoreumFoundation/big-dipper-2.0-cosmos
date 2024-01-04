@@ -70,7 +70,6 @@ const useStyles = makeStyles()((theme) => ({
     fontSize: theme.spacing(1.5),
     padding: `${theme.spacing(0.25)} ${theme.spacing(0.5)}`,
     borderRadius: '2px',
-    marginLeft: theme.spacing(0.75),
   },
   tokenTypeBlock: {
     display: 'flex',

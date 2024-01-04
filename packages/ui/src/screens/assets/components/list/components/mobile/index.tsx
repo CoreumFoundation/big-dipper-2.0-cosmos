@@ -6,6 +6,8 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { ListChildComponentProps, VariableSizeList as List } from 'react-window';
 import SingleAsset from '@/screens/assets/components/list/components/mobile/component/single_asset';
 import numeral from 'numeral';
+import { useRouter } from 'next/router';
+import { ASSETS_DETAILS } from '@/utils/go_to_page';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -15,8 +17,9 @@ type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
 };
 
 const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, item, isLast, i }) => {
+  const { name, tokenType, supply, holders, logo_URIs, denom, display } = item;
   const { rowRef } = useListRow(index, setRowHeight);
-  const { name, tokenType, supply, holders } = item;
+  const router = useRouter();
 
   const selectedItem = {
     id: i,
@@ -24,11 +27,15 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, item, isLast,
     tokenType,
     supply: numeral(supply).format('0,0'),
     holders: numeral(holders).format('0,0'),
+    denom,
+    logo_URIs,
+    display,
   };
 
   return (
     <div style={style}>
-      <div ref={rowRef}>
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+      <div onClick={() => router.push(ASSETS_DETAILS(item.denom))} ref={rowRef}>
         <SingleAsset {...selectedItem} />
         {!isLast && <Divider />}
       </div>
