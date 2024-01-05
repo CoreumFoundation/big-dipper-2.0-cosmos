@@ -21,7 +21,13 @@ const SingleBlock: FC<SingleBlockProps> = ({ className, label, value, descriptio
         {label}
       </Typography>
       <div className="content">
-        {value ? <Typography variant="h1">{value}</Typography> : <Spinner />}
+        {value ? (
+          <Typography variant="h1" className="value">
+            {value}
+          </Typography>
+        ) : (
+          <Spinner />
+        )}
         {!!description && (
           <Typography variant="caption" className="description">
             {` / ${validatorNum}`}

@@ -27,7 +27,7 @@ exports[`component: SortArrows matches snapshot 1`] = `
   width: 14px;
   height: 14px;
   right: 0;
-  fill: #414141;
+  fill: rgba(119, 119, 119, 0.2);
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
@@ -35,7 +35,7 @@ exports[`component: SortArrows matches snapshot 1`] = `
 }
 
 .emotion-1.desc {
-  fill: rgba(119, 119, 119, 0.2);
+  fill: #414141;
 }
 
 .emotion-2 {
@@ -43,11 +43,11 @@ exports[`component: SortArrows matches snapshot 1`] = `
   width: 14px;
   height: 14px;
   right: 0;
-  fill: #414141;
+  fill: rgba(119, 119, 119, 0.2);
 }
 
 .emotion-2.asc {
-  fill: rgba(119, 119, 119, 0.2);
+  fill: #414141;
 }
 
 <div

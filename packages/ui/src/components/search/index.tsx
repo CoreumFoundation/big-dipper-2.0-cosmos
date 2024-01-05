@@ -29,7 +29,9 @@ const Search: FC<SearchProps> = ({ className, placeholder, callback, submitOnCha
           'aria-label': placeholder,
         }}
         endAdornment={
-          <SearchIcon fontSize="small" className="Search-icon" onClick={handleOnSubmit} />
+          <div className={classes.iconWrapper}>
+            <SearchIcon fontSize="small" className="Search-icon" onClick={handleOnSubmit} />
+          </div>
         }
       />
     </form>

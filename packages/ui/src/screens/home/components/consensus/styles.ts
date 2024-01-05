@@ -6,8 +6,12 @@ const useStyles = makeStyles()((theme) => ({
     height: '100%',
     display: 'grid',
     gridTemplateRows: 'auto 1fr auto',
-    // flexDirection: 'column',
     overflow: 'auto',
+
+    '& .MuiTypography-h2': {
+      fontSize: theme.spacing(2.5),
+      marginBottom: theme.spacing(2),
+    },
   },
   content: {
     // flex: 1,
@@ -16,9 +20,6 @@ const useStyles = makeStyles()((theme) => ({
     // justifyContent: 'space-around',
     // flexDirection: 'column',
     placeSelf: 'start center',
-  },
-  label: {
-    marginBottom: theme.spacing(2),
   },
   chart: {
     '& .recharts-radial-bar-background-sector': {
@@ -57,6 +58,8 @@ const useStyles = makeStyles()((theme) => ({
       },
     },
     '& .label': {
+      fontSize: theme.spacing(1.75),
+      fontWeight: 400,
       color: theme.palette.custom.fonts.fontThree,
       marginBottom: theme.spacing(0.5),
     },

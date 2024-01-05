@@ -9,6 +9,7 @@ exports[`screen: Home/Blocks/Mobile matches snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  padding: 0!important;
 }
 
 .emotion-0 a {
@@ -17,6 +18,7 @@ exports[`screen: Home/Blocks/Mobile matches snapshot 1`] = `
 
 .emotion-0 .button {
   color: #25D695;
+  font-size: 14px;
 }
 
 .emotion-0 .button:hover {
@@ -24,7 +26,6 @@ exports[`screen: Home/Blocks/Mobile matches snapshot 1`] = `
 }
 
 .emotion-1 {
-  margin-bottom: 16px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -36,6 +37,11 @@ exports[`screen: Home/Blocks/Mobile matches snapshot 1`] = `
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  padding: 16px;
+}
+
+.emotion-1 .MuiTypography-h2 {
+  font-size: 20px;
 }
 
 .emotion-2 {

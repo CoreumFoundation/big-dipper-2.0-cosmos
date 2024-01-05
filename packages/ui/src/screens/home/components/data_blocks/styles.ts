@@ -3,15 +3,12 @@ import { makeStyles } from 'tss-react/mui';
 const useStyles = makeStyles()((theme) => ({
   root: {
     display: 'grid',
-    gap: theme.spacing(1),
+    gap: theme.spacing(2),
     gridTemplateRows: 'auto',
+
     [theme.breakpoints.up('sm')]: {
       gridTemplateColumns: '1fr 1.5 fr 1.5fr',
     },
-    // [theme.breakpoints.up('lg')]: {
-    //   gap: theme.spacing(2),
-    //   gridTemplateColumns: 'repeat(4, 1fr)',
-    // },
   },
   blockHeight: {
     background: theme.palette.custom.general.single_block,

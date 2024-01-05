@@ -20,27 +20,24 @@ exports[`screen: Validators/Tabs matches snapshot 1`] = `
 }
 
 .emotion-0 .MuiTab-root {
-  background: rgba(27, 29, 35, 0.5);
-  color: #6C6F78;
   font-weight: 400;
-  font-size: 14px;
-  padding: 12px 28px;
-}
-
-.emotion-0 .MuiTab-root:first-child {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  font-size: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-right: 1px solid undefined;
 }
 
 .emotion-0 .MuiTab-root:last-child {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-right: none;
 }
 
 .emotion-0 .MuiTab-root.Mui-selected {
-  background: rgba(37, 214, 149, 0.15);
-  color: #25D695;
   font-weight: 600;
+  font-size: 20px;
+}
+
+.emotion-0 .MuiTab-root.Mui-selected span {
+  color: #25D695;
 }
 
 .emotion-1 {
@@ -192,6 +189,14 @@ exports[`screen: Validators/Tabs matches snapshot 1`] = `
 }
 
 .emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+}
+
+.emotion-7 {
   position: absolute;
   height: 2px;
   bottom: 0;
@@ -258,9 +263,19 @@ exports[`screen: Validators/Tabs matches snapshot 1`] = `
           tabIndex={0}
           type="button"
         >
-          key
+          <div
+            className="emotion-6"
+          >
+            key
+             
+            <span>
+              (
+              1
+              )
+            </span>
+          </div>
           <span
-            className="MuiTabs-indicator emotion-6"
+            className="MuiTabs-indicator emotion-7"
             style={{}}
           />
         </button>

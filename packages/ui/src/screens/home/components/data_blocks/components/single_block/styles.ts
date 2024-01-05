@@ -5,7 +5,6 @@ const useStyles = makeStyles()((theme) => ({
     padding: theme.spacing(2),
     background: theme.palette.primary.main,
     borderRadius: theme.shape.borderRadius,
-    height: '110px',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -13,19 +12,24 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.palette.primary.main,
     '& .label': {
       width: '50%',
-      // marginBottom: theme.spacing(2),
       color: theme.palette.primary.contrastText,
     },
     '& .content': {
       width: '50%',
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'baseline',
       justifyContent: 'flex-end',
     },
     '& .description': {
       display: 'block',
       color: theme.palette.primary.contrastText,
-      fontSize: '1rem',
+      fontSize: theme.spacing(1.75),
+    },
+    '& .value': {
+      display: 'flex',
+      alignItems: 'center',
+      fontSize: theme.spacing(2.5),
+      marginBottom: 0,
     },
   },
 }));

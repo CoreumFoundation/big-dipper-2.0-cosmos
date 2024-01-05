@@ -3,7 +3,7 @@
 exports[`screen: Home/DataBlocks matches snapshot 1`] = `
 .emotion-0 {
   display: grid;
-  gap: 8px;
+  gap: 16px;
   grid-template-rows: auto;
 }
 
@@ -17,7 +17,6 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
   padding: 16px;
   background: #25D695;
   border-radius: 4px;
-  height: 110px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -47,10 +46,10 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   -webkit-justify-content: flex-end;
@@ -60,7 +59,20 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
 .emotion-1 .description {
   display: block;
   color: #FFFFFF;
-  font-size: 1rem;
+  font-size: 14px;
+}
+
+.emotion-1 .value {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 20px;
+  margin-bottom: 0;
 }
 
 .emotion-2 {
@@ -86,7 +98,6 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
   padding: 16px;
   background: #25D695;
   border-radius: 4px;
-  height: 110px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -116,10 +127,10 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   -webkit-justify-content: flex-end;
@@ -129,14 +140,26 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
 .emotion-4 .description {
   display: block;
   color: #FFFFFF;
-  font-size: 1rem;
+  font-size: 14px;
+}
+
+.emotion-4 .value {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 20px;
+  margin-bottom: 0;
 }
 
 .emotion-7 {
   padding: 16px;
   background: #25D695;
   border-radius: 4px;
-  height: 110px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -166,10 +189,10 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   -webkit-justify-content: flex-end;
@@ -179,7 +202,20 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
 .emotion-7 .description {
   display: block;
   color: #FFFFFF;
-  font-size: 1rem;
+  font-size: 14px;
+}
+
+.emotion-7 .value {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 20px;
+  margin-bottom: 0;
 }
 
 .emotion-10 {
@@ -206,7 +242,7 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
       className="content"
     >
       <h1
-        className="MuiTypography-root MuiTypography-h1 emotion-3"
+        className="MuiTypography-root MuiTypography-h1 value emotion-3"
       >
         953,992
       </h1>
@@ -224,7 +260,7 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
       className="content"
     >
       <h1
-        className="MuiTypography-root MuiTypography-h1 emotion-3"
+        className="MuiTypography-root MuiTypography-h1 value emotion-3"
       >
         6.54 s
       </h1>
@@ -242,7 +278,7 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
       className="content"
     >
       <h1
-        className="MuiTypography-root MuiTypography-h1 emotion-3"
+        className="MuiTypography-root MuiTypography-h1 value emotion-3"
       >
         200
       </h1>

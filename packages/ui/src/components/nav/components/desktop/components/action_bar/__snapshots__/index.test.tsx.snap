@@ -60,18 +60,31 @@ exports[`screen: Nav/ActionBar it renders 1`] = `
 .emotion-2 .MuiInputBase-root {
   width: 100%;
   height: 100%;
-  padding: 8px 16px;
+  padding-left: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   border-radius: 48px;
-}
-
-@media (max-width:1024.95px) {
-  .emotion-2 .MuiInputBase-root {
-    padding: 8px;
-  }
 }
 
 .emotion-2 .MuiInputBase-input {
   text-overflow: ellipsis;
+  font-size: 14px;
+  padding: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  line-height: 20px;
 }
 
 .emotion-2 .MuiInputBase-input::-webkit-input-placeholder {
@@ -90,30 +103,9 @@ exports[`screen: Nav/ActionBar it renders 1`] = `
   color: #999999;
 }
 
-@media (max-width:1024.95px) {
-  .emotion-2 .MuiInputBase-input::-webkit-input-placeholder {
-    font-size: 0.85rem;
-  }
-
-  .emotion-2 .MuiInputBase-input::-moz-placeholder {
-    font-size: 0.85rem;
-  }
-
-  .emotion-2 .MuiInputBase-input:-ms-input-placeholder {
-    font-size: 0.85rem;
-  }
-
-  .emotion-2 .MuiInputBase-input::placeholder {
-    font-size: 0.85rem;
-  }
-}
-
 .emotion-2 .Search-icon {
-  background: #25D695;
-  border-radius: 100%;
-  padding: 5px;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   color: white;
   cursor: pointer;
 }
@@ -268,6 +260,28 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
 }
 
 .emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #25D695;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 8px;
+  margin: 4px;
+}
+
+.emotion-6 {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -284,7 +298,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   font-size: 1.25rem;
 }
 
-.emotion-6 {
+.emotion-7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -299,7 +313,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
 }
 
 @media (max-width:1024.95px) {
-  .emotion-6 {
+  .emotion-7 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -318,18 +332,18 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   }
 }
 
-.emotion-6.open-menu-margin {
+.emotion-7.open-menu-margin {
   margin-bottom: 220px;
 }
 
 @media (max-width:1024.95px) {
-  .emotion-6 .netIcon {
+  .emotion-7 .netIcon {
     position: relative;
     left: auto;
   }
 }
 
-.emotion-6 .netContent {
+.emotion-7 .netContent {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -344,7 +358,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
 }
 
 @media (max-width:1024.95px) {
-  .emotion-6 .netContent {
+  .emotion-7 .netContent {
     visibility: visible;
     opacity: 1;
     -webkit-box-pack: start;
@@ -362,7 +376,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   }
 }
 
-.emotion-6 .netContent .currentNetName {
+.emotion-7 .netContent .currentNetName {
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
@@ -371,7 +385,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
 }
 
 @media (max-width:1024.95px) {
-  .emotion-6 .netContent .currentNetName {
+  .emotion-7 .netContent .currentNetName {
     margin: 0;
     font-weight: 600;
     font-size: 10px;
@@ -379,7 +393,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   }
 }
 
-.emotion-6 .netContent .currentNetLink {
+.emotion-7 .netContent .currentNetLink {
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
@@ -389,7 +403,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   white-space: nowrap;
 }
 
-.emotion-6 .arrowIcon {
+.emotion-7 .arrowIcon {
   position: relative;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -399,7 +413,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   transition: all 0.3s ease;
 }
 
-.emotion-6 .arrowIcon.modalShow {
+.emotion-7 .arrowIcon.modalShow {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -407,13 +421,13 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
 }
 
 @media (max-width:1024.95px) {
-  .emotion-6 .arrowIcon {
+  .emotion-7 .arrowIcon {
     position: absolute;
     right: 12px;
   }
 }
 
-.emotion-6 .modal {
+.emotion-7 .modal {
   position: fixed;
   visibility: hidden;
   opacity: 0;
@@ -442,13 +456,13 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   box-shadow: -6px 5px rgba(0, 0, 0, 0.25);
 }
 
-.emotion-6 .modal.modalShow {
+.emotion-7 .modal.modalShow {
   visibility: visible;
   opacity: 1;
 }
 
 @media (max-width:1024.95px) {
-  .emotion-6 .modal {
+  .emotion-7 .modal {
     position: absolute;
     width: 100%;
     height: -webkit-fit-content;
@@ -461,7 +475,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   }
 }
 
-.emotion-6 .modal .linkItem {
+.emotion-7 .modal .linkItem {
   width: 240px;
   height: 55px;
   display: -webkit-box;
@@ -478,25 +492,25 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
 }
 
 @media (max-width:1024.95px) {
-  .emotion-6 .modal .linkItem {
+  .emotion-7 .modal .linkItem {
     width: 100%;
   }
 }
 
-.emotion-6 .modal .linkItem .netName {
+.emotion-7 .modal .linkItem .netName {
   font-weight: 600;
   font-size: 10px;
   line-height: 15px;
 }
 
-.emotion-6 .modal .linkItem .netLink {
+.emotion-7 .modal .linkItem .netLink {
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
   color: #000000;
 }
 
-.emotion-6 .modal .linkItem.selectedItem .netName {
+.emotion-7 .modal .linkItem.selectedItem .netName {
   color: #25D695;
 }
 
@@ -526,23 +540,27 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
           type="text"
           value=""
         />
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall Search-icon emotion-5"
-          color="#868991"
-          data-testid="SearchIcon"
-          focusable="false"
-          onClick={[Function]}
-          viewBox="0 0 24 24"
+        <div
+          className="emotion-5"
         >
-          <path
-            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-          />
-        </svg>
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall Search-icon emotion-6"
+            color="#868991"
+            data-testid="SearchIcon"
+            focusable="false"
+            onClick={[Function]}
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+            />
+          </svg>
+        </div>
       </div>
     </form>
     <div
-      className="emotion-6"
+      className="emotion-7"
       onClick={[Function]}
       onTouchEnd={[Function]}
       role="button"

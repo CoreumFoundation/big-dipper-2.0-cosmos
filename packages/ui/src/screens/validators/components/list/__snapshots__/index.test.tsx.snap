@@ -4,10 +4,24 @@ exports[`screen: Validators/List matches snapshot 1`] = `
 .emotion-0 {
   min-height: 500px;
   height: 50vh;
+  overflow: hidden!important;
 }
 
 @media (min-width:1025px) {
   .emotion-0 {
+    height: 100%;
+    min-height: 65vh;
+    padding: 0!important;
+  }
+}
+
+.emotion-1 {
+  min-height: 500px;
+  height: 50vh;
+}
+
+@media (min-width:1025px) {
+  .emotion-1 {
     min-height: 65vh;
   }
 }
@@ -18,16 +32,16 @@ exports[`screen: Validators/List matches snapshot 1`] = `
   loading={true}
 >
   <div
+    handleTabChange={[Function]}
+    id="Tabs"
+    tab={1}
+  />
+  <div
+    className="emotion-0"
     id="Box"
   >
     <div
-      handleSearch={[Function]}
-      handleTabChange={[Function]}
-      id="Tabs"
-      tab={1}
-    />
-    <div
-      className="emotion-0"
+      className="emotion-1"
     >
       <div
         id="NoData"

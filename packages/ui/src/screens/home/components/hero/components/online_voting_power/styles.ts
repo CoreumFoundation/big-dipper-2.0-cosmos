@@ -5,7 +5,9 @@ const useStyles = makeStyles<{ percentage: number | string }>()((theme, { percen
   root: {
     display: 'grid',
     height: '100%',
+
     '& .MuiTypography-h2': {
+      fontSize: theme.spacing(2.5),
       marginBottom: theme.spacing(2),
     },
   },

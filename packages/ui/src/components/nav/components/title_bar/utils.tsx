@@ -15,7 +15,7 @@ export const formatMarket = (data: AtomState) => {
     },
     {
       key: 'inflation',
-      data: `${formatNumber(Big(data.inflation)?.times(100).toPrecision(), 0)}%`,
+      data: `${formatNumber(Big(data.inflation)?.times(100).toPrecision(), 2)}%`,
     },
     {
       key: 'apr',

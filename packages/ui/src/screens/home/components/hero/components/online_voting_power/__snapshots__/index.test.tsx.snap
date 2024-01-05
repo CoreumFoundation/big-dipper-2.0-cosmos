@@ -7,6 +7,7 @@ exports[`screen: Home/OnlineVotingPower matches snapshot 1`] = `
 }
 
 .emotion-0 .MuiTypography-h2 {
+  font-size: 20px;
   margin-bottom: 16px;
 }
 
@@ -274,6 +275,7 @@ exports[`screen: Home/OnlineVotingPower matches snapshot 2`] = `
 }
 
 .emotion-0 .MuiTypography-h2 {
+  font-size: 20px;
   margin-bottom: 16px;
 }
 

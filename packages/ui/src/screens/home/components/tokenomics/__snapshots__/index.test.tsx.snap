@@ -3,8 +3,18 @@
 exports[`screen: Home/Tokenomics matches snapshot 1`] = `
 .emotion-0 {
   height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 .MuiTypography-h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
 }
 
 .emotion-1 {
@@ -14,10 +24,25 @@ exports[`screen: Home/Tokenomics matches snapshot 1`] = `
   font-weight: 600;
   font-family: "Noto Sans",sans-serif;
   line-height: 1.2;
-  margin-bottom: 16px;
 }
 
 .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -30,13 +55,20 @@ exports[`screen: Home/Tokenomics matches snapshot 1`] = `
   -ms-flex-pack: space-around;
   -webkit-justify-content: space-around;
   justify-content: space-around;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100%;
 }
 
-.emotion-3 {
+.emotion-4 {
+  background: rgba(94, 103, 115, 0.25);
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.emotion-5 {
+  background: rgba(94, 103, 115, 0.25);
+  border-radius: 50%;
+}
+
+.emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -50,39 +82,75 @@ exports[`screen: Home/Tokenomics matches snapshot 1`] = `
   justify-content: space-between;
 }
 
-.emotion-3 .data__item {
-  width: 50%;
-  white-space: pre-wrap;
+.emotion-6 .data__item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.emotion-3 .data__item h4 {
-  color: #414141;
+.emotion-6 .data__item .data__item-label {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 6px;
 }
 
-.emotion-3 .data__item .MuiTypography-caption {
+.emotion-6 .data__item .data__item-label h4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  color: #777777;
+  font-size: 14px;
+}
+
+.emotion-6 .data__item h4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.emotion-6 .data__item h4 span {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.emotion-6 .data__item .MuiTypography-caption {
   color: #777777;
 }
 
-.emotion-3 .data__item:last-child {
-  text-align: right;
+.emotion-6 .data__item .circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
 }
 
-.emotion-4 {
+.emotion-7 {
   margin: 0;
   font-size: 1rem;
   letter-spacing: 0.15px;
   font-family: "Noto Sans",sans-serif;
   font-weight: 400;
   line-height: 1.235;
-}
-
-.emotion-5 {
-  margin: 0;
-  font-size: 0.75rem;
-  letter-spacing: 0.4px;
-  font-family: "Noto Sans",sans-serif;
-  font-weight: 400;
-  line-height: 1.66;
 }
 
 <div
@@ -96,49 +164,77 @@ exports[`screen: Home/Tokenomics matches snapshot 1`] = `
   </h2>
   <div
     className="emotion-2"
-  />
-  <div
-    className="emotion-3"
   >
     <div
-      className="data__item"
+      className="emotion-3"
     >
-      <h4
-        className="MuiTypography-root MuiTypography-h4 emotion-4"
-        style={
-          {
-            "color": "#2FB6E0",
-          }
-        }
+      <div
+        className="emotion-4"
       >
-        255b
-         
-      </h4>
-      <span
-        className="MuiTypography-root MuiTypography-caption emotion-5"
-      >
-        bondedPercent
-      </span>
+        <div
+          className="emotion-5"
+        />
+      </div>
     </div>
     <div
-      className="data__item"
+      className="emotion-6"
     >
-      <h4
-        className="MuiTypography-root MuiTypography-h4 emotion-4"
-        style={
-          {
-            "color": "#FFC93D",
-          }
-        }
+      <div
+        className="data__item"
       >
-        -459b
-         
-      </h4>
-      <span
-        className="MuiTypography-root MuiTypography-caption emotion-5"
+        <div
+          className="data__item-label"
+        >
+          <div
+            className="circle"
+            style={
+              {
+                "background": "#2FB6E0",
+              }
+            }
+          />
+          <h4
+            className="MuiTypography-root MuiTypography-h4 emotion-7"
+          >
+            unbondedPercent
+          </h4>
+        </div>
+        <h4
+          className="MuiTypography-root MuiTypography-h4 data__item-value emotion-7"
+        >
+          -459,465,964,998
+           
+          <span />
+        </h4>
+      </div>
+      <div
+        className="data__item"
       >
-        unbondedPercent
-      </span>
+        <div
+          className="data__item-label"
+        >
+          <div
+            className="circle"
+            style={
+              {
+                "background": "#FFC93D",
+              }
+            }
+          />
+          <h4
+            className="MuiTypography-root MuiTypography-h4 emotion-7"
+          >
+            bondedPercent
+          </h4>
+        </div>
+        <h4
+          className="MuiTypography-root MuiTypography-h4 data__item-value emotion-7"
+        >
+          254,578,529,800
+           
+          <span />
+        </h4>
+      </div>
     </div>
   </div>
 </div>

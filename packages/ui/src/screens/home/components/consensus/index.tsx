@@ -35,9 +35,7 @@ const Consensus: FC<ComponentDefault> = ({ className }) => {
 
   return (
     <Box className={cx(classes.root, className)}>
-      <Typography variant="h2" className={classes.label}>
-        {t('consensus')}
-      </Typography>
+      <Typography variant="h2">{t('consensus')}</Typography>
       <div className={classes.content}>
         {state.loadingNewStep ? (
           <Loading />

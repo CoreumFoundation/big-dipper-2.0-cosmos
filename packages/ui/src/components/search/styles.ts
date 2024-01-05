@@ -13,30 +13,41 @@ const useStyles = makeStyles()((theme) => ({
       width: '100%',
       height: '100%',
       background: theme.palette.custom.general.search,
-      padding: theme.spacing(1, 2),
-      [theme.breakpoints.down(1025)]: {
-        padding: theme.spacing(1),
-      },
+      paddingLeft: theme.spacing(2),
+      display: 'flex',
+      alignItems: 'center',
       borderRadius: 48,
     },
     '& .MuiInputBase-input': {
       textOverflow: 'ellipsis',
+      fontSize: theme.spacing(1.75),
+      padding: 0,
+      display: 'flex',
+      alignItems: 'center',
+      lineHeight: theme.spacing(2.5),
+
       '&::placeholder': {
         color: theme.palette.custom.fonts.fontFour,
-        [theme.breakpoints.down(1025)]: {
-          fontSize: '0.85rem',
-        },
       },
     },
     '& .Search-icon': {
-      background: theme.palette.primary.main,
-      borderRadius: '100%',
-      padding: 5,
-      width: 30,
-      height: 30,
+      width: 24,
+      height: 24,
       color: 'white',
       cursor: 'pointer',
     },
+  },
+  iconWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: theme.palette.primary.main,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    cursor: 'pointer',
+    padding: theme.spacing(1),
+    margin: theme.spacing(0.5),
   },
 }));
 

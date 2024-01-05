@@ -33,19 +33,19 @@ const Tokenomics: FC<ComponentDefault> = ({ className }) => {
 
   const data: CustomToolTipData[] = [
     {
-      legendKey: 'bonded',
-      percentKey: 'bondedPercent',
-      value: numeral(state.bonded).format('0a'),
-      rawValue: state.bonded,
-      percent: `${numeral((state.bonded * 100) / state.total).format('0.00')}%`,
+      legendKey: 'unbonded',
+      percentKey: 'unbondedPercent',
+      value: numeral(state.unbonded).format('0,0'),
+      rawValue: state.unbonded,
+      percent: `${numeral((state.unbonded * 100) / state.total).format('0.00')}%`,
       fill: theme.palette.custom.tokenomics.one,
     },
     {
-      legendKey: 'unbonded',
-      percentKey: 'unbondedPercent',
-      value: numeral(state.unbonded).format('0a'),
-      rawValue: state.unbonded,
-      percent: `${numeral((state.unbonded * 100) / state.total).format('0.00')}%`,
+      legendKey: 'bonded',
+      percentKey: 'bondedPercent',
+      value: numeral(state.bonded).format('0,0'),
+      rawValue: state.bonded,
+      percent: `${numeral((state.bonded * 100) / state.total).format('0.00')}%`,
       fill: theme.palette.custom.tokenomics.two,
     },
     {
@@ -59,52 +59,45 @@ const Tokenomics: FC<ComponentDefault> = ({ className }) => {
 
   return (
     <Box className={cx(classes.root, className)}>
-      <Typography variant="h2" className={classes.label}>
-        {t('tokenomics')}
-      </Typography>
-      {/* Commented, as it was removed in one of the previous commits */}
-      <div className={classes.content}>
-        <DynamicPieChart width={200} height={200} cy={100}>
-          <Pie
-            stroke="none"
-            // cornerRadius={40}
-            cy={90}
-            data={data}
-            startAngle={0}
-            endAngle={360}
-            // innerRadius={79}
-            outerRadius={90}
-            fill="#8884d8"
-            // paddingAngle={-10}
-            dataKey="rawValue"
-            // stroke={theme.palette.background.paper}
-            // strokeWidth={3}
-            isAnimationActive={false}
-          >
-            {data.map((entry) => (
-              <Cell key={entry.legendKey} fill={entry.fill} />
-            ))}
-          </Pie>
-          <Tooltip content={customToolTip} />
-        </DynamicPieChart>
-      </div>
-
-      <div className={classes.data}>
-        {data.slice(0, 2).map((x) => (
-          <div className="data__item" key={x.percentKey}>
-            <Typography variant="h4" style={{ color: x.fill }}>
-              {/* //Kept the "toUpperCase()" in order to show the token symbol in uppercase */}
-              {x.value} {tokenUnits?.[state.denom]?.display?.toUpperCase()}
-            </Typography>
-            <Typography variant="caption">
-              {x.percentKey
-                ? t(x.percentKey, {
-                    percent: x.percent,
-                  })
-                : ''}
-            </Typography>
+      <Typography variant="h2">{t('tokenomics')}</Typography>
+      <div className={classes.contentContainer}>
+        <div className={classes.content}>
+          <div className={classes.circleOut}>
+            <div className={classes.circleIn}>
+              <DynamicPieChart width={150} height={150}>
+                <Pie
+                  stroke="none"
+                  data={data}
+                  startAngle={0}
+                  endAngle={360}
+                  outerRadius={68}
+                  fill="#8884d8"
+                  dataKey="rawValue"
+                  isAnimationActive={false}
+                >
+                  {data.map((entry) => (
+                    <Cell key={entry.legendKey} fill={entry.fill} />
+                  ))}
+                </Pie>
+                <Tooltip content={customToolTip} />
+              </DynamicPieChart>
+            </div>
           </div>
-        ))}
+        </div>
+
+        <div className={classes.data}>
+          {data.slice(0, 2).map((x) => (
+            <div className="data__item" key={x.percentKey}>
+              <div className="data__item-label">
+                <div className="circle" style={{ background: x.fill }} />
+                <Typography variant="h4">{x.percentKey ? t(x.percentKey) : ''}</Typography>
+              </div>
+              <Typography variant="h4" className="data__item-value">
+                {x.value} <span>{tokenUnits?.[state.denom]?.display?.toUpperCase()}</span>
+              </Typography>
+            </div>
+          ))}
+        </div>
       </div>
     </Box>
   );
