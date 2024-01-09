@@ -144,12 +144,12 @@ export const useAssets = () => {
   });
 
   const handleTabChange = useCallback(
-    (_event: SyntheticEvent<Element, globalThis.Event>, newValue: number) => {
+    (_event: SyntheticEvent<Element, globalThis.Event>, _: number) => {
       // eslint-disable-next-line no-console
-      setState((prevState) => ({
-        ...prevState,
-        tab: newValue,
-      }));
+      // setState((prevState) => ({
+      //   ...prevState,
+      //   tab: newValue,
+      // }));
     },
     []
   );
