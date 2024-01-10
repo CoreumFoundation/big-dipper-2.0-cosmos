@@ -37,6 +37,7 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, isItemLoaded,
   const display = useDisplayStyles().classes;
   const { t } = useTranslation('transactions');
   const dateFormat = useRecoilValue(readDate);
+  const { classes } = useStyles();
   // const typeTagValue = getTagDisplayValue((transaction.messages.items[0] as any).type);
 
   if (!isItemLoaded?.(index)) {
@@ -145,7 +146,7 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, isItemLoaded,
   return (
     <div style={style}>
       <div ref={rowRef}>
-        <SingleTransaction {...item} />
+        <SingleTransaction {...item} className={classes.listItem} />
       </div>
     </div>
   );
@@ -159,7 +160,6 @@ const TransactionList: FC<TransactionsListDetailsState> = ({
   transactions,
 }) => {
   const { classes, cx } = useStyles();
-
   const { listRef, getRowHeight, setRowHeight } = useList();
 
   return (

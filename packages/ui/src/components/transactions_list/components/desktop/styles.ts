@@ -10,7 +10,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   cell: {
     ...(theme.mixins.tableCell as CSSObject),
-    padding: theme.spacing(0.5),
+    padding: theme.spacing(2),
   },
   header: {
     ...(theme.mixins.tableCell as CSSObject),

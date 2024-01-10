@@ -16,9 +16,9 @@ import { useCallback, useMemo } from 'react';
 const Transactions = () => {
   const txListFormat = useRecoilValue(readTx);
   const { t } = useTranslation('transactions');
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
   const { state, loadNextPage } = useTransactions();
-  const { updateTxFormat } = useSettingList({ lang: 'en' });
+  const { updateTxFormat } = useSettingList();
   const loadMoreItems = useMemo(
     () => (state.isNextPageLoading ? () => null : loadNextPage),
     [state.isNextPageLoading, loadNextPage]
@@ -58,7 +58,7 @@ const Transactions = () => {
               />
             </div>
           </div>
-          <Box className={classes.box}>
+          <Box className={cx(classes.box, 'scrollbar')}>
             {txListFormat === 'compact' ? (
               <TransactionsList
                 transactions={state.items}
