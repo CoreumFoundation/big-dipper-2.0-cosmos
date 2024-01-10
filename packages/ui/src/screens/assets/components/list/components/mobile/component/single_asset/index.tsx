@@ -14,9 +14,11 @@ const SingleAsset = ({ className, tokenType, supply, holders, logo_URIs, denom, 
           {t('asset')}
         </Typography>
         <div className={classes.nameBlock}>
-          <div className={classes.assetLogo}>
-            <Image src={logo_URIs.svg} alt={denom} width={32} height={32} />
-          </div>
+          {(logo_URIs.svg || logo_URIs.png) && (
+            <div className={classes.assetLogo}>
+              <Image src={logo_URIs.svg || logo_URIs.png} alt={denom} width={32} height={32} />
+            </div>
+          )}
           <div className={classes.nameColumn}>
             <Typography variant="body1" className={classes.name}>
               {display}

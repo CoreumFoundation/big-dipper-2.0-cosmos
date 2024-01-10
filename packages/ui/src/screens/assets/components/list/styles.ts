@@ -4,6 +4,7 @@ const useStyles = makeStyles()((theme) => ({
   list: {
     minHeight: '500px',
     height: '50vh',
+    padding: theme.spacing(2),
     [theme.breakpoints.up('lg')]: {
       minHeight: '65vh',
     },

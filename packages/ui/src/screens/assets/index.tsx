@@ -19,7 +19,7 @@ const Assets = () => {
       />
       <Layout navTitle={t('assets') ?? undefined} className={classes.root}>
         <Typography variant="h1">{t('assets')}</Typography>
-        <List />
+        <List className={classes.content} />
       </Layout>
     </>
   );

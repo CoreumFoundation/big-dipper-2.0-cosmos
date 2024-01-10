@@ -23,6 +23,9 @@ const useStyles = makeStyles()((theme) => ({
   assetProfileData: {
     display: 'flex',
     flexDirection: 'column',
+    maxWidth: '100%',
+    overflow: 'hidden',
+    paddingRight: theme.spacing(2),
   },
   assetName: {
     fontSize: theme.spacing(4),
@@ -31,6 +34,10 @@ const useStyles = makeStyles()((theme) => ({
     textTransform: 'capitalize',
     display: 'flex',
     alignItems: 'baseline',
+  },
+  assetNameDisplay: {
+    position: 'relative',
+    wordBreak: 'break-all',
   },
   chainRow: {
     color: theme.palette.custom.fonts.table_headers,
@@ -46,20 +53,13 @@ const useStyles = makeStyles()((theme) => ({
     borderRadius: '2px',
     marginLeft: '10px',
   },
-  // assetChain: {
-  //   fontSize: theme.spacing(1.75),
-  //   fontWeight: 400,
-  //   color: theme.palette.custom.tags.six,
-  //   background: alpha(theme.palette.text.secondary, 0.25),
-  //   padding: `${theme.spacing(0.25)} ${theme.spacing(0.5)}`,
-  //   borderRadius: '2px',
-  //   marginLeft: '10px',
-  // },
   assetDescription: {
     fontSize: theme.spacing(2),
     fontWeight: 400,
     lineHeight: theme.spacing(3),
     color: theme.palette.custom.tags.six,
+    maxWidth: '100%',
+    wordBreak: 'break-all',
   },
   divider: {
     margin: theme.spacing(3, 0),
@@ -101,12 +101,6 @@ const useStyles = makeStyles()((theme) => ({
           minWidth: '50%',
           marginRight: theme.spacing(6),
         },
-        // [theme.breakpoints.up('lg')]: {
-        //   display: 'grid',
-        //   gridTemplateColumns: 'repeat(5, 1fr)',
-        //   minWidth: 'auto',
-        //   marginRight: 0,
-        // },
       },
       '&.social-links': {
         display: 'flex',
@@ -120,6 +114,7 @@ const useStyles = makeStyles()((theme) => ({
   linkRow: {
     display: 'flex',
     alignItems: 'center',
+    color: `${theme.palette.custom.fonts.netSelector_label} !important`,
   },
   linkItem: {
     display: 'flex',

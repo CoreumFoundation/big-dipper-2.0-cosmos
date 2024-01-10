@@ -8,6 +8,11 @@ const useStyles = makeStyles()((theme) => ({
       color: theme.palette.custom.fonts.highlight,
     },
   },
+  content: {
+    height: 'auto',
+    overflow: 'unset !important',
+    padding: '0 !important',
+  },
 }));
 
 export default useStyles;

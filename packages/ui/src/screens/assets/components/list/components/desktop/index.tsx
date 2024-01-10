@@ -85,7 +85,14 @@ const GridRow: FC<GridRowProps> = ({ column, style, rowIndex, align, item, i }) 
         <Typography variant="body1" align={align} component="div">
           <div className={classes.nameBlock}>
             <div className={classes.assetLogo}>
-              <Image src={item.logo_URIs.svg} alt={item.denom} width={32} height={32} />
+              {(item.logo_URIs.svg || item.logo_URIs.png) && (
+                <Image
+                  src={item.logo_URIs.svg || item.logo_URIs.png}
+                  alt={item.denom}
+                  width={32}
+                  height={32}
+                />
+              )}
             </div>
             <div className={classes.nameColumn}>
               <div className={classes.name}>{item.display}</div>

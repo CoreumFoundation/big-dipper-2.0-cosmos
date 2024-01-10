@@ -5,6 +5,8 @@ import { ComponentProps, FC } from 'react';
 import useStyles from '@/screens/assets/components/list/components/tabs/styles';
 import { tabLabels } from '@/screens/assets/components/list/components/tabs/utils';
 import { a11yProps } from '@/utils/a11yProps';
+import Tooltip from '@mui/material/Tooltip';
+import Zoom from '@mui/material/Zoom';
 
 type TabsHeaderProps = {
   className?: string;
@@ -19,9 +21,22 @@ const TabsHeader: FC<TabsHeaderProps> = ({ className, tab, handleTabChange }) =>
   return (
     <div className={cx(classes.root, className)}>
       <Tabs variant="scrollable" scrollButtons={false} value={tab} onChange={handleTabChange}>
-        {tabLabels.map((x, i) => (
-          <Tab key={x} label={t(x)} {...a11yProps(i)} />
-        ))}
+        {tabLabels.map((x, i) => {
+          if (x === 'nonFungibleToken') {
+            return (
+              <Tooltip
+                TransitionComponent={Zoom}
+                title={<p>{t('commingSoon')}</p>}
+                placement="top"
+                arrow
+              >
+                <Tab key={x} label={t(x)} {...a11yProps(i)} />
+              </Tooltip>
+            );
+          }
+
+          return <Tab key={x} label={t(x)} {...a11yProps(i)} />;
+        })}
       </Tabs>
     </div>
   );

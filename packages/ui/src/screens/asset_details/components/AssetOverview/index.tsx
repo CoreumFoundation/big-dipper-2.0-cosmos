@@ -2,7 +2,7 @@ import Box from '@/components/box';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import Image from 'next/image';
 import useStyles from './styles';
 import { getURLIcon } from './icons';
@@ -18,8 +18,8 @@ const AssetOverview: FC<AssetOverviewProps> = ({ asset, className }) => {
 
   const { display, description, urls, social_media, logo_URIs } = asset;
 
-  const dataItems = [
-    {
+  const dataLinks = useMemo(
+    () => ({
       key: 'links',
       name: (
         <Typography variant="h4" className="label">
@@ -48,8 +48,12 @@ const AssetOverview: FC<AssetOverviewProps> = ({ asset, className }) => {
           })}
         </Typography>
       ),
-    },
-    {
+    }),
+    [urls, classes.linkRow, classes.linkIcon, classes.linkItem, t]
+  );
+
+  const dataSocialMedia = useMemo(
+    () => ({
       key: 'social_medial',
       name: (
         <Typography variant="h4" className="label">
@@ -75,44 +79,66 @@ const AssetOverview: FC<AssetOverviewProps> = ({ asset, className }) => {
           })}
         </Typography>
       ),
-    },
-  ];
+    }),
+    [social_media, classes.linkRow, classes.socialMediaLink, t]
+  );
+
+  const dataItems = useMemo(() => {
+    const dataArr = [];
+
+    if (Object.values(urls).length) {
+      dataArr.push(dataLinks);
+    }
+
+    if (Object.values(social_media).length) {
+      dataArr.push(dataSocialMedia);
+    }
+
+    return dataArr;
+  }, [dataLinks, urls, dataSocialMedia, social_media]);
 
   return (
     <Box className={className}>
       <div className={classes.assetOverviewRoot}>
         <div className={classes.assetProfile}>
-          <div className={classes.assetProfileLogo}>
-            <Image
-              src={logo_URIs.svg}
-              alt={display}
-              width={32}
-              height={32}
-              className={classes.assetLogo}
-            />
-          </div>
+          {logo_URIs.svg || logo_URIs.png ? (
+            <div className={classes.assetProfileLogo}>
+              <Image
+                src={logo_URIs.svg || logo_URIs.png}
+                alt={display}
+                width={32}
+                height={32}
+                className={classes.assetLogo}
+              />
+            </div>
+          ) : (
+            ''
+          )}
           <div className={classes.assetProfileData}>
             <div className={classes.assetName}>
-              {display}
+              <div className={classes.assetNameDisplay}>{display}</div>
               <div className={classes.chainRow}>
                 <div className={classes.nameChain}>Chain: Coreum</div>
               </div>
-              {/* <span className={classes.assetChain}>
-                Chain: Coreum
-              </span> */}
             </div>
             <div className={classes.assetDescription}>{description}</div>
           </div>
         </div>
-        <Divider className={classes.divider} />
-        <div className={classes.statusRoot}>
-          {dataItems.map((x) => (
-            <div key={x.key} className={classes.statusItem}>
-              {x.name}
-              {x.value}
+        {dataItems.length ? (
+          <>
+            <Divider className={classes.divider} />
+            <div className={classes.statusRoot}>
+              {dataItems.map((x) => (
+                <div key={x.key} className={classes.statusItem}>
+                  {x.name}
+                  {x.value}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </Box>
   );
