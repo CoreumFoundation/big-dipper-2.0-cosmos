@@ -162,7 +162,6 @@ export const useTransactions = () => {
       ]);
       handleSetState((prevState) => ({
         ...prevState,
-        loading: false,
         items: newItems,
       }));
     },

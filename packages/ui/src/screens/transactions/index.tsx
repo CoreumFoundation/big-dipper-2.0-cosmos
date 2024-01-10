@@ -11,6 +11,7 @@ import { readTx } from '@/recoil/settings';
 import { useSettingList } from '@/components/nav/components/desktop/components/action_bar/components/settings_list/hooks';
 import { useTransactions } from '@/screens/transactions/hooks';
 import useStyles from '@/screens/transactions/styles';
+import { useCallback, useMemo } from 'react';
 
 const Transactions = () => {
   const txListFormat = useRecoilValue(readTx);
@@ -18,9 +19,18 @@ const Transactions = () => {
   const { classes } = useStyles();
   const { state, loadNextPage } = useTransactions();
   const { updateTxFormat } = useSettingList({ lang: 'en' });
-  const loadMoreItems = state.isNextPageLoading ? () => null : loadNextPage;
-  const isItemLoaded = (index: number) => !state.hasNextPage || index < state.items.length;
-  const itemCount = state.hasNextPage ? state.items.length + 1 : state.items.length;
+  const loadMoreItems = useMemo(
+    () => (state.isNextPageLoading ? () => null : loadNextPage),
+    [state.isNextPageLoading, loadNextPage]
+  );
+  const isItemLoaded = useCallback(
+    (index: number) => !state.hasNextPage || index < state.items.length,
+    [state.hasNextPage, state.items.length]
+  );
+  const itemCount = useMemo(
+    () => (state.hasNextPage ? state.items.length + 1 : state.items.length),
+    [state.hasNextPage, state.items.length]
+  );
 
   return (
     <>
