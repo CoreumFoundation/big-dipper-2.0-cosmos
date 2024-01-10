@@ -17,6 +17,10 @@ const useStyles = makeStyles()((theme) => ({
       alignItems: 'center',
       justifyContent: 'space-between',
     },
+
+    '& .MuiTypography-h2': {
+      fontSize: theme.spacing(2.5),
+    },
   },
   list: {
     flex: 1,

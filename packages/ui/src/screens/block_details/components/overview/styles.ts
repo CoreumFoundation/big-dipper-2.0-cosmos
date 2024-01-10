@@ -4,6 +4,10 @@ const useStyles = makeStyles()((theme) => ({
   root: {
     display: 'grid',
     gap: theme.spacing(3),
+
+    '& .MuiTypography-h2': {
+      fontSize: theme.spacing(2.5),
+    },
   },
   details: {
     display: 'grid',

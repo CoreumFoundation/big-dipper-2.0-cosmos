@@ -44,7 +44,7 @@ const Desktop: FC<DesktopProps> = ({ className, signatures }) => {
                 const { key, align } = columns[columnIndex];
 
                 return (
-                  <div style={style} className={classes.cell}>
+                  <div style={{ ...style }} className={cx(classes.cell, classes.headerCell)}>
                     <Typography variant="h4" align={align}>
                       {t(key)}
                     </Typography>

@@ -14,6 +14,16 @@ const useStyles = makeStyles()((theme) => ({
   cellItem: {
     width: 'auto',
   },
+  headerCell: {
+    color: theme.palette.custom.fonts.table_headers,
+    textTransform: 'uppercase',
+    backgroundColor: theme.palette.custom.general.modal_header,
+
+    '& .MuiTypography-h4': {
+      fontSize: `${theme.spacing(1.5)} !important`,
+      fontWeight: 400,
+    },
+  },
 }));
 
 export default useStyles;

@@ -5,6 +5,7 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     '& .MuiTypography-h2': {
+      fontSize: theme.spacing(2.5),
       paddingBottom: theme.spacing(2),
     },
   },

@@ -7,6 +7,7 @@ import Signatures from '@/screens/block_details/components/signatures';
 import Transactions from '@/screens/block_details/components/transactions';
 import { useBlockDetails } from '@/screens/block_details/hooks';
 import useStyles from '@/screens/block_details/styles';
+import Link from 'next/link';
 
 const BlockDetails = () => {
   const { t } = useTranslation('blocks');
@@ -23,6 +24,21 @@ const BlockDetails = () => {
         }}
       />
       <Layout navTitle={t('blockDetails') ?? undefined}>
+        <div className={classes.block}>
+          <Link href="/validators" className={classes.breadcrumb}>
+            <svg
+              width="16"
+              height="17"
+              viewBox="0 0 16 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#25D695" strokeWidth="1.5" />
+            </svg>
+            Back to all blocks
+          </Link>
+          <div className={classes.title}>{t('blockDetails')}</div>
+        </div>
         <LoadAndExist loading={state.loading} exists={state.exists}>
           <span className={classes.root}>
             <Overview
