@@ -125,16 +125,6 @@ export const formatMinting = (data: Minting, t: TFunction) => [
 
 export const formatDistribution = (data: Distribution, t: TFunction) => [
   {
-    key: 'baseProposerReward',
-    label: t('baseProposerReward'),
-    detail: `${numeral(data.baseProposerReward * 100).format('0.[00]')}%`,
-  },
-  {
-    key: 'bonusProposerReward',
-    label: t('bonusProposerReward'),
-    detail: `${numeral(data.bonusProposerReward * 100).format('0.[00]')}%`,
-  },
-  {
     key: 'communityTax',
     label: t('communityTax'),
     detail: `${numeral(data.communityTax * 100).format('0.[00]')}%`,
