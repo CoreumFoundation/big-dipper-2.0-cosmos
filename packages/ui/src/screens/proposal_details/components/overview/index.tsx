@@ -27,6 +27,7 @@ const Overview: FC<{ className?: string; overview: OverviewType }> = ({ classNam
 
   const type = getProposalType(R.pathOr('', ['@type'], overview.content));
   const height = (overview as any).content?.[0]?.plan?.height ?? '';
+  const name = (overview as any).content?.[0]?.plan?.name ?? '';
 
   const { address: proposerAddress, name: proposerName } = useProfileRecoil(overview.proposer);
   const { name: recipientName } = useProfileRecoil(overview?.content?.recipient);
@@ -106,6 +107,26 @@ const Overview: FC<{ className?: string; overview: OverviewType }> = ({ classNam
           {t('proposer')}
         </Typography>
         <Name name={proposerMoniker} address={proposerAddress} />
+        {!!name && (
+          <>
+            <Typography variant="body1" className="label">
+              {t('name')}
+            </Typography>
+            <Typography variant="body1" className="value">
+              {name}
+            </Typography>
+          </>
+        )}
+        {!!height && (
+          <>
+            <Typography variant="body1" className="label">
+              {t('height')}
+            </Typography>
+            <Typography variant="body1" className="value">
+              {numeral(height).format('0,0')}
+            </Typography>
+          </>
+        )}
         {!!overview.submitTime && (
           <>
             <Typography variant="body1" className="label">
@@ -143,16 +164,6 @@ const Overview: FC<{ className?: string; overview: OverviewType }> = ({ classNam
             </Typography>
             <Typography variant="body1" className="value">
               {formatDayJs(dayjs.utc(overview.votingEndTime), dateFormat)}
-            </Typography>
-          </>
-        )}
-        {!!height && (
-          <>
-            <Typography variant="body1" className="label">
-              {t('height')}
-            </Typography>
-            <Typography variant="body1" className="value">
-              {numeral(height).format('0,0')}
             </Typography>
           </>
         )}
