@@ -6,17 +6,14 @@ const useStyles = makeStyles()((theme) => ({
     ...(theme.mixins.layout as CSSObject),
     display: 'grid',
     gridTemplateRows: 'auto',
-    gap: theme.spacing(1),
+    gap: theme.spacing(1.5),
     '& a': {
       color: theme.palette.custom.fonts.highlight,
-    },
-    [theme.breakpoints.up('lg')]: {
-      gap: theme.spacing(2),
-      gridTemplateColumns: 'repeat(2, 1fr)',
     },
   },
   header: {
     paddingLeft: theme.spacing(2),
+    fontSize: theme.spacing(3.5),
   },
 }));
 

@@ -1,6 +1,6 @@
 import { NextSeo } from 'next-seo';
 import { useTranslation } from 'next-i18next';
-import BoxDetails from '@/components/box_details';
+import BoxDetails from '@/screens/params/components/box_details';
 import Layout from '@/components/layout';
 import LoadAndExist from '@/components/load_and_exist';
 import { useParams } from '@/screens/params/hooks';
@@ -65,7 +65,6 @@ const Params = () => {
     : null;
 
   const ft = state.ft ? { title: t('ft') ?? undefined, details: formatFT(state.ft, t) } : null;
-
   const nft = state.nft ? { title: t('nft') ?? undefined, details: formatNFT(state.nft, t) } : null;
 
   return (
