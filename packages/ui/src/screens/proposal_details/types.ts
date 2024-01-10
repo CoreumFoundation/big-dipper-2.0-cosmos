@@ -15,6 +15,9 @@ export interface OverviewType {
       amount: string;
       denom: string;
     }>;
+    plan?: {
+      height?: string;
+    };
   };
 }
 

@@ -26,6 +26,7 @@ const Overview: FC<{ className?: string; overview: OverviewType }> = ({ classNam
   const { t } = useTranslation('proposals');
 
   const type = getProposalType(R.pathOr('', ['@type'], overview.content));
+  const height = (overview as any).content?.[0]?.plan?.height ?? '';
 
   const { address: proposerAddress, name: proposerName } = useProfileRecoil(overview.proposer);
   const { name: recipientName } = useProfileRecoil(overview?.content?.recipient);
@@ -142,6 +143,16 @@ const Overview: FC<{ className?: string; overview: OverviewType }> = ({ classNam
             </Typography>
             <Typography variant="body1" className="value">
               {formatDayJs(dayjs.utc(overview.votingEndTime), dateFormat)}
+            </Typography>
+          </>
+        )}
+        {!!height && (
+          <>
+            <Typography variant="body1" className="label">
+              {t('height')}
+            </Typography>
+            <Typography variant="body1" className="value">
+              {numeral(height).format('0,0')}
             </Typography>
           </>
         )}
