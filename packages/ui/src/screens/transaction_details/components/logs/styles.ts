@@ -4,12 +4,15 @@ import { makeStyles } from 'tss-react/mui';
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     overflow: 'hidden',
-  },
 
+    '& .MuiTypography-h2': {
+      color: `${theme.palette.custom.fonts.fontFive} !important`,
+      fontSize: theme.spacing(2.5),
+    },
+  },
   header: {
     paddingBottom: theme.spacing(2),
   },
-
   pre: {
     maxHeight: '400px',
     overflow: 'auto',

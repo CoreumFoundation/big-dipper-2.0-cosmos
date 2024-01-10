@@ -4,6 +4,11 @@ const useStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+
+    '& .MuiTypography-h2': {
+      color: `${theme.palette.custom.fonts.fontFive} !important`,
+      fontSize: theme.spacing(2.5),
+    },
   },
   desktopOptions: {
     display: 'flex',

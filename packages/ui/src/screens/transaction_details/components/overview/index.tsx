@@ -3,7 +3,7 @@ import Link from 'next/link';
 import numeral from 'numeral';
 import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
-import BoxDetails from '@/components/box_details';
+import BoxDetails from '@/screens/transaction_details/components/overview/components/box_details';
 import Result from '@/components/result';
 import { readDate } from '@/recoil/settings';
 import useStyles from '@/screens/transaction_details/components/overview/styles';
@@ -11,6 +11,7 @@ import type { OverviewType } from '@/screens/transaction_details/types';
 import dayjs, { formatDayJs } from '@/utils/dayjs';
 import { formatNumber } from '@/utils/format_token';
 import { BLOCK_DETAILS } from '@/utils/go_to_page';
+import { Typography } from '@mui/material';
 
 type OverviewProps = {
   className?: string;
@@ -27,6 +28,7 @@ const Overview: FC<OverviewProps> = ({ className, data }) => {
       key: 'hash',
       label: t('hash'),
       detail: data.hash,
+      fullWidth: true,
     },
     {
       key: 'height',
@@ -36,11 +38,13 @@ const Overview: FC<OverviewProps> = ({ className, data }) => {
           {numeral(data.height).format('0,0')}
         </Link>
       ),
+      fullWidth: false,
     },
     {
       key: 'time',
       label: t('time'),
       detail: formatDayJs(dayjs.utc(data.timestamp), dateFormat),
+      fullWidth: false,
     },
     {
       key: 'fee',
@@ -49,6 +53,7 @@ const Overview: FC<OverviewProps> = ({ className, data }) => {
         data.fee.value,
         data.fee.exponent
       )} ${data?.fee?.displayDenom.toUpperCase()}`,
+      fullWidth: false,
     },
     {
       key: 'gas',
@@ -56,17 +61,20 @@ const Overview: FC<OverviewProps> = ({ className, data }) => {
       detail: `${numeral(data.gasUsed).format('0,0.[00]')} / ${numeral(data.gasWanted).format(
         '0,0.[00]'
       )}`,
+      fullWidth: false,
     },
     {
       key: 'result',
       label: t('result'),
       detail: <Result success={data.success} />,
+      fullWidth: false,
     },
     {
       className: 'memo',
       key: 'memo',
       label: t('memo'),
       detail: data.memo,
+      fullWidth: false,
     },
   ];
 
@@ -76,13 +84,14 @@ const Overview: FC<OverviewProps> = ({ className, data }) => {
       key: 'error',
       label: t('error'),
       detail: data.error,
+      fullWidth: false,
     });
   }
 
   return (
     <BoxDetails
       className={cx(classes.root, className)}
-      title={t('overview') ?? undefined}
+      title={<Typography variant="h2">{t('overview')}</Typography>}
       details={details}
     />
   );

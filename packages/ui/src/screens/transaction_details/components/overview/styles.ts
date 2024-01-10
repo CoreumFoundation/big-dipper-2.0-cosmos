@@ -8,6 +8,11 @@ const useStyles = makeStyles()((theme) => ({
         marginRight: theme.spacing(5),
       },
     },
+
+    '& .MuiTypography-h2': {
+      color: `${theme.palette.custom.fonts.fontFive} !important`,
+      fontSize: theme.spacing(2.5),
+    },
   },
 }));
 

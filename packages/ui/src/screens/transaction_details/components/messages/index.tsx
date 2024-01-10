@@ -36,7 +36,7 @@ const ListItem: FC<ListItemProps> = ({
     <div style={style}>
       <div ref={rowRef}>
         <div className={classes.item}>
-          <div className={classes.tags}>{formattedItem.type}</div>
+          {!viewRaw ? <div className={classes.tags}>{formattedItem.type}</div> : ''}
           <span className="msg">{formattedItem.message}</span>
         </div>
         {!isLast && <Divider />}

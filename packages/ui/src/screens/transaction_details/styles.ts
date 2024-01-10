@@ -31,6 +31,28 @@ const useStyles = makeStyles()((theme) => ({
       height: '40vh',
     },
   },
+  block: {
+    ...(theme.mixins.layout as CSSObject),
+    paddingBottom: '0 !important',
+  },
+  breadcrumb: {
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer',
+    fontSize: theme.spacing(1.75),
+    fontWeight: 500,
+    color: `${theme.palette.primary.main} !important`,
+    '& svg': {
+      fill: 'transparent',
+    },
+  },
+  title: {
+    fontSize: theme.spacing(3.5),
+    fontWeight: 600,
+    color: theme.palette.primary.contrastText,
+    marginTop: theme.spacing(1.5),
+    marginBottom: theme.spacing(1.5),
+  },
 }));
 
 export default useStyles;
