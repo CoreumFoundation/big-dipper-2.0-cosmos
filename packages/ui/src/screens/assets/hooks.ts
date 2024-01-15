@@ -7,7 +7,7 @@ import chainConfig from '@/chainConfig';
 
 const { chainType, primaryTokenUnit, tokenUnits } = chainConfig();
 
-interface Asset {
+export interface Asset {
   denom: string;
   description: string;
   ibc_info: {

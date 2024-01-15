@@ -14,6 +14,7 @@ const getValidator =
   (address: string): ReadOnlySelectorOptions<AtomState>['get'] =>
   ({ get }) => {
     const state = get(atomFamilyState(address));
+
     return state;
   };
 
