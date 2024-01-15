@@ -56,7 +56,10 @@ export const useAccountWithdrawalAddress = (address?: string) => {
   useEffect(() => {
     if (error) refetch();
   }, [error, refetch]);
-  return data ?? defaultReturnValue;
+  return {
+    address: data ?? defaultReturnValue,
+    error,
+  };
 };
 
 export const useAvailableBalances = (address?: string) => {

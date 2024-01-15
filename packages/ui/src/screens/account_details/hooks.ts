@@ -224,6 +224,7 @@ export const useAccountDetails = () => {
     },
     []
   );
+
   const address = Array.isArray(router.query.address)
     ? router.query.address[0]
     : router.query.address ?? '';
@@ -235,6 +236,7 @@ export const useAccountDetails = () => {
     addresses: [address],
     skip: !extra.profile || !address,
   });
+
   useEffect(
     () =>
       setState((prevState) => ({
@@ -265,13 +267,27 @@ export const useAccountDetails = () => {
     formattedRawData.unbondingBalance = R.pathOr({ coins: [] }, ['unbondingBalance'], unbonding);
     formattedRawData.delegationRewards = R.pathOr([], ['delegationRewards'], rewards);
 
-    handleSetState((prevState) => ({ ...prevState, ...formatAllBalance(formattedRawData) }));
+    handleSetState((prevState) => ({
+      ...prevState,
+      ...formatAllBalance(formattedRawData),
+    }));
   }, [commission, available, delegation, unbonding, rewards, handleSetState]);
 
   // ==========================
   // Fetch Data
   // ==========================
-  const withdrawalAddress = useAccountWithdrawalAddress(address);
+  const { address: withdrawalAddress, error } = useAccountWithdrawalAddress(address);
+
+  useEffect(() => {
+    if (error && state.exists) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        loading: false,
+        exists: false,
+      }));
+    }
+  }, [error]);
+
   useEffect(() => {
     handleSetState((prevState) => ({
       ...prevState,

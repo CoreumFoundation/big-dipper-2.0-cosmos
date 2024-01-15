@@ -26,6 +26,8 @@ export const useSearchBar = (t: TFunction) => {
       async (value: string, clear?: () => void) => {
         const parsedValue = value.replace(/\s+/g, '');
 
+        console.log(parsedValue);
+
         if (consensusRegex.test(parsedValue)) {
           const validatorAddress = await snapshot.getPromise(readValidator(parsedValue));
           if (validatorAddress) {
