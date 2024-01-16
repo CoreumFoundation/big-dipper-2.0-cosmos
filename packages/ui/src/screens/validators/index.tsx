@@ -16,7 +16,12 @@ const Validators = () => {
           title: t('validators') ?? undefined,
         }}
       />
-      <Layout navTitle={t('validators') ?? undefined} className={classes.root}>
+      <Layout
+        navTitle={t('validators') ?? undefined}
+        className={classes.root}
+        rootClassName={classes.layoutRoot}
+        contentWrapperClassName={classes.layoutContentWrapper}
+      >
         <Typography variant="h1">{t('validators')}</Typography>
         <List />
       </Layout>

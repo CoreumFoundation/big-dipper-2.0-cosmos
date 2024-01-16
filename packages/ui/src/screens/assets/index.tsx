@@ -17,9 +17,14 @@ const Assets = () => {
           title: t('assets') ?? undefined,
         }}
       />
-      <Layout navTitle={t('assets') ?? undefined} className={classes.root}>
+      <Layout
+        navTitle={t('assets') ?? undefined}
+        className={classes.root}
+        rootClassName={classes.layoutRoot}
+        contentWrapperClassName={classes.layoutContentWrapper}
+      >
         <Typography variant="h1">{t('assets')}</Typography>
-        <List className={classes.content} />
+        <List />
       </Layout>
     </>
   );

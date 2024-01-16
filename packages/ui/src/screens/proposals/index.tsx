@@ -20,7 +20,12 @@ const Proposals = () => {
           title: t('proposals') ?? undefined,
         }}
       />
-      <Layout navTitle={t('proposals') ?? undefined} className={classes.root}>
+      <Layout
+        navTitle={t('proposals') ?? undefined}
+        className={classes.root}
+        rootClassName={classes.layoutRoot}
+        contentWrapperClassName={classes.layoutContentWrapper}
+      >
         <LoadAndExist loading={state.loading} exists={state.exists}>
           <Typography variant="h1">{t('proposals')}</Typography>
           <List

@@ -3,6 +3,7 @@ import { makeStyles } from 'tss-react/mui';
 const useStyles = makeStyles()((theme) => ({
   root: {
     margin: theme.spacing(2, 0),
+    paddingRight: `${theme.spacing(2)} !important`,
   },
   item: {
     marginBottom: theme.spacing(2),

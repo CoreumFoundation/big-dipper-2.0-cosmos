@@ -12,11 +12,16 @@ const useStyles = makeStyles()((theme) => ({
     height: '100%',
   },
   box: {
+    paddingTop: `0 !important`,
+    paddingRight: `0 !important`,
+    paddingBottom: `0 !important`,
     minHeight: '500px',
-    height: '50vh',
+    height: `calc(100% - 60px)`,
     overflow: 'hidden !important',
+    display: 'flex',
+    flexDirection: 'column',
     [theme.breakpoints.up('lg')]: {
-      height: '100%',
+      height: `calc(100% - 60px)`,
       minHeight: '65vh',
       padding: '0 !important',
     },

@@ -50,7 +50,12 @@ const Blocks = () => {
           title: t('blocks') ?? undefined,
         }}
       />
-      <Layout navTitle={t('blocks') ?? undefined} className={classes.root}>
+      <Layout
+        navTitle={t('blocks') ?? undefined}
+        className={classes.root}
+        rootClassName={classes.layoutRoot}
+        contentWrapperClassName={classes.layoutContentWrapper}
+      >
         <LoadAndExist loading={state.loading} exists={state.exists}>
           <Typography variant="h1">{t('blocks')}</Typography>
           <Box className={cx(classes.box, 'scrollbar')}>{box}</Box>

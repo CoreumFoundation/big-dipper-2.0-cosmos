@@ -2,6 +2,7 @@ import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
   root: {
+    paddingRight: `${theme.spacing(2)} !important`,
     margin: theme.spacing(2, 0),
     [theme.breakpoints.up('lg')]: {
       display: 'grid',

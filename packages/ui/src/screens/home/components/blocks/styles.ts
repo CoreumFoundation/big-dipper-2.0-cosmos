@@ -4,7 +4,7 @@ const useStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    padding: `0 !important`,
+    padding: theme.spacing(2),
 
     '& .button': {
       color: theme.palette.primary.main,
@@ -14,15 +14,22 @@ const useStyles = makeStyles()((theme) => ({
         cursor: 'pointer',
       },
     },
+
+    [theme.breakpoints.up('lg')]: {
+      padding: `0 !important`,
+    },
   },
   label: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: theme.spacing(2),
 
     '& .MuiTypography-h2': {
       fontSize: theme.spacing(2.5),
+    },
+
+    [theme.breakpoints.up('lg')]: {
+      padding: theme.spacing(2),
     },
   },
   seeMoreFooter: {
