@@ -27,8 +27,10 @@ exports[`screen: Validators matches snapshot 1`] = `
 
 <div
   className="emotion-0"
+  contentWrapperClassName="css-s4fdp5-layoutContentWrapper"
   id="Layout"
   navTitle="validators"
+  rootClassName="css-1ydocy-layoutRoot"
 >
   <h1
     className="MuiTypography-root MuiTypography-h1 emotion-1"

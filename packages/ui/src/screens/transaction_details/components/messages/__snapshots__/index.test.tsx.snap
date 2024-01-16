@@ -11,6 +11,11 @@ exports[`screen: TransactionDetails/ Messages matches snapshot 1`] = `
   flex-direction: column;
 }
 
+.emotion-0 .MuiTypography-h2 {
+  color: #FFFFFF!important;
+  font-size: 20px;
+}
+
 .emotion-1 {
   padding-bottom: 16px;
 }

@@ -26,8 +26,10 @@ exports[`screen: Blocks matches snapshot 1`] = `
 }
 
 .emotion-2 {
+  padding-top: 0!important;
+  padding-right: 0!important;
   min-height: 500px;
-  height: 50vh;
+  height: 100%;
   overflow: hidden!important;
 }
 
@@ -41,8 +43,10 @@ exports[`screen: Blocks matches snapshot 1`] = `
 
 <div
   className="emotion-0"
+  contentWrapperClassName="css-s4fdp5-layoutContentWrapper"
   id="Layout"
   navTitle="blocks"
+  rootClassName="css-1ydocy-layoutRoot"
 >
   <div
     exists={true}

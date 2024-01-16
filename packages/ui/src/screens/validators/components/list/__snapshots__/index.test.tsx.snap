@@ -2,27 +2,26 @@
 
 exports[`screen: Validators/List matches snapshot 1`] = `
 .emotion-0 {
+  padding-top: 0!important;
+  padding-right: 0!important;
+  padding-bottom: 0!important;
   min-height: 500px;
-  height: 50vh;
+  height: calc(100% - 60px);
   overflow: hidden!important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 @media (min-width:1025px) {
   .emotion-0 {
-    height: 100%;
+    height: calc(100% - 60px);
     min-height: 65vh;
     padding: 0!important;
-  }
-}
-
-.emotion-1 {
-  min-height: 500px;
-  height: 50vh;
-}
-
-@media (min-width:1025px) {
-  .emotion-1 {
-    min-height: 65vh;
   }
 }
 
@@ -41,12 +40,8 @@ exports[`screen: Validators/List matches snapshot 1`] = `
     id="Box"
   >
     <div
-      className="emotion-1"
-    >
-      <div
-        id="NoData"
-      />
-    </div>
+      id="NoData"
+    />
   </div>
 </div>
 `;

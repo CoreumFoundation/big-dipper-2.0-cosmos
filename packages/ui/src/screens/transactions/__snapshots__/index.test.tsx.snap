@@ -27,6 +27,7 @@ exports[`screen: Transactions matches snapshot 1`] = `
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  gap: 8px;
 }
 
 @media (max-width:400.95px) {
@@ -37,6 +38,59 @@ exports[`screen: Transactions matches snapshot 1`] = `
   .emotion-1>h4 {
     font-size: 0.75rem;
   }
+}
+
+.emotion-1 .MuiSwitch-root {
+  width: 36px;
+  height: 20px;
+  padding: 0;
+}
+
+.emotion-1 .MuiSwitch-root .MuiSwitch-switchBase {
+  padding: 0;
+  margin: 2px;
+  transition-duration: 300ms;
+}
+
+.emotion-1 .MuiSwitch-root .MuiSwitch-switchBase.Mui-checked {
+  -webkit-transform: translateX(16px);
+  -moz-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+  color: #fff;
+}
+
+.emotion-1 .MuiSwitch-root .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
+  background-color: #25D695;
+  opacity: 1;
+  border: 0;
+}
+
+.emotion-1 .MuiSwitch-root .MuiSwitch-switchBase.Mui-checked.Mui-disabled+.MuiSwitch-track {
+  opacity: 0.5;
+}
+
+.emotion-1 .MuiSwitch-root .MuiSwitch-switchBase.Mui-focusVisible .MuiSwitch-thumb {
+  color: #33cf4d;
+  border: 6px solid #fff;
+}
+
+.emotion-1 .MuiSwitch-root .MuiSwitch-switchBase.Mui-disabled+.MuiSwitch-track {
+  opacity: 0.7;
+}
+
+.emotion-1 .MuiSwitch-root .MuiSwitch-thumb {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-1 .MuiSwitch-root .MuiSwitch-track {
+  border-radius: 18px;
+  background-color: #373E48;
+  opacity: 1;
+  -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .emotion-2 {
@@ -244,8 +298,12 @@ exports[`screen: Transactions matches snapshot 1`] = `
 }
 
 .emotion-11 {
+  padding-top: 0!important;
+  padding-right: 0!important;
+  padding-bottom: 0!important;
+  min-height: 500px;
   height: 100%;
-  min-height: 65vh;
+  overflow: hidden!important;
 }
 
 <div
@@ -316,7 +374,7 @@ exports[`screen: Transactions matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="emotion-11"
+      className="emotion-11 scrollbar"
       id="Box"
     >
       <div

@@ -39,6 +39,10 @@ exports[`screen: BlockDetails/Transactions matches snapshot 1`] = `
   }
 }
 
+.emotion-1 .MuiTypography-h2 {
+  font-size: 20px;
+}
+
 .emotion-2 {
   margin: 0;
   font-size: 1.5rem;

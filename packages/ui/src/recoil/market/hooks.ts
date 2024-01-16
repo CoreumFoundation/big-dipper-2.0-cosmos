@@ -21,7 +21,7 @@ export function useMarketRecoil() {
 
   useMarketDataQuery({
     variables: {
-      denom: tokenUnits[primaryTokenUnit].display,
+      denom: tokenUnits?.[primaryTokenUnit]?.display,
     },
     onCompleted: (data) => {
       if (data) {

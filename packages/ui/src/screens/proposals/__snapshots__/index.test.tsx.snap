@@ -31,8 +31,10 @@ exports[`screen: Proposals matches snapshot 1`] = `
 
 <div
   className="emotion-0"
+  contentWrapperClassName="css-s4fdp5-layoutContentWrapper"
   id="Layout"
   navTitle="proposals"
+  rootClassName="css-1ydocy-layoutRoot"
 >
   <div
     className="emotion-1"

@@ -3,10 +3,7 @@
 exports[`screen: BlockDetails matches snapshot 1`] = `
 .emotion-0 {
   padding: 16px;
-  display: grid;
-  grid-template-rows: auto auto 1fr;
-  grid-template-columns: 1fr;
-  gap: 8px;
+  padding-bottom: 0!important;
 }
 
 @media (min-width: 1025px) {
@@ -15,22 +12,63 @@ exports[`screen: BlockDetails matches snapshot 1`] = `
   }
 }
 
-.emotion-0 a {
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #25D695!important;
+}
+
+.emotion-1 svg {
+  fill: transparent;
+}
+
+.emotion-2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.emotion-3 {
+  padding: 16px;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 1025px) {
+  .emotion-3 {
+    padding: 16px 24px;
+  }
+}
+
+.emotion-3 a {
   color: #4092CD;
 }
 
 @media (min-width:1025px) {
-  .emotion-0 {
+  .emotion-3 {
     gap: 16px;
   }
 }
 
-.emotion-1 {
+.emotion-4 {
   height: 450px;
 }
 
 @media (min-width:1025px) {
-  .emotion-1 {
+  .emotion-4 {
     height: 450px;
   }
 }
@@ -40,12 +78,43 @@ exports[`screen: BlockDetails matches snapshot 1`] = `
   navTitle="blockDetails"
 >
   <div
+    className="emotion-0"
+  >
+    <a
+      className="emotion-1"
+      href="/validators"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onTouchStart={[Function]}
+    >
+      <svg
+        fill="none"
+        height="17"
+        viewBox="0 0 16 17"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.5 13.5L5.5 8.5L10.5 3.5"
+          stroke="#25D695"
+          strokeWidth="1.5"
+        />
+      </svg>
+      Back to all blocks
+    </a>
+    <div
+      className="emotion-2"
+    >
+      blockDetails
+    </div>
+  </div>
+  <div
     exists={true}
     id="LoadAndExist"
     loading={false}
   >
     <span
-      className="emotion-0"
+      className="emotion-3"
     >
       <div
         hash="E568ACFE5717F79A44979563410FF7F6C3043A07307E541EF21E15FC478C3DF0"
@@ -56,7 +125,7 @@ exports[`screen: BlockDetails matches snapshot 1`] = `
         txs={1}
       />
       <div
-        className="emotion-1"
+        className="emotion-4"
         id="Signatures"
         signatures={
           [
