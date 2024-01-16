@@ -39,8 +39,8 @@ const List: FC<ComponentDefault> = ({ className }) => {
       loading={state.loading || state.assetsLoading || state.metadataLoading}
       exists={state.exists}
     >
-      <Box className={className}>
-        <Tabs tab={state.tab} handleTabChange={handleTabChange} />
+      <Tabs tab={state.tab} handleTabChange={handleTabChange} />
+      <Box className={cx(classes.box, className)}>
         <div className={classes.list}>{list}</div>
       </Box>
     </LoadAndExist>
