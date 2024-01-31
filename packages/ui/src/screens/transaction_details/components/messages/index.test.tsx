@@ -52,6 +52,8 @@ describe('screen: TransactionDetails/ Messages', () => {
           viewRaw={false}
           toggleMessageDisplay={jest.fn()}
           onMessageFilterCallback={jest.fn()}
+          assets={[]}
+          metadatas={[]}
         />
       </MockTheme>
     );

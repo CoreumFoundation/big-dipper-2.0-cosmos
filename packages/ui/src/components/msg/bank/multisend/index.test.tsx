@@ -50,7 +50,7 @@ describe('screen: TransactionDetails/MsgMultiSend', () => {
 
     const component = renderer.create(
       <MockTheme>
-        <Multisend message={message} />
+        <Multisend message={message} metadatas={[]} />
       </MockTheme>
     );
     const tree = component?.toJSON();

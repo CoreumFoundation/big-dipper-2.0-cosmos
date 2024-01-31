@@ -184,6 +184,7 @@ exports[`screen: Blocks/List matches snapshot 1`] = `
               },
             ]
           }
+          metadatas={[]}
           onMessageFilterCallback={[Function]}
           toggleMessageDisplay={[Function]}
           viewRaw={false}

@@ -27,7 +27,7 @@ describe('screen: TransactionDetails/Undelegate', () => {
     });
     const component = renderer.create(
       <MockTheme>
-        <Undelegate message={message} assets={[]} />
+        <Undelegate message={message} assets={[]} metadatas={[]} />
       </MockTheme>
     );
     const tree = component?.toJSON();

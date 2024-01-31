@@ -8,15 +8,20 @@ import { Trans, useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { FC, useMemo } from 'react';
 
-const DepositProposal: FC<{ message: MsgDeposit }> = (props) => {
+const DepositProposal: FC<{ message: MsgDeposit; metadatas: any[] }> = (props) => {
   const { t } = useTranslation('transactions');
-  const { message } = props;
+  const { message, metadatas } = props;
 
   const parsedAmount = message?.amount
     ?.map((x) => {
-      const amount = formatToken(x.amount, x.denom);
+      const asset = metadatas.find((item) => item.base.toLowerCase() === x.denom.toLowerCase());
+
+      const amount = asset
+        ? formatToken(String(+x.amount / 10 ** asset.denom_units[1].exponent))
+        : formatToken(x.amount, x.denom);
+
       // Kept the "toUpperCase()" in order to show the token symbol in uppercase
-      return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom.toUpperCase()}`;
+      return `${formatNumber(amount.value, amount.exponent)} ${asset ? asset.display.toUpperCase() : amount.displayDenom.toUpperCase()}`;
     })
     .reduce(
       (text, value, i, array) => text + (i < array.length - 1 ? ', ' : ` ${t('and')} `) + value

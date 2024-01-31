@@ -28,7 +28,7 @@ describe('screen: TransactionDetails/Fund', () => {
     });
     const component = renderer.create(
       <MockTheme>
-        <Fund message={message} />
+        <Fund message={message} metadatas={[]} />
       </MockTheme>
     );
     const tree = component?.toJSON();

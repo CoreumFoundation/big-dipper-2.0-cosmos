@@ -7,15 +7,21 @@ import { useProfileRecoil } from '@/recoil/profiles/hooks';
 import { formatNumber, formatToken } from '@/utils/format_token';
 import { Asset } from '@/screens/assets/hooks';
 
-const Undelegate: FC<{ message: MsgUndelegate; assets: Asset[] }> = (props) => {
-  const { message, assets } = props;
-  const amount = formatToken(message.amount?.amount, message.amount?.denom);
+const Undelegate: FC<{ message: MsgUndelegate; assets: Asset[]; metadatas: any[] }> = (props) => {
+  const { message, assets, metadatas } = props;
+  const asset = metadatas.find(
+    (item) => item.base.toLowerCase() === message.amount.denom.toLowerCase()
+  );
+
+  const amount = asset
+    ? formatToken(String(+message.amount.amount / 10 ** asset.denom_units[1].exponent))
+    : formatToken(message.amount?.amount, message.amount?.denom);
 
   let parsedAmount = `${formatNumber(
     amount.value,
     amount.exponent
     // Kept the "toUpperCase()" in order to show the token symbol in uppercase
-  )} ${amount.displayDenom.toUpperCase()}`;
+  )} ${asset ? asset.display.toUpperCase() : amount.displayDenom.toUpperCase()}`;
 
   const tokenInAssets = assets.find(
     (assetItem) => amount.displayDenom.toLowerCase() === assetItem.denom.toLowerCase()

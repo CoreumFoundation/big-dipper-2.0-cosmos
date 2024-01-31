@@ -29,7 +29,7 @@ describe('screen: TransactionDetails/DepositProposal', () => {
     });
     const component = renderer.create(
       <MockTheme>
-        <DepositProposal message={message} />
+        <DepositProposal message={message} metadatas={[]} />
       </MockTheme>
     );
     const tree = component?.toJSON();

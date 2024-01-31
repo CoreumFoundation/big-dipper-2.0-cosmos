@@ -19,6 +19,7 @@ type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   isLast: boolean;
   viewRaw: boolean;
   assets: Asset[];
+  metadatas: any[];
 };
 
 const ListItem: FC<ListItemProps> = ({
@@ -30,11 +31,12 @@ const ListItem: FC<ListItemProps> = ({
   isLast,
   viewRaw,
   assets,
+  metadatas,
 }) => {
   const { t } = useTranslation('transactions');
   const { rowRef } = useListRow(index, setRowHeight);
 
-  const formattedItem = getMessageByType(message, viewRaw, t, assets);
+  const formattedItem = getMessageByType(message, viewRaw, t, assets, metadatas);
 
   return (
     <div style={style}>
@@ -56,6 +58,7 @@ type MessagesProps = {
   toggleMessageDisplay: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
   onMessageFilterCallback: (value: string) => void;
   assets: Asset[];
+  metadatas: any[];
 };
 
 const Messages: FC<MessagesProps> = ({ className, ...props }) => {
@@ -115,6 +118,7 @@ const Messages: FC<MessagesProps> = ({ className, ...props }) => {
                   isLast={index === props.messages.length}
                   viewRaw={props.viewRaw}
                   assets={props.assets}
+                  metadatas={props.metadatas}
                 />
               )}
             </List>

@@ -7,16 +7,21 @@ import Typography from '@mui/material/Typography';
 import { Trans, useTranslation } from 'next-i18next';
 import { FC } from 'react';
 
-const RecieverName: FC<{ address: string; coins: MsgCoin[] }> = (props) => {
-  const { address: theAddress, coins } = props;
+const RecieverName: FC<{ address: string; coins: MsgCoin[]; metadatas: any[] }> = (props) => {
+  const { address: theAddress, coins, metadatas } = props;
   const { t } = useTranslation('transactions');
   const { address, name } = useProfileRecoil(theAddress);
   const recieverMoniker = name || theAddress;
+
   const parsedAmount = coins
     ?.map((x) => {
-      const amount = formatToken(x.amount, x.denom);
+      const asset = metadatas.find((item) => item.base.toLowerCase() === x.denom.toLowerCase());
+
+      const amount = asset
+        ? formatToken(String(+x.amount / 10 ** asset.denom_units[1].exponent))
+        : formatToken(x.amount, x.denom);
       // Kept the "toUpperCase()" in order to show the token symbol in uppercase
-      return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom.toUpperCase()}`;
+      return `${formatNumber(amount.value, amount.exponent)} ${asset ? asset.display.toUpperCase() : amount.displayDenom.toUpperCase()}`;
     })
     .reduce(
       (text, value, j, array) => text + (j < array.length - 1 ? ', ' : ` ${t('and')} `) + value
@@ -34,18 +39,23 @@ const RecieverName: FC<{ address: string; coins: MsgCoin[] }> = (props) => {
   );
 };
 
-const Multisend: FC<{ message: MsgMultiSend }> = (props) => {
+const Multisend: FC<{ message: MsgMultiSend; metadatas: any[] }> = (props) => {
   const { t } = useTranslation('transactions');
   const { classes } = useStyles();
 
-  const { message } = props;
+  const { message, metadatas } = props;
 
   const sender = message.inputs[0];
   const senderAmount = sender?.coins
     ?.map((x) => {
-      const amount = formatToken(x.amount, x.denom);
+      const asset = metadatas.find((item) => item.base.toLowerCase() === x.denom.toLowerCase());
+
+      const amount = asset
+        ? formatToken(String(+x.amount / 10 ** asset.denom_units[1].exponent))
+        : formatToken(x.amount, x.denom);
+
       // Kept the "toUpperCase()" in order to show the token symbol in uppercase
-      return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom.toUpperCase()}`;
+      return `${formatNumber(amount.value, amount.exponent)} ${asset ? asset.display.toUpperCase() : amount.displayDenom.toUpperCase()}`;
     })
     .reduce(
       (text, value, i, array) => text + (i < array.length - 1 ? ', ' : ` ${t('and')} `) + value
@@ -68,7 +78,14 @@ const Multisend: FC<{ message: MsgMultiSend }> = (props) => {
       <div className={classes.multisend}>
         {message?.outputs
           ?.filter((x) => x)
-          ?.map((x) => <RecieverName key={x.address} address={x.address} coins={x.coins} />)}
+          ?.map((x) => (
+            <RecieverName
+              key={x.address}
+              address={x.address}
+              coins={x.coins}
+              metadatas={metadatas}
+            />
+          ))}
       </div>
     </div>
   );

@@ -108,6 +108,7 @@ export const useTransactionDetails = () => {
       items: [],
     },
     assets: [],
+    metadatas: [],
   });
 
   const handleSetState = useCallback(
@@ -158,8 +159,33 @@ export const useTransactionDetails = () => {
     }
   }, []);
 
+  const getDenomMetadatas = useCallback(async () => {
+    try {
+      const {
+        data: {
+          pagination: { total },
+        },
+      } = await axios.get(
+        `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/cosmos/bank/v1beta1/denoms_metadata`
+      );
+      const {
+        data: { metadatas },
+      } = await axios.get(
+        `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/cosmos/bank/v1beta1/denoms_metadata?pagination.limit=${total}`
+      );
+
+      handleSetState((prevState) => ({
+        ...prevState,
+        metadatas,
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   useEffect(() => {
     getAssetsList();
+    getDenomMetadatas();
   }, []);
 
   const onMessageFilterCallback = useCallback(

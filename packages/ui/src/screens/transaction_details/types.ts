@@ -26,4 +26,5 @@ export interface TransactionState {
     items: unknown[];
   };
   assets: Asset[];
+  metadatas: any[];
 }

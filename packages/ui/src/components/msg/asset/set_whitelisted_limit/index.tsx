@@ -7,19 +7,28 @@ import { MsgSetWhitelistedLimit } from '@/models';
 import { formatNumber, formatToken } from '@/utils';
 import { Asset } from '@/screens/assets/hooks';
 
-const SetWhitelistedLimit: FC<{ message: MsgSetWhitelistedLimit; assets: Asset[] }> = (props) => {
-  const { message, assets } = props;
+const SetWhitelistedLimit: FC<{
+  message: MsgSetWhitelistedLimit;
+  assets: Asset[];
+  metadatas: any[];
+}> = (props) => {
+  const { message, assets, metadatas } = props;
 
   const sender = useProfileRecoil(message.sender);
   const account = useProfileRecoil(message.account);
+  const asset = metadatas.find(
+    (item) => item.base.toLowerCase() === message.coin.denom.toLowerCase()
+  );
 
-  const amount = formatToken(message.coin.amount, message.coin.denom);
+  const amount = asset
+    ? formatToken(String(+message.coin.amount / 10 ** asset.denom_units[1].exponent))
+    : formatToken(message.coin.amount, message.coin.denom);
 
   let parsedAmount = `${formatNumber(
     amount.value,
     amount.exponent
     // Kept the "toUpperCase()" in order to show the token symbol in uppercase
-  )} ${amount.displayDenom.toUpperCase()}`;
+  )} ${asset ? asset.display.toUpperCase() : amount.displayDenom.toUpperCase()}`;
 
   const tokenInAssets = assets.find(
     (assetItem) => amount.displayDenom.toLowerCase() === assetItem.denom.toLowerCase()

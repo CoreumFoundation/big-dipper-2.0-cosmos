@@ -28,7 +28,7 @@ describe('screen: TransactionDetails/Redelegate', () => {
     });
     const component = renderer.create(
       <MockTheme>
-        <Redelegate message={message} assets={[]} />
+        <Redelegate message={message} assets={[]} metadatas={[]} />
       </MockTheme>
     );
     const tree = component?.toJSON();
