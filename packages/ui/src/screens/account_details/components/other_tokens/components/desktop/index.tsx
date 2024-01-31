@@ -20,22 +20,18 @@ type DesktopProps = {
   items?: OtherTokenType[];
 };
 
-export const formatNumberWithThousandsSeparator = (
-  inputString: string,
-  exponent: number
-): string => {
-  const number = parseFloat(inputString);
+export const formatNumberWithThousandsSeparator = (inputString: string): string => {
+  const parts = inputString.split('.');
+  const integerPart = parts[0];
+  const decimalPart = parts[1] || '';
 
-  if (!Number.isNaN(number)) {
-    const formattedNumber = new Intl.NumberFormat('en-US', {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: exponent,
-    }).format(number);
+  const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-    return formattedNumber;
+  if (decimalPart) {
+    return `${formattedIntegerPart}.${decimalPart}`;
   }
 
-  return String(Number.NaN);
+  return formattedIntegerPart;
 };
 
 const Desktop: FC<DesktopProps> = ({ className, items }) => {
@@ -50,8 +46,9 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
 
     if (Number(x.available.value) > Number.MAX_SAFE_INTEGER && x.exponent) {
       const ratio = Big(10 ** x.exponent);
-      const value = Big(x.available.value).div(ratio).toFixed(x.exponent);
-      available = formatNumberWithThousandsSeparator(value, x.exponent);
+      const value = Big(x.available.value).div(ratio).toFixed(x.exponent).toString();
+
+      available = formatNumberWithThousandsSeparator(value);
     }
 
     return {

@@ -29,7 +29,7 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
         if (Number(x.available.value) > Number.MAX_SAFE_INTEGER && x.exponent) {
           const ratio = Big(10 ** x.exponent);
           const value = Big(x.available.value).div(ratio).toFixed(x.exponent);
-          available = formatNumberWithThousandsSeparator(value, x.exponent);
+          available = formatNumberWithThousandsSeparator(value);
         }
 
         const reward = x.reward ? formatNumber(x.reward.value, x.reward.exponent) : '';
