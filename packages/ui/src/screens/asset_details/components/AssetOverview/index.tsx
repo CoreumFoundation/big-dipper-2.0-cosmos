@@ -16,7 +16,7 @@ const AssetOverview: FC<AssetOverviewProps> = ({ asset, className }) => {
   const { classes } = useStyles();
   const { t } = useTranslation('assets');
 
-  const { display, description, urls, social_media, logo_URIs } = asset;
+  const { display, description, urls, social_media, logo_URIs, chain } = asset;
 
   const dataLinks = useMemo(
     () => ({
@@ -174,7 +174,7 @@ const AssetOverview: FC<AssetOverviewProps> = ({ asset, className }) => {
             <div className={classes.assetName}>
               <div className={classes.assetNameDisplay}>{display}</div>
               <div className={classes.chainRow}>
-                <div className={classes.nameChain}>Chain: Coreum</div>
+                <div className={classes.nameChain}>Chain: {chain}</div>
               </div>
             </div>
             <div className={classes.assetDescription}>{description}</div>

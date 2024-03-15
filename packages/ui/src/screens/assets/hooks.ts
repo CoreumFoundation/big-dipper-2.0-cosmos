@@ -7,14 +7,19 @@ import chainConfig from '@/chainConfig';
 
 const { chainType, primaryTokenUnit, tokenUnits } = chainConfig();
 
+export const convertHexToString = (value: string) => {
+  let str = '';
+
+  value.match(/.{1,2}/g)?.forEach((hexCharCode: string) => {
+    str += String.fromCharCode(parseInt(hexCharCode, 16));
+  });
+
+  return str;
+};
+
 export interface Asset {
   denom: string;
   description: string;
-  ibc_info: {
-    display_name: string;
-    precision: number;
-    source_chain: string;
-  };
   logo_URIs: {
     png: string;
     svg: string;
@@ -33,6 +38,20 @@ export interface Asset {
     youtube: string;
     telegram: string;
     tiktok: string;
+  };
+  extra: {
+    ibc_info?: {
+      display_name: string;
+      precision: number;
+      source_chain: string;
+      denom: string;
+    };
+    xrpl_info?: {
+      precision: number;
+      source_chain: string;
+      issuer: string;
+      currency: string;
+    };
   };
 }
 
@@ -94,9 +113,18 @@ const formatAssets = ({
     }
 
     if (tokenType === 'ibc') {
-      display = item.ibc_info.display_name;
-      exponent = item.ibc_info.precision;
-      chain = item.ibc_info.source_chain;
+      display = item.extra.ibc_info!.display_name;
+      exponent = item.extra.ibc_info!.precision;
+      chain = item.extra.ibc_info!.source_chain;
+    }
+
+    if (item.extra.xrpl_info) {
+      chain = 'XRP Ledger';
+      tokenType = 'bridged';
+      display =
+        item.extra.xrpl_info.currency.length === 40
+          ? convertHexToString(item.extra.xrpl_info.currency)
+          : item.extra.xrpl_info.currency;
     }
 
     return {

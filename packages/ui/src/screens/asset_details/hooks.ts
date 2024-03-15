@@ -5,36 +5,9 @@ import axios from 'axios';
 
 import chainConfig from '@/chainConfig';
 import { useRouter } from 'next/router';
+import { Asset, convertHexToString } from '../assets/hooks';
 
 const { chainType, primaryTokenUnit, tokenUnits } = chainConfig();
-
-interface Asset {
-  denom: string;
-  description: string;
-  ibc_info: {
-    display_name: string;
-    precision: number;
-  };
-  logo_URIs: {
-    png: string;
-    svg: string;
-  };
-  urls: {
-    website: string;
-    github: string;
-    whitepaper: string;
-  };
-  social_media: {
-    linkedin: string;
-    twitter: string;
-    instagram: string;
-    facebook: string;
-    discord: string;
-    youtube: string;
-    telegram: string;
-    tiktok: string;
-  };
-}
 
 interface AssetDetailsState {
   assetsLoading: boolean;
@@ -61,7 +34,8 @@ const formatAsset = ({
   additionalData: any;
 }) => {
   let holders = '0';
-  const tokenType = 'native';
+  let tokenType = 'native';
+  let chain = 'Coreum';
 
   const assetInTotalSupply = additionalData?.supply?.coins?.find(
     (coin: any) => coin.denom === asset.denom
@@ -83,6 +57,15 @@ const formatAsset = ({
     holders = String(assetInHolders?.holders) ?? '0';
   }
 
+  if (asset.extra.xrpl_info) {
+    chain = 'XRP Ledger';
+    tokenType = 'bridged';
+    display =
+      asset.extra.xrpl_info.currency.length === 40
+        ? convertHexToString(asset.extra.xrpl_info.currency)
+        : asset.extra.xrpl_info.currency;
+  }
+
   return {
     ...asset,
     description: descriptionValue,
@@ -92,6 +75,7 @@ const formatAsset = ({
     holders,
     supply,
     tokenType,
+    chain,
   };
 };
 

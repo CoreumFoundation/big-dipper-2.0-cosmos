@@ -197,9 +197,9 @@ const formatOtherTokens = (data: Data, assets: Asset[], metadatas: any[]) => {
     let chain = 'Coreum';
 
     if (asset && asset.denom.includes('ibc')) {
-      display = asset.ibc_info.display_name;
-      exponent = asset.ibc_info.precision;
-      chain = asset.ibc_info.source_chain;
+      display = asset.extra.ibc_info!.display_name;
+      exponent = asset.extra.ibc_info!.precision;
+      chain = asset.extra.ibc_info!.source_chain;
     }
 
     otherTokens.push({

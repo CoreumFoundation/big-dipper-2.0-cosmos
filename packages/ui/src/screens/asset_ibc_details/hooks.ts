@@ -5,37 +5,9 @@ import axios from 'axios';
 
 import chainConfig from '@/chainConfig';
 import { useRouter } from 'next/router';
+import { Asset } from '../assets/hooks';
 
 const { chainType } = chainConfig();
-
-interface Asset {
-  denom: string;
-  description: string;
-  ibc_info: {
-    display_name: string;
-    precision: number;
-    source_chain: string;
-  };
-  logo_URIs: {
-    png: string;
-    svg: string;
-  };
-  urls: {
-    website: string;
-    github: string;
-    whitepaper: string;
-  };
-  social_media: {
-    linkedin: string;
-    twitter: string;
-    instagram: string;
-    facebook: string;
-    discord: string;
-    youtube: string;
-    telegram: string;
-    tiktok: string;
-  };
-}
 
 interface AssetDetailsState {
   assetsLoading: boolean;
@@ -55,16 +27,16 @@ const formatAsset = ({ asset, additionalData }: { asset: Asset; additionalData: 
     (coin: any) => coin.denom === asset.denom
   );
 
-  const exponent = asset.ibc_info.precision ?? 0;
+  const exponent = asset.extra.ibc_info?.precision ?? 0;
   const descriptionValue = asset.description;
-  const display = asset.ibc_info.display_name ?? '';
+  const display = asset.extra.ibc_info?.display_name ?? '';
   const supply = assetInTotalSupply?.amount ?? '0';
   const assetInHolders = additionalData?.tokenHolderCount?.find(
     (tokenHolderCount: any) => tokenHolderCount.denom === asset.denom
   );
   const holders = String(assetInHolders?.holders) ?? '0';
   const tokenType = 'ibc';
-  const chain = asset.ibc_info.source_chain ?? '';
+  const chain = asset.extra.ibc_info?.source_chain ?? '';
 
   return {
     ...asset,

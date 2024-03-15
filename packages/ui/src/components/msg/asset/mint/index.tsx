@@ -42,10 +42,10 @@ const Mint: FC<{
 
   if (tokenInAssets) {
     if (message.coin.denom.includes('ibc')) {
-      const tokenDenom = tokenInAssets.ibc_info.display_name;
+      const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;
       const availableValue = new Big(+message.coin.amount)
-        .div(Big(10).pow(tokenInAssets.ibc_info.precision))
-        .toFixed(tokenInAssets.ibc_info.precision);
+        .div(Big(10).pow(tokenInAssets.extra.ibc_info!.precision))
+        .toFixed(tokenInAssets.extra.ibc_info!.precision);
       amount = formatNumberWithThousandsSeparator(availableValue);
 
       parsedAmount = `${amount} ${tokenDenom}`;
