@@ -39,5 +39,11 @@
   "sender": "Sender",
   "receiver": "Receiver",
   "sender.receiver": "Sender / Receiver",
-  "more": "More"
+  "more": "More",
+  "chain_tx": "Chain Transactions",
+  "bridge_tx": "Bridge Transactions",
+  "route": "Route",
+  "txHash_1": "Tx hash 1",
+  "txHash_2": "Tx hash 2",
+  "destination": "Destination"
 }

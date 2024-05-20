@@ -4,4 +4,8 @@ export interface TransactionsState {
   hasNextPage: boolean;
   isNextPageLoading: boolean;
   items: Transactions[];
+  bridgeItems: Transactions[];
+  bridgeHasNextPage: boolean;
+  tab: number;
+  isBridgeNextPageLoading: boolean;
 }

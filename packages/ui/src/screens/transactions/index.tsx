@@ -12,12 +12,15 @@ import { useSettingList } from '@/components/nav/components/desktop/components/a
 import { useTransactions } from '@/screens/transactions/hooks';
 import useStyles from '@/screens/transactions/styles';
 import { useCallback, useMemo } from 'react';
+import Tabs from '@/screens/transactions/components/tabs';
+import TransactionsListBridge from '@/components/transactions_list_bridge';
+import TransactionsListBridgeDetails from '@/components/transactions_list_bridge_details';
 
 const Transactions = () => {
   const txListFormat = useRecoilValue(readTx);
   const { t } = useTranslation('transactions');
   const { classes, cx } = useStyles();
-  const { state, loadNextPage } = useTransactions();
+  const { state, loadNextPage, loadBridgeNextPage, handleTabChange } = useTransactions();
   const { updateTxFormat } = useSettingList();
   const loadMoreItems = useMemo(
     () => (state.isNextPageLoading ? () => null : loadNextPage),
@@ -31,6 +34,78 @@ const Transactions = () => {
     () => (state.hasNextPage ? state.items.length + 1 : state.items.length),
     [state.hasNextPage, state.items.length]
   );
+
+  const loadMoreBridgeItems = useMemo(
+    () => (state.isBridgeNextPageLoading ? () => null : loadBridgeNextPage),
+    [state.isBridgeNextPageLoading, loadBridgeNextPage]
+  );
+  const isBridgeItemLoaded = useCallback(
+    (index: number) => !state.bridgeHasNextPage || index < state.bridgeItems.length,
+    [state.bridgeItems.length, state.bridgeHasNextPage]
+  );
+  const bridgeItemCount = useMemo(
+    () => (state.bridgeHasNextPage ? state.bridgeItems.length + 1 : state.bridgeItems.length),
+    [state.bridgeHasNextPage, state.bridgeItems.length]
+  );
+
+  const renderTable = useMemo(() => {
+    if (state.tab === 0) {
+      return txListFormat === 'compact' ? (
+        <TransactionsList
+          transactions={state.items}
+          itemCount={itemCount}
+          hasNextPage={state.hasNextPage}
+          isNextPageLoading={state.isNextPageLoading}
+          loadNextPage={loadNextPage}
+          loadMoreItems={loadMoreItems}
+          isItemLoaded={isItemLoaded}
+        />
+      ) : (
+        <TransactionsListDetails
+          transactions={state.items}
+          itemCount={itemCount}
+          hasNextPage={state.hasNextPage}
+          isNextPageLoading={state.isNextPageLoading}
+          loadNextPage={loadNextPage}
+          loadMoreItems={loadMoreItems}
+          isItemLoaded={isItemLoaded}
+        />
+      );
+    }
+
+    return txListFormat === 'compact' ? (
+      <TransactionsListBridge
+        transactions={state.bridgeItems}
+        itemCount={bridgeItemCount}
+        hasNextPage={state.bridgeHasNextPage}
+        isNextPageLoading={state.isBridgeNextPageLoading}
+        loadNextPage={loadBridgeNextPage}
+        loadMoreItems={loadMoreBridgeItems}
+        isItemLoaded={isBridgeItemLoaded}
+      />
+    ) : (
+      <TransactionsListBridgeDetails
+        transactions={state.bridgeItems}
+        itemCount={bridgeItemCount}
+        hasNextPage={state.bridgeHasNextPage}
+        isNextPageLoading={state.isBridgeNextPageLoading}
+        loadNextPage={loadBridgeNextPage}
+        loadMoreItems={loadMoreBridgeItems}
+        isItemLoaded={isBridgeItemLoaded}
+      />
+    );
+  }, [
+    bridgeItemCount,
+    isBridgeItemLoaded,
+    isItemLoaded,
+    itemCount,
+    loadBridgeNextPage,
+    loadMoreBridgeItems,
+    loadMoreItems,
+    loadNextPage,
+    state,
+    txListFormat,
+  ]);
 
   return (
     <>
@@ -58,29 +133,8 @@ const Transactions = () => {
               />
             </div>
           </div>
-          <Box className={cx(classes.box, 'scrollbar')}>
-            {txListFormat === 'compact' ? (
-              <TransactionsList
-                transactions={state.items}
-                itemCount={itemCount}
-                hasNextPage={state.hasNextPage}
-                isNextPageLoading={state.isNextPageLoading}
-                loadNextPage={loadNextPage}
-                loadMoreItems={loadMoreItems}
-                isItemLoaded={isItemLoaded}
-              />
-            ) : (
-              <TransactionsListDetails
-                transactions={state.items}
-                itemCount={itemCount}
-                hasNextPage={state.hasNextPage}
-                isNextPageLoading={state.isNextPageLoading}
-                loadNextPage={loadNextPage}
-                loadMoreItems={loadMoreItems}
-                isItemLoaded={isItemLoaded}
-              />
-            )}
-          </Box>
+          <Tabs tab={state.tab} handleTabChange={handleTabChange} />
+          <Box className={cx(classes.box, 'scrollbar')}>{renderTable}</Box>
         </LoadAndExist>
       </Layout>
     </>

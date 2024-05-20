@@ -1,5 +1,5 @@
 import * as R from 'ramda';
-import { useState } from 'react';
+import { SyntheticEvent, useCallback, useState } from 'react';
 import { convertMsgsToModels } from '@/components/msg/utils';
 import {
   TransactionsListenerSubscription,
@@ -139,6 +139,10 @@ export const useTransactions = () => {
     hasNextPage: false,
     isNextPageLoading: true,
     items: [],
+    bridgeItems: [],
+    bridgeHasNextPage: false,
+    isBridgeNextPageLoading: true,
+    tab: 0,
   });
 
   const handleSetState = (stateChange: (prevState: TransactionsState) => TransactionsState) => {
@@ -147,6 +151,16 @@ export const useTransactions = () => {
       return R.equals(prevState, newState) ? prevState : newState;
     });
   };
+
+  const handleTabChange = useCallback(
+    (_event: SyntheticEvent<Element, globalThis.Event>, newValue: number) => {
+      setState((prevState) => ({
+        ...prevState,
+        tab: newValue,
+      }));
+    },
+    []
+  );
 
   // ================================
   // tx subscription
@@ -219,8 +233,15 @@ export const useTransactions = () => {
       });
   };
 
+  const loadBridgeNextPage = () => {
+    // eslint-disable-next-line no-console
+    console.log('load next bridge page');
+  };
+
   return {
     state,
     loadNextPage,
+    handleTabChange,
+    loadBridgeNextPage,
   };
 };
