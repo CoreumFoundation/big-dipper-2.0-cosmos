@@ -43,6 +43,20 @@ const SingleBridgeTransaction: FC<SingleBridgeTransactionProps> = ({
           </div>
           <div className={cx(classes.item, 'block')}>
             <Typography variant="h4" className="label">
+              {t('destination')}
+            </Typography>
+            {destination}
+          </div>
+          <div className={cx(classes.item, 'time')}>
+            <Typography variant="h4" className="label">
+              {t('time')}
+            </Typography>
+            {time}
+          </div>
+        </div>
+        <div className={classes.itemPrimaryDetailsContainer}>
+          <div className={cx(classes.item, 'block')}>
+            <Typography variant="h4" className="label">
               {t('txHash_1')}
             </Typography>
             {txHash_1}
@@ -52,18 +66,6 @@ const SingleBridgeTransaction: FC<SingleBridgeTransactionProps> = ({
               {t('txHash_2')}
             </Typography>
             {txHash_2}
-          </div>
-          <div className={cx(classes.item, 'block')}>
-            <Typography variant="h4" className="label">
-              {t('destination')}
-            </Typography>
-            {destination}
-          </div>
-          <div className={cx(classes.item, 'block')}>
-            <Typography variant="h4" className="label">
-              {t('time')}
-            </Typography>
-            {time}
           </div>
         </div>
       </div>

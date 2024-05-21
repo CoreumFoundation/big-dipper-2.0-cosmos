@@ -2,7 +2,7 @@
 import Loading from '@/components/loading';
 import useStyles from '@/components/transactions_list_bridge/components/desktop/styles';
 import { columns } from '@/components/transactions_list_bridge/components/desktop/utils';
-import type { TransactionsListState } from '@/components/transactions_list_bridge/types';
+import type { TransactionsListBridgeState } from '@/components/transactions_list_bridge/types';
 import { useGrid } from '@/hooks/use_react_window';
 import { mergeRefs } from '@/utils/merge_refs';
 import Typography from '@mui/material/Typography';
@@ -12,8 +12,12 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { VariableSizeGrid as Grid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import ExtendedTimestamp from '@/components/ExtendedTimestamp';
+import { ACCOUNT_DETAILS, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
+import Link from 'next/link';
+import Zoom from '@mui/material/Zoom';
+import Tooltip from '@mui/material/Tooltip';
 
-const Desktop: FC<TransactionsListState> = ({
+const Desktop: FC<TransactionsListBridgeState> = ({
   className,
   itemCount,
   loadMoreItems,
@@ -28,11 +32,43 @@ const Desktop: FC<TransactionsListState> = ({
   const { t } = useTranslation('transactions');
 
   const items = transactions.map((x) => ({
-    route: <div>route</div>,
-    amount: <div>amount</div>,
-    txHash_1: <div>txHash_1</div>,
-    txHash_2: <div>txHash_2</div>,
-    destination: <div>destination</div>,
+    route: <div>{x.route}</div>,
+    amount: <div>{x.amount}</div>,
+    txHash_1: (
+      <Tooltip TransitionComponent={Zoom} title={<pre>{x.txHash_1}</pre>} placement="bottom" arrow>
+        <Link shallow prefetch={false} href={TRANSACTION_DETAILS(x.txHash_1)}>
+          {getMiddleEllipsis(x?.txHash_1 || '', {
+            beginning: 7,
+            ending: 4,
+          })}
+        </Link>
+      </Tooltip>
+    ),
+    txHash_2: (
+      <Tooltip TransitionComponent={Zoom} title={<pre>{x.txHash_2}</pre>} placement="bottom" arrow>
+        <Link shallow prefetch={false} href={TRANSACTION_DETAILS(x.txHash_2)}>
+          {getMiddleEllipsis(x?.txHash_2 || '', {
+            beginning: 7,
+            ending: 4,
+          })}
+        </Link>
+      </Tooltip>
+    ),
+    destination: (
+      <Tooltip
+        TransitionComponent={Zoom}
+        title={<pre>{x.destination}</pre>}
+        placement="bottom"
+        arrow
+      >
+        <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.destination)}>
+          {getMiddleEllipsis(x?.destination || '', {
+            beginning: 7,
+            ending: 4,
+          })}
+        </Link>
+      </Tooltip>
+    ),
     time: <ExtendedTimestamp timestamp={x.timestamp} />,
   }));
 

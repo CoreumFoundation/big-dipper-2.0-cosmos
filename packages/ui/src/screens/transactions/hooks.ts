@@ -6,7 +6,7 @@ import {
   useTransactionsListenerSubscription,
   useTransactionsQuery,
 } from '@/graphql/types/general_types';
-import type { TransactionsState } from '@/screens/transactions/types';
+import type { BridgeTransaction, TransactionsState } from '@/screens/transactions/types';
 import { convertMsgType } from '@/utils/convert_msg_type';
 import { formatToken } from '@/utils/format_token';
 
@@ -20,6 +20,49 @@ const uniqueAndSort = R.pipe(
   R.uniqBy((r: Transactions) => r?.hash),
   R.sort(R.descend((r) => r?.height))
 );
+
+const mockedBridgeTransactions: BridgeTransaction[] = [
+  {
+    route: 'coreum',
+    amount: '214.241',
+    txHash_1: '1B0ACEDDE2288TESTTESTTESTTESTEA25C90176AF557',
+    txHash_2: 'D81D2E8355384TESTTESTTESTTESTED534FCB65953761',
+    destination: 'COREe31or81y3dhsljkSQSyWdKy',
+    timestamp: '2024-05-21T11:40:26.269503',
+  },
+  {
+    route: 'coreum',
+    amount: '214.241',
+    txHash_1: '1B0ACEDDE2288TESTTESTTESTTESTEA25C90176AF557',
+    txHash_2: 'D81D2E8355384TESTTESTTESTTESTED534FCB65953762',
+    destination: 'COREe31or81y3dhsljkSQSyWdKy',
+    timestamp: '2024-05-21T11:40:26.269503',
+  },
+  {
+    route: 'coreum',
+    amount: '214.241',
+    txHash_1: '1B0ACEDDE2288TESTTESTTESTTESTEA25C90176AF557',
+    txHash_2: 'D81D2E8355384TESTTESTTESTTESTED534FCB65953763',
+    destination: 'COREe31or81y3dhsljkSQSyWdKy',
+    timestamp: '2024-05-21T11:40:26.269503',
+  },
+  {
+    route: 'coreum',
+    amount: '214.241',
+    txHash_1: '1B0ACEDDE2288TESTTESTTESTTESTEA25C90176AF557',
+    txHash_2: 'D81D2E8355384TESTTESTTESTTESTED534FCB65953764',
+    destination: 'COREe31or81y3dhsljkSQSyWdKy',
+    timestamp: '2024-05-21T11:40:26.269503',
+  },
+  {
+    route: 'coreum',
+    amount: '214.241',
+    txHash_1: '1B0ACEDDE2288TESTTESTTESTTESTEA25C90176AF557',
+    txHash_2: 'D81D2E8355384TESTTESTTESTTESTED534FCB65953765',
+    destination: 'COREe31or81y3dhsljkSQSyWdKy',
+    timestamp: '2024-05-21T11:40:26.269503',
+  },
+];
 
 const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom: string) => {
   const attributes = transactionLogs?.[0]?.events.filter(
@@ -139,9 +182,9 @@ export const useTransactions = () => {
     hasNextPage: false,
     isNextPageLoading: true,
     items: [],
-    bridgeItems: [],
+    bridgeItems: mockedBridgeTransactions,
     bridgeHasNextPage: false,
-    isBridgeNextPageLoading: true,
+    isBridgeNextPageLoading: false,
     tab: 0,
   });
 

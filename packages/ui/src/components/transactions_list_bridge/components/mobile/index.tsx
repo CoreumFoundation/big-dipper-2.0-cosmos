@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import Loading from '@/components/loading';
 import useStyles from '@/components/transactions_list_bridge/components/mobile/styles';
-import type { TransactionsListState } from '@/components/transactions_list_bridge/types';
+import type { TransactionsListBridgeState } from '@/components/transactions_list_bridge/types';
 import { useList, useListRow } from '@/hooks/use_react_window';
 import { mergeRefs } from '@/utils/merge_refs';
 import Divider from '@mui/material/Divider';
@@ -10,13 +10,16 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { ListChildComponentProps, VariableSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import ExtendedTimestamp from '@/components/ExtendedTimestamp';
-import { useTranslation } from 'next-i18next';
+// import { useTranslation } from 'next-i18next';
 import SingleBridgeTransactionMobile from '@/components/single_bridge_transaction_mobile';
+import { ACCOUNT_DETAILS, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
+import { Tooltip, Zoom } from '@mui/material';
+import Link from 'next/link';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
   isItemLoaded: ((index: number) => boolean) | undefined;
-  transaction: TransactionsListState['transactions'][number];
+  transaction: TransactionsListBridgeState['transactions'][number];
   isLast: boolean;
 };
 
@@ -28,8 +31,8 @@ const ListItem: FC<ListItemProps> = ({
   transaction,
   isLast,
 }) => {
-  const { classes } = useStyles();
-  const { t } = useTranslation('transactions');
+  // const { classes } = useStyles();
+  // const { t } = useTranslation('transactions');
   const { rowRef } = useListRow(index, setRowHeight);
 
   if (!isItemLoaded?.(index)) {
@@ -43,11 +46,53 @@ const ListItem: FC<ListItemProps> = ({
   }
 
   const item = {
-    route: <div>route</div>,
-    amount: <div>amount</div>,
-    txHash_1: <div>txHash_1</div>,
-    txHash_2: <div>txHash_2</div>,
-    destination: <div>destination</div>,
+    route: <div>{transaction.route}</div>,
+    amount: <div>{transaction.amount}</div>,
+    txHash_1: (
+      <Tooltip
+        TransitionComponent={Zoom}
+        title={<pre>{transaction.txHash_1}</pre>}
+        placement="bottom"
+        arrow
+      >
+        <Link shallow prefetch={false} href={TRANSACTION_DETAILS(transaction.txHash_1)}>
+          {getMiddleEllipsis(transaction?.txHash_1 || '', {
+            beginning: 7,
+            ending: 4,
+          })}
+        </Link>
+      </Tooltip>
+    ),
+    txHash_2: (
+      <Tooltip
+        TransitionComponent={Zoom}
+        title={<pre>{transaction.txHash_2}</pre>}
+        placement="bottom"
+        arrow
+      >
+        <Link shallow prefetch={false} href={TRANSACTION_DETAILS(transaction.txHash_2)}>
+          {getMiddleEllipsis(transaction?.txHash_2 || '', {
+            beginning: 7,
+            ending: 4,
+          })}
+        </Link>
+      </Tooltip>
+    ),
+    destination: (
+      <Tooltip
+        TransitionComponent={Zoom}
+        title={<pre>{transaction.destination}</pre>}
+        placement="bottom"
+        arrow
+      >
+        <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.destination)}>
+          {getMiddleEllipsis(transaction?.destination || '', {
+            beginning: 7,
+            ending: 4,
+          })}
+        </Link>
+      </Tooltip>
+    ),
     time: <ExtendedTimestamp timestamp={transaction.timestamp} flexEnd={false} />,
   };
 
@@ -61,7 +106,7 @@ const ListItem: FC<ListItemProps> = ({
   );
 };
 
-const Mobile: FC<TransactionsListState> = ({
+const Mobile: FC<TransactionsListBridgeState> = ({
   className,
   itemCount,
   loadMoreItems,

@@ -1,4 +1,6 @@
-export interface TransactionsListState {
+import { BridgeTransaction } from '@/screens/transactions/types';
+
+export interface TransactionsListBridgeState {
   ['@type']?: string;
   className?: string;
   hasNextPage?: boolean;
@@ -7,5 +9,5 @@ export interface TransactionsListState {
   loadMoreItems?: (...args: unknown[]) => void;
   isItemLoaded?: (index: number) => boolean;
   itemCount: number;
-  transactions: Transactions[];
+  transactions: BridgeTransaction[];
 }
