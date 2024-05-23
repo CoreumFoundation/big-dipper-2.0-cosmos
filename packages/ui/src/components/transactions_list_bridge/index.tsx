@@ -15,6 +15,8 @@ const TransactionsListBridge: FC<TransactionsListBridgeState> = (props) => {
     isItemLoaded = () => true,
     itemCount,
     transactions,
+    assets,
+    metadatas,
   } = props;
   const display = useDisplayStyles().classes;
 
@@ -26,6 +28,8 @@ const TransactionsListBridge: FC<TransactionsListBridgeState> = (props) => {
     loadMoreItems,
     itemCount,
     transactions,
+    assets,
+    metadatas,
   };
 
   if (!itemCount) {

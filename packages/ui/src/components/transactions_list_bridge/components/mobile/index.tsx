@@ -12,15 +12,20 @@ import InfiniteLoader from 'react-window-infinite-loader';
 import ExtendedTimestamp from '@/components/ExtendedTimestamp';
 // import { useTranslation } from 'next-i18next';
 import SingleBridgeTransactionMobile from '@/components/single_bridge_transaction_mobile';
-import { ACCOUNT_DETAILS, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
+import { ACCOUNT_DETAILS, formatToken, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
 import { Tooltip, Zoom } from '@mui/material';
 import Link from 'next/link';
+import { formatNumberWithThousandsSeparator } from '@/screens/account_details/components/other_tokens/components/desktop';
+import { Asset, convertHexToString } from '@/screens/assets/hooks';
+import Big from 'big.js';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
   isItemLoaded: ((index: number) => boolean) | undefined;
   transaction: TransactionsListBridgeState['transactions'][number];
   isLast: boolean;
+  assets: Asset[];
+  metadatas: any[];
 };
 
 const ListItem: FC<ListItemProps> = ({
@@ -30,6 +35,8 @@ const ListItem: FC<ListItemProps> = ({
   isItemLoaded,
   transaction,
   isLast,
+  assets,
+  metadatas,
 }) => {
   // const { classes } = useStyles();
   // const { t } = useTranslation('transactions');
@@ -45,9 +52,48 @@ const ListItem: FC<ListItemProps> = ({
     );
   }
 
+  const asset = metadatas.find(
+    (item: any) => item.base.toLowerCase() === transaction.coin.denom.toLowerCase()
+  );
+
+  let amount = formatToken(transaction.coin.amount, transaction.coin.denom).value;
+
+  if (asset?.denom_units[1].exponent) {
+    const availableValue = new Big(+transaction.coin.amount)
+      .div(Big(10).pow(asset?.denom_units[1].exponent))
+      .toFixed(asset?.denom_units[1].exponent);
+
+    amount = formatNumberWithThousandsSeparator(availableValue);
+  }
+
+  const tokenInAssets = assets.find(
+    (assetItem: any) => transaction.coin.denom.toLowerCase() === assetItem.denom.toLowerCase()
+  );
+  let displayDenom = asset?.display.toUpperCase() || transaction.coin.denom.toUpperCase();
+  if (tokenInAssets && tokenInAssets?.extra.xrpl_info) {
+    displayDenom =
+      tokenInAssets?.extra.xrpl_info.currency.length === 40
+        ? convertHexToString(tokenInAssets?.extra.xrpl_info.currency)
+        : tokenInAssets?.extra.xrpl_info.currency;
+  }
+
+  let parsedAmount = `${amount} ${displayDenom}`;
+
+  if (tokenInAssets) {
+    if (transaction.coin.denom.includes('ibc')) {
+      const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;
+      const availableValue = new Big(+transaction.coin.amount)
+        .div(Big(10).pow(tokenInAssets.extra.ibc_info!.precision))
+        .toFixed(tokenInAssets.extra.ibc_info!.precision);
+      amount = formatNumberWithThousandsSeparator(availableValue);
+
+      parsedAmount = `${amount} ${tokenDenom}`;
+    }
+  }
+
   const item = {
-    route: <div>{transaction.route}</div>,
-    amount: <div>{transaction.amount}</div>,
+    route: <div>{transaction.source}</div>,
+    amount: <div>{parsedAmount}</div>,
     txHash_1: (
       <Tooltip
         TransitionComponent={Zoom}
@@ -112,6 +158,8 @@ const Mobile: FC<TransactionsListBridgeState> = ({
   loadMoreItems,
   isItemLoaded,
   transactions,
+  assets,
+  metadatas,
 }) => {
   const { classes, cx } = useStyles();
   const { listRef, getRowHeight, setRowHeight } = useList();
@@ -149,6 +197,8 @@ const Mobile: FC<TransactionsListBridgeState> = ({
                     isItemLoaded={isItemLoaded}
                     transaction={transactions[index]}
                     isLast={index === itemCount - 1}
+                    assets={assets}
+                    metadatas={metadatas}
                   />
                 )}
               </List>

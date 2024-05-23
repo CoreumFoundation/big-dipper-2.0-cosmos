@@ -82,6 +82,8 @@ const Transactions = () => {
         loadNextPage={loadBridgeNextPage}
         loadMoreItems={loadMoreBridgeItems}
         isItemLoaded={isBridgeItemLoaded}
+        assets={state.assets}
+        metadatas={state.metadatas}
       />
     ) : (
       <TransactionsListBridgeDetails
@@ -92,6 +94,8 @@ const Transactions = () => {
         loadNextPage={loadBridgeNextPage}
         loadMoreItems={loadMoreBridgeItems}
         isItemLoaded={isBridgeItemLoaded}
+        assets={state.assets}
+        metadatas={state.metadatas}
       />
     );
   }, [

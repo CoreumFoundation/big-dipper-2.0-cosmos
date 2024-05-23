@@ -13,6 +13,8 @@ const TransactionsListBridgeDetails: FC<TransactionsListBridgeDetailsState> = (p
     isItemLoaded = () => true,
     itemCount,
     transactions,
+    assets,
+    metadatas,
   } = props;
 
   const formatProps: TransactionsListBridgeDetailsState = {
@@ -23,6 +25,8 @@ const TransactionsListBridgeDetails: FC<TransactionsListBridgeDetailsState> = (p
     loadMoreItems,
     itemCount,
     transactions,
+    assets,
+    metadatas,
   };
 
   if (!itemCount) {

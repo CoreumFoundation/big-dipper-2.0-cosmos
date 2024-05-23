@@ -13,18 +13,31 @@ import { readDate } from '@/recoil/settings';
 import { useDisplayStyles } from '@/styles/useSharedStyles';
 import dayjs, { formatDayJs } from '@/utils/dayjs';
 import { mergeRefs } from '@/utils/merge_refs';
-import { ACCOUNT_DETAILS, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
+import { ACCOUNT_DETAILS, formatToken, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
 import Link from 'next/link';
 import { Tooltip, Zoom } from '@mui/material';
+import { Asset, convertHexToString } from '@/screens/assets/hooks';
+import { formatNumberWithThousandsSeparator } from '@/screens/account_details/components/other_tokens/components/desktop';
+import Big from 'big.js';
 import SingleBridgeTransaction from './components/single_transaction';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
   isItemLoaded: TransactionsListBridgeDetailsState['isItemLoaded'];
   transaction: TransactionsListBridgeDetailsState['transactions'][number];
+  assets: Asset[];
+  metadatas: any[];
 };
 
-const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, isItemLoaded, transaction }) => {
+const ListItem: FC<ListItemProps> = ({
+  index,
+  style,
+  setRowHeight,
+  isItemLoaded,
+  transaction,
+  assets,
+  metadatas,
+}) => {
   const { rowRef } = useListRow(index, setRowHeight);
   const display = useDisplayStyles().classes;
   // const { t } = useTranslation('transactions');
@@ -41,10 +54,49 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, isItemLoaded,
     );
   }
 
+  const asset = metadatas.find(
+    (item: any) => item.base.toLowerCase() === transaction.coin.denom.toLowerCase()
+  );
+
+  let amount = formatToken(transaction.coin.amount, transaction.coin.denom).value;
+
+  if (asset?.denom_units[1].exponent) {
+    const availableValue = new Big(+transaction.coin.amount)
+      .div(Big(10).pow(asset?.denom_units[1].exponent))
+      .toFixed(asset?.denom_units[1].exponent);
+
+    amount = formatNumberWithThousandsSeparator(availableValue);
+  }
+
+  const tokenInAssets = assets.find(
+    (assetItem: any) => transaction.coin.denom.toLowerCase() === assetItem.denom.toLowerCase()
+  );
+  let displayDenom = asset?.display.toUpperCase() || transaction.coin.denom.toUpperCase();
+  if (tokenInAssets && tokenInAssets?.extra.xrpl_info) {
+    displayDenom =
+      tokenInAssets?.extra.xrpl_info.currency.length === 40
+        ? convertHexToString(tokenInAssets?.extra.xrpl_info.currency)
+        : tokenInAssets?.extra.xrpl_info.currency;
+  }
+
+  let parsedAmount = `${amount} ${displayDenom}`;
+
+  if (tokenInAssets) {
+    if (transaction.coin.denom.includes('ibc')) {
+      const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;
+      const availableValue = new Big(+transaction.coin.amount)
+        .div(Big(10).pow(tokenInAssets.extra.ibc_info!.precision))
+        .toFixed(tokenInAssets.extra.ibc_info!.precision);
+      amount = formatNumberWithThousandsSeparator(availableValue);
+
+      parsedAmount = `${amount} ${tokenDenom}`;
+    }
+  }
+
   const item = {
     key: `${transaction.txHash_1}-${transaction.txHash_2}`,
-    route: <div>{transaction.route}</div>,
-    amount: <div>{transaction.amount}</div>,
+    route: <div>{transaction.source}</div>,
+    amount: <div>{parsedAmount}</div>,
     txHash_1: (
       <Tooltip
         TransitionComponent={Zoom}
@@ -131,6 +183,8 @@ const TransactionList: FC<TransactionsListBridgeDetailsState> = ({
   loadMoreItems,
   isItemLoaded,
   transactions,
+  assets,
+  metadatas,
 }) => {
   const { classes, cx } = useStyles();
   const { listRef, getRowHeight, setRowHeight } = useList();
@@ -167,6 +221,8 @@ const TransactionList: FC<TransactionsListBridgeDetailsState> = ({
                     setRowHeight={setRowHeight}
                     isItemLoaded={isItemLoaded}
                     transaction={transactions[index]}
+                    assets={assets}
+                    metadatas={metadatas}
                   />
                 )}
               </List>

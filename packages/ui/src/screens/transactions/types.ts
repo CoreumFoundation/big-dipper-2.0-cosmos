@@ -1,6 +1,8 @@
+import { Coin } from './contract/Bridge.types';
+
 export interface BridgeTransaction {
-  route: string;
-  amount: any;
+  source: string;
+  coin: Coin;
   txHash_1: string;
   txHash_2: string;
   destination: string;
@@ -17,4 +19,8 @@ export interface TransactionsState {
   bridgeHasNextPage: boolean;
   tab: number;
   isBridgeNextPageLoading: boolean;
+  assets: Asset[];
+  metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
 }

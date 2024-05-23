@@ -1,3 +1,4 @@
+import { Asset } from '@/screens/assets/hooks';
 import { BridgeTransaction } from '@/screens/transactions/types';
 
 export interface TransactionsListBridgeState {
@@ -10,4 +11,6 @@ export interface TransactionsListBridgeState {
   isItemLoaded?: (index: number) => boolean;
   itemCount: number;
   transactions: BridgeTransaction[];
+  assets: Asset[];
+  metadatas: any[];
 }
