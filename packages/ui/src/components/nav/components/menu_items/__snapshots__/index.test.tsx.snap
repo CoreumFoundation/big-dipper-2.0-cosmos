@@ -888,10 +888,14 @@ exports[`screen: Nav/MenuItems it renders 1`] = `
     >
       <div
         className="currentNetName"
-      />
+      >
+        Testnet1
+      </div>
       <div
         className="currentNetLink"
-      />
+      >
+        explorer.testnet-1.coreum.dev
+      </div>
     </div>
     <svg
       className="arrowIcon"

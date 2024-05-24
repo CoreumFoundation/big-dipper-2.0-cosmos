@@ -38,7 +38,10 @@ const ExtendedTimestamp: FC<ExtendedTimestampProps> = ({ timestamp, flexEnd = tr
   const interval = useRef<NodeJS.Timer>();
 
   const { classes, cx } = useStyles();
-  const inputDate = useMemo(() => new Date(`${timestamp}Z`), [timestamp]);
+  const inputDate = useMemo(
+    () => new Date(timestamp.endsWith('Z') ? timestamp : `${timestamp}Z`),
+    [timestamp]
+  );
   const currentDate = useMemo(() => new Date(), []);
   const timePassedMs = useMemo(
     () => currentDate.getTime() - inputDate.getTime(),

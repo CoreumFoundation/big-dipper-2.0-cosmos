@@ -574,7 +574,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
         <div
           className="currentNetName"
         >
-           
+          Testnet 1
         </div>
       </div>
       <svg
@@ -599,8 +599,8 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
           </div>
         </a>
         <a
-          className="linkItem"
-          href="https://explorer.testnet-1.coreum.dev"
+          className="linkItem selectedItem"
+          href="#"
         >
           <div
             className="netName"

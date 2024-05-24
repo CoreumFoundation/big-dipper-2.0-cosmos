@@ -5,29 +5,33 @@ export const columns: {
 }[] = [
   {
     key: 'route',
-    width: 17,
+    width: 12,
   },
   {
     key: 'amount',
-    width: 17,
+    width: 15,
   },
   {
-    key: 'txHash_1',
-    width: 18,
-  },
-  {
-    key: 'txHash_2',
+    key: 'sender',
     align: 'right',
-    width: 18,
+    width: 15,
   },
   {
     key: 'destination',
     align: 'right',
-    width: 18,
+    width: 15,
+  },
+  {
+    key: 'txHash_1',
+    width: 15,
+  },
+  {
+    key: 'txHash_2',
+    width: 15,
   },
   {
     key: 'time',
     align: 'right',
-    width: 12,
+    width: 13,
   },
 ];

@@ -31,6 +31,14 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.palette.text.secondary,
     fontSize: theme.spacing(1.75),
   },
+  route: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 12,
+  },
+  arrows: {
+    transform: 'rotate(-90deg)',
+  },
 }));
 
 export default useStyles;

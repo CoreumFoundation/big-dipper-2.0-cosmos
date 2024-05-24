@@ -1,3 +1,4 @@
+import { Asset } from '../assets/hooks';
 import { Coin } from './contract/Bridge.types';
 
 export interface BridgeTransaction {
@@ -7,6 +8,7 @@ export interface BridgeTransaction {
   txHash_2: string;
   destination: string;
   timestamp: string;
+  sender: string;
 }
 
 export interface TransactionsState {
@@ -23,4 +25,6 @@ export interface TransactionsState {
   metadatas: any[];
   assetsLoading: boolean;
   metadataLoading: boolean;
+  isAllBridgeItemsFetched: boolean;
+  bridgeLoading: boolean;
 }

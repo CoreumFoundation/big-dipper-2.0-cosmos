@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import * as R from 'ramda';
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { convertMsgsToModels } from '@/components/msg/utils';
@@ -41,8 +42,20 @@ const convertAmountToCoin = (amountToConvert: string): { amount: string; denom: 
   return { amount, denom };
 };
 
-const RPC_URL = 'https://full-node.testnet-1.coreum.dev:26657';
-const CONTRACT_ADDRESS = 'testcore16sgampgtngjsmnj8zwz6h8zmh26nv2rs5kl72fuxkrzru5y5caxq82y4s5';
+const RPC_URL =
+  chainType.toLowerCase() === 'mainnet'
+    ? 'https://full-node-uranium.mainnet-1.coreum.dev:26657'
+    : chainType.toLowerCase() === 'testnet'
+      ? 'https://full-node-pluto.testnet-1.coreum.dev:26657'
+      : 'https://full-node-uranium.devnet-1.coreum.dev:26657';
+// const RPC_URL = `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:26657`;
+
+const CONTRACT_ADDRESS =
+  chainType.toLowerCase() === 'mainnet'
+    ? 'core1zhs909jp9yktml6qqx9f0ptcq2xnhhj99cja03j3lfcsp2pgm86studdrz'
+    : chainType.toLowerCase() === 'testnet'
+      ? 'testcore16sgampgtngjsmnj8zwz6h8zmh26nv2rs5kl72fuxkrzru5y5caxq82y4s5'
+      : '';
 
 const queryContractSmart = async (height: number | undefined): Promise<JsonObject> => {
   const bridgeClient = new BridgeQueryClient(RPC_URL, CONTRACT_ADDRESS);
@@ -120,7 +133,7 @@ const getTxOperationsDiff = async (height: number): Promise<Operation[]> => {
 const fetchBridgeTxData = async ({
   page,
   limit,
-  order_by = 'asc',
+  order_by = 'desc',
 }: {
   page: string;
   limit: string;
@@ -148,16 +161,33 @@ const fetchBridgeTxData = async ({
     });
 
     if (response.status === 200) {
-      const {
-        // total_count,
-        txs,
-      } = response.data.result;
+      const { txs } = response.data.result;
 
       const transactions = txs.map(formatTxData);
 
       const resultBridgeTx = await Promise.all(
         transactions.map(async (transaction: any) => {
           const txOperations = await getTxOperationsDiff(transaction.height);
+
+          const blockInfoData = {
+            jsonrpc: '2.0',
+            method: 'block',
+            params: {
+              height: transaction.height,
+            },
+            id: 1,
+          };
+
+          let timestamp = '';
+          try {
+            const blockResponse = await axios.post(RPC_URL, blockInfoData, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+
+            timestamp = blockResponse.data.result.block.header.time;
+          } catch (error) {}
 
           const xrplTxHash = await Promise.all(
             txOperations.map(async (operation: Operation) => {
@@ -215,6 +245,7 @@ const fetchBridgeTxData = async ({
 
           return {
             ...transaction,
+            timestamp,
             txHashes: xrplTxHash,
           };
         })
@@ -361,8 +392,10 @@ export const useTransactions = () => {
     isNextPageLoading: true,
     items: [],
     bridgeItems: [],
+    bridgeLoading: true,
+    isAllBridgeItemsFetched: false,
     bridgeHasNextPage: false,
-    isBridgeNextPageLoading: false,
+    isBridgeNextPageLoading: true,
     tab: 0,
     assets: [],
     metadatas: [],
@@ -478,7 +511,7 @@ export const useTransactions = () => {
         ...prevState,
         loading: false,
         items: newItems,
-        hasNextPage: itemsLength === 51,
+        hasNextPage: itemsLength === LIMIT,
         isNextPageLoading: false,
       }));
     },
@@ -505,30 +538,43 @@ export const useTransactions = () => {
           ...prevState,
           items: newItems,
           isNextPageLoading: false,
-          hasNextPage: itemsLength === 51,
+          hasNextPage: itemsLength === LIMIT,
         }));
       });
   };
 
+  const BRIDGE_TX_LIMIT = 51;
   const getBridgeTxs = async () => {
+    handleSetState((prevState) => ({
+      ...prevState,
+      isBridgeNextPageLoading: true,
+    }));
+    const currentPage = Math.floor(state.bridgeItems.length / 100);
+
     const bridgeTransactions = await fetchBridgeTxData({
-      page: '1',
-      limit: '100',
+      page: String(currentPage + 1),
+      limit: String(BRIDGE_TX_LIMIT),
     });
 
     handleSetState((prevState) => ({
       ...prevState,
-      bridgeItems: bridgeTransactions,
+      bridgeLoading: false,
+      bridgeItems: state.bridgeItems.concat(bridgeTransactions),
+      isBridgeNextPageLoading: false,
+      bridgeHasNextPage: bridgeTransactions.length === BRIDGE_TX_LIMIT,
     }));
   };
 
   useEffect(() => {
     getBridgeTxs();
+    handleSetState((prevState) => ({
+      ...prevState,
+      bridgeLoading: false,
+    }));
   }, []);
 
-  const loadBridgeNextPage = () => {
-    // eslint-disable-next-line no-console
-    console.log('load next bridge page');
+  const loadBridgeNextPage = async () => {
+    await getBridgeTxs();
   };
 
   return {

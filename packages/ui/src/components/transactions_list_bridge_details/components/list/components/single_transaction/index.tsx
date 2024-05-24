@@ -11,6 +11,7 @@ export type SingleBridgeTransactionProps = {
   txHash_2: ReactNode;
   destination: ReactNode;
   time: ReactNode;
+  sender: ReactNode;
 };
 
 const SingleBridgeTransaction: FC<SingleBridgeTransactionProps> = ({
@@ -21,6 +22,7 @@ const SingleBridgeTransaction: FC<SingleBridgeTransactionProps> = ({
   txHash_2,
   destination,
   amount,
+  sender,
 }) => {
   const { t } = useTranslation('transactions');
   const { classes, cx } = useStyles();
@@ -37,9 +39,9 @@ const SingleBridgeTransaction: FC<SingleBridgeTransactionProps> = ({
           </div>
           <div className={cx(classes.item, 'block')}>
             <Typography variant="h4" className="label">
-              {t('amount')}
+              {t('sender')}
             </Typography>
-            {amount}
+            {sender}
           </div>
           <div className={cx(classes.item, 'block')}>
             <Typography variant="h4" className="label">
@@ -47,11 +49,11 @@ const SingleBridgeTransaction: FC<SingleBridgeTransactionProps> = ({
             </Typography>
             {destination}
           </div>
-          <div className={cx(classes.item, 'time')}>
+          <div className={cx(classes.item, 'block')}>
             <Typography variant="h4" className="label">
-              {t('time')}
+              {t('amount')}
             </Typography>
-            {time}
+            {amount}
           </div>
         </div>
         <div className={classes.itemPrimaryDetailsContainer}>
@@ -66,6 +68,12 @@ const SingleBridgeTransaction: FC<SingleBridgeTransactionProps> = ({
               {t('txHash_2')}
             </Typography>
             {txHash_2}
+          </div>
+          <div className={cx(classes.item, 'time')}>
+            <Typography variant="h4" className="label">
+              {t('time')}
+            </Typography>
+            {time}
           </div>
         </div>
       </div>

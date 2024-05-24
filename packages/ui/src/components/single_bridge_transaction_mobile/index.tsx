@@ -11,6 +11,7 @@ type SingleBridgeTransactionMobileProps = {
   txHash_2: ReactNode;
   destination: ReactNode;
   time: ReactNode;
+  sender: ReactNode;
 };
 
 const SingleBridgeTransactionMobile: FC<SingleBridgeTransactionMobileProps> = ({
@@ -21,6 +22,7 @@ const SingleBridgeTransactionMobile: FC<SingleBridgeTransactionMobileProps> = ({
   txHash_2,
   destination,
   amount,
+  sender,
 }) => {
   const { t } = useTranslation('transactions');
   const { classes, cx } = useStyles();
@@ -46,6 +48,24 @@ const SingleBridgeTransactionMobile: FC<SingleBridgeTransactionMobileProps> = ({
       <div className={classes.flex}>
         <div className={classes.item}>
           <Typography variant="h4" className="label">
+            {t('sender')}
+          </Typography>
+          <Typography variant="body1" className="value" component="div">
+            {sender}
+          </Typography>
+        </div>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
+            {t('destination')}
+          </Typography>
+          <Typography variant="body1" className="value">
+            {destination}
+          </Typography>
+        </div>
+      </div>
+      <div className={classes.flex}>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
             {t('txHash_1')}
           </Typography>
           <Typography variant="body1" className="value">
@@ -62,14 +82,6 @@ const SingleBridgeTransactionMobile: FC<SingleBridgeTransactionMobileProps> = ({
         </div>
       </div>
       <div className={classes.flex}>
-        <div className={classes.item}>
-          <Typography variant="h4" className="label">
-            {t('destination')}
-          </Typography>
-          <Typography variant="body1" className="value">
-            {destination}
-          </Typography>
-        </div>
         <div className={classes.item}>
           <Typography variant="h4" className="label">
             {t('time')}

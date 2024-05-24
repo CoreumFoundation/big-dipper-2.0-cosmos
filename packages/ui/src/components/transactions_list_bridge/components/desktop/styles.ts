@@ -88,6 +88,14 @@ const useStyles = makeStyles()((theme) => ({
       fontSize: theme.spacing(1.75),
     },
   },
+  route: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 12,
+  },
+  arrows: {
+    transform: 'rotate(-90deg)',
+  },
 }));
 
 export default useStyles;
