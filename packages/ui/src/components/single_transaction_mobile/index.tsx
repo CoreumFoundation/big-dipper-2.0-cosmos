@@ -10,10 +10,10 @@ type SingleTransactionMobileProps = {
   time: ReactNode;
   messages: ReactNode;
   result?: ReactNode;
-  fee: ReactNode;
-  amount: ReactNode;
-  sender: ReactNode;
-  receiver: ReactNode;
+  fee?: ReactNode;
+  amount?: ReactNode;
+  sender?: ReactNode;
+  receiver?: ReactNode;
 };
 
 const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({

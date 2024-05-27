@@ -48,7 +48,6 @@ const RPC_URL =
     : chainType.toLowerCase() === 'testnet'
       ? 'https://full-node-pluto.testnet-1.coreum.dev:26657'
       : 'https://full-node-uranium.devnet-1.coreum.dev:26657';
-// const RPC_URL = `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:26657`;
 
 const CONTRACT_ADDRESS =
   chainType.toLowerCase() === 'mainnet'
@@ -57,8 +56,9 @@ const CONTRACT_ADDRESS =
       ? 'testcore16sgampgtngjsmnj8zwz6h8zmh26nv2rs5kl72fuxkrzru5y5caxq82y4s5'
       : '';
 
+const bridgeClient = new BridgeQueryClient(RPC_URL, CONTRACT_ADDRESS);
+
 const queryContractSmart = async (height: number | undefined): Promise<JsonObject> => {
-  const bridgeClient = new BridgeQueryClient(RPC_URL, CONTRACT_ADDRESS);
   const response = await bridgeClient.pendingOperations({ height });
 
   return response;
@@ -130,6 +130,131 @@ const getTxOperationsDiff = async (height: number): Promise<Operation[]> => {
   }
 };
 
+const fetchBridgeXRPLCoreumTxData = async ({
+  page,
+  limit,
+  order_by = 'desc',
+}: {
+  page: string;
+  limit: string;
+  order_by?: 'asc' | 'desc';
+}) => {
+  try {
+    const requestQuery = `wasm._contract_address='${CONTRACT_ADDRESS}' AND wasm.action='save_evidence' AND wasm.threshold_reached='true'`;
+    const requestData = {
+      jsonrpc: '2.0',
+      method: 'tx_search',
+      params: {
+        query: requestQuery,
+        prove: false,
+        page,
+        per_page: limit,
+        order_by,
+      },
+      id: 1,
+    };
+    const response = await axios.post(RPC_URL, requestData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.status === 200) {
+      const { txs } = response.data.result;
+
+      let filterTxs = txs
+        .map((tx: any) => {
+          const { events } = tx.tx_result;
+
+          const wasmEvent = events.find((event: any) => event.type === 'wasm');
+          let txHash1 = '';
+          let issuer = '';
+          let currency = '';
+          let amount = '';
+          let recipient = '';
+
+          if (!wasmEvent) {
+            return undefined;
+          }
+
+          wasmEvent.attributes.forEach((attr: { key: string; value: string }) => {
+            switch (attr.key) {
+              case 'hash':
+                txHash1 = attr.value;
+                break;
+              case 'issuer':
+                issuer = attr.value;
+                break;
+              case 'currency':
+                currency = attr.value;
+                break;
+              case 'amount':
+                amount = attr.value;
+                break;
+              case 'recipient':
+                recipient = attr.value;
+                break;
+              default:
+            }
+          });
+
+          if (!txHash1 || !issuer || !currency || !amount || !recipient) {
+            return undefined;
+          }
+
+          return {
+            height: tx.height,
+            txHash_1: txHash1,
+            txHash_2: tx.hash,
+            sender: '',
+            destination: recipient,
+            coin: {
+              amount,
+              denom: currency,
+            },
+            source: 'xrpl',
+          };
+        })
+        .filter((item: any) => item !== undefined);
+
+      filterTxs = await Promise.all(
+        filterTxs.map(async (transaction: any) => {
+          const blockInfoData = {
+            jsonrpc: '2.0',
+            method: 'block',
+            params: {
+              height: transaction.height,
+            },
+            id: 1,
+          };
+          let timestamp = '';
+          try {
+            const blockResponse = await axios.post(RPC_URL, blockInfoData, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+
+            timestamp = blockResponse.data.result.block.header.time;
+          } catch (error) {
+            console.error(error);
+          }
+          return {
+            ...transaction,
+            timestamp,
+          };
+        })
+      );
+
+      return filterTxs;
+    }
+
+    return [];
+  } catch (error) {
+    return [];
+  }
+};
+
 const fetchBridgeTxData = async ({
   page,
   limit,
@@ -187,7 +312,9 @@ const fetchBridgeTxData = async ({
             });
 
             timestamp = blockResponse.data.result.block.header.time;
-          } catch (error) {}
+          } catch (error) {
+            console.error(error);
+          }
 
           const xrplTxHash = await Promise.all(
             txOperations.map(async (operation: Operation) => {
@@ -544,6 +671,7 @@ export const useTransactions = () => {
   };
 
   const BRIDGE_TX_LIMIT = 51;
+  const BRIDGE_XRPL_TX_LIMIT = 100;
   const getBridgeTxs = async () => {
     handleSetState((prevState) => ({
       ...prevState,
@@ -551,17 +679,27 @@ export const useTransactions = () => {
     }));
     const currentPage = Math.floor(state.bridgeItems.length / 100);
 
+    const xrplCoreumBridgeTransactions = await fetchBridgeXRPLCoreumTxData({
+      page: String(currentPage + 1),
+      limit: String(BRIDGE_XRPL_TX_LIMIT),
+    });
+
     const bridgeTransactions = await fetchBridgeTxData({
       page: String(currentPage + 1),
       limit: String(BRIDGE_TX_LIMIT),
     });
 
+    const newTransactionItems = bridgeTransactions
+      .concat(xrplCoreumBridgeTransactions)
+      .sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1));
+
     handleSetState((prevState) => ({
       ...prevState,
       bridgeLoading: false,
-      bridgeItems: state.bridgeItems.concat(bridgeTransactions),
+      bridgeItems: state.bridgeItems.concat(newTransactionItems),
       isBridgeNextPageLoading: false,
-      bridgeHasNextPage: bridgeTransactions.length === BRIDGE_TX_LIMIT,
+      bridgeHasNextPage:
+        bridgeTransactions.length === BRIDGE_TX_LIMIT || xrplCoreumBridgeTransactions > 1,
     }));
   };
 

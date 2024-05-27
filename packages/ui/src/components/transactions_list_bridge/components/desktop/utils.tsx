@@ -13,12 +13,10 @@ export const columns: {
   },
   {
     key: 'sender',
-    align: 'right',
     width: 15,
   },
   {
     key: 'destination',
-    align: 'right',
     width: 15,
   },
   {

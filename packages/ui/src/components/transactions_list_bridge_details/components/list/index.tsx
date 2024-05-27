@@ -166,11 +166,22 @@ const ListItem: FC<ListItemProps> = ({
     );
   }
 
-  const asset = metadatas.find(
-    (item: any) => item.base.toLowerCase() === transaction.coin.denom.toLowerCase()
-  );
+  let { denom } = transaction.coin;
 
-  let amount = formatToken(transaction.coin.amount, transaction.coin.denom).value;
+  if (transaction.source === 'xrpl') {
+    const assetInRegisteredAssets = assets.find(
+      (asset: Asset) =>
+        asset.extra.xrpl_info?.currency.toLowerCase() === transaction.coin.denom.toLowerCase()
+    );
+
+    if (assetInRegisteredAssets) {
+      denom = assetInRegisteredAssets.denom;
+    }
+  }
+
+  const asset = metadatas.find((item: any) => item.base.toLowerCase() === denom.toLowerCase());
+
+  let amount = formatToken(transaction.coin.amount, denom).value;
 
   if (asset?.denom_units[1].exponent) {
     const availableValue = new Big(+transaction.coin.amount)
@@ -181,9 +192,9 @@ const ListItem: FC<ListItemProps> = ({
   }
 
   const tokenInAssets = assets.find(
-    (assetItem: any) => transaction.coin.denom.toLowerCase() === assetItem.denom.toLowerCase()
+    (assetItem: any) => denom.toLowerCase() === assetItem.denom.toLowerCase()
   );
-  let displayDenom = asset?.display.toUpperCase() || transaction.coin.denom.toUpperCase();
+  let displayDenom = asset?.display.toUpperCase() || denom.toUpperCase();
   if (tokenInAssets && tokenInAssets?.extra.xrpl_info) {
     displayDenom =
       tokenInAssets?.extra.xrpl_info.currency.length === 40
@@ -192,7 +203,7 @@ const ListItem: FC<ListItemProps> = ({
   }
 
   if (tokenInAssets) {
-    if (transaction.coin.denom.includes('ibc')) {
+    if (denom.includes('ibc')) {
       const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;
       const availableValue = new Big(+transaction.coin.amount)
         .div(Big(10).pow(tokenInAssets.extra.ibc_info!.precision))
@@ -208,7 +219,7 @@ const ListItem: FC<ListItemProps> = ({
     amount: (
       <Typography variant="body1" className={classes.amount}>
         {amount.split('.')[0]}
-        <span className={classes.decimal}>.{amount.split('.')[1]}</span>
+        {amount.split('.')[1] && <span className={classes.decimal}>.{amount.split('.')[1]}</span>}
         <span className={classes.denom}>{displayDenom}</span>
       </Typography>
     ),

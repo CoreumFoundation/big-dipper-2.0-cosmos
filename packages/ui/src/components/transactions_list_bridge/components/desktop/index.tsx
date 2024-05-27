@@ -18,9 +18,10 @@ import Zoom from '@mui/material/Zoom';
 import Tooltip from '@mui/material/Tooltip';
 import Big from 'big.js';
 import { formatNumberWithThousandsSeparator } from '@/screens/account_details/components/other_tokens/components/desktop';
-import { convertHexToString } from '@/screens/assets/hooks';
+import { Asset, convertHexToString } from '@/screens/assets/hooks';
 import Lottie from 'lottie-react';
 import arrows from '@/assets/arrows.json';
+import { BridgeTransaction } from '@/screens/transactions/types';
 
 const Desktop: FC<TransactionsListBridgeState> = ({
   className,
@@ -148,12 +149,23 @@ const Desktop: FC<TransactionsListBridgeState> = ({
     );
   }, []);
 
-  const items = transactions.map((x) => {
-    const asset = metadatas.find(
-      (item: any) => item.base.toLowerCase() === x.coin.denom.toLowerCase()
-    );
+  const items = transactions.map((x: BridgeTransaction) => {
+    let { denom } = x.coin;
 
-    let amount = formatToken(x.coin.amount, x.coin.denom).value;
+    if (x.source === 'xrpl') {
+      const assetInRegisteredAssets = assets.find(
+        (asset: Asset) =>
+          asset.extra.xrpl_info?.currency.toLowerCase() === x.coin.denom.toLowerCase()
+      );
+
+      if (assetInRegisteredAssets) {
+        denom = assetInRegisteredAssets.denom;
+      }
+    }
+
+    const asset = metadatas.find((item: any) => item.base.toLowerCase() === denom.toLowerCase());
+
+    let amount = formatToken(x.coin.amount, denom).value;
 
     if (asset?.denom_units[1].exponent) {
       const availableValue = new Big(+x.coin.amount)
@@ -164,9 +176,9 @@ const Desktop: FC<TransactionsListBridgeState> = ({
     }
 
     const tokenInAssets = assets.find(
-      (assetItem: any) => x.coin.denom.toLowerCase() === assetItem.denom.toLowerCase()
+      (assetItem: any) => denom.toLowerCase() === assetItem.denom.toLowerCase()
     );
-    let displayDenom = asset?.display.toUpperCase() || x.coin.denom.toUpperCase();
+    let displayDenom = asset?.display.toUpperCase() || denom.toUpperCase();
     if (tokenInAssets && tokenInAssets?.extra.xrpl_info) {
       displayDenom =
         tokenInAssets?.extra.xrpl_info.currency.length === 40
@@ -175,7 +187,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
     }
 
     if (tokenInAssets) {
-      if (x.coin.denom.includes('ibc')) {
+      if (denom.includes('ibc')) {
         const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;
         const availableValue = new Big(+x.coin.amount)
           .div(Big(10).pow(tokenInAssets.extra.ibc_info!.precision))
@@ -191,7 +203,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
       amount: (
         <Typography variant="body1" className={classes.amount}>
           {amount.split('.')[0]}
-          <span className={classes.decimal}>.{amount.split('.')[1]}</span>
+          {amount.split('.')[1] && <span className={classes.decimal}>.{amount.split('.')[1]}</span>}
           <span className={classes.denom}>{displayDenom}</span>
         </Typography>
       ),

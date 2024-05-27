@@ -125,7 +125,11 @@ const Transactions = () => {
         rootClassName={classes.layoutRoot}
         contentWrapperClassName={classes.layoutContentWrapper}
       >
-        <LoadAndExist exists={state.exists} loading={state.loading}>
+        <LoadAndExist
+          className={classes.contentWrapper}
+          exists={state.exists}
+          loading={state.loading}
+        >
           <div className={classes.header}>
             <Typography variant="h1">{t('transactions')}</Typography>
             <div className={classes.header}>

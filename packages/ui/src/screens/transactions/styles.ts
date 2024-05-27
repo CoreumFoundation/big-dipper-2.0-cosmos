@@ -8,6 +8,12 @@ const useStyles = makeStyles()((theme) => ({
       color: theme.palette.custom.fonts.highlight,
     },
   },
+  contentWrapper: {
+    maxHeight: '100%',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+  },
   box: {
     padding: `0 !important`,
     minHeight: '500px',
