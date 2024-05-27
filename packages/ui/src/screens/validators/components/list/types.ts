@@ -18,6 +18,7 @@ export interface ValidatorsState {
   sortDirection: 'asc' | 'desc';
   votingPowerOverall: number;
   items: ValidatorType[];
+  allItemsLoaded: boolean;
 }
 
 export type ItemType = Override<ValidatorType, { validator: AvatarName }>;

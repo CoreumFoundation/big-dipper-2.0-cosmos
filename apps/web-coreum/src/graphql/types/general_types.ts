@@ -11890,7 +11890,10 @@ export type ValidatorUndelegationsQueryVariables = Exact<{
 
 export type ValidatorUndelegationsQuery = { undelegations?: { __typename?: 'ActionUnbondingDelegationResponse', pagination?: any | null, undelegations?: Array<any | null> | null } | null };
 
-export type ValidatorsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ValidatorsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
 
 
 export type ValidatorsQuery = { stakingPool: Array<{ __typename?: 'staking_pool', bondedTokens: any }>, validator: Array<{ __typename?: 'validator', validatorStatuses: Array<{ __typename?: 'validator_status', status: number, jailed: boolean, height: any }>, validatorSigningInfos: Array<{ __typename?: 'validator_signing_info', tombstoned: boolean, missedBlocksCounter: any }>, validatorInfo?: { __typename?: 'validator_info', operatorAddress: string, selfDelegateAddress?: string | null } | null, validatorVotingPowers: Array<{ __typename?: 'validator_voting_power', votingPower: any }>, validatorCommissions: Array<{ __typename?: 'validator_commission', commission: any }> }>, slashingParams: Array<{ __typename?: 'slashing_params', params: any }> };
@@ -11900,7 +11903,10 @@ export type ValidatorsAddressListQueryVariables = Exact<{ [key: string]: never; 
 
 export type ValidatorsAddressListQuery = { validator: Array<{ __typename?: 'validator', validatorInfo?: { __typename?: 'validator_info', operatorAddress: string, selfDelegateAddress?: string | null, consensusAddress: string } | null, validatorDescriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, identity?: string | null, avatarUrl?: string | null }> }> };
 
-export type ValidatorAddressesQueryVariables = Exact<{ [key: string]: never; }>;
+export type ValidatorAddressesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
 
 
 export type ValidatorAddressesQuery = { validator: Array<{ __typename?: 'validator', validatorInfo?: { __typename?: 'validator_info', operatorAddress: string, selfDelegateAddress?: string | null, consensusAddress: string } | null, validatorDescriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatarUrl?: string | null }> }> };
@@ -13574,49 +13580,52 @@ export type ValidatorUndelegationsQueryHookResult = ReturnType<typeof useValidat
 export type ValidatorUndelegationsLazyQueryHookResult = ReturnType<typeof useValidatorUndelegationsLazyQuery>;
 export type ValidatorUndelegationsQueryResult = Apollo.QueryResult<ValidatorUndelegationsQuery, ValidatorUndelegationsQueryVariables>;
 export const ValidatorsDocument = gql`
-    query Validators {
-  stakingPool: staking_pool(limit: 1, order_by: {height: desc}) {
-    bondedTokens: bonded_tokens
-  }
-  validator {
-    validatorStatuses: validator_statuses(order_by: {height: desc}, limit: 1) {
-      status
-      jailed
-      height
+  query Validators($limit: Int = 100, $offset: Int = 0) {
+    stakingPool: staking_pool(limit: 1, order_by: {height: desc}) {
+      bondedTokens: bonded_tokens
     }
-    validatorSigningInfos: validator_signing_infos(
-      order_by: {height: desc}
-      limit: 1
+    validator: validator(
+      limit: $limit
+      offset: $offset
     ) {
-      missedBlocksCounter: missed_blocks_counter
-      tombstoned
+      validatorStatuses: validator_statuses(order_by: {height: desc}, limit: 1) {
+        status
+        jailed
+        height
+      }
+      validatorSigningInfos: validator_signing_infos(
+        order_by: {height: desc}
+        limit: 1
+      ) {
+        missedBlocksCounter: missed_blocks_counter
+        tombstoned
+      }
+      validatorInfo: validator_info {
+        operatorAddress: operator_address
+        selfDelegateAddress: self_delegate_address
+      }
+      validatorVotingPowers: validator_voting_powers(
+        offset: 0
+        limit: 1
+        order_by: {height: desc}
+      ) {
+        votingPower: voting_power
+      }
+      validatorCommissions: validator_commissions(order_by: {height: desc}, limit: 1) {
+        commission
+      }
+      validatorSigningInfos: validator_signing_infos(
+        order_by: {height: desc}
+        limit: 1
+      ) {
+        missedBlocksCounter: missed_blocks_counter
+      }
     }
-    validatorInfo: validator_info {
-      operatorAddress: operator_address
-      selfDelegateAddress: self_delegate_address
-    }
-    validatorVotingPowers: validator_voting_powers(
-      offset: 0
-      limit: 1
-      order_by: {height: desc}
-    ) {
-      votingPower: voting_power
-    }
-    validatorCommissions: validator_commissions(order_by: {height: desc}, limit: 1) {
-      commission
-    }
-    validatorSigningInfos: validator_signing_infos(
-      order_by: {height: desc}
-      limit: 1
-    ) {
-      missedBlocksCounter: missed_blocks_counter
+    slashingParams: slashing_params(order_by: {height: desc}, limit: 1) {
+      params
     }
   }
-  slashingParams: slashing_params(order_by: {height: desc}, limit: 1) {
-    params
-  }
-}
-    `;
+`;
 
 /**
  * __useValidatorsQuery__
@@ -13691,23 +13700,26 @@ export type ValidatorsAddressListQueryHookResult = ReturnType<typeof useValidato
 export type ValidatorsAddressListLazyQueryHookResult = ReturnType<typeof useValidatorsAddressListLazyQuery>;
 export type ValidatorsAddressListQueryResult = Apollo.QueryResult<ValidatorsAddressListQuery, ValidatorsAddressListQueryVariables>;
 export const ValidatorAddressesDocument = gql`
-    query ValidatorAddresses {
-  validator {
-    validatorInfo: validator_info {
-      operatorAddress: operator_address
-      selfDelegateAddress: self_delegate_address
-      consensusAddress: consensus_address
-    }
-    validatorDescriptions: validator_descriptions(
-      limit: 1
-      order_by: {height: desc}
+  query ValidatorAddresses($limit: Int = 100, $offset: Int = 0) {
+    validator: validator(
+      limit: $limit
+      offset: $offset
     ) {
-      moniker
-      avatarUrl: avatar_url
+      validatorInfo: validator_info {
+        operatorAddress: operator_address
+        selfDelegateAddress: self_delegate_address
+        consensusAddress: consensus_address
+      }
+      validatorDescriptions: validator_descriptions(
+        limit: 1
+        order_by: {height: desc}
+      ) {
+        moniker
+        avatarUrl: avatar_url
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useValidatorAddressesQuery__

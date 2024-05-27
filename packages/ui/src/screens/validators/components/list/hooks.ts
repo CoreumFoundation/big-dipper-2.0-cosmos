@@ -1,7 +1,7 @@
 import Big from 'big.js';
 import numeral from 'numeral';
 import * as R from 'ramda';
-import { SyntheticEvent, useCallback, useState } from 'react';
+import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import chainConfig from '@/chainConfig';
 import { useValidatorsQuery, ValidatorsQuery } from '@/graphql/types/general_types';
 import { SlashingParams } from '@/models';
@@ -91,6 +91,7 @@ export const useValidators = () => {
     tab: 0,
     sortKey: 'votingPower',
     sortDirection: 'desc',
+    allItemsLoaded: false,
   });
 
   const handleSetState = useCallback(
@@ -106,7 +107,10 @@ export const useValidators = () => {
   // ==========================
   // Fetch Data
   // ==========================
-  useValidatorsQuery({
+  const validatorsQuery = useValidatorsQuery({
+    variables: {
+      offset: 0,
+    },
     onCompleted: (data) => {
       handleSetState((prevState) => ({
         ...prevState,
@@ -122,6 +126,44 @@ export const useValidators = () => {
       }));
     },
   });
+
+  const loadNextPage = useCallback(async () => {
+    // handleSetState((prevState) => ({ ...prevState, loading: true }));
+    // refetch query
+    await validatorsQuery
+      .fetchMore({
+        variables: {
+          offset: state.items.length,
+        },
+      })
+      .then(({ data }) => {
+        const validators = formatValidators(data);
+        const itemsLength = validators.items?.length || 0;
+
+        if (validators.items) {
+          const newItems = state.items.concat(validators.items);
+
+          handleSetState((prevState) => ({
+            ...prevState,
+            items: newItems,
+            // loading: false,
+            allItemsLoaded: itemsLength < 99,
+          }));
+        } else {
+          handleSetState((prevState) => ({
+            ...prevState,
+            // loading: false,
+            allItemsLoaded: true,
+          }));
+        }
+      });
+  }, [handleSetState, state.items, validatorsQuery]);
+
+  useEffect(() => {
+    if (!state.allItemsLoaded && !state.loading) {
+      loadNextPage();
+    }
+  }, [state.allItemsLoaded, state.loading, loadNextPage]);
 
   const handleTabChange = useCallback(
     (_event: SyntheticEvent<Element, globalThis.Event>, newValue: number) => {

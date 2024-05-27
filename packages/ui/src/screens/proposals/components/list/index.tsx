@@ -87,7 +87,6 @@ const ProposalsList: FC<ProposalsListProps> = ({
     <Box className={cx(classes.root, className)}>
       <div className={classes.topContent}>
         <Total className={classes.total} total={numeral(rawDataTotal).format('0,0')} />
-        {/* <Search className={classes.search} /> */}
       </div>
       <div className={classes.list}>
         <AutoSizer>

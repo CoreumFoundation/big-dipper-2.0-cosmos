@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRecoilCallback } from 'recoil';
 import { AtomState as ValidatorAtomState } from 'ui/recoil/validators';
 import { useValidatorAddressesQuery } from '@/graphql/types/general_types';
@@ -7,7 +7,50 @@ import type { AtomState as ProfileAtomState } from '@/recoil/profiles/types';
 import { atomFamilyState as validatorAtomState } from '@/recoil/validators/atom';
 
 export const useValidatorRecoil = () => {
-  const { loading: loadingValidator, data } = useValidatorAddressesQuery();
+  const [validatorAddresses, setValidatorsAddresses] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAllDataLoaded, setIsAllDataLoaded] = useState<boolean>(false);
+
+  const validatorAddressesQuery = useValidatorAddressesQuery({
+    variables: {},
+    onCompleted: (response) => {
+      setValidatorsAddresses(response.validator);
+      setIsLoading(false);
+
+      if (response.validator.length < 100) {
+        setIsAllDataLoaded(true);
+      }
+    },
+    onError: () => {
+      setValidatorsAddresses([]);
+      setIsLoading(false);
+    },
+  });
+
+  const loadMoreItems = useCallback(async () => {
+    await validatorAddressesQuery
+      .fetchMore({
+        variables: {
+          offset: validatorAddresses.length || 0,
+        },
+      })
+      .then(({ data: responseData }) => {
+        const itemsLength = responseData.validator.length || 0;
+
+        if (itemsLength < 100) {
+          setIsAllDataLoaded(true);
+        }
+
+        setValidatorsAddresses((prevValue) => prevValue.concat(responseData.validator));
+      });
+  }, [validatorAddresses.length, validatorAddressesQuery]);
+
+  useEffect(() => {
+    if (!isAllDataLoaded && !isLoading) {
+      loadMoreItems();
+    }
+  }, [isAllDataLoaded, isLoading, loadMoreItems]);
+
   const setValidatorAtomState = useRecoilCallback(
     ({ set }) =>
       (consensusAddress: string, newState: ValidatorAtomState) =>
@@ -15,9 +58,8 @@ export const useValidatorRecoil = () => {
     []
   );
   useEffect(() => {
-    if (!data?.validator) return;
     const map = new Map(
-      data.validator
+      validatorAddresses
         .filter((x) => x.validatorInfo?.consensusAddress)
         .map((x) => [x.validatorInfo?.consensusAddress ?? '', x])
     );
@@ -27,7 +69,7 @@ export const useValidatorRecoil = () => {
         validator: x.validatorInfo?.consensusAddress ?? '',
       });
     });
-  }, [data, setValidatorAtomState]);
+  }, [validatorAddresses, setValidatorAtomState]);
 
   const setProfileAtomFamilyState = useRecoilCallback(
     ({ set }) =>
@@ -43,7 +85,7 @@ export const useValidatorRecoil = () => {
   );
 
   useEffect(() => {
-    data?.validator?.forEach((validator) => {
+    validatorAddresses.forEach((validator) => {
       if (!validator.validatorInfo?.selfDelegateAddress) return;
 
       setProfileAtomFamilyState(validator.validatorInfo?.selfDelegateAddress, {
@@ -51,9 +93,9 @@ export const useValidatorRecoil = () => {
         imageUrl: validator.validatorDescriptions?.[0]?.avatarUrl || '',
       });
     });
-  }, [data?.validator, setProfileAtomFamilyState]);
+  }, [validatorAddresses, setProfileAtomFamilyState]);
 
   return {
-    loading: loadingValidator,
+    loading: isLoading,
   };
 };
