@@ -22,6 +22,7 @@ import { Asset, convertHexToString } from '@/screens/assets/hooks';
 import Lottie from 'lottie-react';
 import arrows from '@/assets/arrows.json';
 import { BridgeTransaction } from '@/screens/transactions/types';
+import { XRPL_ACCOUNT_DETAILS, XRPL_TRANSACTION_DETAILS } from '@/utils/go_to_page';
 
 const Desktop: FC<TransactionsListBridgeState> = ({
   className,
@@ -209,7 +210,14 @@ const Desktop: FC<TransactionsListBridgeState> = ({
       ),
       sender: (
         <Tooltip TransitionComponent={Zoom} title={<pre>{x.sender}</pre>} placement="bottom" arrow>
-          <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.sender)}>
+          <Link
+            shallow
+            prefetch={false}
+            target="_blank"
+            href={
+              x.source === 'coreum' ? ACCOUNT_DETAILS(x.sender) : XRPL_ACCOUNT_DETAILS(x.sender)
+            }
+          >
             {getMiddleEllipsis(x?.sender || '', {
               beginning: 7,
               ending: 4,
@@ -224,7 +232,16 @@ const Desktop: FC<TransactionsListBridgeState> = ({
           placement="bottom"
           arrow
         >
-          <Link shallow prefetch={false} href={ACCOUNT_DETAILS(x.destination)}>
+          <Link
+            shallow
+            prefetch={false}
+            target="_blank"
+            href={
+              x.source === 'xrpl'
+                ? ACCOUNT_DETAILS(x.destination)
+                : XRPL_ACCOUNT_DETAILS(x.destination)
+            }
+          >
             {getMiddleEllipsis(x?.destination || '', {
               beginning: 7,
               ending: 4,
@@ -239,7 +256,16 @@ const Desktop: FC<TransactionsListBridgeState> = ({
           placement="bottom"
           arrow
         >
-          <Link shallow prefetch={false} href={TRANSACTION_DETAILS(x.txHash_1)}>
+          <Link
+            shallow
+            prefetch={false}
+            target="_blank"
+            href={
+              x.source === 'coreum'
+                ? TRANSACTION_DETAILS(x.txHash_1)
+                : XRPL_TRANSACTION_DETAILS(x.txHash_1)
+            }
+          >
             {getMiddleEllipsis(x?.txHash_1 || '', {
               beginning: 7,
               ending: 4,
@@ -254,7 +280,16 @@ const Desktop: FC<TransactionsListBridgeState> = ({
           placement="bottom"
           arrow
         >
-          <Link shallow prefetch={false} href={TRANSACTION_DETAILS(x.txHash_2)}>
+          <Link
+            shallow
+            prefetch={false}
+            target="_blank"
+            href={
+              x.source === 'xrpl'
+                ? TRANSACTION_DETAILS(x.txHash_2)
+                : XRPL_TRANSACTION_DETAILS(x.txHash_2)
+            }
+          >
             {getMiddleEllipsis(x?.txHash_2 || '-', {
               beginning: 7,
               ending: 4,

@@ -21,6 +21,7 @@ import { formatNumberWithThousandsSeparator } from '@/screens/account_details/co
 import Big from 'big.js';
 import Lottie from 'lottie-react';
 import arrows from '@/assets/arrows.json';
+import { XRPL_ACCOUNT_DETAILS, XRPL_TRANSACTION_DETAILS } from '@/utils/go_to_page';
 import SingleBridgeTransaction from './components/single_transaction';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
@@ -233,7 +234,12 @@ const ListItem: FC<ListItemProps> = ({
         <Link
           shallow
           prefetch={false}
-          href={transaction.txHash_1.length ? TRANSACTION_DETAILS(transaction.txHash_1) : '#'}
+          target="_blank"
+          href={
+            transaction.source === 'coreum'
+              ? TRANSACTION_DETAILS(transaction.txHash_1)
+              : XRPL_TRANSACTION_DETAILS(transaction.txHash_1)
+          }
         >
           <span className={display.hiddenUntilLg}>
             {getMiddleEllipsis(transaction?.txHash_1 || '-', {
@@ -260,7 +266,12 @@ const ListItem: FC<ListItemProps> = ({
         <Link
           shallow
           prefetch={false}
-          href={transaction.txHash_2.length ? TRANSACTION_DETAILS(transaction.txHash_2) : '#'}
+          target="_blank"
+          href={
+            transaction.source === 'xrpl'
+              ? TRANSACTION_DETAILS(transaction.txHash_2)
+              : XRPL_TRANSACTION_DETAILS(transaction.txHash_2)
+          }
         >
           <span className={display.hiddenUntilLg}>
             {getMiddleEllipsis(transaction?.txHash_2 || '-', {
@@ -284,7 +295,16 @@ const ListItem: FC<ListItemProps> = ({
         placement="bottom"
         arrow
       >
-        <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.sender)}>
+        <Link
+          shallow
+          prefetch={false}
+          target="_blank"
+          href={
+            transaction.source === 'coreum'
+              ? ACCOUNT_DETAILS(transaction.sender)
+              : XRPL_ACCOUNT_DETAILS(transaction.sender)
+          }
+        >
           <span className={display.hiddenUntilLg}>
             {getMiddleEllipsis(transaction?.sender || '', {
               beginning: 15,
@@ -307,7 +327,16 @@ const ListItem: FC<ListItemProps> = ({
         placement="bottom"
         arrow
       >
-        <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.destination)}>
+        <Link
+          shallow
+          prefetch={false}
+          target="_blank"
+          href={
+            transaction.source === 'xrpl'
+              ? ACCOUNT_DETAILS(transaction.destination)
+              : XRPL_ACCOUNT_DETAILS(transaction.destination)
+          }
+        >
           <span className={display.hiddenUntilLg}>
             {getMiddleEllipsis(transaction?.destination || '', {
               beginning: 15,

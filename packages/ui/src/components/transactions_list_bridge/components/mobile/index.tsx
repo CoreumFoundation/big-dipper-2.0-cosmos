@@ -10,7 +10,6 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { ListChildComponentProps, VariableSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import ExtendedTimestamp from '@/components/ExtendedTimestamp';
-// import { useTranslation } from 'next-i18next';
 import SingleBridgeTransactionMobile from '@/components/single_bridge_transaction_mobile';
 import { ACCOUNT_DETAILS, formatToken, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
 import { Tooltip, Typography, Zoom } from '@mui/material';
@@ -20,6 +19,7 @@ import { Asset, convertHexToString } from '@/screens/assets/hooks';
 import Big from 'big.js';
 import Lottie from 'lottie-react';
 import arrows from '@/assets/arrows.json';
+import { XRPL_ACCOUNT_DETAILS, XRPL_TRANSACTION_DETAILS } from '@/utils/go_to_page';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -227,7 +227,16 @@ const ListItem: FC<ListItemProps> = ({
         placement="bottom"
         arrow
       >
-        <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.sender)}>
+        <Link
+          shallow
+          prefetch={false}
+          target="_blank"
+          href={
+            transaction.source === 'coreum'
+              ? ACCOUNT_DETAILS(transaction.sender)
+              : XRPL_ACCOUNT_DETAILS(transaction.sender)
+          }
+        >
           {getMiddleEllipsis(transaction?.sender || '', {
             beginning: 7,
             ending: 4,
@@ -242,7 +251,16 @@ const ListItem: FC<ListItemProps> = ({
         placement="bottom"
         arrow
       >
-        <Link shallow prefetch={false} href={ACCOUNT_DETAILS(transaction.destination)}>
+        <Link
+          shallow
+          prefetch={false}
+          target="_blank"
+          href={
+            transaction.source === 'xrpl'
+              ? ACCOUNT_DETAILS(transaction.destination)
+              : XRPL_ACCOUNT_DETAILS(transaction.destination)
+          }
+        >
           {getMiddleEllipsis(transaction?.destination || '', {
             beginning: 7,
             ending: 4,
@@ -257,7 +275,16 @@ const ListItem: FC<ListItemProps> = ({
         placement="bottom"
         arrow
       >
-        <Link shallow prefetch={false} href={TRANSACTION_DETAILS(transaction.txHash_1)}>
+        <Link
+          shallow
+          prefetch={false}
+          target="_blank"
+          href={
+            transaction.source === 'coreum'
+              ? TRANSACTION_DETAILS(transaction.txHash_1)
+              : XRPL_TRANSACTION_DETAILS(transaction.txHash_1)
+          }
+        >
           {getMiddleEllipsis(transaction?.txHash_1 || '', {
             beginning: 7,
             ending: 4,
@@ -272,7 +299,16 @@ const ListItem: FC<ListItemProps> = ({
         placement="bottom"
         arrow
       >
-        <Link shallow prefetch={false} href={TRANSACTION_DETAILS(transaction.txHash_2)}>
+        <Link
+          shallow
+          prefetch={false}
+          target="_blank"
+          href={
+            transaction.source === 'xrpl'
+              ? TRANSACTION_DETAILS(transaction.txHash_2)
+              : XRPL_TRANSACTION_DETAILS(transaction.txHash_2)
+          }
+        >
           {getMiddleEllipsis(transaction?.txHash_2 || '', {
             beginning: 7,
             ending: 4,
