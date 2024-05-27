@@ -192,8 +192,21 @@ const ListItem: FC<ListItemProps> = ({
   const tokenInAssets = assets.find(
     (assetItem: any) => denom.toLowerCase() === assetItem.denom.toLowerCase()
   );
+
+  if (transaction.source === 'xrpl' && tokenInAssets?.extra.xrpl_info?.precision) {
+    const availableValue = new Big(+transaction.coin.amount)
+      .div(Big(10).pow(tokenInAssets?.extra.xrpl_info?.precision))
+      .toFixed(tokenInAssets?.extra.xrpl_info?.precision);
+
+    amount = formatNumberWithThousandsSeparator(availableValue);
+  }
+
   let displayDenom = asset?.display.toUpperCase() || denom.toUpperCase();
-  if (tokenInAssets && tokenInAssets?.extra.xrpl_info) {
+  if (
+    tokenInAssets &&
+    tokenInAssets?.extra.xrpl_info &&
+    tokenInAssets?.extra.xrpl_info.source_chain.toLowerCase() === 'xrpl'
+  ) {
     displayDenom =
       tokenInAssets?.extra.xrpl_info.currency.length === 40
         ? convertHexToString(tokenInAssets?.extra.xrpl_info.currency)
@@ -206,6 +219,7 @@ const ListItem: FC<ListItemProps> = ({
       const availableValue = new Big(+transaction.coin.amount)
         .div(Big(10).pow(tokenInAssets.extra.ibc_info!.precision))
         .toFixed(tokenInAssets.extra.ibc_info!.precision);
+
       amount = formatNumberWithThousandsSeparator(availableValue);
       displayDenom = tokenDenom;
     }

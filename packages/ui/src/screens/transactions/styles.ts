@@ -91,7 +91,6 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   layoutContentWrapper: {
-    marginBottom: theme.spacing(6),
     display: 'flex',
     flex: 1,
     maxHeight: `calc(100vh - ${theme.spacing(10)})`,
