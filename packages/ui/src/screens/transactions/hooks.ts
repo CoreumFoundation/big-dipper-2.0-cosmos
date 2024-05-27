@@ -520,6 +520,8 @@ export const useTransactions = () => {
     isNextPageLoading: true,
     items: [],
     bridgeItems: [],
+    coreumXrplTransactions: [],
+    xrplCoreumTransactions: [],
     bridgeLoading: true,
     isAllBridgeItemsFetched: false,
     bridgeHasNextPage: false,
@@ -529,6 +531,7 @@ export const useTransactions = () => {
     metadatas: [],
     assetsLoading: true,
     metadataLoading: true,
+    xrplCoreumPage: 0,
   });
 
   const getAssetsList = useCallback(async () => {
@@ -671,23 +674,23 @@ export const useTransactions = () => {
       });
   };
 
-  const BRIDGE_TX_LIMIT = 51;
+  const BRIDGE_TX_LIMIT = 11;
   const BRIDGE_XRPL_TX_LIMIT = 100;
   const getBridgeTxs = async () => {
     handleSetState((prevState) => ({
       ...prevState,
       isBridgeNextPageLoading: true,
     }));
-    const currentPage = Math.floor(state.bridgeItems.length / 100);
-
-    const xrplCoreumBridgeTransactions = await fetchBridgeXRPLCoreumTxData({
-      page: String(currentPage + 1),
-      limit: String(BRIDGE_XRPL_TX_LIMIT),
-    });
+    const currentPageCoreumXrpl = Math.floor(state.coreumXrplTransactions.length / BRIDGE_TX_LIMIT);
+    // const currentPageXrplCoreum = Math.floor(state.xrplCoreumTransactions.length / BRIDGE_XRPL_TX_LIMIT);
 
     const bridgeTransactions = await fetchBridgeTxData({
-      page: String(currentPage + 1),
+      page: String(currentPageCoreumXrpl + 1),
       limit: String(BRIDGE_TX_LIMIT),
+    });
+    const xrplCoreumBridgeTransactions = await fetchBridgeXRPLCoreumTxData({
+      page: String(state.xrplCoreumPage + 1),
+      limit: String(BRIDGE_XRPL_TX_LIMIT),
     });
 
     const newTransactionItems = bridgeTransactions
@@ -698,9 +701,12 @@ export const useTransactions = () => {
       ...prevState,
       bridgeLoading: false,
       bridgeItems: state.bridgeItems.concat(newTransactionItems),
+      coreumXrplTransactions: state.coreumXrplTransactions.concat(bridgeTransactions),
+      xrplCoreumTransactions: state.xrplCoreumTransactions.concat(xrplCoreumBridgeTransactions),
       isBridgeNextPageLoading: false,
       bridgeHasNextPage:
         bridgeTransactions.length === BRIDGE_TX_LIMIT || xrplCoreumBridgeTransactions > 1,
+      xrplCoreumPage: state.xrplCoreumPage + 1,
     }));
   };
 
@@ -713,7 +719,9 @@ export const useTransactions = () => {
   }, []);
 
   const loadBridgeNextPage = async () => {
-    await getBridgeTxs();
+    if (!state.isBridgeNextPageLoading) {
+      await getBridgeTxs();
+    }
   };
 
   return {

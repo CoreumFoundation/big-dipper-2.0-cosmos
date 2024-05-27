@@ -27,4 +27,7 @@ export interface TransactionsState {
   metadataLoading: boolean;
   isAllBridgeItemsFetched: boolean;
   bridgeLoading: boolean;
+  coreumXrplTransactions: BridgeTransaction[];
+  xrplCoreumTransactions: BridgeTransaction[];
+  xrplCoreumPage: number;
 }
