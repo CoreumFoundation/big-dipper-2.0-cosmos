@@ -7,6 +7,10 @@ const useStyles = makeStyles()((theme) => ({
   },
   item: {
     marginBottom: theme.spacing(2),
+    maxWidth: '100%',
+    overflow: 'auto',
+    wordBreak: 'break-word',
+
     '& .label': {
       marginBottom: theme.spacing(1),
       color: theme.palette.custom.fonts.fontThree,

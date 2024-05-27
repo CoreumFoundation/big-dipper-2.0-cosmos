@@ -11,6 +11,8 @@ const useStyles = makeStyles()((theme) => ({
   cell: {
     ...(theme.mixins.tableCell as CSSObject),
     padding: theme.spacing(2),
+    overflow: 'auto',
+    scrollbarWidth: 'none',
   },
   header: {
     ...(theme.mixins.tableCell as CSSObject),

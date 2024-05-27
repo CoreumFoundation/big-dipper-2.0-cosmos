@@ -23,6 +23,9 @@ const useStyles = makeStyles()((theme) => ({
   item: {
     gridColumn: '1/3',
     marginBottom: theme.spacing(2),
+    wordBreak: 'break-word',
+    maxWidth: '100%',
+
     '&.messages, &.result': {
       gridColumn: 'auto / span 1',
     },

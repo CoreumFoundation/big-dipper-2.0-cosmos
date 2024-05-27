@@ -42,6 +42,7 @@ const convertAmountToCoin = (amountToConvert: string): { amount: string; denom: 
   return { amount, denom };
 };
 
+// const RPC_URL = `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:26657`;
 const RPC_URL =
   chainType.toLowerCase() === 'mainnet'
     ? 'https://full-node-uranium.mainnet-1.coreum.dev:26657'
