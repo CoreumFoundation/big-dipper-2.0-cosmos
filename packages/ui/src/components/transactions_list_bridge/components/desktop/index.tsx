@@ -171,7 +171,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
     if (asset?.denom_units[1].exponent) {
       const availableValue = new Big(+x.coin.amount)
         .div(Big(10).pow(asset?.denom_units[1].exponent))
-        .toFixed(asset?.denom_units[1].exponent);
+        .toFixed();
 
       amount = formatNumberWithThousandsSeparator(availableValue);
     }
@@ -183,7 +183,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
     if (x.source === 'xrpl' && tokenInAssets?.extra.xrpl_info?.precision) {
       const availableValue = new Big(+x.coin.amount)
         .div(Big(10).pow(tokenInAssets?.extra.xrpl_info?.precision))
-        .toFixed(tokenInAssets?.extra.xrpl_info?.precision);
+        .toFixed();
 
       amount = formatNumberWithThousandsSeparator(availableValue);
     }
@@ -205,7 +205,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
         const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;
         const availableValue = new Big(+x.coin.amount)
           .div(Big(10).pow(tokenInAssets.extra.ibc_info!.precision))
-          .toFixed(tokenInAssets.extra.ibc_info!.precision);
+          .toFixed();
 
         amount = formatNumberWithThousandsSeparator(availableValue);
         displayDenom = tokenDenom;
@@ -221,23 +221,40 @@ const Desktop: FC<TransactionsListBridgeState> = ({
           <span className={classes.denom}>{displayDenom}</span>
         </Typography>
       ),
-      sender: (
-        <Tooltip TransitionComponent={Zoom} title={<pre>{x.sender}</pre>} placement="bottom" arrow>
+      sender:
+        x.source === 'xrpl' ? (
           <Link
             shallow
             prefetch={false}
             target="_blank"
-            href={
-              x.source === 'coreum' ? ACCOUNT_DETAILS(x.sender) : XRPL_ACCOUNT_DETAILS(x.sender)
-            }
+            href={XRPL_TRANSACTION_DETAILS(x.txHash_1)}
+            className={classes.link}
           >
-            {getMiddleEllipsis(x?.sender || '', {
-              beginning: 7,
-              ending: 4,
-            })}
+            {t('view_on_xrpl_explorer')}
           </Link>
-        </Tooltip>
-      ),
+        ) : (
+          <Tooltip
+            TransitionComponent={Zoom}
+            title={<pre>{x.sender}</pre>}
+            placement="bottom"
+            arrow
+          >
+            <Link
+              shallow
+              prefetch={false}
+              target="_blank"
+              href={
+                x.source === 'coreum' ? ACCOUNT_DETAILS(x.sender) : XRPL_ACCOUNT_DETAILS(x.sender)
+              }
+              className={classes.link}
+            >
+              {getMiddleEllipsis(x?.sender || '', {
+                beginning: 7,
+                ending: 4,
+              })}
+            </Link>
+          </Tooltip>
+        ),
       destination: (
         <Tooltip
           TransitionComponent={Zoom}
@@ -254,6 +271,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
                 ? ACCOUNT_DETAILS(x.destination)
                 : XRPL_ACCOUNT_DETAILS(x.destination)
             }
+            className={classes.link}
           >
             {getMiddleEllipsis(x?.destination || '', {
               beginning: 7,
@@ -278,6 +296,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
                 ? TRANSACTION_DETAILS(x.txHash_1)
                 : XRPL_TRANSACTION_DETAILS(x.txHash_1)
             }
+            className={classes.link}
           >
             {getMiddleEllipsis(x?.txHash_1 || '', {
               beginning: 7,
@@ -302,6 +321,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
                 ? TRANSACTION_DETAILS(x.txHash_2)
                 : XRPL_TRANSACTION_DETAILS(x.txHash_2)
             }
+            className={classes.link}
           >
             {getMiddleEllipsis(x?.txHash_2 || '-', {
               beginning: 7,

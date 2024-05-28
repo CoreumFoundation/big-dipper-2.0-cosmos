@@ -22,6 +22,7 @@ import Big from 'big.js';
 import Lottie from 'lottie-react';
 import arrows from '@/assets/arrows.json';
 import { XRPL_ACCOUNT_DETAILS, XRPL_TRANSACTION_DETAILS } from '@/utils/go_to_page';
+import { useTranslation } from 'next-i18next';
 import SingleBridgeTransaction from './components/single_transaction';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
@@ -43,7 +44,7 @@ const ListItem: FC<ListItemProps> = ({
 }) => {
   const { rowRef } = useListRow(index, setRowHeight);
   const display = useDisplayStyles().classes;
-  // const { t } = useTranslation('transactions');
+  const { t } = useTranslation('transactions');
   const dateFormat = useRecoilValue(readDate);
   const { classes } = useStyles();
 
@@ -187,7 +188,7 @@ const ListItem: FC<ListItemProps> = ({
   if (asset?.denom_units[1].exponent) {
     const availableValue = new Big(+transaction.coin.amount)
       .div(Big(10).pow(asset?.denom_units[1].exponent))
-      .toFixed(asset?.denom_units[1].exponent);
+      .toFixed();
 
     amount = formatNumberWithThousandsSeparator(availableValue);
   }
@@ -199,7 +200,7 @@ const ListItem: FC<ListItemProps> = ({
   if (transaction.source === 'xrpl' && tokenInAssets?.extra.xrpl_info?.precision) {
     const availableValue = new Big(+transaction.coin.amount)
       .div(Big(10).pow(tokenInAssets?.extra.xrpl_info?.precision))
-      .toFixed(tokenInAssets?.extra.xrpl_info?.precision);
+      .toFixed();
 
     amount = formatNumberWithThousandsSeparator(availableValue);
   }
@@ -221,7 +222,8 @@ const ListItem: FC<ListItemProps> = ({
       const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;
       const availableValue = new Big(+transaction.coin.amount)
         .div(Big(10).pow(tokenInAssets.extra.ibc_info!.precision))
-        .toFixed(tokenInAssets.extra.ibc_info!.precision);
+        .toFixed();
+
       amount = formatNumberWithThousandsSeparator(availableValue);
       displayDenom = tokenDenom;
     }
@@ -253,6 +255,7 @@ const ListItem: FC<ListItemProps> = ({
               ? TRANSACTION_DETAILS(transaction.txHash_1)
               : XRPL_TRANSACTION_DETAILS(transaction.txHash_1)
           }
+          className={classes.link}
         >
           <span className={display.hiddenUntilLg}>
             {getMiddleEllipsis(transaction?.txHash_1 || '-', {
@@ -285,6 +288,7 @@ const ListItem: FC<ListItemProps> = ({
               ? TRANSACTION_DETAILS(transaction.txHash_2)
               : XRPL_TRANSACTION_DETAILS(transaction.txHash_2)
           }
+          className={classes.link}
         >
           <span className={display.hiddenUntilLg}>
             {getMiddleEllipsis(transaction?.txHash_2 || '-', {
@@ -301,38 +305,50 @@ const ListItem: FC<ListItemProps> = ({
         </Link>
       </Tooltip>
     ),
-    sender: (
-      <Tooltip
-        TransitionComponent={Zoom}
-        title={<pre>{transaction.sender}</pre>}
-        placement="bottom"
-        arrow
-      >
+    sender:
+      transaction.source === 'xrpl' ? (
         <Link
           shallow
           prefetch={false}
           target="_blank"
-          href={
-            transaction.source === 'coreum'
-              ? ACCOUNT_DETAILS(transaction.sender)
-              : XRPL_ACCOUNT_DETAILS(transaction.sender)
-          }
+          href={XRPL_TRANSACTION_DETAILS(transaction.txHash_1)}
+          className={classes.link}
         >
-          <span className={display.hiddenUntilLg}>
-            {getMiddleEllipsis(transaction?.sender || '', {
-              beginning: 15,
-              ending: 4,
-            })}
-          </span>
-          <span className={display.hiddenWhenLg}>
-            {getMiddleEllipsis(transaction?.sender || '', {
-              beginning: 15,
-              ending: 10,
-            })}
-          </span>
+          {t('view_on_xrpl_explorer')}
         </Link>
-      </Tooltip>
-    ),
+      ) : (
+        <Tooltip
+          TransitionComponent={Zoom}
+          title={<pre>{transaction.sender}</pre>}
+          placement="bottom"
+          arrow
+        >
+          <Link
+            shallow
+            prefetch={false}
+            target="_blank"
+            href={
+              transaction.source === 'coreum'
+                ? ACCOUNT_DETAILS(transaction.sender)
+                : XRPL_ACCOUNT_DETAILS(transaction.sender)
+            }
+            className={classes.link}
+          >
+            <span className={display.hiddenUntilLg}>
+              {getMiddleEllipsis(transaction?.sender || '', {
+                beginning: 15,
+                ending: 4,
+              })}
+            </span>
+            <span className={display.hiddenWhenLg}>
+              {getMiddleEllipsis(transaction?.sender || '', {
+                beginning: 15,
+                ending: 10,
+              })}
+            </span>
+          </Link>
+        </Tooltip>
+      ),
     destination: (
       <Tooltip
         TransitionComponent={Zoom}
@@ -349,6 +365,7 @@ const ListItem: FC<ListItemProps> = ({
               ? ACCOUNT_DETAILS(transaction.destination)
               : XRPL_ACCOUNT_DETAILS(transaction.destination)
           }
+          className={classes.link}
         >
           <span className={display.hiddenUntilLg}>
             {getMiddleEllipsis(transaction?.destination || '', {

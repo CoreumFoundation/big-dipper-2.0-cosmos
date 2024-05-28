@@ -8,10 +8,6 @@ export const columns: {
     width: 12,
   },
   {
-    key: 'amount',
-    width: 15,
-  },
-  {
     key: 'sender',
     width: 15,
   },
@@ -25,6 +21,11 @@ export const columns: {
   },
   {
     key: 'txHash_2',
+    width: 15,
+  },
+  {
+    key: 'amount',
+    align: 'right',
     width: 15,
   },
   {

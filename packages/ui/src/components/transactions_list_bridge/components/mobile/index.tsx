@@ -20,6 +20,7 @@ import Big from 'big.js';
 import Lottie from 'lottie-react';
 import arrows from '@/assets/arrows.json';
 import { XRPL_ACCOUNT_DETAILS, XRPL_TRANSACTION_DETAILS } from '@/utils/go_to_page';
+import { useTranslation } from 'next-i18next';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -41,7 +42,7 @@ const ListItem: FC<ListItemProps> = ({
   metadatas,
 }) => {
   const { classes } = useStyles();
-  // const { t } = useTranslation('transactions');
+  const { t } = useTranslation('transactions');
   const { rowRef } = useListRow(index, setRowHeight);
 
   const renderSource = useCallback((source: string) => {
@@ -184,7 +185,7 @@ const ListItem: FC<ListItemProps> = ({
   if (asset?.denom_units[1].exponent) {
     const availableValue = new Big(+transaction.coin.amount)
       .div(Big(10).pow(asset?.denom_units[1].exponent))
-      .toFixed(asset?.denom_units[1].exponent);
+      .toFixed();
 
     amount = formatNumberWithThousandsSeparator(availableValue);
   }
@@ -196,7 +197,7 @@ const ListItem: FC<ListItemProps> = ({
   if (transaction.source === 'xrpl' && tokenInAssets?.extra.xrpl_info?.precision) {
     const availableValue = new Big(+transaction.coin.amount)
       .div(Big(10).pow(tokenInAssets?.extra.xrpl_info?.precision))
-      .toFixed(tokenInAssets?.extra.xrpl_info?.precision);
+      .toFixed();
 
     amount = formatNumberWithThousandsSeparator(availableValue);
   }
@@ -218,7 +219,7 @@ const ListItem: FC<ListItemProps> = ({
       const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;
       const availableValue = new Big(+transaction.coin.amount)
         .div(Big(10).pow(tokenInAssets.extra.ibc_info!.precision))
-        .toFixed(tokenInAssets.extra.ibc_info!.precision);
+        .toFixed();
 
       amount = formatNumberWithThousandsSeparator(availableValue);
       displayDenom = tokenDenom;
@@ -234,30 +235,42 @@ const ListItem: FC<ListItemProps> = ({
         <span className={classes.denom}>{displayDenom}</span>
       </Typography>
     ),
-    sender: (
-      <Tooltip
-        TransitionComponent={Zoom}
-        title={<pre>{transaction.sender}</pre>}
-        placement="bottom"
-        arrow
-      >
+    sender:
+      transaction.source === 'xrpl' ? (
         <Link
           shallow
           prefetch={false}
           target="_blank"
-          href={
-            transaction.source === 'coreum'
-              ? ACCOUNT_DETAILS(transaction.sender)
-              : XRPL_ACCOUNT_DETAILS(transaction.sender)
-          }
+          href={XRPL_TRANSACTION_DETAILS(transaction.txHash_1)}
+          className={classes.link}
         >
-          {getMiddleEllipsis(transaction?.sender || '', {
-            beginning: 7,
-            ending: 4,
-          })}
+          {t('view_on_xrpl_explorer')}
         </Link>
-      </Tooltip>
-    ),
+      ) : (
+        <Tooltip
+          TransitionComponent={Zoom}
+          title={<pre>{transaction.sender}</pre>}
+          placement="bottom"
+          arrow
+        >
+          <Link
+            shallow
+            prefetch={false}
+            target="_blank"
+            href={
+              transaction.source === 'coreum'
+                ? ACCOUNT_DETAILS(transaction.sender)
+                : XRPL_ACCOUNT_DETAILS(transaction.sender)
+            }
+            className={classes.link}
+          >
+            {getMiddleEllipsis(transaction?.sender || '', {
+              beginning: 7,
+              ending: 4,
+            })}
+          </Link>
+        </Tooltip>
+      ),
     destination: (
       <Tooltip
         TransitionComponent={Zoom}
@@ -274,6 +287,7 @@ const ListItem: FC<ListItemProps> = ({
               ? ACCOUNT_DETAILS(transaction.destination)
               : XRPL_ACCOUNT_DETAILS(transaction.destination)
           }
+          className={classes.link}
         >
           {getMiddleEllipsis(transaction?.destination || '', {
             beginning: 7,
@@ -298,6 +312,7 @@ const ListItem: FC<ListItemProps> = ({
               ? TRANSACTION_DETAILS(transaction.txHash_1)
               : XRPL_TRANSACTION_DETAILS(transaction.txHash_1)
           }
+          className={classes.link}
         >
           {getMiddleEllipsis(transaction?.txHash_1 || '', {
             beginning: 7,
@@ -322,6 +337,7 @@ const ListItem: FC<ListItemProps> = ({
               ? TRANSACTION_DETAILS(transaction.txHash_2)
               : XRPL_TRANSACTION_DETAILS(transaction.txHash_2)
           }
+          className={classes.link}
         >
           {getMiddleEllipsis(transaction?.txHash_2 || '', {
             beginning: 7,

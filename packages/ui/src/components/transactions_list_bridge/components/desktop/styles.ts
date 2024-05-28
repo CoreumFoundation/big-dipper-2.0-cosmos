@@ -98,6 +98,9 @@ const useStyles = makeStyles()((theme) => ({
   arrows: {
     transform: 'rotate(-90deg)',
   },
+  link: {
+    fontSize: theme.spacing(1.75),
+  },
 }));
 
 export default useStyles;

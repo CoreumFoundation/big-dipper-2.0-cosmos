@@ -45,5 +45,6 @@
   "route": "Route",
   "txHash_1": "Tx hash 1",
   "txHash_2": "Tx hash 2",
-  "destination": "Destination"
+  "destination": "Destination",
+  "view_on_xrpl_explorer": "View on XRPL Explorer"
 }
