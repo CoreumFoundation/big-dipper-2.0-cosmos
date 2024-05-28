@@ -42,8 +42,7 @@ const ListItem: FC<ListItemProps> = ({
   }
 
   const formattedItem = {
-    description:
-      item.description.length > 200 ? `${item.description.slice(0, 200)}...` : item.description,
+    description: item.description,
     status: item.status,
     title: (
       <Link shallow href={PROPOSAL_DETAILS(item.id)} className="value">
@@ -113,7 +112,7 @@ const ProposalsList: FC<ProposalsListProps> = ({
                 >
                   {({ index, style }) => (
                     <ListItem
-                      key={items[index].id}
+                      key={`proposal-list-item-${items[index]?.id}`}
                       index={index}
                       style={style}
                       setRowHeight={setRowHeight}

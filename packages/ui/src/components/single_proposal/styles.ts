@@ -22,6 +22,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   content: {
     marginBottom: theme.spacing(2),
+    wordBreak: 'break-word',
   },
   id: {
     color: theme.palette.custom.fonts.fontThree,

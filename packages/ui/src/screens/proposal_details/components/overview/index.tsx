@@ -170,7 +170,7 @@ const Overview: FC<{ className?: string; overview: OverviewType }> = ({ classNam
         <Typography variant="body1" className="label">
           {t('description')}
         </Typography>
-        <Markdown markdown={overview.description} />
+        <Markdown markdown={overview.description} className={cx('value', classes.description)} />
         {extra}
       </div>
     </Box>

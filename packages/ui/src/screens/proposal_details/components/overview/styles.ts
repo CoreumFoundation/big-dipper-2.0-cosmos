@@ -54,6 +54,9 @@ const useStyles = makeStyles()((theme) => ({
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
   },
+  description: {
+    wordBreak: 'break-word',
+  },
 }));
 
 export default useStyles;

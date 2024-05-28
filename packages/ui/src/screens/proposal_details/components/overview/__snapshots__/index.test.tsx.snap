@@ -84,6 +84,10 @@ exports[`screen: BlockDetails/Overview matches snapshot 1`] = `
   line-height: 1.5;
 }
 
+.emotion-9 {
+  word-break: break-word;
+}
+
 <div
   className="emotion-0"
   id="Box"
@@ -135,6 +139,7 @@ exports[`screen: BlockDetails/Overview matches snapshot 1`] = `
       description
     </p>
     <div
+      className="value emotion-9"
       id="Markdown"
       markdown="description"
     />
