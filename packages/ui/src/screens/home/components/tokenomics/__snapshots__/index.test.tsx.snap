@@ -111,6 +111,7 @@ exports[`screen: Home/Tokenomics matches snapshot 1`] = `
   flex-direction: row;
   color: #777777;
   font-size: 14px;
+  line-height: 1.5;
 }
 
 .emotion-6 .data__item h4 {
@@ -127,6 +128,7 @@ exports[`screen: Home/Tokenomics matches snapshot 1`] = `
   align-items: baseline;
   font-size: 16px;
   font-weight: 600;
+  line-height: 1.5;
 }
 
 .emotion-6 .data__item h4 span {

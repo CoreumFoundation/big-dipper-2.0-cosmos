@@ -43,6 +43,7 @@ exports[`screen: Home/Blocks/Mobile matches snapshot 1`] = `
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  line-height: 1.5;
 }
 
 .emotion-1 .MuiTypography-h2 {

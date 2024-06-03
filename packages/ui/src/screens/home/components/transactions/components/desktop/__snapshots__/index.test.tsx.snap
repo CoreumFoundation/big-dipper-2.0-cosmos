@@ -24,9 +24,15 @@ exports[`screen: Home/Transactions/Desktop matches snapshot 1`] = `
   caption-side: bottom;
 }
 
+.emotion-1 .MuiTableBody-root .MuiTableHead-root .MuiTableCell-root {
+  font-size: 12px;
+}
+
 .emotion-1 .MuiTableBody-root .MuiTableCell-root {
   white-space: nowrap;
   height: auto;
+  line-height: 1.5;
+  font-size: 14px;
 }
 
 .emotion-2 {

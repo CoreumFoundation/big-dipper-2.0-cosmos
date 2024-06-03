@@ -25,6 +25,7 @@ exports[`screen: Home/SingleBlock matches snapshot 1`] = `
 .emotion-0 .label {
   width: 50%;
   color: #FFFFFF;
+  line-height: 1.5;
 }
 
 .emotion-0 .content {
@@ -47,6 +48,7 @@ exports[`screen: Home/SingleBlock matches snapshot 1`] = `
   display: block;
   color: #FFFFFF;
   font-size: 14px;
+  line-height: 1.5;
 }
 
 .emotion-0 .value {
@@ -60,6 +62,7 @@ exports[`screen: Home/SingleBlock matches snapshot 1`] = `
   align-items: center;
   font-size: 20px;
   margin-bottom: 0;
+  line-height: 1.5;
 }
 
 .emotion-1 {

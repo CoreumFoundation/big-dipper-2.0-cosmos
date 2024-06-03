@@ -242,6 +242,7 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         "direction": "ltr",
         "height": 550,
         "overflow": "auto",
+        "overflowX": "hidden",
         "position": "relative",
         "width": 600,
         "willChange": "transform",

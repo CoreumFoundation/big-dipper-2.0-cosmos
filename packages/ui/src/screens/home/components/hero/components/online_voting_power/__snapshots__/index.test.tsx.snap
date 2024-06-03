@@ -67,6 +67,7 @@ exports[`screen: Home/OnlineVotingPower matches snapshot 1`] = `
   color: #25D695;
   margin-right: 16px;
   font-size: 2.5rem;
+  line-height: 1.5;
 }
 
 @media (max-width:1024.95px) {
@@ -78,6 +79,7 @@ exports[`screen: Home/OnlineVotingPower matches snapshot 1`] = `
 @media (max-width:1024.95px) {
   .emotion-5 .secondary__data {
     font-size: 0.85rem;
+    line-height: 1.5;
   }
 }
 
@@ -130,9 +132,11 @@ exports[`screen: Home/OnlineVotingPower matches snapshot 1`] = `
   -webkit-justify-content: space-between;
   justify-content: space-between;
   padding: 8px;
+  line-height: 1.5;
 }
 
 .emotion-9 .label {
+  font-size: 14px;
   color: #777777;
 }
 
@@ -335,6 +339,7 @@ exports[`screen: Home/OnlineVotingPower matches snapshot 2`] = `
   color: #25D695;
   margin-right: 16px;
   font-size: 2.5rem;
+  line-height: 1.5;
 }
 
 @media (max-width:1024.95px) {
@@ -346,6 +351,7 @@ exports[`screen: Home/OnlineVotingPower matches snapshot 2`] = `
 @media (max-width:1024.95px) {
   .emotion-5 .secondary__data {
     font-size: 0.85rem;
+    line-height: 1.5;
   }
 }
 
@@ -398,9 +404,11 @@ exports[`screen: Home/OnlineVotingPower matches snapshot 2`] = `
   -webkit-justify-content: space-between;
   justify-content: space-between;
   padding: 8px;
+  line-height: 1.5;
 }
 
 .emotion-9 .label {
+  font-size: 14px;
   color: #777777;
 }
 

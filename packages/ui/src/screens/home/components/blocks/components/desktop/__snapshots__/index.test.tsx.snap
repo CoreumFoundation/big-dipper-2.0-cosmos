@@ -32,6 +32,10 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
   overflow: hidden;
 }
 
+.emotion-1 .MuiTableBody-root .MuiTableHead-root .MuiTableCell-root {
+  font-size: 12px;
+}
+
 .emotion-1 .MuiTableBody-root .MuiTableRow-root .MuiTableCell-root:last-child {
   min-width: 100px;
 }
@@ -39,6 +43,8 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
 .emotion-1 .MuiTableBody-root .MuiTableCell-root {
   white-space: nowrap;
   height: auto;
+  line-height: 1.5;
+  font-size: 14px;
 }
 
 .emotion-1 .MuiTableBody-root .MuiTableCell-root .MuiTypography-body1 {
