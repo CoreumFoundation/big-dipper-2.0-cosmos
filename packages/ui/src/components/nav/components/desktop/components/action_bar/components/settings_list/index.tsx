@@ -50,7 +50,7 @@ const Settings: FC<ComponentDefault> = (props) => {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent className={classes.formWrapper}>
           <div className={classes.formItem}>
             <Typography className="form-item--label">{t('theme')}</Typography>
             <div className="theme_container">
@@ -100,7 +100,7 @@ const Settings: FC<ComponentDefault> = (props) => {
           <div className={classes.formItem}>
             <Typography className="form-item--label">{t('language')}</Typography>
             <Select
-              variant="outlined"
+              variant="filled"
               value={i18n.language}
               onChange={(e) => handleChangeLanguage(e?.target?.value as string)}
               MenuProps={{
@@ -119,7 +119,7 @@ const Settings: FC<ComponentDefault> = (props) => {
           <div className={classes.formItem}>
             <Typography className="form-item--label">{t('txListFormat')}</Typography>
             <Select
-              variant="outlined"
+              variant="filled"
               value={txListFormat}
               onChange={updateTxFormat}
               MenuProps={{
@@ -129,7 +129,7 @@ const Settings: FC<ComponentDefault> = (props) => {
               }}
             >
               {TX_LIST.map((l) => (
-                <MenuItem key={l} value={l}>
+                <MenuItem key={l} value={l} className={classes.formMenuItem}>
                   {t(l)}
                 </MenuItem>
               ))}

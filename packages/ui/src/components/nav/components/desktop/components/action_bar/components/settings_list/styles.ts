@@ -49,26 +49,40 @@ const useStyles = makeStyles()((theme) => ({
       width: '500px',
     },
   },
+  formWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(3),
+    padding: `${theme.spacing(3)} !important`,
+  },
   formItem: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 150px',
-    placeItems: 'center start',
-    marginBottom: theme.spacing(2),
-    '& .MuiOutlinedInput-root': {
-      width: '100%',
-      padding: 0,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+
+    '& .MuiFilledInput-root': {
+      overflow: 'auto',
     },
+
+    '& .MuiSelect-select': {
+      width: theme.spacing(10),
+    },
+
+    '& > :before': {
+      border: 'none !important',
+    },
+
     '& .form-item--label': {
       color: theme.palette.custom.fonts.settings_label,
     },
+
     '& .theme_container': {
       display: 'grid',
       gridAutoFlow: 'column',
       background: theme.palette.custom.general.theme_selector_background,
       borderRadius: '10%',
       placeSelf: 'end',
-      margin: theme.spacing(1.5, 0),
-      padding: 2,
 
       '& .theme_item': {
         cursor: 'pointer',
@@ -93,6 +107,10 @@ const useStyles = makeStyles()((theme) => ({
         },
       },
     },
+  },
+  formMenuItem: {
+    width: theme.spacing(20),
+    overflow: 'auto',
   },
   version: {
     color: theme.palette.custom.fonts.settings_label_version,
