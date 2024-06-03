@@ -9,9 +9,10 @@ type InfoPopoverProps = {
   className?: string;
   content?: string | ReactNode;
   display?: string | ReactNode;
+  popoverClassName?: string;
 };
 
-const InfoPopover: FC<InfoPopoverProps> = ({ className, content, display }) => {
+const InfoPopover: FC<InfoPopoverProps> = ({ className, content, display, popoverClassName }) => {
   const { handlePopoverOpen, handlePopoverClose, anchorEl, open } = useInfoPopover();
 
   const { classes, cx } = useStyles();
@@ -29,7 +30,7 @@ const InfoPopover: FC<InfoPopoverProps> = ({ className, content, display }) => {
       </span>
       <Popover
         id="mouse-over-popover"
-        className={classes.popover}
+        className={cx(classes.popover, popoverClassName)}
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{

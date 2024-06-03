@@ -45,7 +45,11 @@ const GridColumn: FC<GridColumnProps> = ({
     formattedComponent = (
       <Typography variant="h5" className="label popover">
         {t('votingPower')}
-        <InfoPopover content={<VotingPowerExplanation />} />
+        <InfoPopover
+          content={<VotingPowerExplanation />}
+          popoverClassName={classes.popoverWrapper}
+          className={classes.popoverContent}
+        />
         {!!sort && items && items.length > 1 && (
           <SortArrows sort={sortKey === sortingKey ? sortDirection : undefined} />
         )}

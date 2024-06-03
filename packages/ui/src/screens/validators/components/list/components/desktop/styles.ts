@@ -42,9 +42,14 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   header: {
+    background: theme.palette.custom.general.modal_header,
     color: `${theme.palette.custom.fonts.table_headers} !important`,
     fontSize: '12px !important',
     textTransform: 'uppercase',
+
+    '.MuiTypography-h5': {
+      fontSize: '12px',
+    },
   },
   body: {
     color: theme.palette.custom.fonts.fontTwo,
@@ -53,6 +58,15 @@ const useStyles = makeStyles()((theme) => ({
     '& .MuiTypography-body1': {
       lineHeight: 1,
     },
+  },
+  popoverWrapper: {
+    '& .MuiPopover-paper': {
+      background: theme.palette.custom.general.nav_drawer,
+    },
+  },
+  popoverContent: {
+    background: theme.palette.custom.general.nav_drawer,
+    borderRadius: 4,
   },
 }));
 
