@@ -38,7 +38,6 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, isItemLoaded,
   const { t } = useTranslation('transactions');
   const dateFormat = useRecoilValue(readDate);
   const { classes } = useStyles();
-  // const typeTagValue = getTagDisplayValue((transaction.messages.items[0] as any).type);
 
   if (!isItemLoaded?.(index)) {
     return (
