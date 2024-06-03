@@ -36,6 +36,7 @@ const useStyles = makeStyles()((theme) => ({
           flexDirection: 'row',
           color: theme.palette.custom.fonts.fontThree,
           fontSize: theme.spacing(1.75),
+          lineHeight: 1.5,
         },
       },
 
@@ -45,6 +46,7 @@ const useStyles = makeStyles()((theme) => ({
         alignItems: 'baseline',
         fontSize: theme.spacing(2),
         fontWeight: 600,
+        lineHeight: 1.5,
 
         '& span': {
           fontSize: theme.spacing(1.5),

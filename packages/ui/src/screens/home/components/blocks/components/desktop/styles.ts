@@ -17,6 +17,13 @@ const useStyles = makeStyles()((theme) => ({
   table: {
     '& .MuiTableBody-root': {
       overflow: 'hidden',
+
+      '& .MuiTableHead-root': {
+        '& .MuiTableCell-root': {
+          fontSize: theme.spacing(1.5),
+        },
+      },
+
       '& .MuiTableRow-root': {
         '& .MuiTableCell-root': {
           '&:last-child': {
@@ -27,6 +34,8 @@ const useStyles = makeStyles()((theme) => ({
       '& .MuiTableCell-root': {
         whiteSpace: 'nowrap',
         height: 'auto',
+        lineHeight: 1.5,
+        fontSize: theme.spacing(1.75),
 
         '& .MuiTypography-body1': {
           whiteSpace: 'nowrap',

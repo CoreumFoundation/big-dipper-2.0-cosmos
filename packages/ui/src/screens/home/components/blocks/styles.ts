@@ -23,6 +23,7 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    lineHeight: 1.5,
 
     '& .MuiTypography-h2': {
       fontSize: theme.spacing(2.5),
@@ -37,6 +38,7 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    lineHeight: 1.5,
   },
 }));
 

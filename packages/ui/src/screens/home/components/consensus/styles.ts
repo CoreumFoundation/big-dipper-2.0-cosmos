@@ -14,11 +14,6 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   content: {
-    // flex: 1,
-    // display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'space-around',
-    // flexDirection: 'column',
     placeSelf: 'start center',
   },
   chart: {
@@ -48,6 +43,7 @@ const useStyles = makeStyles()((theme) => ({
       fontSize: theme.spacing(1.75),
       fontWeight: 400,
       color: theme.palette.custom.fonts.fontThree,
+      lineHeight: 1.5,
     },
     [theme.breakpoints.up('lg')]: {
       marginBottom: 0,

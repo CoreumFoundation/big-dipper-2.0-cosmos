@@ -13,9 +13,17 @@ const useStyles = makeStyles()((theme) => ({
   },
   table: {
     '& .MuiTableBody-root': {
+      '& .MuiTableHead-root': {
+        '& .MuiTableCell-root': {
+          fontSize: theme.spacing(1.5),
+        },
+      },
+
       '& .MuiTableCell-root': {
         whiteSpace: 'nowrap',
         height: 'auto',
+        lineHeight: 1.5,
+        fontSize: theme.spacing(1.75),
       },
     },
   },

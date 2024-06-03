@@ -27,11 +27,13 @@ const useStyles = makeStyles()((theme) => ({
       marginRight: theme.spacing(1),
       fontSize: theme.spacing(1.75),
       fontWeight: 400,
+      lineHeight: 1.5,
     },
     '& .data': {
       textAlign: 'right',
       fontSize: theme.spacing(2),
       fontWeight: 600,
+      lineHeight: 1.5,
     },
     [theme.breakpoints.up('lg')]: {
       padding: 0,

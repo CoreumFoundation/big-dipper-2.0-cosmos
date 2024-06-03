@@ -13,6 +13,7 @@ const useStyles = makeStyles()((theme) => ({
     '& .label': {
       width: '50%',
       color: theme.palette.primary.contrastText,
+      lineHeight: 1.5,
     },
     '& .content': {
       width: '50%',
@@ -24,12 +25,14 @@ const useStyles = makeStyles()((theme) => ({
       display: 'block',
       color: theme.palette.primary.contrastText,
       fontSize: theme.spacing(1.75),
+      lineHeight: 1.5,
     },
     '& .value': {
       display: 'flex',
       alignItems: 'center',
       fontSize: theme.spacing(2.5),
       marginBottom: 0,
+      lineHeight: 1.5,
     },
   },
 }));

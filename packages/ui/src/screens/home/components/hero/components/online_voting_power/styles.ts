@@ -19,6 +19,7 @@ const useStyles = makeStyles<{ percentage: number | string }>()((theme, { percen
       color: theme.palette.primary.main,
       marginRight: theme.spacing(2),
       fontSize: '2.5rem',
+      lineHeight: 1.5,
       [theme.breakpoints.down(1025)]: {
         fontSize: '2rem',
       },
@@ -26,6 +27,7 @@ const useStyles = makeStyles<{ percentage: number | string }>()((theme, { percen
     '& .secondary__data': {
       [theme.breakpoints.down(1025)]: {
         fontSize: '0.85rem',
+        lineHeight: 1.5,
       },
     },
     [theme.breakpoints.down(1025)]: {
@@ -62,7 +64,10 @@ const useStyles = makeStyles<{ percentage: number | string }>()((theme, { percen
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: theme.spacing(1),
+    lineHeight: 1.5,
+
     '& .label': {
+      fontSize: theme.spacing(1.75),
       color: theme.palette.custom.fonts.fontThree,
     },
     '& p.value': {

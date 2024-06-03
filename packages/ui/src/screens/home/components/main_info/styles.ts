@@ -17,11 +17,13 @@ const useStyles = makeStyles()((theme) => ({
     alignItems: 'center',
     fontSize: theme.spacing(2),
     gap: theme.spacing(1),
+    lineHeight: 1.5,
   },
   price: {
     display: 'flex',
     alignItems: 'center',
     fontSize: theme.spacing(2.5),
+    lineHeight: 1.5,
 
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(7),
