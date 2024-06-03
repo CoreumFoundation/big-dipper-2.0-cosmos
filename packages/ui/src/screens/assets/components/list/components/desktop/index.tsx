@@ -227,7 +227,7 @@ const Desktop: FC<DesktopProps> = (props) => {
               ref={columnRef as LegacyRef<Grid>}
               columnCount={columns.length}
               columnWidth={(index) => getColumnWidth(width, index)}
-              height={78}
+              height={50}
               rowCount={1}
               rowHeight={() => 50}
               width={width}
@@ -250,7 +250,7 @@ const Desktop: FC<DesktopProps> = (props) => {
               ref={gridRef as LegacyRef<Grid>}
               columnCount={columns.length}
               columnWidth={(index) => getColumnWidth(width, index)}
-              height={height - 78}
+              height={height - 50}
               rowCount={props.items.length}
               rowHeight={getRowHeight}
               width={width}

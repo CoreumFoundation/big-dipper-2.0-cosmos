@@ -8,7 +8,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   cell: {
     ...(theme.mixins.tableCell as CSSObject),
-    height: '78px !important',
+    height: '50px !important',
     '&.sort:hover': {
       cursor: 'pointer',
     },
@@ -30,8 +30,14 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   header: {
+    background: theme.palette.custom.general.modal_header,
     color: `${theme.palette.custom.fonts.table_headers} !important`,
     fontSize: '12px !important',
+    textTransform: 'uppercase',
+
+    '.MuiTypography-h4': {
+      fontSize: '12px',
+    },
   },
   body: {
     color: theme.palette.custom.fonts.fontTwo,
