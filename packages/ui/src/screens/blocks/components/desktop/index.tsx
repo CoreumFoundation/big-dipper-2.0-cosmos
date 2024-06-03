@@ -30,6 +30,7 @@ const BlockItem: FC<BlockItemProps> = ({ item, rowIndex, column, style, align })
   const { name, address, imageUrl } = useProfileRecoil(item.proposer);
   const { classes, cx } = useStyles();
   let formattedItem: ReactNode | null = null;
+
   switch (column) {
     case 'height':
       formattedItem = (
@@ -58,6 +59,7 @@ const BlockItem: FC<BlockItemProps> = ({ item, rowIndex, column, style, align })
     default:
       break;
   }
+
   return (
     <div
       style={style}
@@ -156,6 +158,7 @@ const Desktop: FC<DesktopProps> = ({
                   rowHeight={getRowHeight}
                   width={width}
                   className="scrollbar"
+                  style={{ overflowX: 'hidden' }}
                 >
                   {({ columnIndex, rowIndex, style }) => {
                     if (!isItemLoaded?.(rowIndex) && columnIndex === 0) {
@@ -177,6 +180,7 @@ const Desktop: FC<DesktopProps> = ({
 
                     const { key, align } = columns[columnIndex];
                     const item = items[rowIndex];
+
                     return (
                       <BlockItem
                         rowIndex={rowIndex}
