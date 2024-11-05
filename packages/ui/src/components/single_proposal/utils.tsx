@@ -8,7 +8,7 @@ export const getStatusInfo = (status: string, t: TFunction) => {
     },
     PROPOSAL_STATUS_INVALID: {
       value: t('invalid'),
-      tag: 'two',
+      tag: 'four',
     },
     PROPOSAL_STATUS_VOTING_PERIOD: {
       value: t('voting'),
@@ -16,7 +16,7 @@ export const getStatusInfo = (status: string, t: TFunction) => {
     },
     PROPOSAL_STATUS_PASSED: {
       value: t('passed'),
-      tag: 'four',
+      tag: 'two',
     },
     PROPOSAL_STATUS_REJECTED: {
       value: t('rejected'),
