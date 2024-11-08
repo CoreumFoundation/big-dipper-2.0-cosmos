@@ -20,9 +20,30 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: Configure git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "Automated Version Bump"
+          git config user.email "gh-action-bump-version@users.noreply.github.com"
+
+      - name: Bump Version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          standard-version --bumpFiles apps/web-coreum/package.json --packageFiles apps/web-coreum/package.json -r patch --prerelease coreum
+
+      - name: Push bumped version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push https://github.com/CoreumFoundation/big-dipper-2.0-cosmos.git --follow-tags
+          git push https://github.com/CoreumFoundation/big-dipper-2.0-cosmos.git --tags
+
       - name: Set Env
         run: |
-          echo "TAG=`ruby -e 'puts File.read("apps/web-coreum/package.json").match(/"version": "(?<semver>(0|[1-9][0-9]*).(0|[1-9][0-9]*).(0|[1-9][0-9]*)-(0|[1-9][0-9]*))"/)[:semver]'`" >> $GITHUB_ENV
+          echo "TAG=`cat package.json | jq -r .version`" >> $GITHUB_ENV
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub
