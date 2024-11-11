@@ -4,6 +4,7 @@ import Color from 'color';
 const useStyles = makeStyles<{ percentage: number }>()((theme, { percentage }) => ({
   root: {
     '& .MuiTypography-h2': {
+      fontSize: theme.spacing(2.5),
       marginBottom: theme.spacing(2),
     },
   },

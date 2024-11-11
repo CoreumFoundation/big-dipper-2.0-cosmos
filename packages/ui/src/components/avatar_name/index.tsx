@@ -49,7 +49,6 @@ const AvatarName: FC<AvatarName & JSX.IntrinsicElements['div']> = ({
         <span className={cx(classes.root, className)} {...props}>
           <Avatar className={classes.avatar} address={address} imageUrl={imageUrl ?? undefined} />
           {/* <MiddleEllipsis className={classes.text} content={name} /> */}
-
           <Typography variant="body1" className={shorten ? classes.short : undefined}>
             {name}
           </Typography>

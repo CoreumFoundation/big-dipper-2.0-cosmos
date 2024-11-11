@@ -57,7 +57,7 @@ const BlockBox: FC<BlockBoxProps> = ({ i, item, state }) => {
           </div>
         </Box>
       }
-      placement="top"
+      placement="top-end"
     >
       <div
         key={item.txs}

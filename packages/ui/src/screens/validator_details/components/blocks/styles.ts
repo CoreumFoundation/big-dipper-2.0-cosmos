@@ -4,6 +4,7 @@ import Color from 'color';
 const useStyles = makeStyles()((theme) => ({
   root: {
     '& .MuiTypography-h2': {
+      fontSize: theme.spacing(2.5),
       marginBottom: theme.spacing(2),
     },
   },
@@ -43,6 +44,7 @@ const useStyles = makeStyles()((theme) => ({
     background: '#2B3138 !important',
     padding: theme.spacing(2),
     gap: 16,
+    minWidth: 'min-content',
 
     [theme.breakpoints.up('sm')]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
