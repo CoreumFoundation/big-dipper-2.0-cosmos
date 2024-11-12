@@ -4,7 +4,7 @@ const useStyles = makeStyles()((theme) => ({
   root: {
     '& .MuiTypography-h2': {
       fontSize: theme.spacing(2.5),
-      marginBottom: theme.spacing(2),
+      padding: theme.spacing(2),
     },
   },
   list: {

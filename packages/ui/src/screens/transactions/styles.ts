@@ -70,7 +70,7 @@ const useStyles = makeStyles()((theme) => ({
         height: 16,
       },
       '& .MuiSwitch-track': {
-        borderRadius: 36 / 2,
+        borderRadius: 13,
         backgroundColor: `#373E48`,
         opacity: 1,
         transition: theme.transitions.create(['all'], {

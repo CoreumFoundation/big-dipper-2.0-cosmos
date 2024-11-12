@@ -50,6 +50,7 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   transactions: {
+    padding: `0 !important`,
     // background: '#31326f',
     [theme.breakpoints.up('lg')]: {
       gridColumn: '1 / 4',
