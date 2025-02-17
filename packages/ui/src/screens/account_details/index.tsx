@@ -80,6 +80,7 @@ export default function AccountDetails() {
               withdrawalAddress={state.overview.withdrawalAddress}
               address={state.overview.address}
               domain={state.domain}
+              riskScoreData={state.riskScoreData}
             />
             <Balance
               className={classes.balance}

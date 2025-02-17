@@ -30,9 +30,20 @@ type OverviewProps = {
   withdrawalAddress: string;
   address: string;
   domain: string;
+  riskScoreData: {
+    level: number;
+    score: number;
+    verdict_time: number;
+  } | null;
 };
 
-const Overview: FC<OverviewProps> = ({ className, address, withdrawalAddress, domain }) => {
+const Overview: FC<OverviewProps> = ({
+  className,
+  address,
+  withdrawalAddress,
+  domain,
+  riskScoreData,
+}) => {
   const { location } = useWindowOrigin();
   const { classes, cx } = useStyles();
   const display = useDisplayStyles().classes;
@@ -182,6 +193,36 @@ const Overview: FC<OverviewProps> = ({ className, address, withdrawalAddress, do
           </div>
         )}
       </Box>
+      {!!riskScoreData && (
+        <>
+          <Typography variant="h3" align="left">
+            {t('account_risk_score')}
+          </Typography>
+          <Box className={cx(classes.root, className)}>
+            <div className={cx(classes.copyText, classes.item)}>
+              <Typography variant="body1" className="label">
+                {t('risk_level')}
+              </Typography>
+              <div className="detail">
+                <Typography variant="body1" className="value">
+                  {riskScoreData?.level}
+                </Typography>
+              </div>
+            </div>
+
+            <div className={cx(classes.copyText, classes.item)}>
+              <Typography variant="body1" className="label">
+                {t('risk_score')}
+              </Typography>
+              <div className="detail">
+                <Typography variant="body1" className="value">
+                  {riskScoreData?.score}
+                </Typography>
+              </div>
+            </div>
+          </Box>
+        </>
+      )}
     </>
   );
 };

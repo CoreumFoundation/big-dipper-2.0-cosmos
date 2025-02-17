@@ -36,5 +36,8 @@
   "bio": "Bio",
   "status": "Status",
   "completionTime": "Completion Time",
-  "domain": "Domain"
+  "domain": "Domain",
+  "account_risk_score": "Account's Risk Score",
+  "risk_level": "Risk Level",
+  "risk_score": "Risk Score"
 }

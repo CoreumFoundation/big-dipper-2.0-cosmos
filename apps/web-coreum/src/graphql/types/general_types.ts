@@ -67,6 +67,13 @@ export type ActionValidatorCommissionAmount = {
   coins?: Maybe<Array<Maybe<Scalars['ActionCoin']>>>;
 };
 
+export type AddressRiskActivity = {
+  __typename?: 'AddressRiskActivity';
+  data?: any;
+  status?: number;
+  err_msg?: any;
+}
+
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type Boolean_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Boolean']>;
@@ -5329,6 +5336,7 @@ export type Query_Root = {
   action_validator_delegations?: Maybe<ActionDelegationResponse>;
   action_validator_redelegations_from?: Maybe<ActionRedelegationResponse>;
   action_validator_unbonding_delegations?: Maybe<ActionUnbondingDelegationResponse>;
+  action_address_risk_score: AddressRiskActivity;
   /** fetch data from the table: "average_block_time_from_genesis" */
   average_block_time_from_genesis: Array<Average_Block_Time_From_Genesis>;
   /** fetch aggregated fields from the table: "average_block_time_from_genesis" */
@@ -5633,7 +5641,6 @@ export type Query_RootAction_Validator_Commission_AmountArgs = {
   address: Scalars['String'];
 };
 
-
 export type Query_RootAction_Validator_DelegationsArgs = {
   address: Scalars['String'];
   count_total?: InputMaybe<Scalars['Boolean']>;
@@ -5658,6 +5665,10 @@ export type Query_RootAction_Validator_Unbonding_DelegationsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
 };
 
+
+export type Query_RootAction_Address_Risk_ScoreArgs = {
+  address: Scalars['String'];
+};
 
 export type Query_RootAverage_Block_Time_From_GenesisArgs = {
   distinct_on?: InputMaybe<Array<Average_Block_Time_From_Genesis_Select_Column>>;
@@ -11613,7 +11624,14 @@ export type AccountCommissionQueryVariables = Exact<{
 }>;
 
 
+
 export type AccountCommissionQuery = { commission?: { __typename?: 'ActionValidatorCommissionAmount', coins?: Array<any | null> | null } | null };
+
+export type AddressRiskScoreQuery = { risk_score?: { __typename?: 'ActionAddressRiskScore', data?: any } | null };
+
+export type AddressRiskScoreQueryVariables = Exact<{
+  address: Scalars['String'];
+}>;
 
 export type AccountWithdrawalAddressQueryVariables = Exact<{
   address: Scalars['String'];
@@ -11959,6 +11977,28 @@ export function useAccountCommissionLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type AccountCommissionQueryHookResult = ReturnType<typeof useAccountCommissionQuery>;
 export type AccountCommissionLazyQueryHookResult = ReturnType<typeof useAccountCommissionLazyQuery>;
 export type AccountCommissionQueryResult = Apollo.QueryResult<AccountCommissionQuery, AccountCommissionQueryVariables>;
+
+export const AddressRiskScoreDocument = gql`
+  query AddressRiskScore($address: String!) {
+    action_address_risk_score(address: $address) {
+      data
+    }
+  }
+`;
+
+export function useAddressRiskScoreQuery(baseOptions: Apollo.QueryHookOptions<AddressRiskScoreQuery, AddressRiskScoreQueryVariables>) {
+  const options = {...defaultOptions, ...baseOptions}
+  return Apollo.useQuery<AddressRiskScoreQuery, AddressRiskScoreQueryVariables>(AddressRiskScoreDocument, options);
+}
+export function useAddressRiskScoreLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AddressRiskScoreQuery, AddressRiskScoreQueryVariables>) {
+    const options = {...defaultOptions, ...baseOptions}
+    return Apollo.useLazyQuery<AddressRiskScoreQuery, AddressRiskScoreQueryVariables>(AddressRiskScoreDocument, options);
+  }
+export type ActionRiskScoreQueryHookResult = ReturnType<typeof useAddressRiskScoreQuery>;
+export type ActionRiskScoreLazyQueryHookResult = ReturnType<typeof useAddressRiskScoreLazyQuery>;
+export type ActionRiskScoreQueryResult = Apollo.QueryResult<AddressRiskScoreQuery, AddressRiskScoreQueryVariables>;
+
+
 export const AccountWithdrawalAddressDocument = gql`
     query AccountWithdrawalAddress($address: String!) {
   withdrawalAddress: action_delegator_withdraw_address(address: $address) {

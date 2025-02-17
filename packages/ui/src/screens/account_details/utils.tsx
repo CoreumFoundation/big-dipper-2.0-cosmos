@@ -4,6 +4,7 @@ import {
   useAccountCommissionQuery,
   useAccountDelegationBalanceQuery,
   useAccountDelegationRewardsQuery,
+  useAddressRiskScoreQuery,
   useAccountUnbondingBalanceQuery,
   useAccountWithdrawalAddressQuery,
 } from '@/graphql/types/general_types';
@@ -90,6 +91,26 @@ export const useAccountWithdrawalAddress = (address?: string) => {
   return {
     address: data ?? defaultReturnValue,
     error,
+  };
+};
+
+export const useAccountRiskActivity = (address?: string) => {
+  const { data, error, refetch } = useAddressRiskScoreQuery({
+    variables: {
+      address: address ?? '',
+    },
+    skip: !address,
+    onError: () => {
+      refetch();
+    },
+  });
+
+  useEffect(() => {
+    if (error) refetch();
+  }, [error, refetch]);
+
+  return {
+    data,
   };
 };
 

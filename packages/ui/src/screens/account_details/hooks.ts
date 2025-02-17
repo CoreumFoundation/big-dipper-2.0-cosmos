@@ -10,6 +10,7 @@ import type {
   OtherTokenType,
 } from '@/screens/account_details/types';
 import {
+  useAccountRiskActivity,
   useAccountWithdrawalAddress,
   useAvailableBalances,
   useCommission,
@@ -60,6 +61,7 @@ const initialState: AccountDetailState = {
   metadataLoading: true,
   metadatas: [],
   domain: '',
+  riskScoreData: null,
 };
 
 type Data = {
@@ -247,6 +249,21 @@ const formatAllBalance = (data: Data, assets: Asset[], metadatas: any[]) => {
   return stateChange;
 };
 
+const formatAddressRiskScore = (data: any, address: string) => {
+  if (data) {
+    const {
+      action_address_risk_score: { data: riskData },
+    } = data;
+    const results = riskData[address];
+
+    return {
+      ...results.risk,
+    };
+  }
+
+  return undefined;
+};
+
 export const useAccountDetails = () => {
   const router = useRouter();
   const bddService = new BDD();
@@ -412,17 +429,31 @@ export const useAccountDetails = () => {
   }, []);
 
   useEffect(() => {
-    const getDomainName = async () => {
-      const domainFromAddress = await getDomainFromAddress(address);
+    if (address.length) {
+      const getDomainName = async () => {
+        const domainFromAddress = await getDomainFromAddress(address);
 
+        handleSetState((prevState) => ({
+          ...prevState,
+          domain: domainFromAddress,
+        }));
+      };
+
+      getDomainName();
+    }
+  }, [address]);
+
+  const { data } = useAccountRiskActivity(address);
+  const formattedRiskData = formatAddressRiskScore(data, address);
+
+  useEffect(() => {
+    if (formattedRiskData) {
       handleSetState((prevState) => ({
         ...prevState,
-        domain: domainFromAddress,
+        riskScoreData: formattedRiskData,
       }));
-    };
-
-    getDomainName();
-  }, [address]);
+    }
+  }, [formattedRiskData]);
 
   return { state };
 };

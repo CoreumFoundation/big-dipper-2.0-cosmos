@@ -46,4 +46,9 @@ export interface AccountDetailState {
   rewards: RewardsType;
   metadatas: any[];
   domain: string;
+  riskScoreData: {
+    level: number;
+    score: number;
+    verdict_time: number;
+  } | null;
 }

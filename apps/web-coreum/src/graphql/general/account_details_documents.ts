@@ -103,3 +103,11 @@ export const AccountUndelegationsDocument = /* GraphQL */ `
     }
   }
 `;
+
+export const AddressRiskScore = /* GraphQL */ `
+  query AddressRiskScore($address: String!) {
+    action_address_risk_score(address: $address) {
+      data
+    }
+  }
+`;
