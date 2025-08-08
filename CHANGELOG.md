@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.75](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.74...v2.3.0-coreum.75) (2025-08-08)
+
+
+### Bug Fixes
+
+* prevent home page crust because of hasura response ([fc68edd](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/fc68edd7f5d595adf8cdae7e5104689f5067fb36))
+
 ## [2.3.0-coreum.74](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.73...v2.3.0-coreum.74) (2025-08-08)
 
 
