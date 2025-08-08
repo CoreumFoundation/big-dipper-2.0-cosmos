@@ -15,8 +15,8 @@ const formatBlocks = (data: BlocksListenerSubscription) =>
       hash: x.hash,
       timestamp: x.timestamp,
       proposer: proposerAddress,
-      moniker: x.validator?.validatorDescriptions?.[0]?.moniker || undefined,
-      avatarUrl: x.validator?.validatorDescriptions?.[0]?.avatarUrl || undefined,
+      moniker: x?.validator?.validatorDescriptions?.[0]?.moniker || undefined,
+      avatarUrl: x?.validator?.validatorDescriptions?.[0]?.avatarUrl || undefined,
     };
   }) ?? [];
 

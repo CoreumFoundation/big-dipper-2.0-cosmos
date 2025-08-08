@@ -28,4 +28,4 @@ export const XRPL_TRANSACTION_DETAILS = (tx: string): string =>
  * @returns
  */
 export const ADDRESS_DETAILS = (address: string) =>
-  address?.includes(prefix.validator) ? VALIDATOR_DETAILS(address) : ACCOUNT_DETAILS(address);
+  address?.includes(prefix?.validator) ? VALIDATOR_DETAILS(address) : ACCOUNT_DETAILS(address);

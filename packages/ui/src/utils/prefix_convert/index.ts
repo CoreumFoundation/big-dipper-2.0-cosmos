@@ -10,7 +10,7 @@ export const toValidatorAddress = (address: string) => {
     }
     const decode = bech32.decode(address).words;
 
-    return bech32.encode(prefix.validator, decode);
+    return bech32.encode(prefix?.validator, decode);
   } catch (error) {
     console.error(`Error processing address ${address}:`, error);
     return '';

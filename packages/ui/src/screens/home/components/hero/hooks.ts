@@ -30,11 +30,16 @@ export const useHero = () => {
       denom: tokenUnits?.[primaryTokenUnit]?.display,
     },
     onCompleted: (data) => {
-      handleSetState((prevState) => ({
-        ...prevState,
-        dataLoading: itemsToLoad <= data.tokenPrice.length,
-        tokenPriceHistory: data.tokenPrice.map((x) => ({ price: x.price, timestamp: x.timestamp })),
-      }));
+      if (data?.tokenPrice) {
+        handleSetState((prevState) => ({
+          ...prevState,
+          dataLoading: itemsToLoad <= data.tokenPrice.length,
+          tokenPriceHistory: data.tokenPrice.map((x) => ({
+            price: x.price,
+            timestamp: x.timestamp,
+          })),
+        }));
+      }
     },
     onError: () => {
       handleSetState((prevState) => ({ ...prevState, dataLoading: false }));
@@ -55,13 +60,15 @@ export const useHero = () => {
         },
       })
       .then(({ data }) => {
-        handleSetState((prevState) => ({
-          ...prevState,
-          dataLoading: false,
-          tokenPriceHistory: prevState.tokenPriceHistory.concat(
-            data.tokenPrice.map((x) => ({ price: x.price, timestamp: x.timestamp }))
-          ),
-        }));
+        if (data?.tokenPrice) {
+          handleSetState((prevState) => ({
+            ...prevState,
+            dataLoading: false,
+            tokenPriceHistory: prevState.tokenPriceHistory.concat(
+              data.tokenPrice.map((x) => ({ price: x.price, timestamp: x.timestamp }))
+            ),
+          }));
+        }
       });
 
     if (limit !== 100) {

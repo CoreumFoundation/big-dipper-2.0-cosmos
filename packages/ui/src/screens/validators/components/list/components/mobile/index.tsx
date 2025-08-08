@@ -87,7 +87,7 @@ const Mobile: FC<MobileProps> = ({ className, items, search }) => {
           >
             {({ index, style }) => (
               <ListItem
-                key={items[index].validator.address}
+                key={items[index]?.validator.address}
                 index={index}
                 style={style}
                 item={items[index]}
