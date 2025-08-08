@@ -22,7 +22,7 @@ const AssetDetails = () => {
   const {
     state: { dex },
   } = useParams();
-  const { exists, asset, loading, metadataLoading, assetsLoading } = state;
+  const { exists, asset, loading, metadataLoading, assetsLoading, assetDexSettings } = state;
 
   return (
     <>
@@ -58,7 +58,14 @@ const AssetDetails = () => {
                 {asset.denom !== primaryTokenUnit && (
                   <AssetFeatures className={classes.block} asset={asset} />
                 )}
-                {dex && <AssetDexSettings className={classes.block} asset={asset} dex={dex} />}
+                {dex && (
+                  <AssetDexSettings
+                    className={classes.block}
+                    asset={asset}
+                    dex={dex}
+                    assetDexSettings={assetDexSettings}
+                  />
+                )}
               </>
             )}
           </div>

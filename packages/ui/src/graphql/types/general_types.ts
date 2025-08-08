@@ -12083,6 +12083,18 @@ export type ValidatorAddressesQuery = { validator: Array<{ __typename?: 'validat
 export type AssetsQuery = { token_holder_count: Array<{ denom: string, holders: number, __typename?: 'token_holder_count', }>, supply: { __typename?: 'supply', coins: Array<{ __typename?: 'coins', denom: string, amount: number }>, height: number }, account_aggregate: { __typename?: 'account_aggregate', aggregate: { count: number } }};
 export type AssetsQueryVariables = Exact<{ [key: string]: never; }>;
 
+export type DexSettingsQuery = {
+  action_asset_ft_dex_settings?: {
+    __typename?: 'action_asset_ft_dex_settings',
+    unified_ref_amount: string,
+    whitelisted_denoms?: string | null
+  } | null
+};
+
+export type DexSettingsQueryVariables = Exact<{
+  denom: string;
+}>;
+
 export const AccountCommissionDocument = gql`
     query AccountCommission($validatorAddress: String!) {
   commission: action_validator_commission_amount(address: $validatorAddress) {
@@ -14016,3 +14028,31 @@ export function useAssetsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ass
 export type AssetsQueryHookResult = ReturnType<typeof useValidatorAddressesQuery>;
 export type AssetsLazyQueryHookResult = ReturnType<typeof useValidatorAddressesLazyQuery>;
 export type AssetsQueryResult = Apollo.QueryResult<AssetsQuery, AssetsQueryVariables>;
+
+export const DexSettingsDocument = gql`
+  query DexSettings($denom: String!) {
+    action_asset_ft_dex_settings(denom: $denom) {
+      unified_ref_amount
+      whitelisted_denoms
+    }
+  }
+`;
+
+export function useDexSettingsQuery(
+  baseOptions?: Apollo.QueryHookOptions<DexSettingsQuery, DexSettingsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<DexSettingsQuery, DexSettingsQueryVariables>(DexSettingsDocument, options);
+}
+
+/** Hook: useDexSettingsLazyQuery */
+export function useDexSettingsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<DexSettingsQuery, DexSettingsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<DexSettingsQuery, DexSettingsQueryVariables>(DexSettingsDocument, options);
+}
+
+export type DexSettingsQueryHookResult = ReturnType<typeof useDexSettingsQuery>;
+export type DexSettingsLazyQueryHookResult = ReturnType<typeof useDexSettingsLazyQuery>;
+export type DexSettingsQueryResult = Apollo.QueryResult<DexSettingsQuery, DexSettingsQueryVariables>;

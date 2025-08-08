@@ -12,9 +12,15 @@ interface AssetDexSettingsProps {
   className?: string;
   asset: any;
   dex: any;
+  assetDexSettings: any;
 }
 
-const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) => {
+const AssetDexSettings: FC<AssetDexSettingsProps> = ({
+  asset,
+  className,
+  dex,
+  assetDexSettings,
+}) => {
   const { classes, cx } = useStyles();
   const { t } = useTranslation('assets');
 
@@ -22,7 +28,10 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
   const { default_unified_ref_amount } = dex;
 
   const refAmount = useMemo(() => {
-    const currentRefAmount = dexSettings?.unified_ref_amount || default_unified_ref_amount;
+    const currentRefAmount =
+      assetDexSettings?.action_asset_ft_dex_settings?.unified_ref_amount ||
+      dexSettings?.unified_ref_amount ||
+      default_unified_ref_amount;
 
     if (currentRefAmount > 1) {
       if (currentRefAmount <= 100000000000000000000000) {
@@ -31,7 +40,15 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
     }
 
     return currentRefAmount;
-  }, [default_unified_ref_amount, dexSettings?.unified_ref_amount]);
+  }, [assetDexSettings, default_unified_ref_amount, dexSettings?.unified_ref_amount]);
+
+  const currentWhitelistedDenoms = useMemo(() => {
+    const denoms = assetDexSettings?.action_asset_ft_dex_settings?.whitelisted_denoms?.length
+      ? assetDexSettings?.action_asset_ft_dex_settings?.whitelisted_denoms
+      : dexSettings?.whitelisted_denoms;
+
+    return denoms ? denoms.map((item: string) => <p key={item}>{item}</p>) : t('no_denoms');
+  }, [assetDexSettings, dexSettings?.whitelisted_denoms, t]);
 
   const unifiedRefAmount = useMemo(
     () => ({
@@ -79,13 +96,11 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
       ),
       value: (
         <Typography variant="body1" className={cx('value', classes.denomsWrapper)}>
-          {dexSettings?.whitelisted_denoms.length
-            ? dexSettings?.whitelisted_denoms.map((item: string) => <p key={item}>{item}</p>)
-            : t('no_denoms')}
+          {currentWhitelistedDenoms}
         </Typography>
       ),
     };
-  }, [asset.denom, classes.denomsWrapper, cx, dexSettings?.whitelisted_denoms, features, t]);
+  }, [asset.denom, classes.denomsWrapper, currentWhitelistedDenoms, cx, features, t]);
 
   const dataItems = useMemo(() => {
     const items = [];

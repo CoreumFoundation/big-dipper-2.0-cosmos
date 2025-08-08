@@ -1,6 +1,6 @@
 import * as R from 'ramda';
 import { useCallback, useEffect, useState } from 'react';
-import { AssetsQuery, useAssetsQuery } from '@/graphql/types/general_types';
+import { AssetsQuery, useAssetsQuery, useDexSettingsQuery } from '@/graphql/types/general_types';
 import axios from 'axios';
 
 import chainConfig from '@/chainConfig';
@@ -24,6 +24,7 @@ interface AssetDetailsState {
   metadata: any;
   asset: any;
   assetInfo: any;
+  assetDexSettings: any;
 }
 
 const formatAsset = ({
@@ -128,6 +129,7 @@ export const useAssetDetails = () => {
     assetsListItem: null,
     asset: null,
     assetInfo: null,
+    assetDexSettings: null,
   });
 
   const handleSetState = useCallback(
@@ -139,6 +141,18 @@ export const useAssetDetails = () => {
     },
     []
   );
+
+  useDexSettingsQuery({
+    variables: {
+      denom: router.query.address as string,
+    },
+    onCompleted: (data) => {
+      handleSetState((prevState) => ({
+        ...prevState,
+        assetDexSettings: data,
+      }));
+    },
+  });
 
   const getAssetsList = useCallback(async () => {
     try {
