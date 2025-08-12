@@ -15,7 +15,7 @@ const AssetIBCDetails = () => {
   const { t } = useTranslation('assets');
   const { classes } = useStyles();
   const { state } = useAssetDetails();
-  const { exists, asset, loading, assetsLoading } = state;
+  const { exists, asset, loading, assetsLoading, assetDexSettings } = state;
   const {
     state: { dex },
   } = useParams();
@@ -51,7 +51,14 @@ const AssetIBCDetails = () => {
                 <AssetOverview className={classes.block} asset={asset} />
                 <AssetDetailsOverview className={classes.block} asset={asset} />
                 <AssetPriceOverview className={classes.block} asset={asset} />
-                {dex && <AssetDexSettings className={classes.block} asset={asset} dex={dex} />}
+                {dex && (
+                  <AssetDexSettings
+                    assetDexSettings={assetDexSettings}
+                    className={classes.block}
+                    asset={asset}
+                    dex={dex}
+                  />
+                )}
               </>
             )}
           </div>
