@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.76](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.75...v2.3.0-coreum.76) (2025-08-12)
+
+
+### Bug Fixes
+
+* use asset dex settings for ibc tokens ([df58d86](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/df58d86c866dddaf96450f1cdccad79c60d988af))
+
 ## [2.3.0-coreum.75](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.74...v2.3.0-coreum.75) (2025-08-08)
 
 
