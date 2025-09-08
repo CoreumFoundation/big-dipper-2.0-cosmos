@@ -25,7 +25,7 @@ query ProposalDetailsTally($proposalId: Int) {
     bondedTokens: bonded_tokens
   }
   quorum: gov_params (limit: 1, order_by: {height: desc}) {
-    tallyParams: tally_params 
+    tallyParams: tally_params
   }
 }
 
@@ -40,11 +40,17 @@ query ProposalDetailsDeposits($proposalId: Int) {
 }
 
 query ProposalDetailsVotes($proposalId: Int) {
-  proposalVote: proposal_vote(where: {proposal_id: {_eq: $proposalId}}, order_by: {height: desc}) {
+  proposalVote: proposal_vote(
+    where: { proposal_id: { _eq: $proposalId } }
+    order_by: [{ voter_address: asc }, { height: desc }]
+    distinct_on: [voter_address]
+  ) {
     option
     voterAddress: voter_address
   }
-  validatorStatuses: proposal_validator_status_snapshot(where: {proposal_id: {_eq: $proposalId}, status: {_eq: 3}}) {
+  validatorStatuses: proposal_validator_status_snapshot(
+    where: { proposal_id: { _eq: $proposalId }, status: { _eq: 3 } }
+  ) {
     validator {
       validatorInfo: validator_info {
         selfDelegateAddress: self_delegate_address

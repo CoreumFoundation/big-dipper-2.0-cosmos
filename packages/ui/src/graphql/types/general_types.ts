@@ -13172,7 +13172,8 @@ export const ProposalDetailsVotesDocument = gql`
   query ProposalDetailsVotes($proposalId: Int, $limit: Int = 100, $offset: Int = 0) {
     proposalVote: proposal_vote(
       where: {proposal_id: {_eq: $proposalId}}
-      order_by: {height: desc}
+      order_by: [{ voter_address: asc }, { height: desc }]
+      distinct_on: [voter_address]
       limit: $limit
       offset: $offset
     ) {
@@ -13190,6 +13191,7 @@ export const ProposalDetailsVotesDocument = gql`
     }
   }
 `;
+
 
 /**
  * __useProposalDetailsVotesQuery__
