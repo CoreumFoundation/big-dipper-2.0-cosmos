@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.80](https://github.com/tokenize-x/fe-chain-explorer/compare/v2.3.0-coreum.79...v2.3.0-coreum.80) (2025-11-17)
+
+
+### Bug Fixes
+
+* update handle of sender, receiver and amount in tx history ([40464c8](https://github.com/tokenize-x/fe-chain-explorer/commit/40464c864381f8eb9bbf506a9b30e0e03e7b684b))
+
 ## [2.3.0-coreum.79](https://github.com/tokenize-x/fe-chain-explorer/compare/v2.3.0-coreum.78...v2.3.0-coreum.79) (2025-11-17)
 
 
