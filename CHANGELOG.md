@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.78](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.77...v2.3.0-coreum.78) (2025-11-17)
+
+
+### Bug Fixes
+
+* hide not voted in proposals details ([c7d9508](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/c7d95083f6c8fb8aa2704457551dffcb2ccc325f))
+
 ## [2.3.0-coreum.77](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.76...v2.3.0-coreum.77) (2025-09-08)
 
 
