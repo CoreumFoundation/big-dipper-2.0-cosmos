@@ -8,6 +8,7 @@ import { formatNumber } from '@/utils/format_token';
 
 const WithdrawReward: FC<{ message: MsgWithdrawDelegatorReward }> = (props) => {
   const { message } = props;
+
   const delegator = useProfileRecoil(message.delegatorAddress);
   const delegatorMoniker = delegator ? delegator?.name : message.delegatorAddress;
 

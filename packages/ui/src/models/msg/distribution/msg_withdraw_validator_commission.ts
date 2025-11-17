@@ -27,18 +27,25 @@ class MsgWithdrawValidatorCommission {
   static getWithdrawalAmount(log?: Log) {
     const withdrawEvents =
       log?.events ?? [].filter((x: { type: string }) => x.type === 'withdraw_commission');
-    const withdrawAmounts =
-      withdrawEvents?.[0]?.attributes?.filter((x: { key?: string }) => x.key === 'amount') ?? [];
+    const amounts = withdrawEvents.flatMap((event) => {
+      const withdrawAmounts = event.attributes?.filter((x) => x.key === 'amount') ?? [];
 
-    const amounts = (withdrawAmounts?.[0]?.value ?? '0').split(',').map((x) => {
-      const [amount, denom = primaryTokenUnit] = x.match(/[a-z]+|[^a-z]+/gi) ?? [];
-      return formatToken(amount, denom);
+      return withdrawAmounts.flatMap((attr) =>
+        (attr.value ?? '0')
+          .split(',')
+          .filter(Boolean)
+          .map((x) => {
+            const [amount, denom = primaryTokenUnit] = x.match(/[a-z]+|[^a-z]+/gi) ?? [];
+
+            return formatToken(amount, denom);
+          })
+      );
     });
 
     return amounts;
   }
 
-  static fromJson(json: object, log?: Log): MsgWithdrawValidatorCommission {
+  static fromJson(json: object, log?: Log, index?: number): MsgWithdrawValidatorCommission {
     const amounts = this.getWithdrawalAmount(log);
 
     return {
@@ -46,7 +53,7 @@ class MsgWithdrawValidatorCommission {
       json,
       type: R.pathOr('', ['@type'], json),
       validatorAddress: R.pathOr('', ['validator_address'], json),
-      amounts,
+      amounts: typeof index === 'number' ? [amounts[index]] : amounts,
     };
   }
 }
