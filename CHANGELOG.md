@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.79](https://github.com/tokenize-x/fe-chain-explorer/compare/v2.3.0-coreum.78...v2.3.0-coreum.79) (2025-11-17)
+
+
+### Bug Fixes
+
+* hide not voted in proposals details ([0767d87](https://github.com/tokenize-x/fe-chain-explorer/commit/0767d87e2dcc1765631396cd19c0e33e56aa79d0))
+
 ## 2.3.0-coreum.78 (2025-10-31)
 
 
