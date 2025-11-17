@@ -15,7 +15,7 @@ type TabsHeaderProps = {
     no: number;
     abstain: number;
     veto: number;
-    notVoted: number;
+    // notVoted: number;
   };
 };
 

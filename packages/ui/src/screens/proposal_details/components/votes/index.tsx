@@ -54,7 +54,7 @@ const Votes: FC<ComponentDefault> = (props) => {
           no: state.voteCount.no,
           abstain: state.voteCount.abstain,
           veto: state.voteCount.veto,
-          notVoted: state.voteCount.didNotVote,
+          // notVoted: state.voteCount.didNotVote,
         }}
         tab={state.tab}
         handleTabChange={handleTabChange}

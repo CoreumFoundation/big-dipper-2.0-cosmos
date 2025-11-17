@@ -3,9 +3,9 @@ export const tabLabels = (data: {
   no: number;
   abstain: number;
   veto: number;
-  notVoted: number;
+  // notVoted: number;
 }) => {
-  const { yes, no, abstain, veto, notVoted } = data;
+  const { yes, no, abstain, veto } = data;
   const total = yes + no + abstain + veto;
 
   return [
@@ -29,9 +29,9 @@ export const tabLabels = (data: {
       key: 'abstain',
       num: abstain,
     },
-    {
-      key: 'didNotVote',
-      num: notVoted,
-    },
+    // {
+    //   key: 'didNotVote',
+    //   num: notVoted,
+    // },
   ];
 };
