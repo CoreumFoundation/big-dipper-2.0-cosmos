@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.83](https://github.com/tokenize-x/fe-chain-explorer/compare/v2.3.0-coreum.82...v2.3.0-coreum.83) (2025-11-18)
+
+
+### Bug Fixes
+
+* add types to the functions' parameters ([55888c1](https://github.com/tokenize-x/fe-chain-explorer/commit/55888c1291719fa3b692e208267b135f7dad1ec6))
+
 ## [2.3.0-coreum.82](https://github.com/tokenize-x/fe-chain-explorer/compare/v2.3.0-coreum.81...v2.3.0-coreum.82) (2025-11-18)
 
 
