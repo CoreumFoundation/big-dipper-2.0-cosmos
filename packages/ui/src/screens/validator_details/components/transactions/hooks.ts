@@ -27,7 +27,9 @@ const getMsgIndexEvents = (transactionLogsEvents: any[]) =>
     })
     .filter((item) => item !== undefined);
 
-const getSender = (msgIndexEvents: any[]) => {
+const getSender = (
+  msgIndexEvents: { attributes: { key: string; value: string }[]; type: string }[]
+) => {
   const sendersResult = Array.from(
     new Set(
       msgIndexEvents
@@ -53,7 +55,9 @@ const getSender = (msgIndexEvents: any[]) => {
   return sendersResult[0];
 };
 
-const getReceiver = (msgIndexEvents: any[]) => {
+const getReceiver = (
+  msgIndexEvents: { attributes: { key: string; value: string }[]; type: string }[]
+) => {
   const receiversResult = Array.from(
     new Set(
       msgIndexEvents
@@ -80,7 +84,10 @@ const getReceiver = (msgIndexEvents: any[]) => {
   return receiversResult[0];
 };
 
-const getAmount = (msgIndexEvents: any[], denom: string) => {
+const getAmount = (
+  msgIndexEvents: { attributes: { key: string; value: string }[]; type: string }[],
+  denom: string
+) => {
   const transferEvents = msgIndexEvents.filter(
     (item: { attributes: { key: string; value: string }[]; type: string }) =>
       item.type === 'transfer'
@@ -124,7 +131,10 @@ const getAmount = (msgIndexEvents: any[], denom: string) => {
 const formatSpenderAndReceiver = (transactionLogs: any[], denom: string) => {
   const transactionLogsEvents = transactionLogs?.[0]?.events || [];
 
-  const msgIndexEvents = getMsgIndexEvents(transactionLogsEvents);
+  const msgIndexEvents = getMsgIndexEvents(transactionLogsEvents) as {
+    attributes: { key: string; value: string }[];
+    type: string;
+  }[];
   const sender = getSender(msgIndexEvents);
   const receiver = getReceiver(msgIndexEvents);
   const amount = getAmount(msgIndexEvents, denom);
