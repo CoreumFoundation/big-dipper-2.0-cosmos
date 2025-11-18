@@ -23,8 +23,9 @@ FROM starter AS pruner
 COPY ./ ./
 
 ARG PROJECT_NAME
-RUN yarn config set nodeLinker node-modules \
-  && yarn config set supportedArchitectures --json '{}' \
+RUN chmod +x .yarn/releases/yarn-3.3.1.cjs \
+  && node .yarn/releases/yarn-3.3.1.cjs config set nodeLinker node-modules \
+  && node .yarn/releases/yarn-3.3.1.cjs config set supportedArchitectures --json '{}' \
   && turbo prune --scope=${PROJECT_NAME} --docker
 
 ################################################################################
@@ -72,15 +73,16 @@ ENV NEXT_PUBLIC_MATOMO_SITE_ID={{NEXT_PUBLIC_MATOMO_SITE_ID}}
 ENV NEXT_PUBLIC_RPC_WEBSOCKET={{NEXT_PUBLIC_RPC_WEBSOCKET}}
 
 RUN export SENTRYCLI_SKIP_DOWNLOAD=$([ -z "${NEXT_PUBLIC_SENTRY_DSN}" ] && echo 1) \
-  && corepack enable && yarn -v \
-  && yarn config set supportedArchitectures --json '{}' \
-  && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install --inline-builds
+  && chmod +x .yarn/releases/yarn-3.3.1.cjs \
+  && node .yarn/releases/yarn-3.3.1.cjs --version \
+  && node .yarn/releases/yarn-3.3.1.cjs config set supportedArchitectures --json '{}' \
+  && YARN_ENABLE_IMMUTABLE_INSTALLS=false node .yarn/releases/yarn-3.3.1.cjs install --inline-builds
 
 ## Build the project
 COPY --from=pruner /app/out/full/ ./
-RUN ([ -z "${NEXT_PUBLIC_SENTRY_DSN}" ] || yarn node packages/shared-utils/configs/sentry/install.js) \
-  && yarn workspace ${PROJECT_NAME} add sharp \
-  && yarn workspace ${PROJECT_NAME} run build
+RUN ([ -z "${NEXT_PUBLIC_SENTRY_DSN}" ] || node .yarn/releases/yarn-3.3.1.cjs node packages/shared-utils/configs/sentry/install.js) \
+  && node .yarn/releases/yarn-3.3.1.cjs workspace ${PROJECT_NAME} add sharp \
+  && node .yarn/releases/yarn-3.3.1.cjs workspace ${PROJECT_NAME} run build
 
 ################################################################################
 
@@ -167,4 +169,4 @@ NEXT_PUBLIC_RPC_WEBSOCKET\
 # Don't run production as root
 USER nextjs
 
-CMD node ./inject.js && yarn node ./server.js
+CMD node ./inject.js && node /app/.yarn/releases/yarn-3.3.1.cjs node ./server.js
