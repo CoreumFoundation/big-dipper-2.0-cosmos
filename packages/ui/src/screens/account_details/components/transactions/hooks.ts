@@ -13,94 +13,122 @@ import { formatToken } from '@/utils/format_token';
 const LIMIT = 100;
 const LIMITPlusOne = LIMIT + 1;
 
-const getSender = (messages: any[]) => {
-  const senderKeys = [
-    'executor',
-    'sender',
-    'from_address',
-    'issuer',
-    'grantee',
-    'granter',
-    'depositor',
-    'submitter',
-    'proposer',
-    'voter',
-    'delegator_address',
-    'admin',
-    'address',
-  ];
+const getMsgIndexEvents = (transactionLogsEvents: any[]) =>
+  transactionLogsEvents
+    .map((item: { attributes: { key: string; value: string }[]; type: string }) => {
+      const msgIndexAttr = item.attributes.find(
+        (attr: { key: string; value: string }) => attr.key === 'msg_index'
+      );
 
-  const getPrimarySender = (message: any) => senderKeys.find((key) => message[key]) || '';
-
-  let firstSender = messages[0][getPrimarySender(messages[0])];
-
-  if (firstSender === '' && messages[0].inputs?.length) {
-    firstSender = messages[0].inputs[0].from_address;
-  }
-
-  if (messages.length > 1) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const message of messages) {
-      const currentSender = message[getPrimarySender(message) as string];
-      if (currentSender && currentSender !== firstSender) {
-        return 'Multiple';
+      if (msgIndexAttr) {
+        return item;
       }
 
-      if (message.inputs?.length) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const senderInInputs = message.inputs.find((item: any) => item.address !== firstSender);
+      return undefined;
+    })
+    .filter((item) => item !== undefined);
 
-        if (senderInInputs) {
-          return 'Multiple';
+const getSender = (msgIndexEvents: any[]) => {
+  const sendersResult = Array.from(
+    new Set(
+      msgIndexEvents
+        .map((item: { attributes: { key: string; value: string }[]; type: string }) => {
+          const msgIndexAttr = item.attributes.find(
+            (attr: { key: string; value: string }) => attr.key === 'sender'
+          );
+
+          return msgIndexAttr?.value;
+        })
+        .filter((item): item is string => item !== undefined)
+    )
+  );
+
+  if (sendersResult.length > 1) {
+    return 'Multiple';
+  }
+
+  if (!sendersResult.length) {
+    return '-';
+  }
+
+  return sendersResult[0];
+};
+
+const getReceiver = (msgIndexEvents: any[]) => {
+  const receiversResult = Array.from(
+    new Set(
+      msgIndexEvents
+        .map((item: { attributes: { key: string; value: string }[]; type: string }) => {
+          const msgIndexAttr = item.attributes.find(
+            (attr: { key: string; value: string }) =>
+              attr.key === 'recipient' || attr.key === 'receiver'
+          );
+
+          return msgIndexAttr?.value;
+        })
+        .filter((item): item is string => item !== undefined)
+    )
+  );
+
+  if (receiversResult.length > 1) {
+    return 'Multiple';
+  }
+
+  if (!receiversResult.length) {
+    return '-';
+  }
+
+  return receiversResult[0];
+};
+
+const getAmount = (msgIndexEvents: any[], denom: string) => {
+  const transferEvents = msgIndexEvents.filter(
+    (item: { attributes: { key: string; value: string }[]; type: string }) =>
+      item.type === 'transfer'
+  );
+
+  if (!transferEvents.length) {
+    return '-';
+  }
+
+  let amount = 0;
+  let isSingleDenom = true;
+  transferEvents.forEach(
+    (event: { attributes: { key: string; value: string }[]; type: string }) => {
+      const amountItem = event.attributes.find(
+        (attr: { key: string; value: string }) => attr.key === 'amount'
+      );
+
+      if (amountItem) {
+        const amountParsed = amountItem.value.split(denom);
+        const amountValue = amountParsed[0];
+        const amountDenom = amountItem.value.split(amountValue)[1];
+
+        if (isSingleDenom) {
+          if (amountDenom.toLowerCase() !== denom.toLowerCase()) {
+            isSingleDenom = false;
+          } else {
+            amount += parseInt(amountValue, 10);
+          }
         }
       }
     }
+  );
+
+  if (!isSingleDenom) {
+    return '';
   }
 
-  return firstSender || '-';
+  return `${String(amount)}${denom}`;
 };
 
-const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom: string) => {
-  let attributes: any = [];
+const formatSpenderAndReceiver = (transactionLogs: any[], denom: string) => {
+  const transactionLogsEvents = transactionLogs?.[0]?.events || [];
 
-  if (transactionLogs) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const transactionLog of transactionLogs) {
-      const { events } = transactionLog;
-
-      if (events.filter((event: any) => event.attributes.length > 1).length) {
-        attributes = [...attributes, ...events.filter((event: any) => event.attributes.length > 1)];
-      }
-    }
-  }
-
-  const sender = getSender(messages);
-  const receivers = attributes
-    ?.map((e: any) => {
-      const receiverItems = e.attributes.filter((attr: any) => attr.key === 'receiver');
-
-      return receiverItems;
-    })
-    .filter((item: any) => item.length);
-
-  let receiver = '-';
-
-  if (receivers?.length) {
-    receiver = receivers.length === 1 ? receivers[0][0].value : 'Multiple';
-  }
-
-  let amount = '';
-  const coinReceivedEvents = attributes?.filter((item: any) => item.type === 'coin_received');
-
-  if (coinReceivedEvents?.length === 1) {
-    const amountAttribute = coinReceivedEvents[0].attributes.find(
-      (item: any) => item.key === 'amount' && item.value?.includes(denom)
-    );
-
-    if (amountAttribute) {
-      amount = amountAttribute.value;
-    }
-  }
+  const msgIndexEvents = getMsgIndexEvents(transactionLogsEvents);
+  const sender = getSender(msgIndexEvents);
+  const receiver = getReceiver(msgIndexEvents);
+  const amount = getAmount(msgIndexEvents, denom);
 
   return {
     sender,
@@ -116,17 +144,13 @@ const formatTransactions = (data: GetMessagesByAddressQuery): Transactions[] => 
   }
   return formattedData.map((x) => {
     const { transaction } = x;
-    const { fee, logs, messages: txMessages } = transaction as any;
+    const { fee, logs } = transaction as any;
     const feeAmount = fee?.amount?.[0] ?? {
       denom: '',
       amount: 0,
     };
 
-    const { sender, receiver, amount } = formatSpenderAndReceiver(
-      txMessages,
-      logs,
-      feeAmount.denom
-    );
+    const { sender, receiver, amount } = formatSpenderAndReceiver(logs, feeAmount.denom);
     const formatedAmount =
       amount !== '' && amount !== '-'
         ? formatToken(amount.replace(feeAmount.denom, ''), feeAmount.denom)

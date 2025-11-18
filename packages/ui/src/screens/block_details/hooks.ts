@@ -98,58 +98,122 @@ const formatSignatures = (data: BlockDetailsQuery) => {
 // ==========================
 // Transactions
 // ==========================
-const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom: string) => {
-  const attributes = transactionLogs?.[0]?.events.filter(
-    (event: any) => event.attributes.length > 1
-  );
-  let sender = '-';
+const getMsgIndexEvents = (transactionLogsEvents: any[]) =>
+  transactionLogsEvents
+    .map((item: { attributes: { key: string; value: string }[]; type: string }) => {
+      const msgIndexAttr = item.attributes.find(
+        (attr: { key: string; value: string }) => attr.key === 'msg_index'
+      );
 
-  if (messages?.length) {
-    sender =
-      messages.length === 1
-        ? messages[0].executor ||
-          messages[0].sender ||
-          messages[0].from_address ||
-          messages[0].issuer ||
-          messages[0].grantee ||
-          messages[0].granter ||
-          messages[0].depositor ||
-          messages[0].submitter ||
-          messages[0].proposer ||
-          messages[0].voter ||
-          messages[0].delegator_address ||
-          messages[0].admin ||
-          messages[0].address ||
-          '-'
-        : 'Multiple';
-  }
+      if (msgIndexAttr) {
+        return item;
+      }
 
-  const receivers = attributes
-    ?.map((e: any) => {
-      const receiverItems = e.attributes.filter((attr: any) => attr.key === 'receiver');
-
-      return receiverItems;
+      return undefined;
     })
-    .filter((item: any) => item.length);
+    .filter((item) => item !== undefined);
 
-  let receiver = '-';
+const getSender = (msgIndexEvents: any[]) => {
+  const sendersResult = Array.from(
+    new Set(
+      msgIndexEvents
+        .map((item: { attributes: { key: string; value: string }[]; type: string }) => {
+          const msgIndexAttr = item.attributes.find(
+            (attr: { key: string; value: string }) => attr.key === 'sender'
+          );
 
-  if (receivers?.length) {
-    receiver = receivers.length === 1 ? receivers[0][0].value : 'Multiple';
+          return msgIndexAttr?.value;
+        })
+        .filter((item): item is string => item !== undefined)
+    )
+  );
+
+  if (sendersResult.length > 1) {
+    return 'Multiple';
   }
 
-  let amount = '';
-  const coinReceivedEvents = attributes?.filter((item: any) => item.type === 'coin_received');
+  if (!sendersResult.length) {
+    return '-';
+  }
 
-  if (coinReceivedEvents?.length === 1) {
-    const amountAttribute = coinReceivedEvents[0].attributes.find(
-      (item: any) => item.key === 'amount' && item.value?.includes(denom)
-    );
+  return sendersResult[0];
+};
 
-    if (amountAttribute) {
-      amount = amountAttribute.value;
+const getReceiver = (msgIndexEvents: any[]) => {
+  const receiversResult = Array.from(
+    new Set(
+      msgIndexEvents
+        .map((item: { attributes: { key: string; value: string }[]; type: string }) => {
+          const msgIndexAttr = item.attributes.find(
+            (attr: { key: string; value: string }) =>
+              attr.key === 'recipient' || attr.key === 'receiver'
+          );
+
+          return msgIndexAttr?.value;
+        })
+        .filter((item): item is string => item !== undefined)
+    )
+  );
+
+  if (receiversResult.length > 1) {
+    return 'Multiple';
+  }
+
+  if (!receiversResult.length) {
+    return '-';
+  }
+
+  return receiversResult[0];
+};
+
+const getAmount = (msgIndexEvents: any[], denom: string) => {
+  const transferEvents = msgIndexEvents.filter(
+    (item: { attributes: { key: string; value: string }[]; type: string }) =>
+      item.type === 'transfer'
+  );
+
+  if (!transferEvents.length) {
+    return '-';
+  }
+
+  let amount = 0;
+  let isSingleDenom = true;
+  transferEvents.forEach(
+    (event: { attributes: { key: string; value: string }[]; type: string }) => {
+      const amountItem = event.attributes.find(
+        (attr: { key: string; value: string }) => attr.key === 'amount'
+      );
+
+      if (amountItem) {
+        const amountParsed = amountItem.value.split(denom);
+        const amountValue = amountParsed[0];
+        const amountDenom = amountItem.value.split(amountValue)[1];
+
+        if (isSingleDenom) {
+          if (amountDenom.toLowerCase() !== denom.toLowerCase()) {
+            isSingleDenom = false;
+          } else {
+            amount += parseInt(amountValue, 10);
+          }
+        }
+      }
     }
+  );
+
+  if (!isSingleDenom) {
+    return '';
   }
+
+  return `${String(amount)}${denom}`;
+};
+
+const formatSpenderAndReceiver = (transactionLogs: any[], denom: string) => {
+  const transactionLogsEvents = transactionLogs?.[0]?.events || [];
+
+  const msgIndexEvents = getMsgIndexEvents(transactionLogsEvents);
+  const sender = getSender(msgIndexEvents);
+  const receiver = getReceiver(msgIndexEvents);
+  const amount = getAmount(msgIndexEvents, denom);
 
   return {
     sender,
@@ -160,17 +224,13 @@ const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom
 
 const formatTransactions = (data: BlockDetailsQuery, stateChange: Partial<BlockDetailState>) => {
   const transactions = data.transaction.map((x) => {
-    const { fee, logs, messages: txMessages } = x;
+    const { fee, logs } = x;
 
     const feeAmount = fee?.amount?.[0] ?? {
       denom: '',
       amount: 0,
     };
-    const { sender, receiver, amount } = formatSpenderAndReceiver(
-      txMessages,
-      logs,
-      feeAmount.denom
-    );
+    const { sender, receiver, amount } = formatSpenderAndReceiver(logs, feeAmount.denom);
     const formatedAmount =
       amount !== '' && amount !== '-'
         ? formatToken(amount.replace(feeAmount.denom, ''), feeAmount.denom)
