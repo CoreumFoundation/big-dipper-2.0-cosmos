@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.82](https://github.com/tokenize-x/fe-chain-explorer/compare/v2.3.0-coreum.81...v2.3.0-coreum.82) (2025-11-18)
+
+
+### Bug Fixes
+
+* update handle of transactions in account details, block details, validator details component hooks ([27fadc8](https://github.com/tokenize-x/fe-chain-explorer/commit/27fadc8dd81b2c9887d21d37a6c984c19a1d6113))
+
 ## [2.3.0-coreum.81](https://github.com/tokenize-x/fe-chain-explorer/compare/v2.3.0-coreum.80...v2.3.0-coreum.81) (2025-11-17)
 
 
