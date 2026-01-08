@@ -11,7 +11,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 // import { Hind_Madurai } from '@next/font/google';
-import { Noto_Sans } from '@next/font/google';
+import { Noto_Sans, Figtree } from '@next/font/google';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
@@ -23,6 +23,15 @@ const notoSans = Noto_Sans({
   display: 'swap',
   preload: true,
   subsets: ['latin'],
+});
+
+const figtree = Figtree({
+  weight: ['400', '500', '700'],
+  style: 'normal',
+  display: 'swap',
+  preload: true,
+  subsets: ['latin'],
+  variable: '--font-figtree',
 });
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -66,6 +75,7 @@ const Main = (props: MainProps) => {
   useEffect(() => {
     if (typeof document !== 'undefined' && document?.documentElement) {
       document.documentElement.classList.toggle('mode-dark', muiTheme.palette.mode === 'dark');
+      document.documentElement.classList.add(figtree.variable);
       document
         .querySelector('meta[name="theme-color"]')
         ?.setAttribute('content', muiTheme.palette.primary.main);

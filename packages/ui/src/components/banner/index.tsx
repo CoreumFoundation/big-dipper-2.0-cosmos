@@ -29,6 +29,7 @@ export function getBannersLinks() {
       // ignore
     }
   }
+
   return bannerLinks;
 }
 

@@ -3,6 +3,7 @@ import Menu from '@/components/nav/components/mobile/components/menu';
 import Navbar from '@/components/nav/components/mobile/components/navbar';
 import { useMobile } from '@/components/nav/components/mobile/hooks';
 import useStyles from '@/components/nav/components/mobile/styles';
+import { useBanner } from '@/components/layout/contexts/banner';
 import { useGetComponentDimension } from '@/hooks/use_get_component_dimension';
 
 type MobileProps = {
@@ -12,7 +13,8 @@ type MobileProps = {
 const Mobile: FC<MobileProps> = ({ className }) => {
   const { ref: heightRef, height } = useGetComponentDimension();
   const { isMenu, isOpen, openNetwork, toggleNavMenus } = useMobile();
-  const { classes, cx } = useStyles();
+  const { isBannerVisible, bannerHeight } = useBanner();
+  const { classes, cx } = useStyles({ isBannerOpen: isBannerVisible, bannerHeight });
 
   return (
     <div className={className}>

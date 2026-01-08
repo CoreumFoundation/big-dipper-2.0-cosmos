@@ -61,7 +61,8 @@
     "SENTRY_PROJECT",
     "SENTRY_ORG",
     "SENTRY_URL",
-    "VERCEL"
+    "VERCEL",
+    "NEXT_PUBLIC_BANNER_TYPE"
   ],
   "globalDependencies": [
     ".env",

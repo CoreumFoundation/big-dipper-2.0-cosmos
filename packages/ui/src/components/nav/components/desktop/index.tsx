@@ -6,6 +6,7 @@ import MenuItems from '@/components/nav/components/menu_items';
 import useStyles from '@/components/nav/components/desktop/styles';
 import { useDesktop } from '@/components/nav/components/desktop/hooks';
 import ActionBar from '@/components/nav/components/desktop/components/action_bar';
+import { useBanner } from '@/components/layout/contexts/banner';
 import Logo from '@/assets/logo.svg';
 import LogoText from '@/assets/logo-text-white.svg';
 import DevnetBadge from '@/assets/devnet-badge.svg';
@@ -18,7 +19,8 @@ type DesktopProps = {
 };
 
 const Desktop: FC<DesktopProps> = ({ className }) => {
-  const { classes, cx } = useStyles();
+  const { isBannerVisible, bannerHeight } = useBanner();
+  const { classes, cx } = useStyles({ isBannerOpen: isBannerVisible, bannerHeight });
   const netName = process.env.NEXT_PUBLIC_CHAIN_TYPE;
   const { isMenu, toggleMenu, turnOffAll } = useDesktop();
 

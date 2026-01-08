@@ -1,4 +1,5 @@
 import chainConfig from '@/chainConfig';
+import { BannerProvider } from '@/components/layout/contexts/banner';
 import useApollo from '@/graphql/useApollo';
 import { useWindowOrigin } from '@/hooks/use_window';
 import Main, { MainProps } from '@/screens/app/components/main';
@@ -40,7 +41,9 @@ function MyApp(props: MainProps<{ initialApolloState?: NormalizedCacheObject }>)
         additionalMetaTags={ADDITIONAL_META_TAGS}
       />
       <ApolloProvider client={apolloClient}>
-        <Main {...props} />
+        <BannerProvider>
+          <Main {...props} />
+        </BannerProvider>
       </ApolloProvider>
     </RecoilRoot>
   );
