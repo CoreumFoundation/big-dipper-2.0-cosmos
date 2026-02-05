@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.85](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.84...v2.3.0-coreum.85) (2026-02-05)
+
+
+### Bug Fixes
+
+* hardcode banner value ([f8935ac](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/f8935acb39b543c34d53fc19f13b01499fb4c015))
+
 ## [2.3.0-coreum.84](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.78...v2.3.0-coreum.84) (2026-02-05)
 
 
