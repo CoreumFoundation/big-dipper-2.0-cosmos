@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles()(() => ({
+const useStyles = makeStyles()((theme) => ({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -24,32 +24,50 @@ const useStyles = makeStyles()(() => ({
     backdropFilter: 'blur(4px)',
   },
   title: {
-    color: '#FFFFFF',
+    color: theme.palette.mode === 'light' ? '#000' : '#FFF',
     fontSize: 14,
-    fontWeight: 700,
+    fontWeight: 600,
     lineHeight: '165%',
     fontFamily: 'var(--font-figtree), "Figtree", sans-serif',
+    fontStyle: 'normal',
     margin: 0,
     paddingRight: 16,
   },
   description: {
-    color: 'rgba(255, 255, 255, 0.75)',
+    color: theme.palette.mode === 'light' ? '#000' : '#BBB',
     fontSize: 14,
+    fontWeight: 400,
     lineHeight: '20px',
     letterSpacing: '-0.14px',
     fontFamily: 'var(--font-figtree), "Figtree", sans-serif',
+    fontStyle: 'normal',
     margin: 0,
     '& a': {
-      color: '#B1FC03',
+      color: theme.palette.mode === 'light' ? '#000' : '#B1FC03',
       fontWeight: 500,
-      textDecoration: 'underline',
+      fontSize: 14,
+      lineHeight: '20px',
+      letterSpacing: '-0.14px',
+      fontFamily: 'var(--font-figtree), "Figtree", sans-serif',
+      fontStyle: 'normal',
+      textDecorationLine: 'underline',
+      textDecorationStyle: 'solid',
+      textDecorationSkipInk: 'auto',
+      textDecorationThickness: 'auto',
+      textUnderlineOffset: 'auto',
+      textUnderlinePosition: 'from-font',
       '&:hover': {
         opacity: 0.8,
       },
     },
     '& .highlight': {
-      color: '#FFFFFF',
+      color: theme.palette.mode === 'light' ? '#000' : '#FFF',
       fontWeight: 500,
+      fontSize: 14,
+      lineHeight: '20px',
+      letterSpacing: '-0.14px',
+      fontFamily: 'var(--font-figtree), "Figtree", sans-serif',
+      fontStyle: 'normal',
     },
   },
   closeButton: {

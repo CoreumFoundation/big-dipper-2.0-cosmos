@@ -4,12 +4,7 @@ import { FC, useEffect, useRef } from 'react';
 import { useBanner } from '@/components/layout/contexts/banner';
 import useStyles from './styles';
 
-export type BannerType =
-  | 'upgrade_complete'
-  | 'proposal_passed'
-  | 'voting_started'
-  | 'new_proposal'
-  | 'none';
+export type BannerType = 'announce' | 'approved' | 'executed' | 'none';
 
 export const getBannerType = (): BannerType =>
   (process.env.NEXT_PUBLIC_BANNER_TYPE as BannerType) || 'none';
@@ -23,27 +18,29 @@ interface BannerContent {
 
 const getBannerContent = (type: BannerType): BannerContent | null => {
   switch (type) {
-    case 'upgrade_complete':
+    case 'announce':
       return {
-        title: 'Upgrade Complete: Coreum is now TX',
+        title: 'New Proposal: Coreum to join TX.',
         description: (
           <>
-            The network migration has been successfully executed. Head to{' '}
-            <a href="https://tx.org" target="_blank" rel="noopener noreferrer">
-              tx.org
-            </a>{' '}
-            to access the new ecosystem of RWA products running on the Coreum blockchain legacy.
+            A unified ecosystem, infrastructure, and marketplace for real-world assets, supported by
+            globally regulated partners. Voting starts <span className="highlight">February 5th</span>
+            . Learn more at{' '}
+            <a href="https://tx.org/vote" target="_blank" rel="noopener noreferrer">
+              tx.org/vote
+            </a>
+            .
           </>
         ),
       };
-    case 'proposal_passed':
+    case 'approved':
       return {
         title: 'Update: The proposal for Coreum to join TX has passed!',
         description: (
           <>
             The network migration will take effect at{' '}
             <span className="highlight">00:00:00 EST</span> on{' '}
-            <span className="highlight">February 14</span>. Learn more about the details{' '}
+            <span className="highlight">March 6th</span>. Learn more about the details{' '}
             <a href="#" target="_blank" rel="noopener noreferrer">
               here
             </a>
@@ -51,29 +48,13 @@ const getBannerContent = (type: BannerType): BannerContent | null => {
           </>
         ),
       };
-    case 'voting_started':
+    case 'executed':
       return {
-        title: 'Update: Voting has officially started for Coreum to join TX',
+        title: 'Upgrade complete: Coreum is now TX',
         description: (
           <>
-            Read the full proposal and cast your vote by{' '}
-            <span className="highlight">February 8</span>{' '}
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              here
-            </a>
-            .
-          </>
-        ),
-      };
-    case 'new_proposal':
-      return {
-        title: 'New Proposal: Coreum to Become TX',
-        description: (
-          <>
-            A unified ecosystem, infrastructure, and marketplace for real-world assets, supported by
-            globally regulated partners. Voting starts <span className="highlight">February 2</span>
-            . Learn more at{' '}
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            The network migration has been successfully executed. Head to{' '}
+            <a href="https://tx.org" target="_blank" rel="noopener noreferrer">
               tx.org
             </a>
             .
