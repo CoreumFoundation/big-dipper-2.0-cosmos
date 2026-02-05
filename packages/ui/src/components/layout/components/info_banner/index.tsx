@@ -7,7 +7,7 @@ import useStyles from './styles';
 export type BannerType = 'announce' | 'approved' | 'executed' | 'none';
 
 export const getBannerType = (): BannerType =>
-  (process.env.NEXT_PUBLIC_BANNER_TYPE as BannerType) || 'none';
+  (process.env.NEXT_PUBLIC_BANNER_TYPE as BannerType) || 'announce';
 
 export const hasBannerContent = (): boolean => getBannerType() !== 'none';
 
@@ -24,8 +24,8 @@ const getBannerContent = (type: BannerType): BannerContent | null => {
         description: (
           <>
             A unified ecosystem, infrastructure, and marketplace for real-world assets, supported by
-            globally regulated partners. Voting starts <span className="highlight">February 5th</span>
-            . Learn more at{' '}
+            globally regulated partners. Voting starts{' '}
+            <span className="highlight">February 5th</span>. Learn more at{' '}
             <a href="https://tx.org/vote" target="_blank" rel="noopener noreferrer">
               tx.org/vote
             </a>
