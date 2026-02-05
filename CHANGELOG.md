@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.84](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.78...v2.3.0-coreum.84) (2026-02-05)
+
+
+### Features
+
+* add banners with info about upgrade ([4c93325](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/4c93325abd05b95a26aa512cff391c16060dba37))
+* update banners ([a890329](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/a890329e48aeb9b27d359e5b8fa31a92e04dc9c8))
+
+
+### Bug Fixes
+
+* add types to the functions' parameters ([48862d9](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/48862d973f8915b334a108e279a3f99ba196cb45))
+* update Dockerfile ([d35514d](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/d35514df2a036e2760314a85fd78781b1c60e559))
+* update handle of messages in transaction details page to correctly parse tx data ([2c2c517](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/2c2c51731dc4879bc7cbafea18246fdb6626ebb0))
+* update handle of sender, receiver and amount in tx history ([aa32bb9](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/aa32bb9edc037a4814395329bdf9361a90b2330e))
+* update handle of transactions in account details, block details, validator details component hooks ([c60d500](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/c60d500b1c0f9c9eb5198adb084d6de06bb29d34))
+
 ## [2.3.0-coreum.83](https://github.com/tokenize-x/fe-chain-explorer/compare/v2.3.0-coreum.82...v2.3.0-coreum.83) (2025-11-18)
 
 
