@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import React, { type ReactNode } from 'react';
 import type {
   Distribution,
   Gov,
@@ -9,9 +11,11 @@ import type {
   FT,
   Auth,
   Dex,
+  Pse,
 } from '@/screens/params/types';
 import { formatNumber, formatToken } from '@/utils/format_token';
 import { nanoToSeconds, secondsToDays } from '@/utils/time';
+import { ACCOUNT_DETAILS } from '@/utils/go_to_page';
 import { TFunction } from 'next-i18next';
 import numeral from 'numeral';
 
@@ -305,3 +309,52 @@ export const formatDex = (data: Dex, t: TFunction) => [
     detail: `${formatNumber(formatToken(data.order_reserve.amount, data.order_reserve.denom).value, formatToken(data.order_reserve.amount, data.order_reserve.denom).exponent)} ${formatToken(data.order_reserve.amount, data.order_reserve.denom).displayDenom.toUpperCase()}`,
   },
 ];
+
+const renderAddressList = (addresses: string[]) => (
+  <ul style={{ margin: 0, paddingLeft: 20 }}>
+    {addresses.map((address) => (
+      <li key={address} style={{ marginBottom: 4, wordBreak: 'break-all' }}>
+        <Link shallow prefetch={false} href={ACCOUNT_DETAILS(address)}>
+          {address}
+        </Link>
+      </li>
+    ))}
+  </ul>
+);
+
+export const formatPse = (data: Pse, t: TFunction) => {
+  const details: Array<{ key: string; label: string; detail: string | ReactNode }> = [];
+
+  if (data.clearing_account_mappings && data.clearing_account_mappings.length > 0) {
+    data.clearing_account_mappings.forEach((mapping) => {
+      const translationKey = mapping.clearing_account;
+      const title =
+        t(translationKey) !== translationKey
+          ? t(translationKey)
+          : `PSE ${mapping.clearing_account.charAt(0).toUpperCase() + mapping.clearing_account.slice(1)}`;
+
+      const addresses = mapping.recipient_addresses.filter(Boolean);
+      details.push({
+        key: mapping.clearing_account,
+        label: title,
+        detail: addresses.length > 0 ? renderAddressList(addresses) : t('none') || 'None',
+      });
+    });
+  }
+
+  if (data.excluded_addresses && data.excluded_addresses.length > 0) {
+    details.push({
+      key: 'excludedAddresses',
+      label: t('excludedAddresses'),
+      detail: renderAddressList(data.excluded_addresses),
+    });
+  } else if (data.excluded_addresses === null) {
+    details.push({
+      key: 'excluded_none',
+      label: t('excludedAddresses'),
+      detail: t('none') || 'None',
+    });
+  }
+
+  return details;
+};

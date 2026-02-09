@@ -2,7 +2,13 @@ import numeral from 'numeral';
 import * as R from 'ramda';
 import { useCallback, useState } from 'react';
 import chainConfig from '@/chainConfig';
-import { ParamsQuery, useParamsQuery } from '@/graphql/types/general_types';
+import {
+  ParamsQuery,
+  useParamsQuery,
+  usePseParamsQuery,
+  PseParamsQuery,
+  useLatestBlockHeightListenerSubscription,
+} from '@/graphql/types/general_types';
 import {
   DistributionParams,
   GovParams,
@@ -13,7 +19,7 @@ import {
   TokenParams,
 } from '@/models';
 import { customStakingParams } from '@/models/staking_params';
-import type { Auth, Dex, ParamsState } from '@/screens/params/types';
+import type { Auth, Dex, Pse, ParamsState } from '@/screens/params/types';
 import { formatToken } from '@/utils/format_token';
 import AuthParams from '@/models/auth_params';
 import DexParams from '@/models/dex_params';
@@ -33,6 +39,7 @@ const initialState: ParamsState = {
   ft: null,
   auth: null,
   dex: null,
+  pse: null,
 };
 
 // ================================
@@ -222,6 +229,22 @@ const formatDEXParams = (data: ParamsQuery): Dex | null => {
   return null;
 };
 
+const formatPseParams = (data: PseParamsQuery): Pse | null => {
+  const { pse_params } = data;
+  if (pse_params?.params) {
+    const { params } = pse_params;
+    return {
+      clearing_account_mappings: (params.clearing_account_mappings ?? []).map((mapping) => ({
+        clearing_account: mapping?.clearing_account ?? '',
+        recipient_addresses: mapping?.recipient_addresses ?? [],
+      })),
+      excluded_addresses: params.excluded_addresses ?? null,
+    };
+  }
+
+  return null;
+};
+
 const formatParam = (data: ParamsQuery) => {
   const results: Partial<ParamsState> = {};
 
@@ -250,6 +273,7 @@ const formatParam = (data: ParamsQuery) => {
 
 export const useParams = () => {
   const [state, setState] = useState<ParamsState>(initialState);
+  const [blockHeight, setBlockHeight] = useState<number | null>(null);
 
   const handleSetState = useCallback((stateChange: (prevState: ParamsState) => ParamsState) => {
     setState((prevState) => {
@@ -257,6 +281,18 @@ export const useParams = () => {
       return R.equals(prevState, newState) ? prevState : newState;
     });
   }, []);
+
+  // ================================
+  // block height subscription
+  // ================================
+  useLatestBlockHeightListenerSubscription({
+    onData: (data) => {
+      const height = data.data.data?.height?.[0]?.height ?? null;
+      if (height !== null) {
+        setBlockHeight(height);
+      }
+    },
+  });
 
   // ================================
   // param query
@@ -271,6 +307,26 @@ export const useParams = () => {
     },
     onError: () => {
       handleSetState((prevState) => ({ ...prevState, loading: false }));
+    },
+  });
+
+  // ================================
+  // PSE params query
+  // ================================
+  usePseParamsQuery({
+    variables: {
+      height: blockHeight ?? undefined,
+    },
+    skip: !blockHeight,
+    onCompleted: (data) => {
+      const pseParams = formatPseParams(data);
+      handleSetState((prevState) => ({
+        ...prevState,
+        pse: pseParams,
+      }));
+    },
+    onError: () => {
+      handleSetState((prevState) => ({ ...prevState, pse: null }));
     },
   });
 

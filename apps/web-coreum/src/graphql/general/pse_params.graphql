@@ -1,0 +1,11 @@
+query PseParams($height: Int) {
+  pse_params: action_pse_params(height: $height) {
+    params {
+      clearing_account_mappings {
+        clearing_account
+        recipient_addresses
+      }
+      excluded_addresses
+    }
+  }
+}

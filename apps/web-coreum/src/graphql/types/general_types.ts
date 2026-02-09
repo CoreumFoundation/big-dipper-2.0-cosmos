@@ -74,6 +74,10 @@ export type AddressRiskActivity = {
   err_msg?: any;
 }
 
+export type ActionPSEParams = {
+  __typename?: 'ActionPSEParams';
+};
+
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type Boolean_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Boolean']>;
@@ -5337,6 +5341,10 @@ export type Query_Root = {
   action_validator_redelegations_from?: Maybe<ActionRedelegationResponse>;
   action_validator_unbonding_delegations?: Maybe<ActionUnbondingDelegationResponse>;
   action_address_risk_score: AddressRiskActivity;
+  action_pse_clearing_account_balances: any;
+  action_pse_params: any;
+  action_pse_scheduled_distributions: any;
+  action_pse_score: any;
   /** fetch data from the table: "average_block_time_from_genesis" */
   average_block_time_from_genesis: Array<Average_Block_Time_From_Genesis>;
   /** fetch aggregated fields from the table: "average_block_time_from_genesis" */
@@ -11889,6 +11897,26 @@ export type ParamsQuery = {
   dexParams: Array<{ __typename?: 'dex_params', params: any }>,
 };
 
+export type PseParamsQueryVariables = Exact<{
+  height?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type PseParamsQuery = {
+  pse_params?: {
+    __typename?: 'action_pse_params';
+    params?: {
+      __typename?: 'PseParams';
+      clearing_account_mappings?: Array<{
+        __typename?: 'ClearingAccountMapping';
+        clearing_account?: string | null;
+        recipient_addresses?: Array<string | null> | null;
+      } | null> | null;
+      excluded_addresses?: Array<string | null> | null;
+    } | null;
+  } | null;
+};
+
 export type ProposalDetailsQueryVariables = Exact<{
   proposalId?: InputMaybe<Scalars['Int']>;
 }>;
@@ -12359,7 +12387,7 @@ export type AccountDelegationsQueryHookResult = ReturnType<typeof useAccountDele
 export type AccountDelegationsLazyQueryHookResult = ReturnType<typeof useAccountDelegationsLazyQuery>;
 export type AccountDelegationsQueryResult = Apollo.QueryResult<AccountDelegationsQuery, AccountDelegationsQueryVariables>;
 export const AccountRedelegationsDocument = gql`
-    query AccountRedelegations($address: String!, $offset: Int = 0, $limit: Int = 10, $pagination: Boolean! = true) {
+    query AccountRedelegations($offset: Int = 0, $limit: Int = 10, $pagination: Boolean! = true) {
   redelegations: action_redelegation(
     address: $address
     limit: $limit
@@ -13032,6 +13060,47 @@ export function useParamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Par
 export type ParamsQueryHookResult = ReturnType<typeof useParamsQuery>;
 export type ParamsLazyQueryHookResult = ReturnType<typeof useParamsLazyQuery>;
 export type ParamsQueryResult = Apollo.QueryResult<ParamsQuery, ParamsQueryVariables>;
+export const PseParamsDocument = gql`
+    query PseParams($height: Int) {
+  pse_params: action_pse_params(height: $height) {
+    params {
+      clearing_account_mappings {
+        clearing_account
+        recipient_addresses
+      }
+      excluded_addresses
+    }
+  }
+}
+    `;
+
+/**
+ * __usePseParamsQuery__
+ *
+ * To run a query within a React component, call `usePseParamsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePseParamsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePseParamsQuery({
+ *   variables: {
+ *      height: // value for 'height'
+ *   },
+ * });
+ */
+export function usePseParamsQuery(baseOptions?: Apollo.QueryHookOptions<PseParamsQuery, PseParamsQueryVariables>) {
+  const options = {...defaultOptions, ...baseOptions};
+  return Apollo.useQuery<PseParamsQuery, PseParamsQueryVariables>(PseParamsDocument, options);
+}
+export function usePseParamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PseParamsQuery, PseParamsQueryVariables>) {
+  const options = {...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<PseParamsQuery, PseParamsQueryVariables>(PseParamsDocument, options);
+}
+export type PseParamsQueryHookResult = ReturnType<typeof usePseParamsQuery>;
+export type PseParamsLazyQueryHookResult = ReturnType<typeof usePseParamsLazyQuery>;
+export type PseParamsQueryResult = Apollo.QueryResult<PseParamsQuery, PseParamsQueryVariables>;
 export const ProposalDetailsDocument = gql`
     query ProposalDetails($proposalId: Int) {
   proposal(where: {id: {_eq: $proposalId}}) {

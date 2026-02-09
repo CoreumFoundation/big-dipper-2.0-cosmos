@@ -33,6 +33,23 @@ const useStyles = makeStyles()((theme) => ({
       gridTemplateColumns: 'repeat(6, 1fr)',
     },
   },
+  bodyPse: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    gap: 16,
+
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
+
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+    },
+
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+    },
+  },
   item: {
     display: 'flex',
     flexDirection: 'column',
@@ -53,6 +70,14 @@ const useStyles = makeStyles()((theme) => ({
       fontWeight: 600,
       lineHeight: '24px',
       wordBreak: 'break-all',
+      '& a': {
+        color: theme.palette.custom.fonts.highlight,
+        textDecoration: 'none',
+        cursor: 'pointer',
+        '&:hover': {
+          textDecoration: 'underline',
+        },
+      },
     },
   },
 }));

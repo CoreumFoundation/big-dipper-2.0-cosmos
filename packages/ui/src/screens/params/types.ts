@@ -76,6 +76,14 @@ export interface Dex {
   default_unified_ref_amount: string;
 }
 
+export interface Pse {
+  clearing_account_mappings: Array<{
+    clearing_account: string;
+    recipient_addresses: Array<string>;
+  }>;
+  excluded_addresses: Array<string> | null;
+}
+
 export interface ParamsState {
   loading: boolean;
   exists: boolean;
@@ -89,4 +97,5 @@ export interface ParamsState {
   ft: FT | null;
   auth: Auth | null;
   dex: Dex | null;
+  pse: Pse | null;
 }

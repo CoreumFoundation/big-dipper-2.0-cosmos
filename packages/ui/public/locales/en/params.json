@@ -40,5 +40,13 @@
   "longEmaBlockLength": "Long Ema Block Length",
   "shortEmaBlockLength": "Short Ema Block Length",
   "maxGasPriceMultiplier": "Max Gas Price Multiplier",
-  "escalationStartFraction": "Escalation Start Fraction"
+  "escalationStartFraction": "Escalation Start Fraction",
+  "pse": "PSE",
+  "pse_foundation": "PSE Foundation",
+  "pse_alliance": "PSE Alliance",
+  "pse_partnership": "PSE Partnership",
+  "pse_investors": "PSE Investors",
+  "pse_team": "PSE Team",
+  "excludedAddresses": "Excluded Addresses",
+  "none": "None"
 }

@@ -58,5 +58,13 @@
   "defaultUnifiedRefAmount": "Default Unified Ref Amount",
   "maxOrdersPerDenom": "Max Orders Per Denom",
   "priceTickExponent": "Price Tick Exponent",
-  "orderReserve": "Order Reserve"
+  "orderReserve": "Order Reserve",
+  "pse": "PSE",
+  "pse_foundation": "PSE Foundation",
+  "pse_alliance": "PSE Alliance",
+  "pse_partnership": "PSE Partnership",
+  "pse_investors": "PSE Investors",
+  "pse_team": "PSE Team",
+  "excludedAddresses": "Excluded Addresses",
+  "none": "None"
 }

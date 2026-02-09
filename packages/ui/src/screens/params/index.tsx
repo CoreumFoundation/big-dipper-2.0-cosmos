@@ -5,6 +5,7 @@ import Layout from '@/components/layout';
 import LoadAndExist from '@/components/load_and_exist';
 import { useParams } from '@/screens/params/hooks';
 import useStyles from '@/screens/params/styles';
+import boxDetailsStyles from '@/screens/params/components/box_details/styles';
 import { Typography } from '@mui/material';
 import {
   formatDistribution,
@@ -17,11 +18,13 @@ import {
   formatNFT,
   formatAuth,
   formatDex,
+  formatPse,
 } from '@/screens/params/utils';
 
 const Params = () => {
   const { t } = useTranslation('params');
   const { classes } = useStyles();
+  const { classes: boxDetailsClasses } = boxDetailsStyles();
   const { state } = useParams();
 
   const staking = state.staking
@@ -83,6 +86,13 @@ const Params = () => {
   const ft = state.ft ? { title: t('ft') ?? undefined, details: formatFT(state.ft, t) } : null;
   const nft = state.nft ? { title: t('nft') ?? undefined, details: formatNFT(state.nft, t) } : null;
 
+  const pse = state.pse
+    ? {
+        title: t('pse') ?? undefined,
+        details: formatPse(state.pse, t),
+      }
+    : null;
+
   return (
     <>
       <NextSeo
@@ -107,6 +117,7 @@ const Params = () => {
             {nft && <BoxDetails {...nft} />}
             {auth && <BoxDetails {...auth} />}
             {dex && <BoxDetails {...dex} />}
+            {pse && <BoxDetails {...pse} bodyClassName={boxDetailsClasses.bodyPse} />}
           </span>
         </LoadAndExist>
       </Layout>

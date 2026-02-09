@@ -11888,6 +11888,26 @@ export type ParamsQuery = {
   dexParams: Array<{ __typename?: 'dex_params', params: any }>,
 };
 
+export type PseParamsQueryVariables = Exact<{
+  height?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type PseParamsQuery = {
+  pse_params?: {
+    __typename?: 'action_pse_params';
+    params?: {
+      __typename?: 'PseParams';
+      clearing_account_mappings?: Array<{
+        __typename?: 'ClearingAccountMapping';
+        clearing_account?: string | null;
+        recipient_addresses?: Array<string | null> | null;
+      } | null> | null;
+      excluded_addresses?: Array<string | null> | null;
+    } | null;
+  } | null;
+};
+
 export type ProposalDetailsQueryVariables = Exact<{
   proposalId?: InputMaybe<Scalars['Int']>;
 }>;
@@ -13033,6 +13053,47 @@ export function useParamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Par
 export type ParamsQueryHookResult = ReturnType<typeof useParamsQuery>;
 export type ParamsLazyQueryHookResult = ReturnType<typeof useParamsLazyQuery>;
 export type ParamsQueryResult = Apollo.QueryResult<ParamsQuery, ParamsQueryVariables>;
+export const PseParamsDocument = gql`
+    query PseParams($height: Int) {
+  pse_params: action_pse_params(height: $height) {
+    params {
+      clearing_account_mappings {
+        clearing_account
+        recipient_addresses
+      }
+      excluded_addresses
+    }
+  }
+}
+    `;
+
+/**
+ * __usePseParamsQuery__
+ *
+ * To run a query within a React component, call `usePseParamsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePseParamsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePseParamsQuery({
+ *   variables: {
+ *      height: // value for 'height'
+ *   },
+ * });
+ */
+export function usePseParamsQuery(baseOptions?: Apollo.QueryHookOptions<PseParamsQuery, PseParamsQueryVariables>) {
+  const options = {...defaultOptions, ...baseOptions};
+  return Apollo.useQuery<PseParamsQuery, PseParamsQueryVariables>(PseParamsDocument, options);
+}
+export function usePseParamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PseParamsQuery, PseParamsQueryVariables>) {
+  const options = {...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<PseParamsQuery, PseParamsQueryVariables>(PseParamsDocument, options);
+}
+export type PseParamsQueryHookResult = ReturnType<typeof usePseParamsQuery>;
+export type PseParamsLazyQueryHookResult = ReturnType<typeof usePseParamsLazyQuery>;
+export type PseParamsQueryResult = Apollo.QueryResult<PseParamsQuery, PseParamsQueryVariables>;
 export const ProposalDetailsDocument = gql`
     query ProposalDetails($proposalId: Int) {
   proposal(where: {id: {_eq: $proposalId}}) {

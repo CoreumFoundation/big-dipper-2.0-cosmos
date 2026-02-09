@@ -5,6 +5,7 @@ import useStyles from '@/screens/params/components/box_details/styles';
 
 type BoxDetailsProps = {
   className?: string;
+  bodyClassName?: string;
   title?: string | ReactNode;
   titleAction?: ReactNode;
   details: {
@@ -15,7 +16,13 @@ type BoxDetailsProps = {
   }[];
 };
 
-const BoxDetails: FC<BoxDetailsProps> = ({ className, title, titleAction, details }) => {
+const BoxDetails: FC<BoxDetailsProps> = ({
+  className,
+  bodyClassName,
+  title,
+  titleAction,
+  details,
+}) => {
   const { classes, cx } = useStyles();
   return (
     <Box className={cx(classes.root, className)}>
@@ -25,7 +32,7 @@ const BoxDetails: FC<BoxDetailsProps> = ({ className, title, titleAction, detail
           {!!titleAction && titleAction}
         </div>
       )}
-      <div className={classes.body}>
+      <div className={cx(classes.body, bodyClassName)}>
         {details.map((x) => (
           <div key={x.key} className={cx(classes.item, x.className)}>
             {isValidElement(x.label) ? (
