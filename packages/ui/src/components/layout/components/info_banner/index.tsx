@@ -7,7 +7,7 @@ import useStyles from './styles';
 export type BannerType = 'announce' | 'approved' | 'executed' | 'none';
 
 export const getBannerType = (): BannerType =>
-  (process.env.NEXT_PUBLIC_BANNER_TYPE as BannerType) || 'announce';
+  (process.env.NEXT_PUBLIC_BANNER_TYPE as BannerType) || 'approved';
 
 export const hasBannerContent = (): boolean => getBannerType() !== 'none';
 
