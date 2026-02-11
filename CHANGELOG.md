@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.88](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.87...v2.3.0-coreum.88) (2026-02-11)
+
+
+### Features
+
+* add support for different uppercase and lowercase for transactions query ([74a430b](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/74a430bfbc72f7cbbfe155892db6c172e5674a48))
+
 ## [2.3.0-coreum.87](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.86...v2.3.0-coreum.87) (2026-02-11)
 
 
