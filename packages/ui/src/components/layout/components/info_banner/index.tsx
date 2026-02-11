@@ -41,7 +41,7 @@ const getBannerContent = (type: BannerType): BannerContent | null => {
             The network migration will take effect at{' '}
             <span className="highlight">00:00:00 EST</span> on{' '}
             <span className="highlight">March 6th</span>. Learn more about the details{' '}
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            <a href="https://coreum.medium.com/coreum-proposal-29-official-results-interpretation-and-outcome-report-fcd780295217" target="_blank" rel="noopener noreferrer">
               here
             </a>
             .
