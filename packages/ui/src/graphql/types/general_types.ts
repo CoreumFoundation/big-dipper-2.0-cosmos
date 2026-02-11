@@ -13383,7 +13383,7 @@ export type TokenomicsLazyQueryHookResult = ReturnType<typeof useTokenomicsLazyQ
 export type TokenomicsQueryResult = Apollo.QueryResult<TokenomicsQuery, TokenomicsQueryVariables>;
 export const TransactionDetailsDocument = gql`
     query TransactionDetails($hash: String) {
-  transaction(where: {hash: {_eq: $hash}}, limit: 1) {
+  transaction(where: {hash: {_ilike: $hash}}, limit: 1) {
     hash: hash
     height: height
     block: block {
