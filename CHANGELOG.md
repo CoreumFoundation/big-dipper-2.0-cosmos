@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.87](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.86...v2.3.0-coreum.87) (2026-02-11)
+
+
+### Bug Fixes
+
+* udpate link for approved banner state ([af8ce3f](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/af8ce3f19965a9f4ef296de9c4dfc4fbb6b0dafd))
+
 ## [2.3.0-coreum.86](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.85...v2.3.0-coreum.86) (2026-02-10)
 
 
