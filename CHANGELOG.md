@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.89](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.88...v2.3.0-coreum.89) (2026-02-12)
+
+
+### Features
+
+* add PSE params ([52b0654](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/52b0654528e9741daea810c7c0d7b060ce9d6fac))
+
 ## [2.3.0-coreum.88](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.87...v2.3.0-coreum.88) (2026-02-11)
 
 
