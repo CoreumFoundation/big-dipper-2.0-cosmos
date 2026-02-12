@@ -7,7 +7,6 @@ import {
   useParamsQuery,
   usePseParamsQuery,
   PseParamsQuery,
-  useLatestBlockHeightListenerSubscription,
 } from '@/graphql/types/general_types';
 import {
   DistributionParams,
@@ -273,7 +272,6 @@ const formatParam = (data: ParamsQuery) => {
 
 export const useParams = () => {
   const [state, setState] = useState<ParamsState>(initialState);
-  const [blockHeight, setBlockHeight] = useState<number | null>(null);
 
   const handleSetState = useCallback((stateChange: (prevState: ParamsState) => ParamsState) => {
     setState((prevState) => {
@@ -281,18 +279,6 @@ export const useParams = () => {
       return R.equals(prevState, newState) ? prevState : newState;
     });
   }, []);
-
-  // ================================
-  // block height subscription
-  // ================================
-  useLatestBlockHeightListenerSubscription({
-    onData: (data) => {
-      const height = data.data.data?.height?.[0]?.height ?? null;
-      if (height !== null) {
-        setBlockHeight(height);
-      }
-    },
-  });
 
   // ================================
   // param query
@@ -314,10 +300,6 @@ export const useParams = () => {
   // PSE params query
   // ================================
   usePseParamsQuery({
-    variables: {
-      height: blockHeight ?? undefined,
-    },
-    skip: !blockHeight,
     onCompleted: (data) => {
       const pseParams = formatPseParams(data);
       handleSetState((prevState) => ({

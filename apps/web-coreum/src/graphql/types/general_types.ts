@@ -13061,8 +13061,8 @@ export type ParamsQueryHookResult = ReturnType<typeof useParamsQuery>;
 export type ParamsLazyQueryHookResult = ReturnType<typeof useParamsLazyQuery>;
 export type ParamsQueryResult = Apollo.QueryResult<ParamsQuery, ParamsQueryVariables>;
 export const PseParamsDocument = gql`
-    query PseParams($height: Int) {
-  pse_params: action_pse_params(height: $height) {
+    query PseParams {
+  pse_params: action_pse_params {
     params {
       clearing_account_mappings {
         clearing_account
