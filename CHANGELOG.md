@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.90](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.89...v2.3.0-coreum.90) (2026-02-12)
+
+
+### Bug Fixes
+
+* get pse params without usage of height as arguments ([f666dfc](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/f666dfc0ff1d4b0359de4b77bd15906422a17ba1))
+
 ## [2.3.0-coreum.89](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.88...v2.3.0-coreum.89) (2026-02-12)
 
 
