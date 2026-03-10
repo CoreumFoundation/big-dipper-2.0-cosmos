@@ -7,7 +7,7 @@ import useStyles from './styles';
 export type BannerType = 'announce' | 'approved' | 'executed' | 'none';
 
 export const getBannerType = (): BannerType =>
-  (process.env.NEXT_PUBLIC_BANNER_TYPE as BannerType) || 'approved';
+  (process.env.NEXT_PUBLIC_BANNER_TYPE as BannerType) || 'executed';
 
 export const hasBannerContent = (): boolean => getBannerType() !== 'none';
 
@@ -41,7 +41,11 @@ const getBannerContent = (type: BannerType): BannerContent | null => {
             The network migration will take effect at{' '}
             <span className="highlight">00:00:00 EST</span> on{' '}
             <span className="highlight">March 6th</span>. Learn more about the details{' '}
-            <a href="https://coreum.medium.com/coreum-proposal-29-official-results-interpretation-and-outcome-report-fcd780295217" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://coreum.medium.com/coreum-proposal-29-official-results-interpretation-and-outcome-report-fcd780295217"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               here
             </a>
             .
